@@ -6,13 +6,13 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:40:38 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 19:53:09 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/17 20:13:42 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	init_minishell(t_init *state)
+t_init	*init_minishell(t_init *state)
 {
 	t_exe		*exe_built;
 	t_signal	*sig_act;
@@ -23,7 +23,7 @@ void	init_minishell(t_init *state)
 	state->exe = exe_built;
 	state->signal = sig_act;
 	printf("%p, %p\n", exe_built, sig_act);
-	return ;
+	return (state);
 }
 
 	// ft_memset(state, 0, sizeof(t_init));

@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 20:02:24 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/17 20:11:34 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(void)
 {
 	t_init	*state;
 
-	init_minishell(state);
+	state = init_minishell(state);
 	printf("%p, %p\n", state->exe, state->signal);
 	signal_minishell(state->signal->action);
 	standby_state(state);
@@ -41,7 +41,7 @@ int	main(void)
 // 	return (0);
 // }
 
-// __attribute__((destructor))
-// static void destructor() {
-//     system("leaks -q minishell");
-// }
+__attribute__((destructor))
+static void destructor() {
+    system("leaks -q minishell");
+}

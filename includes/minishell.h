@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 19:26:16 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/17 20:11:56 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_init
 }				t_init;
 /*---------------------------*/
 
-void	init_minishell(t_init *state);
+t_init	*init_minishell(t_init *state);
 void	standby_state(t_init *state);
 
 /*---lexer---*/
