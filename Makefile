@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#              #
-#    Updated: 2023/09/17 16:00:00 by csakamot         ###   ########.fr        #
+#    Updated: 2023/09/17 16:32:20 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,9 @@ HEAD		= ./includes/
 
 PRE			= ./srcs/
 
-BUILTIN		= ./builtin/
+BUILTIN		= built_in/
+
+LEXER		= lexer/
 
 LIBFT		= ${addprefix ${PRE}, libft/}
 ##-----------------------------##
@@ -29,16 +31,21 @@ LIBFT		= ${addprefix ${PRE}, libft/}
 
 
 ##------------Srcs-------------##
-SRC			= minishell.c init_minishell.c standby_state.c signal.c \
-				external_command.c built_in.c built_in_cd.c built_in_echo.c \
-				built_in_env.c built_in_exit.c built_in_pwd.c built_in_unset.c \
-				malloc_free.c
+MAINSRC		= minishell.c init_minishell.c standby_state.c signal.c \
+				external_command.c malloc_free.c
+
+BULITINSRC	= built_in.c built_in_cd.c built_in_echo.c built_in_env.c \
+				built_in_exit.c built_in_pwd.c built_in_unset.c
+
+LEXERSRC	= lexer_main.c
+
+SRCS		= ${MAINSRC} ${addprefix ${BUILTIN}, ${BULITINSRC}} ${addprefix ${LEXER}, ${LEXERSRC}}
 ##-----------------------------##
 
 
 
 ##-----------Object------------##
-OBJS		= ${addprefix ${PRE}, ${SRC:.c=.o}}
+OBJS		= ${addprefix ${PRE}, ${SRCS:.c=.o}}
 ##-----------------------------##
 
 
@@ -69,7 +76,7 @@ ARCHIVES	= ${addprefix ${LIBFT}, libft.a}
 all:		${NAME}
 
 %.o:%.c
-			${CC} -I/usr/include -Imlx -c $< -o $@
+			${CC} -I/usr/include -c $< -o $@
 
 ${NAME}:	${OBJS}
 			@${CCLIBFT}
