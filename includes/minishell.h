@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 02:20:17 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/17 19:26:16 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,13 @@ typedef struct s_init
 
 void	init_minishell(t_init *state);
 void	standby_state(t_init *state);
+
+/*---lexer---*/
+char	**lexer_main(char *str);
+char	*single_quotation(char **str);
+char	*double_quotation(char **str);
+char	*split_word(char **str);
+/*-----------*/
 
 /*---built_in---*/
 int		judge_built_in(t_init *state, char **exe_buil_command);

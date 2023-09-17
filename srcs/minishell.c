@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 13:16:31 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/17 19:56:01 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(void)
 // 	return (0);
 // }
 
-__attribute__((destructor))
-static void destructor() {
-    system("leaks -q minishell");
-}
+// __attribute__((destructor))
+// static void destructor() {
+//     system("leaks -q minishell");
+// }
