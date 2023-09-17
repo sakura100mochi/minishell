@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   standby_state.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:36:44 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 14:55:49 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/17 16:30:57 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	standby_state(t_init *state)
 			free(state->prompt);
 			continue ;
 		}
-		state->exe->command = ft_split(state->prompt, ' ');
+		state->exe->command = lexer_main(state->prompt);
 		if (judge_built_in(state, state->exe->command))
 			external_command(state, state->exe);
 		printf("");
