@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 15:41:57 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/17 16:02:20 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	external_command(t_init *state, t_exe *exe_ext)
 		exe_ext_command(state, exe_ext, exe_ext->command);
 	else
 		waitpid(exe_ext->pid, &status, 0);
-	printf("aa\n");
 	double_array_free(exe_ext->command);
 	return ;
 }

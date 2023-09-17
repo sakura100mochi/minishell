@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#              #
-#    Updated: 2023/09/17 15:24:41 by csakamot         ###   ########.fr        #
+#    Updated: 2023/09/17 16:00:00 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ NAME		= minishell
 HEAD		= ./includes/
 
 PRE			= ./srcs/
+
+BUILTIN		= ./builtin/
 
 LIBFT		= ${addprefix ${PRE}, libft/}
 ##-----------------------------##

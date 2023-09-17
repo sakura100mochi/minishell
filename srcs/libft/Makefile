@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 02:35:02 by yayoi             #+#    #+#              #
-#    Updated: 2023/09/17 15:18:05 by csakamot         ###   ########.fr        #
+#    Updated: 2023/09/17 15:52:04 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,11 +38,11 @@ all:			$(NAME)
 
 $(NAME):		${OBJS}
 				@echo "libft			compiled"
-				@${AR} ${ARFLAG} ${NAME} ${OBJS} ${FTPRINTF_OBJS} ${GNL_OBJS}
+				@${AR} ${ARFLAG} ${NAME} ${OBJS}
 				@echo "libft.a			created"
 
 clean:
-				@${RM} ${OBJS} ${FTPRINTF_OBJS} ${GNL_OBJS}
+				@${RM} ${OBJS}
 				@echo "libft_object file	removed"
 
 fclean:			clean
