@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   malloc_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 14:10:49 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 15:23:30 by csakamot         ###   ########.fr       */
+/*   Created: 2023/09/14 13:22:32 by csakamot          #+#    #+#             */
+/*   Updated: 2023/09/16 18:44:29 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incdlu"
+#include "../includes/minishell.h"
 
-int	main(void)
+void	double_array_free(char **array)
 {
-	return (0);
+	size_t	index;
+
+	index = 0;
+	while (array[index] != NULL)
+	{
+		free(array[index]);
+		index++;
+	}
+	free(array);
+	return ;
 }

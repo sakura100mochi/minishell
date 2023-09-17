@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   built_in_cd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 14:10:49 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 15:23:30 by csakamot         ###   ########.fr       */
+/*   Created: 2023/09/15 05:36:22 by csakamot          #+#    #+#             */
+/*   Updated: 2023/09/15 05:41:31 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incdlu"
+#include "../includes/minishell.h"
 
-int	main(void)
+void	built_in_cd(void)
 {
-	return (0);
+	printf("cd:Not yet implemented.\n");
+	return ;
 }

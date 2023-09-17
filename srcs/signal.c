@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 14:10:49 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 15:23:30 by csakamot         ###   ########.fr       */
+/*   Created: 2023/09/13 12:50:11 by csakamot          #+#    #+#             */
+/*   Updated: 2023/09/17 02:58:15 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incdlu"
+#include "../includes/minishell.h"
 
-int	main(void)
+static void	signal_handler(int signum, siginfo_t *info, void *dummy)
 {
-	return (0);
+	(void)dummy;
+	if (signum == SIGINT)
+	{
+		rl_redisplay();
+		return ;
+	}
+	return ;
+}
+
+void	signal_minishell(struct sigaction action)
+{
+	action.sa_sigaction = signal_handler;
+	sigemptyset(&action.sa_mask);
+	action.sa_flags = SA_SIGINFO;
+	sigaction(SIGINT, &action, NULL);
+	return ;
 }

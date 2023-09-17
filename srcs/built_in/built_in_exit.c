@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   built_in_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 14:10:49 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 15:23:30 by csakamot         ###   ########.fr       */
+/*   Created: 2023/09/15 05:36:15 by csakamot          #+#    #+#             */
+/*   Updated: 2023/09/16 17:38:19 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incdlu"
+#include "../includes/minishell.h"
 
-int	main(void)
+void	built_in_exit(t_init *state)
 {
-	return (0);
+	printf("exit:Not yet implemented.\n");
+	// double_array_free(state->exe->command);
+	free(state->prompt);
+	exit(EXIT_SUCCESS);
+	return ;
 }

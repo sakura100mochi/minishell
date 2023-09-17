@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   built_in_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 14:10:49 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 15:23:30 by csakamot         ###   ########.fr       */
+/*   Created: 2023/09/15 05:36:17 by csakamot          #+#    #+#             */
+/*   Updated: 2023/09/17 02:40:39 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incdlu"
+#include "../includes/minishell.h"
 
-int	main(void)
+void	built_in_env(t_init *state)
 {
-	return (0);
+	size_t		i;
+	extern char	**environ;
+
+	i = 0;
+	printf("env:Not yet implemented.\n");
+	while (environ[i])
+	{
+		printf("%s\n", environ[i]);
+		i++;
+	}
+	return ;
 }

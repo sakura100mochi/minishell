@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 14:10:49 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 15:23:30 by csakamot         ###   ########.fr       */
+/*   Created: 2023/09/13 11:40:38 by csakamot          #+#    #+#             */
+/*   Updated: 2023/09/17 02:39:30 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incdlu"
+#include "../includes/minishell.h"
 
-int	main(void)
+void	init_minishell(t_init *state)
 {
-	return (0);
+	t_exe		exe_built;
+	t_signal	sig_act;
+
+	ft_memset(state, 0, sizeof(t_init));
+	ft_memset(&exe_built, 0, sizeof(t_exe));
+	ft_memset(&sig_act, 0, sizeof(t_signal));
+	state->exe = &exe_built;
+	state->signal = &sig_act;
+	return ;
 }
