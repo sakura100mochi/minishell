@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 13:16:31 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/17 19:52:28 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 int	main(void)
 {
-	t_init	state;
+	t_init	*state;
 
-	init_minishell(&state);
-	signal_minishell(state.signal->action);
-	standby_state(&state);
+	init_minishell(state);
+	printf("%p, %p\n", state->exe, state->signal);
+	signal_minishell(state->signal->action);
+	standby_state(state);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 16:02:20 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/17 18:32:09 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	exe_ext_command(t_init *state, t_exe *exe_ext, char **command)
 	exe = ft_strjoin(BINARY, command[0]);
 	exe_ext->exe_flag = execve(exe, command, environ);
 	perror("execve");
-	// exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }
 
 void	external_command(t_init *state, t_exe *exe_ext)

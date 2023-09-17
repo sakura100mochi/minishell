@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:36:44 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 14:55:49 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/17 19:47:22 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	standby_state(t_init *state)
 {
 	while (1)
 	{
-		rl_on_new_line();
 		state->prompt = readline("minishell$");
 		add_history(state->prompt);
 		if (!*(state)->prompt)
@@ -24,6 +23,7 @@ void	standby_state(t_init *state)
 			free(state->prompt);
 			continue ;
 		}
+		printf("%p, %p\n", state->exe, state->signal);
 		state->exe->command = ft_split(state->prompt, ' ');
 		if (judge_built_in(state, state->exe->command))
 			external_command(state, state->exe);

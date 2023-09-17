@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#              #
-#    Updated: 2023/09/17 16:32:20 by csakamot         ###   ########.fr        #
+#    Updated: 2023/09/17 17:10:53 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ MAINSRC		= minishell.c init_minishell.c standby_state.c signal.c \
 BULITINSRC	= built_in.c built_in_cd.c built_in_echo.c built_in_env.c \
 				built_in_exit.c built_in_pwd.c built_in_unset.c
 
-LEXERSRC	= lexer_main.c
+LEXERSRC	= 
 
 SRCS		= ${MAINSRC} ${addprefix ${BUILTIN}, ${BULITINSRC}} ${addprefix ${LEXER}, ${LEXERSRC}}
 ##-----------------------------##
@@ -53,7 +53,7 @@ OBJS		= ${addprefix ${PRE}, ${SRCS:.c=.o}}
 ##----------conpiler-----------##
 CFLAGS		= -Wall -Wextra -Werror
 
-CCLIBFT		= make -s -C srcs/libft
+CCLIBFT		= make -C srcs/libft
 ##-----------------------------##
 
 
