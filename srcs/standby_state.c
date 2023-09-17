@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:36:44 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 19:47:22 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/17 20:02:42 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void	standby_state(t_init *state)
 			free(state->prompt);
 			continue ;
 		}
-		printf("%p, %p\n", state->exe, state->signal);
-		state->exe->command = ft_split(state->prompt, ' ');
+		state->exe->command = lexer_main(state->prompt);
 		if (judge_built_in(state, state->exe->command))
 			external_command(state, state->exe);
 		printf("");
