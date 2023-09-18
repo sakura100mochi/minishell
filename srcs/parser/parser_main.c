@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:54 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/18 16:45:12 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/18 22:21:30 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_parser	*parser_main(char **str)
 		parse = parsing(parse, phrase);
 		if (str[i] != NULL)
 			i++;
-		// ft_bzero_double(phrase);
+		ft_bzero_double(phrase);
 	}
 	return (parse);
 }
