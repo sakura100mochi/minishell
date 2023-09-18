@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:17 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/18 11:51:01 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/18 13:30:02 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../includes/built_in.h"
 
-void	built_in_env(t_init *state)
+void	built_in_env(t_init *state, t_env *evn_variable)
 {
 	size_t		i;
 	extern char	**environ;
@@ -22,7 +23,7 @@ void	built_in_env(t_init *state)
 	printf("env:Not yet implemented.\n");
 	while (environ[i])
 	{
-		printf("%s\n", environ[i]);
+		
 		i++;
 	}
 	return ;

@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   external_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/18 11:50:30 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/18 12:30:38 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/minishell.h"
 
@@ -21,7 +22,7 @@ static void	exe_ext_command(t_init *state, t_exe *exe_ext, char **command)
 	exe = ft_strjoin(BINARY, command[0]);
 	exe_ext->exe_flag = execve(exe, command, environ);
 	perror("execve");
-	// exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }
 
 void	external_command(t_init *state, t_exe *exe_ext)

@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in_exit.c                                    :+:      :+:    :+:   */
+/*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/15 05:36:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 18:42:19 by csakamot         ###   ########.fr       */
+/*   Created: 2023/09/17 18:39:46 by csakamot          #+#    #+#             */
+/*   Updated: 2023/09/18 12:48:02 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-#include "../../includes/built_in.h"
+#ifndef BUILT_IN_H
+# define BUILT_IN_H
 
-void	built_in_exit(t_init *state)
+/*---include---*/
+# include "minishell.h"
+/*-------------*/
+
+/*---Structure_Declaration---*/
+typedef struct s_env
 {
-	printf("exit:Not yet implemented.\n");
-	// double_array_free(state->exe->command);
-	free(state->prompt);
-	exit(EXIT_SUCCESS);
-	return ;
-}
+	int			head;
+	char		*variable;
+	t_env		*prev;
+	t_env		*next;
+}				t_env;
+/*---------------------------*/
+
+#endif

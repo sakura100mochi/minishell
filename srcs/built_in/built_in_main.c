@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in_exit.c                                    :+:      :+:    :+:   */
+/*   built_in_main.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/15 05:36:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 18:42:19 by csakamot         ###   ########.fr       */
+/*   Created: 2023/09/18 12:44:53 by csakamot          #+#    #+#             */
+/*   Updated: 2023/09/18 12:45:27 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include "../../includes/built_in.h"
 
-void	built_in_exit(t_init *state)
+int	main(void)
 {
-	printf("exit:Not yet implemented.\n");
-	// double_array_free(state->exe->command);
-	free(state->prompt);
-	exit(EXIT_SUCCESS);
-	return ;
+	t_init	*state;
+
+	state = NULL;
+	state = init_minishell(state);
+	signal_minishell(state->signal->action);
+	standby_state(state);
+	return (0);
 }

@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in_exit.c                                    :+:      :+:    :+:   */
+/*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/15 05:36:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 18:42:19 by csakamot         ###   ########.fr       */
+/*   Created: 2023/09/18 13:28:21 by csakamot          #+#    #+#             */
+/*   Updated: 2023/09/18 13:32:14 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include "../../includes/built_in.h"
 
-void	built_in_exit(t_init *state)
+t_env	*inint_env(t_init *state)
 {
-	printf("exit:Not yet implemented.\n");
-	// double_array_free(state->exe->command);
-	free(state->prompt);
-	exit(EXIT_SUCCESS);
-	return ;
+	t_env	*env_variable;
 }
