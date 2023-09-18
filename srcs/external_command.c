@@ -6,9 +6,10 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 18:32:09 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:30:38 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/minishell.h"
 
@@ -17,6 +18,7 @@ static void	exe_ext_command(t_init *state, t_exe *exe_ext, char **command)
 	char		*exe;
 	extern char	**environ;
 
+	(void)state;
 	exe = ft_strjoin(BINARY, command[0]);
 	exe_ext->exe_flag = execve(exe, command, environ);
 	perror("execve");

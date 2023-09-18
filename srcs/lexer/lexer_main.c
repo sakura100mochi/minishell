@@ -6,24 +6,21 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:51 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 19:55:28 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/18 12:12:49 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static size_t	count_quotation(char **str)
+static size_t	count_quotation(char *str, size_t *i)
 {
-	char	*tmp;
-	size_t	i;
+	size_t	j;
 
-	i = 0;
-	tmp = *str;
-	tmp++;
-	while (tmp[i] != '\"' && tmp[i] != '\'' && tmp[i] != '\0')
-		i++;
-	i += 2;
-	*str += i;
+	j = 1;
+	while (str[j] != '\"' && str[j] != '\'' && str[j] != '\0')
+		j++;
+	j++;
+	*i += j;
 	return (1);
 }
 
@@ -32,23 +29,24 @@ static size_t	count_word(char *str)
 	size_t	i;
 	size_t	count;
 
-	i = 0;
 	if (str == NULL)
 		return (0);
+	i = 0;
 	count = 1;
-	while (*str != '\0')
+	while (str[i] != '\0')
 	{
-		if (*str == '\'' || *str == '\"')
-			count += count_quotation(&str);
+		if (str[i] == '\'' || str[i] == '\"')
+			count += count_quotation(&str[i], &i);
 		else
 		{
-			if (*str == ' ' || *str == '|' || *str == '<' || *str == '>')
+			if (str[i] == ' ' || str[i] == '|'
+				|| str[i] == '<' || str[i] == '>')
 				count++;
-			*str++;
+			i++;
 		}
 	}
-	*str--;
-	if (*str != ' ' && *str != '|' && *str != '<' && *str != '>')
+	i--;
+	if (str[i] != ' ' && str[i] != '|' && str[i] != '<' && str[i] != '>')
 		count++;
 	return (count);
 }
