@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:36:44 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/18 13:38:46 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/18 18:49:51 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	standby_state(t_init *state)
 	while (1)
 	{
 		state->prompt = readline("minishell$");
-		printf("%p, %p\n", state->exe, state->signal);
 		add_history(state->prompt);
 		if (!*(state)->prompt)
 		{
