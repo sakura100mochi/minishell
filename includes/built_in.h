@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:39:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 18:51:44 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:48:02 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 typedef struct s_env
 {
 	int			head;
+	char		*variable;
+	t_env		*prev;
+	t_env		*next;
 }				t_env;
 /*---------------------------*/
 

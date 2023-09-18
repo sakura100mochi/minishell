@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:36:44 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 20:13:06 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:41:17 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	standby_state(t_init *state)
 		state->exe->command = lexer_main(state->prompt);
 		if (judge_built_in(state, state->exe->command))
 			external_command(state, state->exe);
-		printf("");
 		free(state->prompt);
 	}
 	return ;

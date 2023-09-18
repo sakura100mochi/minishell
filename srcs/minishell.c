@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/18 12:29:49 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:45:23 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,12 @@
 // {
 // 	t_init	*state;
 
-// 	init_minishell(&state);
-// 	signal_minishell(state.signal->action);
-// 	standby_state(&state);
+// 	state = NULL;
+// 	state = init_minishell(state);
+// 	signal_minishell(state->signal->action);
+// 	standby_state(state);
 // 	return (0);
 // }
-	state = init_minishell(state);
-	printf("%p, %p\n", state->exe, state->signal);
-	signal_minishell(state->signal->action);
-	standby_state(state);
-	return (0);
-}
 
 // int	main(int argc, char **argv)
 // {
