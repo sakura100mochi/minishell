@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/18 13:27:49 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:17:29 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ typedef struct s_init
 /*---------------------------*/
 
 t_init	*init_minishell(t_init *state);
-t_env	*init_env(t_init *state);
+t_init	*init_env(t_init *state);
 void	standby_state(t_init *state);
+t_env	*new_node(char *content, size_t index);
 
 /*---lexer---*/
 char	**lexer_main(char *str);
@@ -70,7 +71,7 @@ char	*split_word(char **str);
 /*---built_in---*/
 int		judge_built_in(t_init *state, char **exe_buil_command);
 void	built_in_cd(void);
-void	built_in_echo(void);
+void	built_in_echo(t_init *state);
 void	built_in_env(t_init *state, t_env *env_variable);
 void	built_in_exit(t_init *state);
 void	built_in_pwd(void);
