@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/18 19:05:53 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/18 20:15:25 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,14 @@ typedef enum e_error
 /*----------*/
 
 /*---Structure_Declaration---*/
+typedef struct s_env
+{
+	int					head;
+	char				*variable;
+	struct s_env		*prev;
+	struct s_env		*next;
+}						t_env;
+
 typedef struct s_signal
 {
 	struct sigaction	action;
@@ -77,7 +85,14 @@ char	*split_word(char **str);
 /*-----------*/
 
 /*---built_in---*/
-
+int		judge_built_in(t_init *state, char **exe_buil_command);
+void	built_in_cd(void);
+void	built_in_echo(t_init *state);
+void	built_in_env(t_init *state, t_env *env_variable);
+void	built_in_exit(t_init *state);
+t_env	*built_in_export(t_exe *exe, t_env *env_variable);
+void	built_in_pwd(void);
+void	built_in_unset(void);
 /*--------------*/
 
 /*---external_command---*/
