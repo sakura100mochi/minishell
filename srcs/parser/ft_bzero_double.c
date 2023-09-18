@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in.h                                         :+:      :+:    :+:   */
+/*   ft_bzero_double.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 18:39:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/18 18:50:52 by yhirai           ###   ########.fr       */
+/*   Created: 2023/09/18 16:28:12 by yhirai            #+#    #+#             */
+/*   Updated: 2023/09/18 16:39:37 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN_H
-# define BUILT_IN_H
+#include "../../includes/minishell.h"
 
-/*---include---*/
-# include "minishell.h"
-/*-------------*/
-
-/*---Structure_Declaration---*/
-typedef struct s_env
+void	ft_bzero_double(char **str)
 {
-	int					head;
-	char				*variable;
-	struct s_env		*prev;
-	struct s_env		*next;
-}						t_env;
-/*---------------------------*/
+	size_t	i;
+	size_t	j;
 
-#endif
+	i = 0;
+	while (str[i] != NULL)
+	{
+		j = 0;
+		while (str[i][j] != '\0')
+		{
+			str[i][j] = '\0';
+			j++;
+		}
+		i++;
+	}
+}
