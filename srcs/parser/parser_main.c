@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:54 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/18 19:17:58 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/18 20:40:48 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,20 @@ t_parser	*parser_main(char **str)
 
 	parse = ft_calloc(sizeof(t_parser), pipe_count(str));
 	if (parse == NULL)
-		return (NULL);
+		return ((t_parser *)MALLOC_ERROR);
 	phrase = ft_calloc(sizeof(char *), pipe_count(str));
 	if (phrase == NULL)
-		return (NULL);
+		return ((t_parser *)MALLOC_ERROR);
 	i = 0;
 	while (str[i] != NULL)
 	{
 		j = 0;
 		while (str[i] != NULL && str[i][0] != '|')
-		{
-			phrase[j] = str[i];
-			printf("+++++%s\n", phrase[j]);
-			i++;
-			j++;
-		}
+			phrase[j++] = str[i++];
 		parse = parsing(parse, phrase);
 		if (str[i] != NULL)
 			i++;
-		// ft_bzero_double(phrase);
+		ft_bzero_double(phrase);
 	}
 	return (parse);
 }
@@ -83,7 +78,7 @@ static char	**ft_free(char **result)
 int	main(void)
 {
 	char		**result;
-	char		str[] = "echo 'orld' \"hello\" | cat < file";
+	char		str[] = "echo 'orld' \"hello\" aaa | cat < file";
 	int			i;
 
 	result = lexer_main(str);

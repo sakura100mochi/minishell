@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/18 20:15:25 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/18 20:40:22 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 /*---enum---*/
 typedef enum e_error
 {
+	MALLOC_ERROR,
 	NO_COMMAND
 }				t_error;
 /*----------*/
@@ -76,13 +77,6 @@ t_init	*init_minishell(t_init *state);
 t_init	*init_env(t_init *state);
 void	standby_state(t_init *state);
 t_env	*new_node(char *content, size_t index);
-
-/*---lexer---*/
-char	**lexer_main(char *str);
-char	*single_quotation(char **str);
-char	*double_quotation(char **str);
-char	*split_word(char **str);
-/*-----------*/
 
 /*---built_in---*/
 int		judge_built_in(t_init *state, char **exe_buil_command);
