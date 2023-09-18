@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 19:26:16 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/18 13:30:38 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,18 @@ typedef struct s_exe
 	char	**command;
 }				t_exe;
 
+typedef struct s_parser
+{
+	char	*command;
+	char	*option;
+}			t_parser;
+
 typedef struct s_init
 {
 	char		*prompt;
 	t_exe		*exe;
 	t_signal	*signal;
+	t_parser	*parser;
 }				t_init;
 /*---------------------------*/
 
