@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#              #
-#    Updated: 2023/09/18 13:30:51 by csakamot         ###   ########.fr        #
+#    Updated: 2023/09/18 16:36:32 by yhirai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,21 +25,25 @@ BUILTIN		= built_in/
 
 LEXER		= lexer/
 
+PARSER		= parser/
+
 LIBFT		= ${addprefix ${PRE}, libft/}
 ##-----------------------------##
 
 
 
 ##------------Srcs-------------##
-MAINSRC		= minishell.c init_minishell.c init_env.c standby_state.c \
-				signal.c external_command.c malloc_free.c
+# MAINSRC		= minishell.c init_minishell.c init_env.c standby_state.c \
+# 				signal.c external_command.c malloc_free.c
 
-BULITINSRC	= built_in.c built_in_cd.c built_in_echo.c built_in_env.c \
-				built_in_exit.c built_in_pwd.c built_in_unset.c built_in_main.c
+# BULITINSRC	= built_in.c built_in_cd.c built_in_echo.c built_in_env.c \
+# 				built_in_exit.c built_in_pwd.c built_in_unset.c built_in_main.c
 
 LEXERSRC	= lexer_main.c split_word.c single_quotation.c double_quotation.c
 
-SRCS		= ${MAINSRC} ${addprefix ${BUILTIN}, ${BULITINSRC}} ${addprefix ${LEXER}, ${LEXERSRC}}
+PARSERSRC	= parser_main.c parsing.c ft_bzero_double.c
+
+SRCS		= ${addprefix ${LEXER}, ${LEXERSRC}} ${addprefix ${PARSER}, ${PARSERSRC}}
 ##-----------------------------##
 
 
@@ -80,7 +84,7 @@ all:		${NAME}
 
 ${NAME}:	${OBJS}
 			@${CCLIBFT}
-#			@echo "object file		compiled"
+			@echo "object file		compiled"
 			@${CC} ${CFLAGS} ${OBJS} -Lsrcs ${ARCHIVES} -lreadline -o ${NAME}
 #			@echo "minishell		created\n\n"
 #			@echo "    ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗     "
