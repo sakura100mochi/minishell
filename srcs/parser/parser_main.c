@@ -88,7 +88,7 @@ int	main(void)
 
 	result = lexer_main(str);
 	i = 0;
-	while (result[i] != '\0')
+	while (result[i] != NULL)
 	{
 		printf("lexer : [%s]\n", result[i]);
 		i++;
