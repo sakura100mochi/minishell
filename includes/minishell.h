@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/18 18:56:50 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/18 19:00:18 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /*---include---*/
 # include "../srcs/libft/libft_include/libft.h"
-// # include "built_in.h"
+# include "built_in.h"
 # include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
@@ -76,7 +76,7 @@ typedef struct s_init
 	t_exe		*exe;
 	t_signal	*signal;
 	t_parser	*parser;
-	// t_env		*env;
+	t_env		*env;
 }				t_init;
 /*---------------------------*/
 
