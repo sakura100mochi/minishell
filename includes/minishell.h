@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/18 19:00:18 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/18 19:05:53 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 /*---include---*/
 # include "../srcs/libft/libft_include/libft.h"
 # include "built_in.h"
+# include "parser.h"
 # include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
@@ -34,16 +35,11 @@
 # define BINARY	"/bin/"
 /*----------*/
 
-/*---maclo---*/
-# define YES 1
-# define NO 0
-/*-----------*/
-
 /*---enum---*/
-typedef enum	e_error
+typedef enum e_error
 {
-	NO_COMMAND,
-};
+	NO_COMMAND
+}				t_error;
 /*----------*/
 
 /*---Structure_Declaration---*/
@@ -58,18 +54,6 @@ typedef struct s_exe
 	size_t	exe_flag;
 	char	**command;
 }				t_exe;
-
-typedef struct s_parser
-{
-	char			*command;
-	char			*option;
-	char			*file_name;
-	char			*redirection;
-	char			*result;
-	struct s_parser	*next;
-	struct s_parser	*pre;
-}			t_parser;
-
 typedef struct s_init
 {
 	char		*prompt;
@@ -86,32 +70,25 @@ void	standby_state(t_init *state);
 t_env	*new_node(char *content, size_t index);
 
 /*---lexer---*/
-char		**lexer_main(char *str);
-char		*single_quotation(char **str);
-char		*double_quotation(char **str);
-char		*split_word(char **str);
+char	**lexer_main(char *str);
+char	*single_quotation(char **str);
+char	*double_quotation(char **str);
+char	*split_word(char **str);
 /*-----------*/
-
-/*---parser---*/
-t_parser	*parser_main(char **str);
-t_parser	*parsing(t_parser *parse, char **phrase);
-int			check_command(char *str);
-void		ft_bzero_double(char **str);
-/*------------*/
 
 /*---built_in---*/
 
 /*--------------*/
 
 /*---external_command---*/
-void		external_command(t_init *state, t_exe *exe_built);
+void	external_command(t_init *state, t_exe *exe_built);
 /*---------------------*/
 
 /*---signal---*/
-void		signal_minishell(struct sigaction action);
+void	signal_minishell(struct sigaction action);
 /*------------*/
 
 /*---free---*/
-void		double_array_free(char **array);
+void	double_array_free(char **array);
 /*----------*/
 #endif
