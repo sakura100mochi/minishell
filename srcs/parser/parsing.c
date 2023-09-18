@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:26:19 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/18 20:06:25 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/18 20:12:45 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_parser	*command(t_parser *parse, char **phrase)
 	j = 0;
 	while (phrase[i] != NULL)
 	{
-		while (phrase[i][0] != '-')
+		while (phrase[i] != NULL && phrase[i][0] != '-')
 			i++;
 		if (phrase[i] != NULL)
 		{
