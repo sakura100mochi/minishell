@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:39:31 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/17 19:48:44 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/18 12:12:26 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ char	*double_quotation(char **str)
 
 	tmp = *str;
 	len = count_char(tmp);
-	result = (char *)ft_calloc(sizeof(char), len + 1);
-	if (result == NULL)
-		return (NULL);
 	result = ft_substr(tmp, 0, len);
 	if (tmp[len] == ' ' && tmp[len] != '\0')
 		len++;

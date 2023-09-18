@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   external_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 16:02:20 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/18 11:50:30 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	exe_ext_command(t_init *state, t_exe *exe_ext, char **command)
 	char		*exe;
 	extern char	**environ;
 
+	(void)state;
 	exe = ft_strjoin(BINARY, command[0]);
 	exe_ext->exe_flag = execve(exe, command, environ);
 	perror("execve");

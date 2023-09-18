@@ -6,21 +6,21 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 19:56:01 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/18 11:56:27 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	main(void)
-{
-	t_init	state;
+// int	main(void)
+// {
+// 	t_init	state;
 
-	init_minishell(&state);
-	signal_minishell(state.signal->action);
-	standby_state(&state);
-	return (0);
-}
+// 	init_minishell(&state);
+// 	signal_minishell(state.signal->action);
+// 	standby_state(&state);
+// 	return (0);
+// }
 
 // int	main(int argc, char **argv)
 // {
@@ -40,7 +40,7 @@ int	main(void)
 // 	return (0);
 // }
 
-// __attribute__((destructor))
-// static void destructor() {
-//     system("leaks -q minishell");
-// }
+__attribute__((destructor))
+static void destructor() {
+    system("leaks -q minishell");
+}
