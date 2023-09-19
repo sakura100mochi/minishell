@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 18:54:21 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/18 20:06:47 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/19 19:40:53 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_file
 typedef struct s_parser
 {
 	char			*cmd;
-	char			**option;
+	char			*option;
 	char			*str;
 	t_file			*redirect;
 	char			*result;
@@ -56,7 +56,7 @@ char		*split_word(char **str);
 /*-----------*/
 
 /*---parser---*/
-t_parser	*parser_main(char **str);
+t_parser	**parser_main(char **str);
 t_parser	*parsing(t_parser *parse, char **phrase);
 t_parser	*command(t_parser *parse, char **phrase);
 int			check_command(char *str);
