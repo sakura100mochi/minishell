@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:26:05 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/19 19:24:24 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/20 01:33:35 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,18 @@ static t_env	*input_env_variable(t_exe *exe_built, t_env *env_variable)
 	return (start);
 }
 
+static int	check_option(t_exe *exe_buit, t_env *env_variable)
+{
+	(void)exe_buit;
+	(void)env_variable;
+	return (1);
+}
+
 t_env	*built_in_export(t_exe *exe_built, t_env *env_variable)
 {
 	if (!exe_built->command[1])
 		export_no_command(env_variable);
-	else if (check_option())
+	else if (check_option(exe_built, env_variable))
 	{
 		env_variable = input_env_variable(exe_built, env_variable);
 	}
