@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:54 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/19 19:10:10 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/19 20:09:13 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,30 +34,35 @@ static size_t	pipe_count(char **str)
 	return (count);
 }
 
-t_parser	*parser_main(char **str)
+t_parser	**parser_main(char **str)
 {
-	t_parser	*parse;
+	t_parser	**parse;
 	char		**phrase;
 	size_t		i;
 	size_t		j;
+	size_t		k;
 
-	parse = ft_calloc(sizeof(t_parser), pipe_count(str));
+	parse = ft_calloc(sizeof(t_parser *), pipe_count(str) + 1);
 	if (parse == NULL)
-		return ((t_parser *)MALLOC_ERROR);
+		return ((t_parser **)MALLOC_ERROR);
 	phrase = ft_calloc(sizeof(char *), pipe_count(str));
 	if (phrase == NULL)
-		return ((t_parser *)MALLOC_ERROR);
+		return ((t_parser **)MALLOC_ERROR);
 	i = 0;
+	k = 0;
 	while (str[i] != NULL)
 	{
 		j = 0;
 		while (str[i] != NULL && str[i][0] != '|')
 			phrase[j++] = str[i++];
-		parse = parsing(parse, phrase);
+		parse[k] = parsing(parse[k], phrase);
+		printf("%ld|cmd___%s|option___%s\n", k, parse[k]->cmd, parse[k]->option);
+		k++;
 		if (str[i] != NULL)
 			i++;
 		ft_bzero_double(phrase);
 	}
+	parse[k] = NULL;
 	return (parse);
 }
 
@@ -78,16 +83,9 @@ static char	**ft_free(char **result)
 int	main(void)
 {
 	char		**result;
-	char		str[] = "echo \"a\" -n a -n 'orld' \"hello\" aaa -n | cat < file";
-	int			i;
+	char		str[] = "cat < file | echo -n a | echo -n -n -n \"Hello World\"";
 
 	result = lexer_main(str);
-	i = 0;
-	while (result[i] != NULL)
-	{
-		printf("lexer : [%s]\n", result[i]);
-		i++;
-	}
 	parser_main(lexer_main(str));
 	ft_free(result);
 	return (0);
