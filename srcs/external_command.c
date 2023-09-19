@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/18 12:30:38 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/18 20:35:13 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	external_command(t_init *state, t_exe *exe_ext)
 
 	status = 0;
 	exe_ext->pid = fork();
-	// printf("process:%d, %s\n", exe_ext->pid, state->env[1]);
+	// ft_printf("process:%d, %s\n", exe_ext->pid, state->env[1]);
 	if (exe_ext->pid < 0)
 		exit(EXIT_FAILURE);
 	else if (exe_ext->pid == 0)
