@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:28:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/18 15:47:55 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/19 18:53:38 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	nodeadd_back(t_env **env, t_env *new)
 	new -> prev = *env;
 }
 
-t_env	*new_node(char *content, size_t index)
+t_env	*new_node(char *content, size_t head)
 {
 	t_env	*new;
 
 	new = (t_env *)ft_calloc(1, sizeof(t_env));
 	if (!new)
 		return (NULL);
-	if (!index)
+	if (head)
 		new -> head = 1;
 	new -> variable = content;
 	new -> next = NULL;
@@ -44,15 +44,11 @@ t_init	*init_env(t_init *state)
 	extern char	**environ;
 
 	index = 0;
+	env_variable = new_node("head", 1);
+	start = env_variable;
 	while (environ[index])
 	{
-		if (!index)
-		{
-			env_variable = new_node(environ[index], index);
-			start = env_variable;
-			index++;
-		}
-		new = new_node(environ[index], index);
+		new = new_node(environ[index], 0);
 		nodeadd_back(&env_variable, new);
 		index++;
 	}

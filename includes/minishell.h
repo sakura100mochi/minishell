@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/18 20:40:22 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/19 19:05:53 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <string.h>
 # include <signal.h>
 # include <sys/types.h>
-# include <sys/wait.h> //linux
+# include <sys/wait.h>
 # include <termios.h>
 # include <termcap.h>
 /*-------------*/
@@ -55,13 +55,13 @@ typedef struct s_env
 typedef struct s_signal
 {
 	struct sigaction	action;
-}				t_signal;
+}						t_signal;
 
 typedef struct s_exe
 {
-	pid_t	pid;
-	size_t	exe_flag;
-	char	**command;
+	pid_t		pid;
+	size_t		exe_flag;
+	char		**command;
 }				t_exe;
 typedef struct s_init
 {
@@ -70,6 +70,7 @@ typedef struct s_init
 	t_signal	*signal;
 	t_parser	*parser;
 	t_env		*env;
+	t_error		*error;
 }				t_init;
 /*---------------------------*/
 
