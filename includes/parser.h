@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 18:54:21 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/18 20:06:47 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/19 19:09:45 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_file
 typedef struct s_parser
 {
 	char			*cmd;
-	char			**option;
+	char			*option;
 	char			*str;
 	t_file			*redirect;
 	char			*result;

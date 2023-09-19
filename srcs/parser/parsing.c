@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:26:19 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/18 20:12:45 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/19 19:09:53 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_parser	*parsing(t_parser *parse, char **phrase)
 t_parser	*command(t_parser *parse, char **phrase)
 {
 	size_t	i;
-	size_t	j;
 
 	i = 0;
 	while (check_command(phrase[i]) == NO && phrase[i] != NULL)
@@ -30,17 +29,17 @@ t_parser	*command(t_parser *parse, char **phrase)
 		return ((t_parser *)NO_COMMAND);
 	parse->cmd = phrase[i];
 	i = 0;
-	j = 0;
 	while (phrase[i] != NULL)
 	{
-		while (phrase[i] != NULL && phrase[i][0] != '-')
-			i++;
-		if (phrase[i] != NULL)
+		if (phrase[i][0] == '-')
 		{
-			parse->option[j] = phrase[i];
-			i++;
-			j++;
+			if (parse->option == NULL)
+				parse->option = phrase[i];
+			else
+				ft_strlcat(parse->option, phrase[i],
+					ft_strlen(parse->option) + ft_strlen(phrase[i]) + 1);
 		}
+		i++;
 	}
 	return (parse);
 }

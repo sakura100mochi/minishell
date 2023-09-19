@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:54 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/19 16:33:48 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/19 19:10:10 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static char	**ft_free(char **result)
 int	main(void)
 {
 	char		**result;
-	char		str[] = "echo 'orld' \"hello\" aaa | cat < file";
+	char		str[] = "echo \"a\" -n a -n 'orld' \"hello\" aaa -n | cat < file";
 	int			i;
 
 	result = lexer_main(str);
