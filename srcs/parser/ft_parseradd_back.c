@@ -6,7 +6,7 @@
 /*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:58:27 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/09/20 14:18:04 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/09/20 22:25:33 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@ void	ft_parseradd_back(t_parser **node, t_parser *new)
 		last = ft_parserlast(*node);
 		last->next = new;
 		new->prev = last;
-	printf("corect _____command|%s\n", new->cmd);
-	printf("corect _____option|%s\n", new->option);
-	printf("#####command|%s\n", last->cmd);
-	printf("#####option|%s\n", last->option);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 18:54:21 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/20 13:51:51 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/09/20 21:46:45 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_file
 	t_redirect_type	type;
 	struct s_file	*next;
 }			t_file;
+
 typedef struct s_parser
 {
 	char			*cmd;
