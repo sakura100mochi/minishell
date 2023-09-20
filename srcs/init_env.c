@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:28:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/19 18:53:38 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:56:22 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_init	*init_env(t_init *state)
 	start = env_variable;
 	while (environ[index])
 	{
-		new = new_node(environ[index], 0);
+		new = new_node(ft_strdup(environ[index]), 0);
 		nodeadd_back(&env_variable, new);
 		index++;
 	}

@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 13:22:32 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/20 11:50:49 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:55:45 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	delete_all_env_node(t_env *env_variable)
 	env_variable = env_variable -> next;
 	while (!(env_variable -> head))
 	{
+		free(env_variable->variable);
 		current_location = env_variable;
 		env_variable = (env_variable -> next);
 		free(current_location);
