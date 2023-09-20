@@ -6,30 +6,11 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:22 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/20 14:33:35 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/20 19:42:39 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/built_in.h"
-
-static t_env	*serch_env_variable(t_env *head, char *variable)
-{
-	size_t	len;
-	t_env	*serch_variable;
-
-	serch_variable = head;
-	if (*variable == '\0')
-		return (serch_variable->prev);
-	serch_variable = serch_variable->next;
-	len = ft_strlen(variable);
-	while (!serch_variable->head)
-	{
-		if (!ft_strncmp(serch_variable->variable, variable, len))
-			break ;
-		serch_variable = serch_variable->next;
-	}
-	return (serch_variable);
-}
 
 static t_env	*set_pwd(t_env *env_variable, char *head_variable)
 {
