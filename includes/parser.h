@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 18:54:21 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/19 19:40:53 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/20 13:51:51 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,17 @@ char		*split_word(char **str);
 /*-----------*/
 
 /*---parser---*/
-t_parser	**parser_main(char **str);
-t_parser	*parsing(t_parser *parse, char **phrase);
-t_parser	*command(t_parser *parse, char **phrase);
-int			check_command(char *str);
+t_parser	*parser_main(char **str);
+t_parser	*split_pipe(char **str, char **one_phrase);
 void		ft_bzero_double(char **str);
+int			check_command(char *str);
+t_parser	*ft_parsernew(char *cmd, char *option, char *str, t_file *redirect);
+void		ft_parseradd_back(t_parser **node, t_parser *new);
+t_parser	*ft_parserlast(t_parser *node);
+char		*ft_command(char **one_phrase);
+char		*ft_option(char **one_phrase);
+char		*ft_str(char **one_phrase);
+t_file		*ft_redirect(char **one_phrase);
 /*------------*/
 
 #endif

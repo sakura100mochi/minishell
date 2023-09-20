@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#              #
-#    Updated: 2023/09/20 08:54:52 by csakamot         ###   ########.fr        #
+#    Updated: 2023/09/20 13:20:11 by hiraiyuina       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ LIBFT		= ${addprefix ${PRE}, libft/}
 
 LEXERSRC	= lexer_main.c split_word.c single_quotation.c double_quotation.c
 
-PARSERSRC	= parser_main.c parsing.c ft_bzero_double.c
+PARSERSRC	= parser_main.c split_pipe.c ft_parsernew.c ft_parseradd_back.c parser_contents.c ft_bzero_double.c make_add_node.c
 
 SRCS		= ${MAINSRC} ${addprefix ${BUILTIN}, ${BULITINSRC}} ${addprefix ${LEXER}, ${LEXERSRC}} ${addprefix ${PARSER}, ${PARSERSRC}}
 ##-----------------------------##

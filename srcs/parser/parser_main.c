@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:54 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/19 20:09:13 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/20 13:54:18 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,41 +34,22 @@ static size_t	pipe_count(char **str)
 	return (count);
 }
 
-t_parser	**parser_main(char **str)
+t_parser	*parser_main(char **str)
 {
-	t_parser	**parse;
-	char		**phrase;
-	size_t		i;
-	size_t		j;
-	size_t		k;
+	t_parser	*node;
+	char		**one_phrase;
 
-	parse = ft_calloc(sizeof(t_parser *), pipe_count(str) + 1);
-	if (parse == NULL)
-		return ((t_parser **)MALLOC_ERROR);
-	phrase = ft_calloc(sizeof(char *), pipe_count(str));
-	if (phrase == NULL)
-		return ((t_parser **)MALLOC_ERROR);
-	i = 0;
-	k = 0;
-	while (str[i] != NULL)
-	{
-		j = 0;
-		while (str[i] != NULL && str[i][0] != '|')
-			phrase[j++] = str[i++];
-		parse[k] = parsing(parse[k], phrase);
-		printf("%ld|cmd___%s|option___%s\n", k, parse[k]->cmd, parse[k]->option);
-		k++;
-		if (str[i] != NULL)
-			i++;
-		ft_bzero_double(phrase);
-	}
-	parse[k] = NULL;
-	return (parse);
+	one_phrase = ft_calloc(sizeof(char *), pipe_count(str));
+	if (one_phrase == NULL)
+		return ((t_parser *)MALLOC_ERROR);
+	node = split_pipe(str, one_phrase);
+	return (node);
 }
 
-static char	**ft_free(char **result)
+static char	**ft_free(char **result, t_parser *node)
 {
-	size_t	i;
+	size_t		i;
+	t_parser	*tmp;
 
 	i = 0;
 	while (result[i] != NULL)
@@ -77,16 +58,44 @@ static char	**ft_free(char **result)
 		i++;
 	}
 	free(result);
+	while (node != NULL)
+	{
+		tmp = node->next;
+		free(node);
+		node = tmp;
+	}
 	return (NULL);
 }
 
 int	main(void)
 {
+	t_parser	*node;
+	t_parser	*head;
 	char		**result;
+	size_t		i;
 	char		str[] = "cat < file | echo -n a | echo -n -n -n \"Hello World\"";
 
+	i = 0;
 	result = lexer_main(str);
-	parser_main(lexer_main(str));
-	ft_free(result);
+	while (result[i] != NULL)
+	{
+		printf("lexer:[%s]\n", result[i]);
+		if (result[i][0] == '|')
+			printf("=============================\n");
+		i++;
+	}
+	printf("\n---------------------------\n\n");
+	node = parser_main(lexer_main(str));
+	head = node;
+	while (node != NULL)
+	{
+		printf("cmd|[%s]\n", node->cmd);
+		printf("option|[%s]\n", node->option);
+		printf("str|[%s]\n", node->str);
+		printf("redirect|[%p]\n", node->redirect);
+		printf("=============================\n");
+		node = node->next;
+	}
+	ft_free(result, head);
 	return (0);
 }
