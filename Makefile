@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#              #
-#    Updated: 2023/09/20 19:43:34 by csakamot         ###   ########.fr        #
+#    Updated: 2023/09/21 06:18:55 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ BULITINSRC	= built_in.c built_in_cd.c built_in_echo.c built_in_env.c \
 
 LEXERSRC	= lexer_main.c split_word.c single_quotation.c double_quotation.c
 
-#PARSERSRC	= parser_main.c parsing.c ft_bzero_double.c
+PARSERSRC	= parser_main.c split_pipe.c ft_parsernew.c ft_parseradd_back.c parser_contents.c ft_bzero_double.c make_add_node.c
 
 SRCS		= ${MAINSRC} ${addprefix ${BUILTIN}, ${BULITINSRC}} ${addprefix ${LEXER}, ${LEXERSRC}}
 # ${addprefix ${PARSER}, ${PARSERSRC}}
