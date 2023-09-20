@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/20 01:43:41 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/20 11:46:54 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 /*---include---*/
 # include "../srcs/libft/libft_include/libft.h"
-# include "built_in.h"
 # include "parser.h"
 # include <dirent.h>
 # include <errno.h>
@@ -63,6 +62,7 @@ typedef struct s_exe
 	size_t		exe_flag;
 	char		**command;
 }				t_exe;
+
 typedef struct s_init
 {
 	char		*prompt;
@@ -80,14 +80,7 @@ void	standby_state(t_init *state);
 t_env	*new_node(char *content, size_t index);
 
 /*---built_in---*/
-int		judge_built_in(t_init *state, char **exe_buil_command);
-void	built_in_cd(void);
-void	built_in_echo(t_init *state, t_parser *parser);
-void	built_in_env(t_init *state, t_env *env_variable);
-void	built_in_exit(t_init *state);
-t_env	*built_in_export(t_exe *exe, t_env *env_variable);
-void	built_in_pwd(void);
-void	built_in_unset(void);
+
 /*--------------*/
 
 /*---external_command---*/
@@ -100,5 +93,6 @@ void	signal_minishell(struct sigaction action);
 
 /*---free---*/
 void	double_array_free(char **array);
+void	delete_all_env_node(t_env *env_variable);
 /*----------*/
 #endif

@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:39:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/18 19:24:08 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/20 11:16:19 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,14 @@
 /*-------------*/
 
 /*---Structure_Declaration---*/
-
+int		judge_built_in(t_init *state, char **exe_buil_command);
+t_env	*built_in_cd(t_env *env_variable, t_parser *parser);
+void	built_in_echo(t_init *state, t_parser *parser);
+void	built_in_env(t_init *state, t_env *env_variable);
+void	built_in_exit(t_init *state);
+t_env	*built_in_export(t_exe *exe, t_env *env_variable);
+void	built_in_pwd(void);
+void	built_in_unset(void);
 /*---------------------------*/
 
 #endif

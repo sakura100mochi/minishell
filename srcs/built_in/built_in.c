@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:18:37 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/20 01:42:55 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/20 11:16:46 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	judge_built_in(t_init *state, char **exe_built_command)
 	len = ft_strlen(exe_built_command[0]);
 	// ft_printf("len%zu, command:%s\n", len, exe_built_command[0]);
 	if (len == 2 && !ft_strncmp(exe_built_command[0], "cd", len))
-		built_in_cd();
+		state->env = built_in_cd(state->env, state->parser);
 	else if (len == 4 && !ft_strncmp(exe_built_command[0], "echo", len))
 		built_in_echo(state, state->parser);
 	else if (len == 3 && !ft_strncmp(exe_built_command[0], "env", len))

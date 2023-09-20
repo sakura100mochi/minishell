@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:44:53 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/19 19:03:49 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/20 11:49:38 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,3 +22,8 @@ int	main(void)
 	standby_state(state);
 	return (0);
 }
+
+// __attribute__((destructor))
+// static void destructor() {
+//     system("leaks -q minishell");
+// }
