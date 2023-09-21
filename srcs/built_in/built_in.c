@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:18:37 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/21 09:46:08 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/21 12:26:30 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int	judge_built_in(t_init *state, char **exe_built_command)
 	else if (len == 4 && !ft_strncmp(exe_built_command[0], "exit", len))
 		built_in_exit(state);
 	else if (len == 6 && !ft_strncmp(exe_built_command[0], "export", len))
-		state->env = built_in_export(state->exe, state->env, state->exp);
+		built_in_export(state->exe, state->env, state->exp);
 	else if (len == 3 && !ft_strncmp(exe_built_command[0], "pwd", len))
 		built_in_pwd();
 	else if (len == 5 && !ft_strncmp(exe_built_command[0], "unset", len))
-		built_in_unset();
+		built_in_unset(state->exe, state->env, state->exp);
 	else
 		return (1);
 	double_array_free(exe_built_command);
