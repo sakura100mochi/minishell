@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_env.c                                         :+:      :+:    :+:   */
+/*   init_exp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 13:28:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/21 09:49:16 by csakamot         ###   ########.fr       */
+/*   Created: 2023/09/21 09:37:18 by csakamot          #+#    #+#             */
+/*   Updated: 2023/09/21 09:54:33 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	env_nodeadd_back(t_env **env, t_env *new)
+void	exp_nodeadd_back(t_exp **env, t_exp *new)
 {
 	while ((*env)-> next)
 		*env = ((*env)-> next);
@@ -20,11 +20,11 @@ void	env_nodeadd_back(t_env **env, t_env *new)
 	new -> prev = *env;
 }
 
-t_env	*new_env_node(char *content, size_t head)
+t_exp	*new_exp_node(char *content, size_t head)
 {
-	t_env	*new;
+	t_exp	*new;
 
-	new = (t_env *)ft_calloc(1, sizeof(t_env));
+	new = (t_exp *)ft_calloc(1, sizeof(t_exp));
 	if (!new)
 		return (NULL);
 	if (head)
@@ -35,25 +35,25 @@ t_env	*new_env_node(char *content, size_t head)
 	return (new);
 }
 
-t_init	*init_env(t_init *state)
+t_init	*init_exp(t_init *state)
 {
 	size_t		index;
-	t_env		*env_variable;
-	t_env		*start;
-	t_env		*new;
+	t_exp		*exp_variable;
+	t_exp		*start;
+	t_exp		*new;
 	extern char	**environ;
 
 	index = 0;
-	env_variable = new_env_node("head", 1);
-	start = env_variable;
+	exp_variable = new_exp_node("head", 1);
+	start = exp_variable;
 	while (environ[index])
 	{
-		new = new_env_node(ft_strdup(environ[index]), 0);
-		env_nodeadd_back(&env_variable, new);
+		new = new_exp_node(ft_strjoin("dexlare -x ", environ[index]), 0);
+		exp_nodeadd_back(&exp_variable, new);
 		index++;
 	}
-	start->prev = env_variable->next;
-	env_variable->next->next = start;
-	state->env = start;
+	start->prev = exp_variable->next;
+	exp_variable->next->next = start;
+	state->exp = start;
 	return (state);
 }

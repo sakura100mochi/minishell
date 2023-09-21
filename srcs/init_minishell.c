@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:40:38 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/19 19:08:34 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/21 09:42:50 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_init	*init_minishell(t_init *state)
 	sig_act = (t_signal *)ft_calloc(sizeof(t_signal), 1);
 	error = (t_error *)ft_calloc(sizeof(t_error), 1);
 	state = init_env(state);
+	state = init_exp(state);
 	state->exe = exe_built;
 	state->signal = sig_act;
 	state->error = error;
