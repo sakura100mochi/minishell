@@ -6,7 +6,7 @@
 /*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 18:54:21 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/20 21:46:45 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/09/21 14:34:30 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 typedef enum e_redirect_type
 {
-	UNKNOEN,
+	UNKNOWN,
 	QUOTE_HEREDOC,
 	HEREDOC,
 	INPUT,
@@ -64,6 +64,9 @@ int			check_command(char *str);
 t_parser	*ft_parsernew(char *cmd, char *option, char *str, t_file *redirect);
 void		ft_parseradd_back(t_parser **node, t_parser *new);
 t_parser	*ft_parserlast(t_parser *node);
+t_file		*ft_filenew(char **one_phrase);
+void		ft_fileadd_back(t_file **file, t_file *new);
+t_file		*ft_filelast(t_file *file);
 char		*ft_command(char **one_phrase);
 char		*ft_option(char **one_phrase);
 char		*ft_str(char **one_phrase);

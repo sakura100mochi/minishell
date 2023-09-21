@@ -6,7 +6,7 @@
 /*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:05:35 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/09/20 22:23:38 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/09/21 14:57:40 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,16 @@ char	*ft_str(char **one_phrase)
 
 t_file	*ft_redirect(char **one_phrase)
 {
-	(void)one_phrase;
-	return (NULL);
+	size_t	i;
+	t_file	*file;
+
+	i = 0;
+	file = NULL;
+	while (one_phrase[i] != NULL)
+	{
+		if (one_phrase[i][0] == '<' || one_phrase[i][0] == '>')
+			ft_fileadd_back(&file, ft_filenew(&one_phrase[i]));
+		i++;
+	}
+	return (file);
 }

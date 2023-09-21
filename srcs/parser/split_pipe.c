@@ -6,7 +6,7 @@
 /*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:07:28 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/09/20 22:27:27 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/09/21 14:58:46 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_parser	*split_pipe(char **str, char **one_phrase)
 		new = ft_parsernew(ft_command(one_phrase), ft_option(one_phrase),
 			ft_str(one_phrase), ft_redirect(one_phrase));
 		ft_parseradd_back(&node, new);
+		// printf("---%s\n", node->cmd);
 		if (str[i] != NULL)
 			i++;
 		ft_bzero_double(one_phrase);
