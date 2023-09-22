@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:36:44 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/22 14:17:41 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/22 17:03:43 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ void	standby_state(t_init *state)
 		if (!*(state)->prompt)
 		{
 			free(state->prompt);
+			continue ;
+		}
+		else if (state->prompt == NULL)
+		{
+			printf("^D\n");
 			continue ;
 		}
 		state->exe->command = lexer_main(state->prompt);

@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 12:50:11 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/22 15:02:12 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/22 17:30:15 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	signal_handler(int signum, siginfo_t *info, void *dummy)
 	(void)info;
 	if (signum == SIGINT)
 	{
-		printf("\n");
+		ft_printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 1);
 		rl_redisplay();
@@ -33,5 +33,6 @@ void	signal_minishell(struct sigaction action)
 	sigemptyset(&action.sa_mask);
 	action.sa_flags = SA_SIGINFO;
 	sigaction(SIGINT, &action, NULL);
+	signal(SIGQUIT, SIG_IGN);
 	return ;
 }
