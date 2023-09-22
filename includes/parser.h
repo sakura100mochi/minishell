@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 18:54:21 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/22 15:35:33 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/22 16:17:01 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ char		*split_word(char **str);
 /*---parser---*/
 t_parser	*parser_main(char **str);
 t_parser	*split_pipe(char **str, char **one_phrase);
-void		ft_bzero_double(char **str);
 char		*ft_strjoin_minis(char *s1, char const *s2);
 int			check_command(char *str);
 t_parser	*ft_parsernew(char *cmd, char *option, t_file *redirect);
@@ -74,6 +73,7 @@ t_file		*ft_filenew(char **one_phrase);
 void		ft_fileadd_back(t_file **file, t_file *new);
 t_file		*ft_filelast(t_file *file);
 char		*ft_command(char **one_phrase);
+char		*ft_command_add(char *cmd, char *one_phrase);
 char		*ft_option(char **one_phrase);
 t_file		*ft_redirect(char **one_phrase);
 /*------------*/

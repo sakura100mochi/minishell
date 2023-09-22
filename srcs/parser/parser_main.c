@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:54 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/22 15:43:42 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/22 16:50:44 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,26 @@ t_parser	*parser_main(char **str)
 {
 	t_parser	*node;
 	char		**one_phrase;
+	size_t		i;
 
+	i = 0;
 	one_phrase = ft_calloc(sizeof(char *), pipe_count(str));
 	if (one_phrase == NULL)
 		return ((t_parser *)MALLOC_ERROR);
 	node = split_pipe(str, one_phrase);
+	free(one_phrase);
+	while (str[i] != NULL)
+		free(str[i++]);
+	free(str);
 	return (node);
 }
 
 static char	**ft_free(char **result, t_parser *node)
 {
 	size_t		i;
-	t_parser	*tmp;
+	t_parser	*tmp_node;
+	t_file		*file;
+	t_file		*tmp_file;
 
 	i = 0;
 	while (result[i] != NULL)
@@ -61,9 +69,19 @@ static char	**ft_free(char **result, t_parser *node)
 	free(result);
 	while (node != NULL)
 	{
-		tmp = node->next;
+		file = node->redirect;
+		while (file != NULL)
+		{
+			tmp_file = file->next;
+			free(file->file_name);
+			free(file);
+			file = tmp_file;
+		}
+		tmp_node = node->next;
+		free(node->cmd);
+		free(node->option);
 		free(node);
-		node = tmp;
+		node = tmp_node;
 	}
 	return (NULL);
 }
@@ -75,7 +93,7 @@ int	main(void)
 	t_file		*file;
 	char		**result;
 	size_t		i;
-	char		*str = "cat << a | cat < a | cat >> a | cat > a";
+	char		*str = "cat << a -n | cat -n -n -n >> a";
 
 	i = 0;
 	result = lexer_main(str);
@@ -107,7 +125,7 @@ int	main(void)
 	return (0);
 }
 
-// __attribute__((destructor))
-// static void destructor() {
-//     system("leaks -q minishell");
-// }
+__attribute__((destructor))
+static void destructor() {
+    system("leaks -q minishell");
+}

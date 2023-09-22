@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:07:28 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/09/22 14:47:57 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/22 16:45:58 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,15 @@ t_parser	*split_pipe(char **str, char **one_phrase)
 	{
 		j = 0;
 		while (str[i] != NULL && str[i][0] != '|')
-		{
-			one_phrase[j] = one_phrase_malloc(str[i]);
-			i++;
-			j++;
-		}
+			one_phrase[j++] = one_phrase_malloc(str[i++]);
 		new = ft_parsernew(ft_command(one_phrase), ft_option(one_phrase),
 				ft_redirect(one_phrase));
 		ft_parseradd_back(&node, new);
 		if (str[i] != NULL)
 			i++;
-		ft_bzero_double(one_phrase);
+		j = 0;
+		while (one_phrase[j] != NULL)
+			free(one_phrase[j++]);
 	}
 	return (node);
 }
