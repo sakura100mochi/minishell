@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_add_back.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:58:27 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/09/21 15:00:34 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/09/22 13:40:37 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,8 @@ void	ft_parseradd_back(t_parser **node, t_parser *new)
 
 t_parser	*ft_parserlast(t_parser *node)
 {
-	t_parser	*head;
-	size_t		size;
-
-	size = 0;
-	head = node;
-	while (head != NULL)
-	{
-		head = head->next;
-		size++;
-	}
-	while (size > 1)
-	{
+	while (node->next != NULL)
 		node = node->next;
-		size--;
-	}
 	return (node);
 }
 
@@ -65,20 +52,7 @@ void	ft_fileadd_back(t_file **file, t_file *new)
 
 t_file	*ft_filelast(t_file *file)
 {
-	t_file	*head;
-	size_t	size;
-
-	size = 0;
-	head = file;
-	while (head != NULL)
-	{
-		head = head->next;
-		size++;
-	}
-	while (size > 1)
-	{
+	while (file->next != NULL)
 		file = file->next;
-		size--;
-	}
 	return (file);
 }

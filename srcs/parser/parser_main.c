@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:54 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/21 14:56:47 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/09/22 15:43:42 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,21 @@
 static size_t	pipe_count(char **str)
 {
 	size_t	count;
+	size_t	max;
 	size_t	i;
-	size_t	j;
 
 	count = 0;
+	max = 0;
 	i = 0;
 	while (str[i] != NULL)
 	{
-		j = 0;
-		while (str[i][j] != '\0')
+		if (str[i][0] == '|')
 		{
-			if (str[i][j] == '|')
-				count++;
-			j++;
+			if (max < count)
+				max = count;
+			count = 0;
 		}
+		count++;
 		i++;
 	}
 	return (count);
@@ -74,7 +75,7 @@ int	main(void)
 	t_file		*file;
 	char		**result;
 	size_t		i;
-	char		str[] = "cat < file | echo -n a | echo -n -n -n \"Hello World\"";
+	char		*str = "cat << a | cat < a | cat >> a | cat > a";
 
 	i = 0;
 	result = lexer_main(str);
@@ -90,13 +91,13 @@ int	main(void)
 	head = node;
 	while (node != NULL)
 	{
-		printf("cmd|[%s]%p\n", node->cmd, node->cmd);
-		printf("option|[%s]%p\n", node->option, node->option);
-		printf("str|[%s]%p\n", node->str, node->str);
+		printf("cmd|[%s]\n", node->cmd);
+		printf("option|[%s]\n", node->option);
 		file = node->redirect;
 		while (file != NULL)
 		{
-			printf("redirect|[%s]%p\n", file->file_name, file->file_name);
+			printf("redirect|type|[%u]\n", file->type);
+			printf("redirect|name|[%s]\n", file->file_name);
 			file = file->next;
 		}
 		printf("=============================\n");
@@ -105,3 +106,8 @@ int	main(void)
 	ft_free(result, head);
 	return (0);
 }
+
+// __attribute__((destructor))
+// static void destructor() {
+//     system("leaks -q minishell");
+// }
