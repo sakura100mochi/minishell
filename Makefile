@@ -3,12 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#              #
-#    Updated: 2023/09/22 14:57:53 by csakamot         ###   ########.fr        #
+#    Created: Invalid date        by                   #+#    #+#              #
+#    Updated: 2023/09/22 16:53:13 by yhirai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 ##----Executable File Name-----##
 NAME		= minishell
@@ -42,7 +43,7 @@ BULITINSRC	= built_in.c built_in_cd.c built_in_echo.c built_in_env.c \
 
 LEXERSRC	= lexer_main.c split_word.c single_quotation.c double_quotation.c
 
-#PARSERSRC	= parser_main.c split_pipe.c ft_parsernew.c ft_parseradd_back.c parser_contents.c ft_bzero_double.c make_add_node.c
+PARSERSRC	= parser_main.c split_pipe.c list_new.c list_add_back.c parser_contents.c parser_utils.c etc.c
 
 SRCS		= ${MAINSRC} ${addprefix ${BUILTIN}, ${BULITINSRC}} ${addprefix ${LEXER}, ${LEXERSRC}}
 # ${addprefix ${PARSER}, ${PARSERSRC}}

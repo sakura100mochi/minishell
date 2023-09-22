@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:54 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/20 22:53:13 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/09/22 16:50:44 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,21 @@
 static size_t	pipe_count(char **str)
 {
 	size_t	count;
+	size_t	max;
 	size_t	i;
-	size_t	j;
 
 	count = 0;
+	max = 0;
 	i = 0;
 	while (str[i] != NULL)
 	{
-		j = 0;
-		while (str[i][j] != '\0')
+		if (str[i][0] == '|')
 		{
-			if (str[i][j] == '|')
-				count++;
-			j++;
+			if (max < count)
+				max = count;
+			count = 0;
 		}
+		count++;
 		i++;
 	}
 	return (count);
@@ -38,18 +39,26 @@ t_parser	*parser_main(char **str)
 {
 	t_parser	*node;
 	char		**one_phrase;
+	size_t		i;
 
+	i = 0;
 	one_phrase = ft_calloc(sizeof(char *), pipe_count(str));
 	if (one_phrase == NULL)
 		return ((t_parser *)MALLOC_ERROR);
 	node = split_pipe(str, one_phrase);
+	free(one_phrase);
+	while (str[i] != NULL)
+		free(str[i++]);
+	free(str);
 	return (node);
 }
 
 static char	**ft_free(char **result, t_parser *node)
 {
 	size_t		i;
-	t_parser	*tmp;
+	t_parser	*tmp_node;
+	t_file		*file;
+	t_file		*tmp_file;
 
 	i = 0;
 	while (result[i] != NULL)
@@ -60,9 +69,19 @@ static char	**ft_free(char **result, t_parser *node)
 	free(result);
 	while (node != NULL)
 	{
-		tmp = node->next;
+		file = node->redirect;
+		while (file != NULL)
+		{
+			tmp_file = file->next;
+			free(file->file_name);
+			free(file);
+			file = tmp_file;
+		}
+		tmp_node = node->next;
+		free(node->cmd);
+		free(node->option);
 		free(node);
-		node = tmp;
+		node = tmp_node;
 	}
 	return (NULL);
 }
@@ -71,9 +90,10 @@ int	main(void)
 {
 	t_parser	*node;
 	t_parser	*head;
+	t_file		*file;
 	char		**result;
 	size_t		i;
-	char		str[] = "cat < file | echo -n a | echo -n -n -n \"Hello World\"";
+	char		*str = "cat << a -n | cat -n -n -n >> a";
 
 	i = 0;
 	result = lexer_main(str);
@@ -91,11 +111,21 @@ int	main(void)
 	{
 		printf("cmd|[%s]\n", node->cmd);
 		printf("option|[%s]\n", node->option);
-		printf("str|[%s]\n", node->str);
-		printf("redirect|[%p]\n", node->redirect);
+		file = node->redirect;
+		while (file != NULL)
+		{
+			printf("redirect|type|[%u]\n", file->type);
+			printf("redirect|name|[%s]\n", file->file_name);
+			file = file->next;
+		}
 		printf("=============================\n");
 		node = node->next;
 	}
 	ft_free(result, head);
 	return (0);
+}
+
+__attribute__((destructor))
+static void destructor() {
+    system("leaks -q minishell");
 }
