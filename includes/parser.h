@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 18:54:21 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/22 16:17:01 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/22 18:17:08 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,11 @@ char		*ft_command_add(char *cmd, char *one_phrase);
 char		*ft_option(char **one_phrase);
 t_file		*ft_redirect(char **one_phrase);
 /*------------*/
+
+/*---Error_parser---*/
+t_parser	*parser_malloc_error(void);
+char		*char_malloc_error(void);
+t_file		*file_malloc_error(void);
+/*------------------*/
 
 #endif
