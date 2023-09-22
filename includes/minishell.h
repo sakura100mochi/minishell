@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/20 01:43:41 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/22 14:38:38 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 /*---include---*/
 # include "../srcs/libft/libft_include/libft.h"
-# include "built_in.h"
 # include "parser.h"
 # include <dirent.h>
 # include <errno.h>
@@ -52,6 +51,14 @@ typedef struct s_env
 	struct s_env		*next;
 }						t_env;
 
+typedef struct s_exp
+{
+	int					head;
+	char				*variable;
+	struct s_exp		*prev;
+	struct s_exp		*next;
+}						t_exp;
+
 typedef struct s_signal
 {
 	struct sigaction	action;
@@ -63,6 +70,7 @@ typedef struct s_exe
 	size_t		exe_flag;
 	char		**command;
 }				t_exe;
+
 typedef struct s_init
 {
 	char		*prompt;
@@ -70,24 +78,22 @@ typedef struct s_init
 	t_signal	*signal;
 	t_parser	*parser;
 	t_env		*env;
+	t_exp		*exp;
 	t_error		*error;
 }				t_init;
 /*---------------------------*/
 
 t_init	*init_minishell(t_init *state);
 t_init	*init_env(t_init *state);
+t_init	*init_exp(t_init *state);
+t_env	*new_env_node(char *content, size_t head);
+t_exp	*new_exp_node(char *content, size_t head);
+void	env_nodeadd_back(t_env **env, t_env *new);
+void	exp_nodeadd_back(t_exp **env, t_exp *new);
 void	standby_state(t_init *state);
-t_env	*new_node(char *content, size_t index);
 
 /*---built_in---*/
-int		judge_built_in(t_init *state, char **exe_buil_command);
-void	built_in_cd(void);
-void	built_in_echo(t_init *state, t_parser *parser);
-void	built_in_env(t_init *state, t_env *env_variable);
-void	built_in_exit(t_init *state);
-t_env	*built_in_export(t_exe *exe, t_env *env_variable);
-void	built_in_pwd(void);
-void	built_in_unset(void);
+
 /*--------------*/
 
 /*---external_command---*/
@@ -100,5 +106,7 @@ void	signal_minishell(struct sigaction action);
 
 /*---free---*/
 void	double_array_free(char **array);
+void	delete_all_env_node(t_env *env_variable);
+void	delete_all_exp_node(t_exp *exp_variable);
 /*----------*/
 #endif
