@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:54 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/22 16:50:44 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/22 18:23:41 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_parser	*parser_main(char **str)
 	i = 0;
 	one_phrase = ft_calloc(sizeof(char *), pipe_count(str));
 	if (one_phrase == NULL)
-		return ((t_parser *)MALLOC_ERROR);
+		return (parser_malloc_error());
 	node = split_pipe(str, one_phrase);
 	free(one_phrase);
 	while (str[i] != NULL)
@@ -93,7 +93,7 @@ int	main(void)
 	t_file		*file;
 	char		**result;
 	size_t		i;
-	char		*str = "cat << a -n | cat -n -n -n >> a";
+	char		*str = "> a echo \"hello\" < b > c << d";
 
 	i = 0;
 	result = lexer_main(str);
@@ -125,7 +125,7 @@ int	main(void)
 	return (0);
 }
 
-__attribute__((destructor))
-static void destructor() {
-    system("leaks -q minishell");
-}
+// __attribute__((destructor))
+// static void destructor() {
+//     system("leaks -q minishell");
+// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:07:28 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/09/22 16:45:58 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/22 18:15:10 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*one_phrase_malloc(char *str)
 	i = 0;
 	one_phrase = ft_calloc(sizeof(char), ft_strlen(str) + 1);
 	if (one_phrase == NULL)
-		return (NULL);
+		return (char_malloc_error());
 	while (str[i] != '\0')
 	{
 		one_phrase[i] = str[i];
