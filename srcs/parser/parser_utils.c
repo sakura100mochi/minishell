@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:28:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/22 16:12:10 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/22 18:18:10 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_strjoin_minis(char *s1, char const *s2)
 		len = ft_strlen(s1) + ft_strlen(s2) + 1;
 	str = ft_calloc(sizeof(char), (len + 1));
 	if (str == NULL)
-		return (NULL);
+		return (char_malloc_error());
 	i = 0;
 	while (s1 != NULL && *s1 != '\0')
 		str[i++] = *s1++;

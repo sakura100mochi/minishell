@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_contents.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:05:35 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/09/22 16:35:46 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/22 18:32:39 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,19 @@ char	*ft_command(char **one_phrase)
 	while (check_command(one_phrase[i]) == NO && one_phrase[i] != NULL)
 		i++;
 	if (one_phrase[i] == NULL)
-		return (NULL);
+		return (char_malloc_error());
 	cmd = ft_strjoin_minis(NULL, one_phrase[i]);
 	i++;
 	while (one_phrase[i] != NULL)
 	{
-		if (one_phrase[i][0] == '-')
-			i++;
-		else if (one_phrase[i][0] == '<' || one_phrase[i][0] == '>')
+		if ((one_phrase[i][0] == '<' || one_phrase[i][0] == '>') &&
+				(one_phrase[i + 1][0] == '<' || one_phrase[i + 1][0] == '>'))
 			i += 2;
-		else
-		{
-			cmd = ft_command_add(cmd, one_phrase[i]);
+		else if (one_phrase[i][0] == '<' || one_phrase[i][0] == '>')
 			i++;
-		}
+		else if (one_phrase[i][0] != '-')
+			cmd = ft_command_add(cmd, one_phrase[i]);
+		i++;
 	}
 	return (cmd);
 }
