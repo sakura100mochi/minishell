@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:22 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/23 21:27:06 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/24 06:07:46 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,18 @@ static t_env	*set_pwd(t_env *env_variable, char *head_variable)
 	return (env_variable);
 }
 
-static int	check_file_access(t_parser *parser, char *file)
-{
-	if (*file = "\0")
-	{
-		chdir("~/");
-		return (1);
-	}
-	if (parser->option)
-		return (1);
-	return (1);
-}
-
 static int	change_directory(t_parser *parser, char *file)
 {
-	size_t	len;
 	char	*wd_path;
 	char	*tmp_path;
 	char	*absolute_path;
 
-	if (*file == "\0" || *file == "~/")
+	if (!*file)
 	{
 		chdir("~/");
 		return (0);
 	}
-	if (parser->option)
+	if (*parser->option)
 		return (1);
 	wd_path = NULL;
 	wd_path = getcwd(wd_path, PATH_MAX);

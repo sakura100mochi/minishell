@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/23 22:03:25 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/24 06:04:48 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	execution_main(t_init *state)
 	char	*file;
 
 	file = format_command(state->parser);
+	printf("%s, %s, %s\n", state->parser->cmd, state->parser->option, file);
 	if (judge_built_in(state, state->parser, file))
 		external_command(state, state->exe, state->parser, file);
 }

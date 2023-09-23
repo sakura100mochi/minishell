@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:36:44 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/23 16:14:07 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/24 06:01:10 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,25 @@
 
 static t_init	*kari(t_init *state, char **command)
 {
+	char		*tmp;
 	t_parser	*parser;
 
 	parser = (t_parser *)ft_calloc(sizeof(t_parser), 1);
 	parser->option = "";
 	if (command[1])
-		parser->cmd = ft_strjoin("cd", command[1]);
+	{
+		tmp = ft_strjoin(command[0], " ");
+		parser->cmd = ft_strjoin(tmp, command[1]);
+	}
+	else
+		parser->cmd = command[0];
 	state->parser = parser;
 	return (state);
 }
 
 static void	kari_free(t_parser *parser)
 {
+	free(parser->cmd);
 	free(parser);
 }
 

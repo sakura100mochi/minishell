@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:26:05 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/23 21:45:03 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/24 05:14:30 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static t_exp	*input_exp_variable(char *str, t_exp *exp_variable)
 void	built_in_export(t_parser *parser, t_env *env_variable, \
 									t_exp *exp_variable, char *str)
 {
-	if (*str == "\0")
+	if (!*str)
 		export_no_command(exp_variable);
 	else
 		exp_variable = input_exp_variable(str, exp_variable);
