@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:36:44 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/22 19:02:14 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/23 14:32:57 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_init	*kari(t_init *state, char **command)
 	parser = (t_parser *)ft_calloc(sizeof(t_parser), 1);
 	parser->option = "";
 	if (command[1])
-		parser->str = command[1];
+		parser->redirect->file_name = command[1];
 	state->parser = parser;
 	return (state);
 }
