@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:22 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/23 19:44:56 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/23 21:27:06 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,32 @@ static t_env	*set_pwd(t_env *env_variable, char *head_variable)
 	return (env_variable);
 }
 
-static void	change_directory(t_parser *parser, char *file)
+static int	check_file_access(t_parser *parser, char *file)
+{
+	if (*file = "\0")
+	{
+		chdir("~/");
+		return (1);
+	}
+	if (parser->option)
+		return (1);
+	return (1);
+}
+
+static int	change_directory(t_parser *parser, char *file)
 {
 	size_t	len;
 	char	*wd_path;
 	char	*tmp_path;
 	char	*absolute_path;
 
-	if (!*file)
+	if (*file == "\0" || *file == "~/")
 	{
 		chdir("~/");
-		return ;
+		return (0);
 	}
-	len = ft_strlen(file);
-	if (len == 1 && ft_strncmp(parser->option, "-", 1))
-		return ;
+	if (parser->option)
+		return (1);
 	wd_path = NULL;
 	wd_path = getcwd(wd_path, PATH_MAX);
 	tmp_path = ft_strjoin(wd_path, "/");
@@ -49,6 +60,7 @@ static void	change_directory(t_parser *parser, char *file)
 	free(wd_path);
 	free(tmp_path);
 	free(absolute_path);
+	return (0);
 }
 
 t_env	*built_in_cd(t_env *env_variable, t_parser *parser, char *file)
@@ -59,9 +71,11 @@ t_env	*built_in_cd(t_env *env_variable, t_parser *parser, char *file)
 	env_variable = serch_env_variable(head, "OLDPWD=");
 	if (env_variable != head)
 		env_variable = set_pwd(env_variable, "OLDPWD=");
-	change_directory(parser, file);
-	env_variable = serch_env_variable(head, "PWD=");
-	if (env_variable != head)
-		env_variable = set_pwd(env_variable, "PWD=");
+	if (change_directory(parser, file))
+	{
+		env_variable = serch_env_variable(head, "PWD=");
+		if (env_variable != head)
+			env_variable = set_pwd(env_variable, "PWD=");
+	}
 	return (head);
 }

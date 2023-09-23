@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/23 19:29:20 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/23 21:54:37 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	exp_nodeadd_back(t_exp **env, t_exp *new);
 void	standby_state(t_init *state);
 
 /*---external_command---*/
-void	external_command(t_init *state, t_exe *exe_built, char *file);
+void	external_command(t_init *state, t_exe *exe, t_parser *parser, char *file);
 /*---------------------*/
 
 /*---signal---*/
