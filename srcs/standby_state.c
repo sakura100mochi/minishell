@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:36:44 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/23 14:32:57 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/23 16:14:07 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_init	*kari(t_init *state, char **command)
 	parser = (t_parser *)ft_calloc(sizeof(t_parser), 1);
 	parser->option = "";
 	if (command[1])
-		parser->redirect->file_name = command[1];
+		parser->cmd = ft_strjoin("cd", command[1]);
 	state->parser = parser;
 	return (state);
 }
@@ -48,8 +48,7 @@ void	standby_state(t_init *state)
 		}
 		state->exe->command = lexer_main(state->prompt);
 		state = kari(state, lexer_main(state->prompt));
-		if (judge_built_in(state, state->exe->command))
-			external_command(state, state->exe);
+		execution_main(state);
 		free(state->prompt);
 		kari_free(state->parser);
 	}

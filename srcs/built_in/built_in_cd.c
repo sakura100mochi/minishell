@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:22 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/20 19:42:39 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/23 19:44:56 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,32 +26,32 @@ static t_env	*set_pwd(t_env *env_variable, char *head_variable)
 	return (env_variable);
 }
 
-static void	change_directory(t_parser *parser)
+static void	change_directory(t_parser *parser, char *file)
 {
 	size_t	len;
 	char	*wd_path;
 	char	*tmp_path;
 	char	*absolute_path;
 
-	if (!*(parser)->str)
+	if (!*file)
 	{
 		chdir("~/");
 		return ;
 	}
-	len = ft_strlen(parser->str);
-	if (len == 1 && ft_strncmp(parser->str, "-", 1))
+	len = ft_strlen(file);
+	if (len == 1 && ft_strncmp(parser->option, "-", 1))
 		return ;
 	wd_path = NULL;
 	wd_path = getcwd(wd_path, PATH_MAX);
 	tmp_path = ft_strjoin(wd_path, "/");
-	absolute_path = ft_strjoin(tmp_path, parser->str);
+	absolute_path = ft_strjoin(tmp_path, file);
 	chdir(absolute_path);
 	free(wd_path);
 	free(tmp_path);
 	free(absolute_path);
 }
 
-t_env	*built_in_cd(t_env *env_variable, t_parser *parser)
+t_env	*built_in_cd(t_env *env_variable, t_parser *parser, char *file)
 {
 	t_env	*head;
 
@@ -59,7 +59,7 @@ t_env	*built_in_cd(t_env *env_variable, t_parser *parser)
 	env_variable = serch_env_variable(head, "OLDPWD=");
 	if (env_variable != head)
 		env_variable = set_pwd(env_variable, "OLDPWD=");
-	change_directory(parser);
+	change_directory(parser, file);
 	env_variable = serch_env_variable(head, "PWD=");
 	if (env_variable != head)
 		env_variable = set_pwd(env_variable, "PWD=");

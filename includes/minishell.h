@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/22 18:07:26 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/09/23 19:29:20 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,16 +88,14 @@ t_init	*init_env(t_init *state);
 t_init	*init_exp(t_init *state);
 t_env	*new_env_node(char *content, size_t head);
 t_exp	*new_exp_node(char *content, size_t head);
+void	execution_main(t_init *state);
+int		check_cmd_file(t_parser *parser, t_env *env_variable, char *file);
 void	env_nodeadd_back(t_env **env, t_env *new);
 void	exp_nodeadd_back(t_exp **env, t_exp *new);
 void	standby_state(t_init *state);
 
-/*---built_in---*/
-
-/*--------------*/
-
 /*---external_command---*/
-void	external_command(t_init *state, t_exe *exe_built);
+void	external_command(t_init *state, t_exe *exe_built, char *file);
 /*---------------------*/
 
 /*---signal---*/

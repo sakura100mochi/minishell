@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/19 19:04:18 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/23 19:26:35 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ static void	exe_ext_command(t_init *state, t_exe *exe_ext, char **command)
 	exit(EXIT_SUCCESS);
 }
 
-void	external_command(t_init *state, t_exe *exe_ext)
+void	external_command(t_init *state, t_exe *exe_ext, char *file)
 {
 	int		status;
 
+	if (check_cmd_file(state->parser, state->env, file))
+		return ;
 	status = 0;
 	exe_ext->pid = fork();
 	// ft_printf("process:%d, %s\n", exe_ext->pid, state->env[1]);
