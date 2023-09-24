@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:36:44 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/24 14:59:01 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/24 17:23:12 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,7 @@ void	standby_state(t_init *state)
 			printf("^D\n");
 			continue ;
 		}
-		printf("before\n");
 		state->parser = parser_main(lexer_main(state->prompt));
-		printf("after\n");
 		execution_main(state);
 		free(state->prompt);
 	}
