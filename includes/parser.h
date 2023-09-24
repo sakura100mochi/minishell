@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 18:54:21 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/24 16:54:22 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/24 17:09:06 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ t_file			*ft_redirect(char **one_phrase);
 t_parser		*parser_malloc_error(void);
 char			*char_malloc_error(void);
 t_file			*file_malloc_error(void);
-char			*no_command(void);
 /*------------------*/
 
 #endif
