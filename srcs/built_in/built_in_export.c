@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:26:05 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/24 05:14:30 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/24 19:03:09 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	built_in_export(t_parser *parser, t_env *env_variable, \
 		export_no_command(exp_variable);
 	else
 		exp_variable = input_exp_variable(str, exp_variable);
-	if (str && !*(parser)->option)
+	if (str && !parser->option)
 	{
 		env_variable = input_env_variable(str, env_variable);
 	}

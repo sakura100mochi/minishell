@@ -6,22 +6,22 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/19 19:04:31 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/24 19:05:58 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// int	main(void)
-// {
-// 	t_init	*state;
+int	main(void)
+{
+	t_init	*state;
 
-// 	state = NULL;
-// 	state = init_minishell(state);
-// 	signal_minishell(state->signal->action);
-// 	standby_state(state);
-// 	return (0);
-// }
+	state = NULL;
+	state = init_minishell(state);
+	signal_minishell(state->signal->action);
+	standby_state(state);
+	return (0);
+}
 
 // int	main(int argc, char **argv)
 // {
@@ -41,7 +41,7 @@
 // 	return (0);
 // }
 
-// __attribute__((destructor))
-// static void destructor() {
-//     system("leaks -q minishell");
-// }
+__attribute__((destructor))
+static void destructor() {
+    system("leaks -q minishell");
+}

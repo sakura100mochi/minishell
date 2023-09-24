@@ -6,19 +6,35 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/24 18:53:44 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/24 19:27:06 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void	exe_ext_command(char *full_path, t_exe *exe, char **command)
+static char	**struct_to_array(t_env *env)
 {
-	extern char	**environ;
+	size_t	index;
+	char	**result;
+	t_env	*head;
 
-	exe->exe_flag = execve(full_path, command, environ);
-	perror("execve");
-	exit(EXIT_SUCCESS);
+	index = 0;
+	head = env;
+	env = env->next;
+	while (!env->head)
+	{
+		index++;
+		env = env->next;
+	}
+	result = (char **)ft_calloc(sizeof(char *), index + 1);
+	env = env->next;
+	index = 0;
+	while (!env->head)
+	{
+		result[index++] = ft_strdup(env->variable);
+		env = env->next;
+	}
+	return (result);
 }
 
 static char	*check_cmd_access(t_parser *parser, char **path)
@@ -105,21 +121,27 @@ void	external_command(t_init *state, t_exe *exe,
 {
 	int		status;
 	char	**command;
+	char	**env;
 	char	*full_path;
 
+	status = 0;
 	full_path = check_cmd_path(state->env, parser);
 	if (!full_path)
 		return ;
 	command = create_command(parser, file);
-	status = 0;
+	env = struct_to_array(state->env);
 	exe->pid = fork();
 	if (exe->pid < 0)
 		exit(EXIT_FAILURE);
 	else if (exe->pid == 0)
-		exe_ext_command(full_path, exe, command);
+	{
+		exe->exe_flag = execve(full_path, command, env);
+		perror("execve");
+		exit(EXIT_SUCCESS);
+	}
 	else
 		waitpid(exe->pid, &status, 0);
 	free(full_path);
 	double_array_free(command);
-	return ;
+	double_array_free(env);
 }
