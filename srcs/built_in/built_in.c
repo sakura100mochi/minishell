@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:18:37 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/23 21:38:29 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/24 14:19:31 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,5 @@ int	judge_built_in(t_init *state, t_parser *parser, char *file)
 		built_in_unset(state->parser, state->env, state->exp, file);
 	else
 		return (1);
-	double_array_free(state->exe->command);
 	return (0);
 }

@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_main.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:44:53 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/24 13:40:28 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/24 14:17:54 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// int	main(void)
-// {
-// 	t_init	*state;
+int	main(void)
+{
+	t_init	*state;
 
-// 	state = NULL;
-// 	state = init_minishell(state);
-// 	signal_minishell(state->signal->action);
-// 	standby_state(state);
-// 	return (0);
-// }
+	state = NULL;
+	state = init_minishell(state);
+	signal_minishell(state->signal->action);
+	standby_state(state);
+	return (0);
+}
 
-// __attribute__((destructor))
-// static void destructor() {
-//     system("leaks -q minishell");
-// }
+__attribute__((destructor))
+static void destructor() {
+    system("leaks -q minishell");
+}
