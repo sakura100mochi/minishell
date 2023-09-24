@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 18:54:21 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/24 13:55:51 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/24 14:57:46 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@
 
 /*---Structure_Declaration---*/
 
+// QUOTE_HEREDOC << '', << ""
 // HEREDOC <<
 // INPUT <
 // APPEND >>
 // OUTPUT >
 // UNKNOWN
-// QUOTE_HEREDOC << '', << ""
 typedef enum e_redirect_type
 {
+	QUOTE_HEREDOC,
 	HEREDOC,
 	INPUT,
 	APPEND,
 	OUTPUT,
-	UNKNOWN,
-	QUOTE_HEREDOC
+	UNKNOWN
 }			t_redirect_type;
 
 typedef struct s_file
