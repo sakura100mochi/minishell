@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:54 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/24 15:20:45 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/24 15:26:51 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,38 +53,38 @@ t_parser	*parser_main(char **str)
 	return (node);
 }
 
-// static char	**ft_free(char **result, t_parser *node)
-// {
-// 	size_t		i;
-// 	t_parser	*tmp_node;
-// 	t_file		*file;
-// 	t_file		*tmp_file;
+static char	**ft_free(char **result, t_parser *node)
+{
+	size_t		i;
+	t_parser	*tmp_node;
+	t_file		*file;
+	t_file		*tmp_file;
 
-// 	i = 0;
-// 	while (result[i] != NULL)
-// 	{
-// 		free(result[i]);
-// 		i++;
-// 	}
-// 	free(result);
-// 	while (node != NULL)
-// 	{
-// 		file = node->redirect;
-// 		while (file != NULL)
-// 		{
-// 			tmp_file = file->next;
-// 			free(file->file_name);
-// 			free(file);
-// 			file = tmp_file;
-// 		}
-// 		tmp_node = node->next;
-// 		free(node->cmd);
-// 		free(node->option);
-// 		free(node);
-// 		node = tmp_node;
-// 	}
-// 	return (NULL);
-// }
+	i = 0;
+	while (result[i] != NULL)
+	{
+		free(result[i]);
+		i++;
+	}
+	free(result);
+	while (node != NULL)
+	{
+		file = node->redirect;
+		while (file != NULL)
+		{
+			tmp_file = file->next;
+			free(file->file_name);
+			free(file);
+			file = tmp_file;
+		}
+		tmp_node = node->next;
+		free(node->cmd);
+		free(node->option);
+		free(node);
+		node = tmp_node;
+	}
+	return (NULL);
+}
 
 int	main(void)
 {
@@ -93,7 +93,7 @@ int	main(void)
 	t_file		*file;
 	char		**result;
 	size_t		i;
-	char		*str = "echo aaa";
+	char		*str = "echo >";
 
 	i = 0;
 	result = lexer_main(str);
@@ -121,7 +121,7 @@ int	main(void)
 		printf("=============================\n");
 		node = node->next;
 	}
-	// ft_free(result, head);
+	ft_free(result, head);
 	return (0);
 }
 
