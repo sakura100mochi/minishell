@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:05:35 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/09/24 15:20:26 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/24 16:49:36 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*ft_command(char **one_phrase)
 	while (one_phrase[i] != NULL)
 	{
 		if ((one_phrase[i][0] == '<' || one_phrase[i][0] == '>') &&
+				one_phrase[i + 1] != NULL &&
 				(one_phrase[i + 1][0] == '<' || one_phrase[i + 1][0] == '>'))
 			i += 2;
 		else if (one_phrase[i][0] == '<' || one_phrase[i][0] == '>')
@@ -83,7 +84,8 @@ t_file	*ft_redirect(char **one_phrase)
 		if (one_phrase[i][0] == '<' || one_phrase[i][0] == '>')
 		{
 			ft_fileadd_back(&file, ft_filenew(&one_phrase[i]));
-			if (one_phrase[i + 1][0] == '<' || one_phrase[i + 1][0] == '>')
+			if (one_phrase[i + 1] != NULL &&
+				(one_phrase[i + 1][0] == '<' || one_phrase[i + 1][0] == '>'))
 				i++;
 		}
 		i++;

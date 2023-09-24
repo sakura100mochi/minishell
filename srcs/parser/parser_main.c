@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:54 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/24 15:26:51 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/24 16:55:43 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	main(void)
 	t_file		*file;
 	char		**result;
 	size_t		i;
-	char		*str = "echo >";
+	char		*str = "<< \'ghdi\'";
 
 	i = 0;
 	result = lexer_main(str);

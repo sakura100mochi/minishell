@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:53:36 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/09/24 15:25:59 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/24 16:53:36 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,33 @@ t_file	*ft_filenew(char **one_phrase)
 	file = (t_file *)malloc(sizeof(t_file));
 	if (file == NULL)
 		return (file_malloc_error());
-	if (one_phrase[0][0] == '<' && one_phrase[1][0] == '<' &&
-		(one_phrase[2][0] == '\"' || one_phrase[2][0] == '\''))
-		file->type = QUOTE_HEREDOC;
-	else if (one_phrase[0][0] == '<' && one_phrase[1][0] == '<')
-		file->type = HEREDOC;
-	else if (one_phrase[0][0] == '<')
-		file->type = INPUT;
-	else if (one_phrase[0][0] == '>' && one_phrase[1][0] == '>')
-		file->type = APPEND;
-	else if (one_phrase[0][0] == '>')
-		file->type = OUTPUT;
-	else
-		file->type = UNKNOWN;
-	if (file->type == INPUT || file->type == OUTPUT)
+	file->type = file_type(one_phrase);
+	if ((file->type == INPUT || file->type == OUTPUT) && one_phrase[1] != NULL)
 		file->file_name = ft_strjoin_minis(NULL, one_phrase[1]);
-	else
+	else if (one_phrase[1] != NULL && one_phrase[2] != NULL)
 		file->file_name = ft_strjoin_minis(NULL, one_phrase[2]);
+	else
+		file->file_name = NULL;
 	file->next = NULL;
 	return (file);
+}
+
+t_redirect_type	file_type(char **one_phrase)
+{
+	if (one_phrase[0] != NULL && one_phrase[0][0] == '<' &&
+			one_phrase[1] != NULL && one_phrase[1][0] == '<' &&
+			one_phrase[2] != NULL &&
+			(one_phrase[2][0] == '\"' || one_phrase[2][0] == '\''))
+		return (QUOTE_HEREDOC);
+	else if (one_phrase[0] != NULL && one_phrase[0][0] == '<' &&
+				one_phrase[1] != NULL && one_phrase[1][0] == '<')
+		return (HEREDOC);
+	else if (one_phrase[0][0] == '<')
+		return (INPUT);
+	else if (one_phrase[0] != NULL && one_phrase[0][0] == '>' &&
+				one_phrase[1] != NULL && one_phrase[1][0] == '>')
+		return (APPEND);
+	else if (one_phrase[0][0] == '>')
+		return (OUTPUT);
+	return (UNKNOWN);
 }
