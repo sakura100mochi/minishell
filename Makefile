@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/09/24 17:14:00 by csakamot         ###   ########.fr        #
+#    Updated: 2023/09/24 17:21:25 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ LEXERSRC	= lexer_main.c split_word.c single_quotation.c double_quotation.c
 
 PARSERSRC	= parser_main.c split_pipe.c list_new.c list_add_back.c parser_contents.c parser_utils.c
 
-ERROR_P_SRC = malloc_error.c no_cammand.c
+ERROR_P_SRC = malloc_error.c
 
 SRCS		= ${MAINSRC} ${addprefix ${BUILTIN}, ${BULITINSRC}} ${addprefix ${LEXER}, ${LEXERSRC}} ${addprefix ${PARSER}, ${PARSERSRC}} ${addprefix ${ERROR_P}, ${ERROR_P_SRC}}
 ##-----------------------------##
