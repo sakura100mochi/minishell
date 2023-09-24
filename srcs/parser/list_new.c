@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:53:36 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/09/24 16:53:36 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/24 20:01:38 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,33 @@ t_file	*ft_filenew(char **one_phrase)
 	return (file);
 }
 
+static int	quote_check(char *str)
+{
+	size_t	i;
+	size_t	count_single;
+	size_t	count_double;
+
+	i = 0;
+	count_single = 0;
+	count_double = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\'')
+			count_single++;
+		else if (str[i] == '\"')
+			count_double++;
+		i++;
+	}
+	if (count_double == 2 || count_single == 2)
+		return (YES);
+	return (NO);
+}
+
 t_redirect_type	file_type(char **one_phrase)
 {
 	if (one_phrase[0] != NULL && one_phrase[0][0] == '<' &&
 			one_phrase[1] != NULL && one_phrase[1][0] == '<' &&
-			one_phrase[2] != NULL &&
-			(one_phrase[2][0] == '\"' || one_phrase[2][0] == '\''))
+			one_phrase[2] != NULL && quote_check(one_phrase[2]) == YES)
 		return (QUOTE_HEREDOC);
 	else if (one_phrase[0] != NULL && one_phrase[0][0] == '<' &&
 				one_phrase[1] != NULL && one_phrase[1][0] == '<')

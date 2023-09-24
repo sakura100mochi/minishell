@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/24 16:51:57 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/24 18:12:59 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 /*---include---*/
 # include "../srcs/libft/libft_include/libft.h"
 # include "parser.h"
+# include "redirect.h"
 # include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>

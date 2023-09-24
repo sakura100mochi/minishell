@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 18:54:21 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/24 17:09:06 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/24 19:45:55 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 // QUOTE_HEREDOC << '', << ""
 // HEREDOC <<
 // INPUT <
-// APPEND >>
+// APPEND >>  (追加)
 // OUTPUT >
 // UNKNOWN
 typedef enum e_redirect_type

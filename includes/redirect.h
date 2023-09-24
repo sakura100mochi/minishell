@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in_main.c                                    :+:      :+:    :+:   */
+/*   redirect.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 12:44:53 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/24 19:55:16 by yhirai           ###   ########.fr       */
+/*   Created: 2023/09/24 18:11:32 by yhirai            #+#    #+#             */
+/*   Updated: 2023/09/24 19:53:48 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#ifndef REDIRECT_H
+# define REDIRECT_H
 
-// int	main(void)
-// {
-// 	t_init	*state;
+void	redirect_main(t_parser *node);
+void	quote_heredoc(t_parser *node, t_file *file);
+void	heredoc(t_parser *node, t_file *file);
+void	input(t_parser *node, t_file *file);
+void	append(t_parser *node, t_file *file);
+void	output(t_parser *node, t_file *file);
 
-// 	state = NULL;
-// 	state = init_minishell(state);
-// 	signal_minishell(state->signal->action);
-// 	standby_state(state);
-// 	return (0);
-// }
+/*---Error---*/
+void	syntax(void);
+/*-----------*/
 
-// __attribute__((destructor))
-// static void destructor() {
-//     system("leaks -q minishell");
-// }
+#endif
