@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:54 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/24 15:24:02 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/24 15:24:30 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,77 +53,77 @@ t_parser	*parser_main(char **str)
 	return (node);
 }
 
-static char	**ft_free(char **result, t_parser *node)
-{
-	size_t		i;
-	t_parser	*tmp_node;
-	t_file		*file;
-	t_file		*tmp_file;
+// static char	**ft_free(char **result, t_parser *node)
+// {
+// 	size_t		i;
+// 	t_parser	*tmp_node;
+// 	t_file		*file;
+// 	t_file		*tmp_file;
 
-	i = 0;
-	while (result[i] != NULL)
-	{
-		free(result[i]);
-		i++;
-	}
-	free(result);
-	while (node != NULL)
-	{
-		file = node->redirect;
-		while (file != NULL)
-		{
-			tmp_file = file->next;
-			free(file->file_name);
-			free(file);
-			file = tmp_file;
-		}
-		tmp_node = node->next;
-		free(node->cmd);
-		free(node->option);
-		free(node);
-		node = tmp_node;
-	}
-	return (NULL);
-}
+// 	i = 0;
+// 	while (result[i] != NULL)
+// 	{
+// 		free(result[i]);
+// 		i++;
+// 	}
+// 	free(result);
+// 	while (node != NULL)
+// 	{
+// 		file = node->redirect;
+// 		while (file != NULL)
+// 		{
+// 			tmp_file = file->next;
+// 			free(file->file_name);
+// 			free(file);
+// 			file = tmp_file;
+// 		}
+// 		tmp_node = node->next;
+// 		free(node->cmd);
+// 		free(node->option);
+// 		free(node);
+// 		node = tmp_node;
+// 	}
+// 	return (NULL);
+// }
 
-int	main(void)
-{
-	t_parser	*node;
-	t_parser	*head;
-	t_file		*file;
-	char		**result;
-	size_t		i;
-	char		*str = "echo aaa";
+// int	main(void)
+// {
+// 	t_parser	*node;
+// 	t_parser	*head;
+// 	t_file		*file;
+// 	char		**result;
+// 	size_t		i;
+// 	char		*str = "echo aaa";
 
-	i = 0;
-	result = lexer_main(str);
-	while (result[i] != NULL)
-	{
-		printf("lexer:[%s]\n", result[i]);
-		if (result[i][0] == '|')
-			printf("=============================\n");
-		i++;
-	}
-	printf("\n---------------------------\n\n");
-	node = parser_main(lexer_main(str));
-	head = node;
-	while (node != NULL)
-	{
-		printf("cmd|[%s]\n", node->cmd);
-		printf("option|[%s]\n", node->option);
-		file = node->redirect;
-		while (file != NULL)
-		{
-			printf("redirect|type|[%u]\n", file->type);
-			printf("redirect|name|[%s]\n", file->file_name);
-			file = file->next;
-		}
-		printf("=============================\n");
-		node = node->next;
-	}
-	ft_free(result, head);
-	return (0);
-}
+// 	i = 0;
+// 	result = lexer_main(str);
+// 	while (result[i] != NULL)
+// 	{
+// 		printf("lexer:[%s]\n", result[i]);
+// 		if (result[i][0] == '|')
+// 			printf("=============================\n");
+// 		i++;
+// 	}
+// 	printf("\n---------------------------\n\n");
+// 	node = parser_main(lexer_main(str));
+// 	head = node;
+// 	while (node != NULL)
+// 	{
+// 		printf("cmd|[%s]\n", node->cmd);
+// 		printf("option|[%s]\n", node->option);
+// 		file = node->redirect;
+// 		while (file != NULL)
+// 		{
+// 			printf("redirect|type|[%u]\n", file->type);
+// 			printf("redirect|name|[%s]\n", file->file_name);
+// 			file = file->next;
+// 		}
+// 		printf("=============================\n");
+// 		node = node->next;
+// 	}
+// 	ft_free(result, head);
+// 	return (0);
+// }
 
 // __attribute__((destructor))
 // static void destructor() {
