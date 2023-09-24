@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/24 05:44:18 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/24 14:58:11 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	built_in_exit(t_init *state)
 {
-	double_array_free(state->exe->command);
 	free(state->prompt);
 	delete_all_env_node(state->env);
 	exit(EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/24 06:02:20 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/24 14:19:37 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ void	external_command(t_init *state, t_exe *exe, t_parser *parser, char *file)
 		exe_ext_command(parser, exe, command);
 	else
 		waitpid(exe->pid, &status, 0);
-	double_array_free(exe->command);
 	double_array_free(command);
 	return ;
 }

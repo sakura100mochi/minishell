@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:54 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/24 15:20:45 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/24 15:24:30 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,44 +86,44 @@ t_parser	*parser_main(char **str)
 // 	return (NULL);
 // }
 
-int	main(void)
-{
-	t_parser	*node;
-	t_parser	*head;
-	t_file		*file;
-	char		**result;
-	size_t		i;
-	char		*str = "echo aaa";
+// int	main(void)
+// {
+// 	t_parser	*node;
+// 	t_parser	*head;
+// 	t_file		*file;
+// 	char		**result;
+// 	size_t		i;
+// 	char		*str = "echo aaa";
 
-	i = 0;
-	result = lexer_main(str);
-	while (result[i] != NULL)
-	{
-		printf("lexer:[%s]\n", result[i]);
-		if (result[i][0] == '|')
-			printf("=============================\n");
-		i++;
-	}
-	printf("\n---------------------------\n\n");
-	node = parser_main(lexer_main(str));
-	head = node;
-	while (node != NULL)
-	{
-		printf("cmd|[%s]\n", node->cmd);
-		printf("option|[%s]\n", node->option);
-		file = node->redirect;
-		while (file != NULL)
-		{
-			printf("redirect|type|[%u]\n", file->type);
-			printf("redirect|name|[%s]\n", file->file_name);
-			file = file->next;
-		}
-		printf("=============================\n");
-		node = node->next;
-	}
-	// ft_free(result, head);
-	return (0);
-}
+// 	i = 0;
+// 	result = lexer_main(str);
+// 	while (result[i] != NULL)
+// 	{
+// 		printf("lexer:[%s]\n", result[i]);
+// 		if (result[i][0] == '|')
+// 			printf("=============================\n");
+// 		i++;
+// 	}
+// 	printf("\n---------------------------\n\n");
+// 	node = parser_main(lexer_main(str));
+// 	head = node;
+// 	while (node != NULL)
+// 	{
+// 		printf("cmd|[%s]\n", node->cmd);
+// 		printf("option|[%s]\n", node->option);
+// 		file = node->redirect;
+// 		while (file != NULL)
+// 		{
+// 			printf("redirect|type|[%u]\n", file->type);
+// 			printf("redirect|name|[%s]\n", file->file_name);
+// 			file = file->next;
+// 		}
+// 		printf("=============================\n");
+// 		node = node->next;
+// 	}
+// 	ft_free(result, head);
+// 	return (0);
+// }
 
 // __attribute__((destructor))
 // static void destructor() {
