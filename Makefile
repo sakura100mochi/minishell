@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/09/24 13:27:21 by csakamot         ###   ########.fr        #
+#    Updated: 2023/09/24 13:32:45 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,9 +46,9 @@ BULITINSRC	= built_in.c built_in_cd.c built_in_echo.c built_in_env.c \
 
 LEXERSRC	= lexer_main.c split_word.c single_quotation.c double_quotation.c
 
-# PARSERSRC	= parser_main.c split_pipe.c list_new.c list_add_back.c parser_contents.c parser_utils.c etc.c
+PARSERSRC	= parser_main.c split_pipe.c list_new.c list_add_back.c parser_contents.c parser_utils.c etc.c
 
-# ERROR_P_SRC = malloc_error.c
+ERROR_P_SRC = malloc_error.c
 
 SRCS		= ${MAINSRC} ${addprefix ${BUILTIN}, ${BULITINSRC}} ${addprefix ${LEXER}, ${LEXERSRC}} ${addprefix ${PARSER}, ${PARSERSRC}} ${addprefix ${ERROR_P}, ${ERROR_P_SRC}}
 ##-----------------------------##
