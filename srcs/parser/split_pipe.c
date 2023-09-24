@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:07:28 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/09/24 14:14:06 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/24 15:20:47 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ t_parser	*split_pipe(char **str, char **one_phrase)
 		j = 0;
 		while (str[i] != NULL && str[i][0] != '|')
 			one_phrase[j++] = one_phrase_malloc(str[i++]);
-		one_phrase[j] = NULL;
 		new = ft_parsernew(ft_command(one_phrase), ft_option(one_phrase),
 				ft_redirect(one_phrase));
 		ft_parseradd_back(&node, new);
