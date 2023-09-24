@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_new.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:53:36 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/09/22 18:17:36 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/09/24 14:56:20 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ t_file	*ft_filenew(char **one_phrase)
 	file = (t_file *)malloc(sizeof(t_file));
 	if (file == NULL)
 		return (file_malloc_error());
-	if (one_phrase[0][0] == '<' && one_phrase[1][0] == '<')
+	if (one_phrase[0][0] == '<' && one_phrase[1][0] == '<' &&
+		(one_phrase[2][0] == '\"' || one_phrase[2][0] == '\''))
+		file->type = QUOTE_HEREDOC;
+	else if (one_phrase[0][0] == '<' && one_phrase[1][0] == '<')
 		file->type = HEREDOC;
 	else if (one_phrase[0][0] == '<')
 		file->type = INPUT;

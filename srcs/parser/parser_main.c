@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:54 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/24 14:05:03 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/24 15:20:45 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_parser	*parser_main(char **str)
 	size_t		i;
 
 	i = 0;
-	one_phrase = ft_calloc(sizeof(char *), pipe_count(str));
+	one_phrase = ft_calloc(sizeof(char *), pipe_count(str) + 1);
 	if (one_phrase == NULL)
 		return (parser_malloc_error());
 	node = split_pipe(str, one_phrase);
@@ -93,7 +93,7 @@ int	main(void)
 	t_file		*file;
 	char		**result;
 	size_t		i;
-	char		*str = "echo";
+	char		*str = "echo aaa";
 
 	i = 0;
 	result = lexer_main(str);
