@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/09/24 17:21:25 by csakamot         ###   ########.fr        #
+#    Updated: 2023/09/24 20:05:53 by yhirai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,11 @@ LEXER		= lexer/
 
 PARSER		= parser/
 
-ERROR_P     = parser/Error_parser/
+ERROR_P		= parser/Error_parser/
+
+REDIRECT	= redirect/
+
+ERROR_R		= redirect/Error_redirect/
 
 LIBFT		= ${addprefix ${PRE}, libft/}
 ##-----------------------------##
@@ -48,9 +52,12 @@ LEXERSRC	= lexer_main.c split_word.c single_quotation.c double_quotation.c
 
 PARSERSRC	= parser_main.c split_pipe.c list_new.c list_add_back.c parser_contents.c parser_utils.c
 
-ERROR_P_SRC = malloc_error.c
+ERROR_P_SRC	= malloc_error.c
+REDIRECTSRC	= redirect_main.c append.c heredoc.c input.c output.c quote_heredoc.c
 
-SRCS		= ${MAINSRC} ${addprefix ${BUILTIN}, ${BULITINSRC}} ${addprefix ${LEXER}, ${LEXERSRC}} ${addprefix ${PARSER}, ${PARSERSRC}} ${addprefix ${ERROR_P}, ${ERROR_P_SRC}}
+ERROR_R_SRC	= syntax.c
+
+SRCS		= ${MAINSRC} ${addprefix ${BUILTIN}, ${BULITINSRC}} ${addprefix ${LEXER}, ${LEXERSRC}} ${addprefix ${PARSER}, ${PARSERSRC}} ${addprefix ${ERROR_P}, ${ERROR_P_SRC}} ${addprefix ${REDIRECT}, ${REDIRECTSRC}} ${addprefix ${ERROR_R}, ${ERROR_R_SRC}}
 ##-----------------------------##
 
 
