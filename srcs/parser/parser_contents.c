@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_contents.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:05:35 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/09/22 18:32:39 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/09/24 14:11:41 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,8 @@ char	*ft_command(char **one_phrase)
 	size_t	i;
 	char	*cmd;
 
+	cmd = NULL;
 	i = 0;
-	while (check_command(one_phrase[i]) == NO && one_phrase[i] != NULL)
-		i++;
-	if (one_phrase[i] == NULL)
-		return (char_malloc_error());
-	cmd = ft_strjoin_minis(NULL, one_phrase[i]);
-	i++;
 	while (one_phrase[i] != NULL)
 	{
 		if ((one_phrase[i][0] == '<' || one_phrase[i][0] == '>') &&

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 18:54:21 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/22 18:17:08 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/09/24 13:55:51 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ char		*split_word(char **str);
 t_parser	*parser_main(char **str);
 t_parser	*split_pipe(char **str, char **one_phrase);
 char		*ft_strjoin_minis(char *s1, char const *s2);
-int			check_command(char *str);
 t_parser	*ft_parsernew(char *cmd, char *option, t_file *redirect);
 void		ft_parseradd_back(t_parser **node, t_parser *new);
 t_parser	*ft_parserlast(t_parser *node);
@@ -82,6 +81,7 @@ t_file		*ft_redirect(char **one_phrase);
 t_parser	*parser_malloc_error(void);
 char		*char_malloc_error(void);
 t_file		*file_malloc_error(void);
+char		*no_command(void);
 /*------------------*/
 
 #endif
