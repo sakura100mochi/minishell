@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:42:14 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/20 19:42:45 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/25 17:12:57 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,43 @@ t_env	*serch_env_variable(t_env *head, char *variable)
 		serch_variable = serch_variable->next;
 	}
 	return (serch_variable);
+}
+
+char	*variable_format(char *str)
+{
+	char	*result;
+	size_t	index;
+
+	index = 0;
+	while (str[index] != '\0')
+	{
+		index++;
+	}
+	return (result);
+}
+
+char	*wrap_with_quotes(char *str)
+{
+	int		flag;
+	size_t	i;
+	size_t	len;
+	char	*result;
+
+	flag = 0;
+	i = 0;
+	len = ft_strlen(str) + 2;
+	result = (char *)ft_calloc(sizeof(char), (len + 1));
+	while (i++ < len - 1)
+	{
+		if (!flag && i - 1 > 0 && result[i - 2] == '=')
+		{
+			result[i - 1] = '"';
+			flag++;
+		}
+		else
+			result[i - 1] = str[i - 1 - flag];
+	}
+	result[i - 1] = '"';
+	result[i] = '\0';
+	return (result);
 }
