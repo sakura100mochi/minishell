@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:39:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/23 21:38:45 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/25 13:28:55 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@
 int		judge_built_in(t_init *state, t_parser *parser, char *file);
 t_env	*serch_env_variable(t_env *head, char *variable);
 t_env	*built_in_cd(t_env *env_variable, t_parser *parser, char *file);
-void	built_in_echo(t_init *state, t_parser *parser, char *str);
-void	built_in_env(t_init *state, t_env *env_variable, t_parser *parser);
-void	built_in_exit(t_init *state);
-void	built_in_export(t_parser *parser, t_env *env_variable, t_exp *exp_variable, char *str);
+void	built_in_echo(t_parser *parser, char *str);
+void	built_in_env(t_env *env_variable, t_parser *parser, char *file);
+void	built_in_exit(t_init *state, char *file);
+void	built_in_export(t_parser *parser, t_env *env_variable, \
+									t_exp *exp_variable, char *str);
 void	built_in_pwd(void);
-void	built_in_unset(t_parser *parser, t_env *env_variable, t_exp *exp_variable, char *str);
+void	built_in_unset(t_parser *parser, t_env *env_variable, \
+									t_exp *exp_variable, char *str);
 /*---------------------------*/
 
 #endif

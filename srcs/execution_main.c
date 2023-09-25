@@ -6,12 +6,12 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/24 14:53:22 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:21:43 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/minishell.h"
-# include "../includes/built_in.h"
+#include "../includes/minishell.h"
+#include "../includes/built_in.h"
 
 static char	*format_command(t_parser *parser)
 {

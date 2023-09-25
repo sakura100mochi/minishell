@@ -1,29 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   pipe_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/25 13:09:29 by csakamot         ###   ########.fr       */
+/*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
+/*   Updated: 2023/09/25 13:07:25 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-
-int	main(void)
-{
-	t_init	*state;
-
-	state = NULL;
-	state = init_minishell(state);
-	signal_minishell(state->signal->action);
-	standby_state(state);
-	return (0);
-}
-
-// __attribute__((destructor))
-// static void destructor() {
-//     system("leaks -q minishell");
-// }
+#include "../../includes/pipe.h"

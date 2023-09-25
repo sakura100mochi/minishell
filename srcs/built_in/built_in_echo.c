@@ -6,18 +6,16 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/24 14:48:56 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/25 13:10:20 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/built_in.h"
 
-void	built_in_echo(t_init *state, t_parser *parser, char *str)
+void	built_in_echo(t_parser *parser, char *str)
 {
 	size_t	len;
 
-	(void)state;
-	ft_printf("echo:Not yet implemented.\n");
 	len = 0;
 	if (parser->option)
 		len = ft_strlen(parser->option);
