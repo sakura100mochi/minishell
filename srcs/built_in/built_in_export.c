@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:26:05 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/24 05:14:30 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/24 21:45:55 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 static void	export_no_command(t_exp *exp_variable)
 {
-	size_t	i;
+	// size_t	i;
 
-	i = 0;
+	// i = 0;
 	exp_variable = exp_variable->next;
 	while (!exp_variable->head)
 	{
 		ft_printf("%s\n", exp_variable->variable);
 		exp_variable = exp_variable->next;
-		i++;
+		// i++;
 	}
 	return ;
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+         #
+#    By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/09/24 20:05:53 by yhirai           ###   ########.fr        #
+#    Updated: 2023/09/25 16:37:27 by hiraiyuina       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
