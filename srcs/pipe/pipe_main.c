@@ -6,8 +6,13 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/25 13:07:25 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:09:58 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pipe.h"
+
+int	main(void)
+{
+	return (0);
+}
