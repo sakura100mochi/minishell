@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:22 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/24 06:07:46 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/26 14:10:23 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ static int	change_directory(t_parser *parser, char *file)
 	if (!*file)
 	{
 		chdir("~/");
-		return (0);
-	}
-	if (*parser->option)
 		return (1);
+	}
+	if (parser->option)
+		return (0);
 	wd_path = NULL;
 	wd_path = getcwd(wd_path, PATH_MAX);
 	tmp_path = ft_strjoin(wd_path, "/");
@@ -47,7 +47,7 @@ static int	change_directory(t_parser *parser, char *file)
 	free(wd_path);
 	free(tmp_path);
 	free(absolute_path);
-	return (0);
+	return (1);
 }
 
 t_env	*built_in_cd(t_env *env_variable, t_parser *parser, char *file)

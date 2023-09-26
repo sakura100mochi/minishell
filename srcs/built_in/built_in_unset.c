@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:10 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/24 19:04:40 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/26 14:04:48 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,5 @@ void	built_in_unset(t_parser *parser, t_env *env_variable, \
 		exp_variable = rm_exp_variable(str, exp_variable);
 		exp_variable = rm_exp_str(str, exp_variable);
 	}
-	ft_printf("unset:Not yet implemented.\n");
 	return ;
 }
