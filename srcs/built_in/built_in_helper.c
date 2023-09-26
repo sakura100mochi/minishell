@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:42:14 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/25 17:12:57 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/26 10:56:08 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,6 @@ t_env	*serch_env_variable(t_env *head, char *variable)
 		serch_variable = serch_variable->next;
 	}
 	return (serch_variable);
-}
-
-char	*variable_format(char *str)
-{
-	char	*result;
-	size_t	index;
-
-	index = 0;
-	while (str[index] != '\0')
-	{
-		index++;
-	}
-	return (result);
 }
 
 char	*wrap_with_quotes(char *str)
