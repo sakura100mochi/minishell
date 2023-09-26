@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:39:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/26 11:16:34 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:53:15 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	built_in_export(t_parser *parser, t_env *env_variable, \
 void	export_no_command(t_exp *exp_variable);
 t_env	*input_env_variable(char *str, t_env *env_variable);
 t_exp	*input_exp_variable(char *str, t_exp *exp_variable, int flag);
-void	built_in_pwd(void);
+void	built_in_pwd(t_parser *parser);
 void	built_in_unset(t_parser *parser, t_env *env_variable, \
 									t_exp *exp_variable, char *str);
 

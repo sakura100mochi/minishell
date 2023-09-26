@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:18:37 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/25 13:28:46 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:53:24 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	judge_built_in(t_init *state, t_parser *parser, char *file)
 	else if (len == 6 && !ft_strncmp(parser->cmd, "export", len))
 		built_in_export(state->parser, state->env, state->exp, file);
 	else if (len == 3 && !ft_strncmp(parser->cmd, "pwd", len))
-		built_in_pwd();
+		built_in_pwd(parser);
 	else if (len == 5 && !ft_strncmp(parser->cmd, "unset", len))
 		built_in_unset(state->parser, state->env, state->exp, file);
 	else
