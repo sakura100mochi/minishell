@@ -6,12 +6,17 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/26 16:22:57 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:02:36 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pipe.h"
 
+void	pipe_main(t_parser *parser)
+{
+	(void)parser;
+	return ;
+}
 
 // int main() {
 //     int pipe_fd[2];

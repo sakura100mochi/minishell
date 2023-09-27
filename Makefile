@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/09/26 16:09:27 by csakamot         ###   ########.fr        #
+#    Updated: 2023/09/27 17:02:07 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,23 +44,23 @@ LIBFT		= ${addprefix ${PRE}, libft/}
 
 
 ##------------Srcs-------------##
-# MAINSRC			= minishell.c init_minishell.c init_env.c init_exp.c \
-# 				standby_state.c signal.c execution_main.c external_command.c \
-# 				malloc_free.c
+MAINSRC			= minishell.c init_minishell.c init_env.c init_exp.c \
+				standby_state.c signal.c execution_main.c external_command.c \
+				malloc_free.c
 
-# BULITINSRC		= built_in.c built_in_cd.c built_in_echo.c built_in_env.c \
-# 				built_in_exit.c built_in_pwd.c built_in_unset.c built_in_export.c \
-# 				built_in_helper.c built_in_export_helper.c
+BULITINSRC		= built_in.c built_in_cd.c built_in_echo.c built_in_env.c \
+				built_in_exit.c built_in_pwd.c built_in_unset.c built_in_export.c \
+				built_in_helper.c built_in_export_helper.c
 
-# LEXERSRC		= lexer_main.c split_word.c single_quotation.c double_quotation.c
+LEXERSRC		= lexer_main.c split_word.c single_quotation.c double_quotation.c
 
-# PARSERSRC		= parser_main.c split_pipe.c list_new.c list_add_back.c parser_contents.c parser_utils.c
+PARSERSRC		= parser_main.c split_pipe.c list_new.c list_add_back.c parser_contents.c parser_utils.c
 
-# ERROR_P_SRC		= malloc_error.c
+ERROR_P_SRC		= malloc_error.c
 
-# REDIRECTSRC		= redirect_main.c append.c heredoc.c input.c output.c quote_heredoc.c
+REDIRECTSRC		= redirect_main.c append.c heredoc.c input.c output.c quote_heredoc.c
 
-# ERROR_R_SRC		= syntax.c
+ERROR_R_SRC		= syntax.c
 
 PIPESRC			= pipe_main.c
 
