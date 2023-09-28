@@ -6,12 +6,11 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:36:44 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/27 17:22:26 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/28 11:01:00 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include "../includes/built_in.h"
 #include "../includes/pipe.h"
 
 void	standby_state(t_init *state)
@@ -31,7 +30,7 @@ void	standby_state(t_init *state)
 			continue ;
 		}
 		state->parser = parser_main(lexer_main(state->prompt));
-		execution_main(state);
+		pipe_main(state, state->parser);
 		free(state->prompt);
 	}
 	return ;

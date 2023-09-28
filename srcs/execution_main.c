@@ -6,12 +6,13 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/27 17:21:34 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/28 11:10:55 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/built_in.h"
+#include "../includes/pipe.h"
 
 static char	*format_command(t_parser *parser)
 {
@@ -35,16 +36,12 @@ void	execution_main(t_init *state)
 {
 	char		*file;
 
-	while (state->parser != NULL)
-	{
-		printf("ok!\n");
-		if (!state->parser->cmd)
-			return ;
-		file = format_command(state->parser);
-		printf("%s, %s, %s\n", state->parser->cmd, state->parser->option, file);
-		if (judge_built_in(state, state->parser, file))
-			external_command(state, state->exe, state->parser, file);
-		free(file);
-		state->parser = state->parser->next;
-	}
+	printf("ok!\n");
+	if (!state->parser->cmd)
+		return ;
+	file = format_command(state->parser);
+	printf("%s, %s, %s\n", state->parser->cmd, state->parser->option, file);
+	if (!judge_built_in(state, state->parser, file))
+		external_command(state, state->exe, state->parser, file);
+	free(file);
 }

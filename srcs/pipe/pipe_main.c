@@ -6,16 +6,22 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/27 17:02:36 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/28 11:10:07 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../includes/minishell.h"
+#include "../../includes/built_in.h"
 #include "../../includes/pipe.h"
 
-void	pipe_main(t_parser *parser)
+int	pipe_main(t_init *state, t_parser *parser)
 {
-	(void)parser;
-	return ;
+	while (parser != NULL)
+	{
+		execution_main(state);
+		parser = parser->next;
+	}
+	return (0);
 }
 
 // int main() {
