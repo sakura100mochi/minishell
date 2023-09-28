@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/28 13:29:11 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:09:01 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	pipe_main(t_init *state, t_parser *parser, size_t len)
 	size_t	index;
 
 	index = 0;
+	state->pipe = init_pipe(len);
 	while (index < len)
 	{
 		parser = parser->next;
