@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/25 14:48:43 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/28 23:03:40 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 static int	check_argument(char *file)
 {
 	size_t	flag;
-	char	*head;
 
-	head = file;
 	flag = 0;
 	while (*file != '\0')
 	{

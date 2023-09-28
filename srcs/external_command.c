@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/28 11:25:22 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/28 23:03:18 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ static char	**struct_to_array(t_env *env)
 {
 	size_t	index;
 	char	**result;
-	t_env	*head;
 
 	index = 0;
-	head = env;
 	env = env->next;
 	while (!env->head)
 	{

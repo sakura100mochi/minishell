@@ -6,11 +6,20 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 18:09:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/28 18:19:06 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/28 23:06:28 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pipe.h"
+
+static void	pipe_nodeadd_back(t_pipe **pipe, t_pipe *new)
+{
+	while ((*pipe)-> next)
+		*pipe = ((*pipe)-> next);
+	(*pipe)-> next = new;
+	new -> prev = *pipe;
+}
+
 
 static t_pipe	*new_pipe_node(size_t head)
 {
@@ -26,10 +35,11 @@ static t_pipe	*new_pipe_node(size_t head)
 	return (new);
 }
 
-t_pipe	*init_pipe(size_t len)
+t_pipe	*init_pipe(t_init *state, size_t len)
 {
 	size_t	index;
 	t_pipe	*head;
+	t_pipe	*new;
 	t_pipe	*pipe;
 
 	index = 0;
@@ -37,7 +47,12 @@ t_pipe	*init_pipe(size_t len)
 	head = pipe;
 	while (index < len)
 	{
+		new = new_pipe_node(0);
+		pipe_nodeadd_back(&pipe, new);
 		index++;
 	}
+	head->prev = pipe->next;
+	pipe->next->next = head;
+	state->pipe = head;
 	return (head);
 }
