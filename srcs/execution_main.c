@@ -6,13 +6,26 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/28 11:10:55 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/28 13:27:41 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/built_in.h"
 #include "../includes/pipe.h"
+
+static size_t	count_listlen(t_parser *list)
+{
+	size_t	len;
+
+	len = 0;
+	while (list != NULL)
+	{
+		list = list->next;
+		len++;
+	}
+	return (len);
+}
 
 static char	*format_command(t_parser *parser)
 {
@@ -34,11 +47,16 @@ static char	*format_command(t_parser *parser)
 
 void	execution_main(t_init *state)
 {
-	char		*file;
+	char	*file;
+	size_t	len;
 
 	printf("ok!\n");
-	if (!state->parser->cmd)
+	len = count_listlen(state->parser);
+	if (len > 1)
+	{
+		pipe_main(state, state->parser, len);
 		return ;
+	}
 	file = format_command(state->parser);
 	printf("%s, %s, %s\n", state->parser->cmd, state->parser->option, file);
 	if (!judge_built_in(state, state->parser, file))

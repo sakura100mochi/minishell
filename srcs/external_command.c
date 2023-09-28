@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/24 19:27:06 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/28 11:25:22 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void	external_command(t_init *state, t_exe *exe,
 	else if (exe->pid == 0)
 	{
 		exe->exe_flag = execve(full_path, command, env);
-		perror("execve");
+		perror("minishell:");
 		exit(EXIT_SUCCESS);
 	}
 	else

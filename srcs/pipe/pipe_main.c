@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/28 11:10:07 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/28 13:29:11 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,33 @@
 #include "../../includes/built_in.h"
 #include "../../includes/pipe.h"
 
-int	pipe_main(t_init *state, t_parser *parser)
+// static char	*format_command(t_parser *parser)
+// {
+// 	size_t	cmd_len;
+// 	size_t	file_len;
+// 	char	*tmp;
+// 	char	*file;
+
+// 	cmd_len = 0;
+// 	while (parser->cmd[cmd_len] != ' ' && parser->cmd[cmd_len] != '\0')
+// 		cmd_len++;
+// 	file_len = ft_strlen(parser->cmd) - (cmd_len + 1);
+// 	tmp = ft_substr(parser->cmd, 0, cmd_len);
+// 	file = ft_substr(parser->cmd, cmd_len + 1, file_len);
+// 	free(parser->cmd);
+// 	parser->cmd = tmp;
+// 	return (file);
+// }
+
+int	pipe_main(t_init *state, t_parser *parser, size_t len)
 {
-	while (parser != NULL)
+	size_t	index;
+
+	index = 0;
+	while (index < len)
 	{
-		execution_main(state);
 		parser = parser->next;
+		index++;
 	}
 	return (0);
 }

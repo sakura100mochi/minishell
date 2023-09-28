@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 12:55:54 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/28 11:08:44 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/28 13:28:02 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /*-------------*/
 
 /*---pipe---*/
-int	pipe_main(t_init *state, t_parser *parser);
+int	pipe_main(t_init *state, t_parser *parser, size_t len);
 /*----------*/
 
 #endif
