@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/28 23:35:28 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/29 11:10:02 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_exe
 
 typedef struct s_pipe
 {
-	int				*pipe_fd;
+	int				pipe_fd[2];
 	pid_t			pid;
 	size_t			head;
 	struct s_pipe	*prev;

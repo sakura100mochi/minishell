@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/29 10:53:13 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/29 11:17:55 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ int	pipe_main(t_init *state, t_parser *parser, t_pipe *pipelist, size_t len)
 	index = 0;
 	while (index <= len)
 	{
+		printf("ok!\n");
 		file = format_command(parser);
+		printf("%s, %s, %s\n", parser->cmd, parser->option, file);
 		pipelist->pid = fork();
 		if (pipelist->pid == -1)
 			exit(EXIT_FAILURE);
