@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/29 14:25:02 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/29 14:53:36 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	pipe_main(t_init *state, t_parser *parser, t_pipe *pipelist, size_t len)
 	size_t	index;
 	char	*file;
 
-	(void)state;
 	status = 0;
 	index = 0;
 	while (index <= len)
