@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/29 11:16:16 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/29 13:51:51 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static size_t	count_listlen(t_parser *list)
 		list = list->next;
 		len++;
 	}
-	return (len);
+	return (len - 1);
 }
 
 static char	*format_command(t_parser *parser)
@@ -51,15 +51,21 @@ void	execution_main(t_init *state)
 	size_t	len;
 
 	len = count_listlen(state->parser);
-	if (len > 1)
+	if (len)
 	{
-		state->pipe = init_pipe(state, len);
+		state = init_pipe(state, len);
+		// state->pipe = state->pipe->next;
+		// for (size_t i = 0; i < 5; i++)
+		// {
+		// 	state->pipe = state->pipe->next;
+		// 	printf("%zu, %p, %p, %p\n", state->pipe->head, state->pipe, state->pipe->prev, state->pipe->next);
+		// }
 		pipe_main(state, state->parser, state->pipe->next, len);
 		return ;
 	}
 	file = format_command(state->parser);
 	printf("%s, %s, %s\n", state->parser->cmd, state->parser->option, file);
 	if (!judge_built_in(state, state->parser, file))
-		external_command(state, state->exe, state->parser, file);
+		fork_and_execve(state, state->exe, state->parser, file);
 	free(file);
 }

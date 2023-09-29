@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/09/28 23:04:07 by csakamot         ###   ########.fr        #
+#    Updated: 2023/09/29 13:56:45 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ REDIRECTSRC		= redirect_main.c append.c heredoc.c input.c output.c quote_heredoc
 
 ERROR_R_SRC		= syntax.c
 
-PIPESRC			= pipe_main.c init_pipe.c
+PIPESRC			= pipe_main.c init_pipe.c pipe_execve.c
 
 ERROR_PIPE_SRC	= pipe_error_main.c
 

@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:28:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/21 09:49:16 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/29 12:21:23 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ t_env	*new_env_node(char *content, size_t head)
 	if (!new)
 		return (NULL);
 	if (head)
-		new -> head = 1;
-	new -> variable = content;
-	new -> next = NULL;
-	new -> prev = NULL;
+		new->head = 1;
+	new->variable = content;
+	new->next = NULL;
+	new->prev = NULL;
 	return (new);
 }
 

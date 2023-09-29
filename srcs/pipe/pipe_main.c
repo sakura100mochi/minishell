@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/29 11:17:55 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/29 14:25:02 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,32 @@ int	pipe_main(t_init *state, t_parser *parser, t_pipe *pipelist, size_t len)
 	size_t	index;
 	char	*file;
 
+	(void)state;
 	status = 0;
 	index = 0;
 	while (index <= len)
 	{
-		printf("ok!\n");
 		file = format_command(parser);
-		printf("%s, %s, %s\n", parser->cmd, parser->option, file);
+		printf("%zu, %s, %s, %s\n", pipelist->head, parser->cmd, parser->option, file);
 		pipelist->pid = fork();
 		if (pipelist->pid == -1)
 			exit(EXIT_FAILURE);
 		if (pipelist->pid == 0)
 		{
-			close(pipelist->pipe_fd[0]);
+			if (!pipelist->head)
+				close(pipelist->pipe_fd[0]);
 			if (!pipelist->prev->head)
 				dup2(pipelist->prev->pipe_fd[0], STDIN_FILENO);
-			if (!pipelist->next->head)
+			if (!pipelist->head)
 				dup2(pipelist->pipe_fd[1], STDOUT_FILENO);
-			if (!judge_built_in(state, state->parser, file))
-				external_command(state, state->exe, state->parser, file);
+			if (!judge_built_in(state, parser, file))
+				execve_without_fork(state, parser, file);
 			exit(EXIT_FAILURE);
 		}
 		if (!pipelist->prev->head)
 			close(pipelist->prev->pipe_fd[0]);
-		close(pipelist->pipe_fd[1]);
+		if (!pipelist->head)
+			close(pipelist->pipe_fd[1]);
 		waitpid(pipelist->pid, &status, 0);
 		free(file);
 		parser = parser->next;
