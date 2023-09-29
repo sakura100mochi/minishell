@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 18:09:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/28 23:06:28 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/29 10:21:23 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void	pipe_nodeadd_back(t_pipe **pipe, t_pipe *new)
 	new -> prev = *pipe;
 }
 
-
 static t_pipe	*new_pipe_node(size_t head)
 {
 	t_pipe	*new;
@@ -30,8 +29,12 @@ static t_pipe	*new_pipe_node(size_t head)
 		return (NULL);
 	if (head)
 		new -> head = 1;
-	new -> next = NULL;
-	new -> prev = NULL;
+	else
+	{
+		pipe(new->pipe_fd);
+		new -> next = NULL;
+		new -> prev = NULL;
+	}
 	return (new);
 }
 

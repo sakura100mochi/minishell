@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/29 00:03:43 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/29 10:54:01 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	execution_main(t_init *state)
 	if (len > 1)
 	{
 		state->pipe = init_pipe(state, len);
-		pipe_main(state, state->parser, pipe, len);
+		pipe_main(state, state->parser, state->pipe, len);
 		return ;
 	}
 	file = format_command(state->parser);
