@@ -6,11 +6,12 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:36 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/30 14:55:12 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 17:27:25 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../includes/redirect.h"
 
 void	output(t_parser *node, t_file *file)
 {

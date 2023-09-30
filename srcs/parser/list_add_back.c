@@ -6,11 +6,12 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:58:27 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/09/22 13:40:37 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 17:25:13 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../includes/parser.h"
 
 void	ft_parseradd_back(t_parser **node, t_parser *new)
 {

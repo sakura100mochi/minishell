@@ -6,13 +6,16 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:09:45 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/30 16:43:14 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 17:58:54 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../includes/redirect.h"
+#include "../../includes/parser.h"
+#include "../../includes/built_in.h"
 
-void	redirect_main(t_parser *node)
+void	redirect_main(t_data *data, t_parser *node)
 {
 	t_file	*file;
 	char	*str;
@@ -37,10 +40,10 @@ void	redirect_main(t_parser *node)
 			output(node, file);
 		file = file->next;
 	}
-	check_fd(node, node->redirect, str);
+	check_fd(data, node, node->redirect, str);
 }
 
-void	check_fd(t_parser *node, t_file *file, char *str)
+void	check_fd(t_data *data, t_parser *node, t_file *file, char *str)
 {
 	int		fd;
 	t_file	*head;
@@ -54,13 +57,33 @@ void	check_fd(t_parser *node, t_file *file, char *str)
 			fd = file->fd;
 		file = file->next;
 	}
-	dup2(fd, STDOUT_FILENO);
-	ft_printf("%s\n", str);
+	cmd_redirect(data, node, fd, str);
 	while (head != NULL)
 	{
 		if (head->fd)
 			close(head->fd);
 		head = head->next;
+	}
+	(void)node;
+}
+
+void	cmd_redirect(t_data *data, t_parser *node, int fd, char *str)
+{
+	char	*file;
+
+	if (node->cmd == NULL)
+		return ;
+	if (ft_strncmp(node->cmd, "cat", ft_strlen(node->cmd)) == 0)
+	{
+		dup2(fd, STDOUT_FILENO);
+		ft_printf("%s\n", str);
+	}
+	else
+	{
+		file = format_command(data->parser);
+		if (!judge_built_in(data, data->parser, file))
+			fork_and_execve(data, data->exe, data->parser, file);
+		free(file);
 	}
 }
 

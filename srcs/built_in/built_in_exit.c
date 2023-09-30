@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/28 23:03:40 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/30 17:41:22 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ static int	check_argument(char *file)
 	return (0);
 }
 
-void	built_in_exit(t_init *state, char *file)
+void	built_in_exit(t_data *data, char *file)
 {
 	if (*file && check_argument(file))
 		return ;
 	if (!*file)
 		ft_printf("exit\n");
-	free(state->prompt);
-	delete_all_env_node(state->env);
+	free(data->prompt);
+	delete_all_env_node(data->env);
 	exit(EXIT_SUCCESS);
 	return ;
 }

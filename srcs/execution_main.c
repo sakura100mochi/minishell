@@ -6,13 +6,14 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 16:44:57 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 17:59:00 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/built_in.h"
 #include "../includes/pipe.h"
+#include "../includes/redirect.h"
 
 static int	check_headoc(t_file *redirect)
 {
@@ -40,7 +41,7 @@ static size_t	count_listlen(t_parser *list)
 	return (len - 1);
 }
 
-static char	*format_command(t_parser *parser)
+char	*format_command(t_parser *parser)
 {
 	size_t	cmd_len;
 	size_t	file_len;
@@ -58,24 +59,27 @@ static char	*format_command(t_parser *parser)
 	return (file);
 }
 
-void	execution_main(t_init *state)
+void	execution_main(t_data *data)
 {
 	char	*file;
 	size_t	len;
 
-	len = count_listlen(state->parser);
+	len = count_listlen(data->parser);
 	if (len)
 	{
-		state = init_pipe(state, len);
-		pipe_main(state, state->parser, state->pipe->next, len);
+		data = init_pipe(data, len);
+		pipe_main(data, data->parser, data->pipe->next, len);
 		return ;
 	}
-	if (!check_headoc(state->parser->redirect))
+	if (!check_headoc(data->parser->redirect))
+	{
+		redirect_main(data, data->parser);
 		return ;
-	file = format_command(state->parser);
-	if (!judge_built_in(state, state->parser, file))
-		fork_and_execve(state, state->exe, state->parser, file);
+	}
+	file = format_command(data->parser);
+	if (!judge_built_in(data, data->parser, file))
+		fork_and_execve(data, data->exe, data->parser, file);
 	free(file);
 }
 
-	// printf("%s, %s, %s\n", state->parser->cmd, state->parser->option, file);
+	// printf("%s, %s, %s\n", data->parser->cmd, data->parser->option, file);

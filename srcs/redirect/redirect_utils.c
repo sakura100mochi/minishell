@@ -6,11 +6,13 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 15:09:35 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/30 15:09:54 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 17:34:55 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../includes/redirect.h"
+#include "../../includes/parser.h"
 
 char	*ft_strjoin_red(char *s1, char const *s2)
 {

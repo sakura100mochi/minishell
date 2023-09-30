@@ -3,33 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   init_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:40:38 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/21 09:42:50 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/30 17:41:22 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_init	*init_minishell(t_init *state)
+t_data	*init_minishell(t_data *data)
 {
 	t_exe		*exe_built;
 	t_signal	*sig_act;
-	t_error		*error;
 
-	state = (t_init *)ft_calloc(sizeof(t_init), 1);
+	data = (t_data *)ft_calloc(sizeof(t_data), 1);
 	exe_built = (t_exe *)ft_calloc(sizeof(t_exe), 1);
 	sig_act = (t_signal *)ft_calloc(sizeof(t_signal), 1);
-	error = (t_error *)ft_calloc(sizeof(t_error), 1);
-	state = init_env(state);
-	state = init_exp(state);
-	state->exe = exe_built;
-	state->signal = sig_act;
-	state->error = error;
-	return (state);
+	data = init_env(data);
+	data = init_exp(data);
+	data->exe = exe_built;
+	data->signal = sig_act;
+	return (data);
 }
 
-	// ft_memset(state, 0, sizeof(t_init));
+	// ft_memset(data, 0, sizeof(t_data));
 	// ft_memset(exe_built, 0, sizeof(t_exe));
 	// ft_memset(sig_act, 0, sizeof(t_signal));

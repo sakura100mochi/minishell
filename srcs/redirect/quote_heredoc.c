@@ -6,11 +6,13 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:45 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/30 16:38:46 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 17:34:36 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../includes/redirect.h"
+#include "../../includes/parser.h"
 
 char	*quote_heredoc(t_parser *node, t_file *file)
 {
