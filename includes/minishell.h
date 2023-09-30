@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 12:11:31 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 17:59:11 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 /*---include---*/
 # include "../srcs/libft/libft_include/libft.h"
-# include "parser.h"
-# include "redirect.h"
 # include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
@@ -31,19 +29,24 @@
 # include <termcap.h>
 /*-------------*/
 
-/*---path---*/
-# define BINARY	"/bin/"
-/*----------*/
-
-/*---enum---*/
-typedef enum e_error
-{
-	MALLOC_ERROR,
-	NO_COMMAND
-}				t_error;
-/*----------*/
-
 /*---Structure_Declaration---*/
+
+// QUOTE_HEREDOC << '', << ""
+// HEREDOC <<
+// INPUT <
+// APPEND >>  (追加)
+// OUTPUT >
+// UNKNOWN
+typedef enum e_redirect_type
+{
+	QUOTE_HEREDOC,
+	HEREDOC,
+	INPUT,
+	APPEND,
+	OUTPUT,
+	UNKNOWN
+}			t_redirect_type;
+
 typedef struct s_env
 {
 	int					head;
@@ -80,7 +83,26 @@ typedef struct s_pipe
 	struct s_pipe	*next;
 }			t_pipe;
 
-typedef struct s_init
+typedef struct s_file
+{
+	int				fd;
+	char			*heredoc;
+	char			*file_name;
+	t_redirect_type	type;
+	struct s_file	*next;
+}			t_file;
+
+typedef struct s_parser
+{
+	char			*cmd;
+	char			*option;
+	t_file			*redirect;
+	char			*result;
+	struct s_parser	*next;
+	struct s_parser	*prev;
+}			t_parser;
+
+typedef struct s_data
 {
 	char		*prompt;
 	t_exe		*exe;
@@ -89,22 +111,22 @@ typedef struct s_init
 	t_parser	*parser;
 	t_env		*env;
 	t_exp		*exp;
-	t_error		*error;
-}				t_init;
+}				t_data;
 /*---------------------------*/
 
-t_init	*init_minishell(t_init *state);
-t_init	*init_env(t_init *state);
-t_init	*init_exp(t_init *state);
+t_data	*init_minishell(t_data *data);
+t_data	*init_env(t_data *data);
+t_data	*init_exp(t_data *data);
 t_env	*new_env_node(char *content, size_t head);
 t_exp	*new_exp_node(char *content, size_t head);
-void	execution_main(t_init *state);
+void	execution_main(t_data *data);
+char	*format_command(t_parser *parser);
 void	env_nodeadd_back(t_env **env, t_env *new);
 void	exp_nodeadd_back(t_exp **env, t_exp *new);
-void	standby_state(t_init *state);
+void	standby_state(t_data *data);
 
 /*---external_command---*/
-void	fork_and_execve(t_init *state, t_exe *exe, \
+void	fork_and_execve(t_data *data, t_exe *exe, \
 							t_parser *parser, char *file);
 /*---------------------*/
 

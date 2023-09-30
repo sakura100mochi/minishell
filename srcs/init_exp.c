@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_exp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 09:37:18 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/21 11:10:34 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/30 17:41:22 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_exp	*new_exp_node(char *content, size_t head)
 	return (new);
 }
 
-t_init	*init_exp(t_init *state)
+t_data	*init_exp(t_data *data)
 {
 	size_t		index;
 	t_exp		*exp_variable;
@@ -83,6 +83,6 @@ t_init	*init_exp(t_init *state)
 	}
 	start->prev = exp_variable->next;
 	exp_variable->next->next = start;
-	state->exp = start;
-	return (state);
+	data->exp = start;
+	return (data);
 }

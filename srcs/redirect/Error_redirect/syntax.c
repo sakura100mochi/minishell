@@ -6,11 +6,12 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:26:38 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/30 15:00:11 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 17:27:01 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../../includes/minishell.h"
+#include "../../../includes/minishell.h"
+#include "../../../includes/redirect.h"
 
 void	syntax(char *str)
 {

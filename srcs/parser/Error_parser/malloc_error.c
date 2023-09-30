@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:02:09 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/09/22 18:16:53 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/09/30 17:25:09 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
+#include "../../../includes/parser.h"
 
 t_parser	*parser_malloc_error(void)
 {

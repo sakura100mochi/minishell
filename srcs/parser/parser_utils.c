@@ -6,11 +6,12 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:28:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/24 15:19:56 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 17:25:25 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../includes/parser.h"
 
 char	*ft_strjoin_minis(char *s1, char const *s2)
 {

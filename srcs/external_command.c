@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   external_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/29 13:58:54 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/30 17:41:22 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ static char	**create_command(t_parser *parser, char *file)
 	return (result);
 }
 
-void	fork_and_execve(t_init *state, t_exe *exe,
+void	fork_and_execve(t_data *data, t_exe *exe,
 						t_parser *parser, char *file)
 {
 	int		status;
@@ -123,11 +123,11 @@ void	fork_and_execve(t_init *state, t_exe *exe,
 	char	*full_path;
 
 	status = 0;
-	full_path = check_cmd_path(state->env, parser);
+	full_path = check_cmd_path(data->env, parser);
 	if (!full_path)
 		return ;
 	command = create_command(parser, file);
-	env = struct_to_array(state->env);
+	env = struct_to_array(data->env);
 	exe->pid = fork();
 	if (exe->pid < 0)
 		exit(EXIT_FAILURE);

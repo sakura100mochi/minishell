@@ -6,55 +6,19 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 18:54:21 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/30 15:36:43 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 17:17:19 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
+# include "minishell.h"
+
 /*---maclo---*/
 # define YES 1
 # define NO 0
 /*-----------*/
-
-/*---Structure_Declaration---*/
-
-// QUOTE_HEREDOC << '', << ""
-// HEREDOC <<
-// INPUT <
-// APPEND >>  (追加)
-// OUTPUT >
-// UNKNOWN
-typedef enum e_redirect_type
-{
-	QUOTE_HEREDOC,
-	HEREDOC,
-	INPUT,
-	APPEND,
-	OUTPUT,
-	UNKNOWN
-}			t_redirect_type;
-
-typedef struct s_file
-{
-	int				fd;
-	char			*heredoc;
-	char			*file_name;
-	t_redirect_type	type;
-	struct s_file	*next;
-}			t_file;
-
-typedef struct s_parser
-{
-	char			*cmd;
-	char			*option;
-	t_file			*redirect;
-	char			*result;
-	struct s_parser	*next;
-	struct s_parser	*prev;
-}			t_parser;
-/*---------------------------*/
 
 /*---lexer---*/
 char			**lexer_main(char *str);

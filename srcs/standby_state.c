@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   standby_state.c                                    :+:      :+:    :+:   */
+/*   standby_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:36:44 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 15:45:11 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 17:30:58 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include "../includes/parser.h"
 #include "../includes/pipe.h"
 
-void	standby_state(t_init *state)
+void	standby_state(t_data *data)
 {
 	while (1)
 	{
-		state->prompt = readline("minishell$");
-		add_history(state->prompt);
-		if (!*(state)->prompt)
+		data->prompt = readline("minishell$");
+		add_history(data->prompt);
+		if (!*(data)->prompt)
 		{
-			free(state->prompt);
+			free(data->prompt);
 			continue ;
 		}
-		else if (state->prompt == NULL)
+		else if (data->prompt == NULL)
 		{
 			printf("^D\n");
 			continue ;
 		}
-		state->parser = parser_main(lexer_main(state->prompt));
-		execution_main(state);
-		free(state->prompt);
+		data->parser = parser_main(lexer_main(data->prompt));
+		execution_main(data);
+		free(data->prompt);
 	}
 	return ;
 }

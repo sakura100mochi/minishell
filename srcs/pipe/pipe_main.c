@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 15:12:34 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/30 17:41:22 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*format_command(t_parser *parser)
 	return (file);
 }
 
-static int	check_pipe_exec(t_init *state, t_parser *parser,
+static int	check_pipe_exec(t_data *data, t_parser *parser,
 									t_pipe *pipelist, char *file)
 {
 	if (!pipelist->head)
@@ -41,12 +41,12 @@ static int	check_pipe_exec(t_init *state, t_parser *parser,
 		dup2(pipelist->prev->pipe_fd[0], STDIN_FILENO);
 	if (!pipelist->head)
 		dup2(pipelist->pipe_fd[1], STDOUT_FILENO);
-	if (!judge_built_in(state, parser, file))
-		execve_without_fork(state, parser, file);
+	if (!judge_built_in(data, parser, file))
+		execve_without_fork(data, parser, file);
 	return (0);
 }
 
-int	pipe_main(t_init *state, t_parser *parser, t_pipe *pipelist, size_t len)
+int	pipe_main(t_data *data, t_parser *parser, t_pipe *pipelist, size_t len)
 {
 	int		status;
 	size_t	index;
@@ -62,7 +62,7 @@ int	pipe_main(t_init *state, t_parser *parser, t_pipe *pipelist, size_t len)
 			exit(EXIT_FAILURE);
 		if (pipelist->pid == 0)
 		{
-			check_pipe_exec(state, parser, pipelist, file);
+			check_pipe_exec(data, parser, pipelist, file);
 			exit(EXIT_FAILURE);
 		}
 		if (!pipelist->prev->head)

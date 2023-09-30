@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:28:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/29 12:21:23 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/30 17:41:22 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_env	*new_env_node(char *content, size_t head)
 	return (new);
 }
 
-t_init	*init_env(t_init *state)
+t_data	*init_env(t_data *data)
 {
 	size_t		index;
 	t_env		*env_variable;
@@ -54,6 +54,6 @@ t_init	*init_env(t_init *state)
 	}
 	start->prev = env_variable->next;
 	env_variable->next->next = start;
-	state->env = start;
-	return (state);
+	data->env = start;
+	return (data);
 }

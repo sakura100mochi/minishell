@@ -6,11 +6,12 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:05:35 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/09/30 15:47:34 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 17:25:18 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../includes/parser.h"
 
 char	*ft_command(char **one_phrase)
 {
