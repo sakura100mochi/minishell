@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/29 15:40:10 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/30 15:12:34 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,20 @@ static char	*format_command(t_parser *parser)
 	return (file);
 }
 
+static int	check_pipe_exec(t_init *state, t_parser *parser,
+									t_pipe *pipelist, char *file)
+{
+	if (!pipelist->head)
+		close(pipelist->pipe_fd[0]);
+	if (!pipelist->prev->head)
+		dup2(pipelist->prev->pipe_fd[0], STDIN_FILENO);
+	if (!pipelist->head)
+		dup2(pipelist->pipe_fd[1], STDOUT_FILENO);
+	if (!judge_built_in(state, parser, file))
+		execve_without_fork(state, parser, file);
+	return (0);
+}
+
 int	pipe_main(t_init *state, t_parser *parser, t_pipe *pipelist, size_t len)
 {
 	int		status;
@@ -43,20 +57,12 @@ int	pipe_main(t_init *state, t_parser *parser, t_pipe *pipelist, size_t len)
 	while (index <= len)
 	{
 		file = format_command(parser);
-		printf("%zu, %s, %s, %s\n", pipelist->head, parser->cmd, parser->option, file);
 		pipelist->pid = fork();
 		if (pipelist->pid == -1)
 			exit(EXIT_FAILURE);
 		if (pipelist->pid == 0)
 		{
-			if (!pipelist->head)
-				close(pipelist->pipe_fd[0]);
-			if (!pipelist->prev->head)
-				dup2(pipelist->prev->pipe_fd[0], STDIN_FILENO);
-			if (!pipelist->head)
-				dup2(pipelist->pipe_fd[1], STDOUT_FILENO);
-			if (!judge_built_in(state, parser, file))
-				execve_without_fork(state, parser, file);
+			check_pipe_exec(state, parser, pipelist, file);
 			exit(EXIT_FAILURE);
 		}
 		if (!pipelist->prev->head)
@@ -71,6 +77,8 @@ int	pipe_main(t_init *state, t_parser *parser, t_pipe *pipelist, size_t len)
 	}
 	return (0);
 }
+
+// printf("%zu, %s, %s, %s\n", pipelist->head,arser->cmd, parser->option, file);
 
 // #include <stdio.h>
 // #include <stdlib.h>

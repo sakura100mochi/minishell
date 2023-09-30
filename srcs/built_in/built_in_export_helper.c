@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 10:55:19 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/26 13:48:03 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/30 15:01:35 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ t_exp	*input_exp_variable(char *str, t_exp *exp_variable, int flag)
 	new->next = head;
 	return (head);
 }
-
 
 int	check_wrap_with_quotes(char *str)
 {
