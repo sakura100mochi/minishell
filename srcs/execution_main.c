@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   execution_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 16:44:57 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 16:55:26 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include "../includes/unfold.h"
 #include "../includes/built_in.h"
 #include "../includes/pipe.h"
 
@@ -55,6 +56,8 @@ static char	*format_command(t_parser *parser)
 	file = ft_substr(parser->cmd, cmd_len + 1, file_len);
 	free(parser->cmd);
 	parser->cmd = tmp;
+	unfold_main(parser, file);
+	printf("%s, %s", parser->cmd, file);
 	return (file);
 }
 

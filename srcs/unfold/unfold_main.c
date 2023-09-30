@@ -6,8 +6,13 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:16:53 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 16:42:20 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:51:30 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/unfold.h"
+
+int	unfold_main(t_parser *parser, char *file)
+{
+	return (0);
+}
