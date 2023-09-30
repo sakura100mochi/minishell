@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   external_command.c                                 :+:      :+:    :+:   */
+/*   pipe_execve.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/29 13:58:54 by csakamot         ###   ########.fr       */
+/*   Created: 2023/09/29 13:56:11 by csakamot          #+#    #+#             */
+/*   Updated: 2023/09/29 13:59:38 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/pipe.h"
 
 static char	**struct_to_array(t_env *env)
 {
@@ -114,32 +114,17 @@ static char	**create_command(t_parser *parser, char *file)
 	return (result);
 }
 
-void	fork_and_execve(t_init *state, t_exe *exe,
-						t_parser *parser, char *file)
+int	execve_without_fork(t_init *state, t_parser *parser, char *file)
 {
-	int		status;
 	char	**command;
 	char	**env;
 	char	*full_path;
 
-	status = 0;
 	full_path = check_cmd_path(state->env, parser);
 	if (!full_path)
-		return ;
+		return (1);
 	command = create_command(parser, file);
 	env = struct_to_array(state->env);
-	exe->pid = fork();
-	if (exe->pid < 0)
-		exit(EXIT_FAILURE);
-	else if (exe->pid == 0)
-	{
-		exe->exe_flag = execve(full_path, command, env);
-		perror("minishell:");
-		exit(EXIT_SUCCESS);
-	}
-	else
-		waitpid(exe->pid, &status, 0);
-	free(full_path);
-	double_array_free(command);
-	double_array_free(env);
+	execve(full_path, command, env);
+	return (1);
 }

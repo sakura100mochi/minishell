@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/25 16:34:04 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/09/30 11:49:05 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,22 @@ typedef struct s_exe
 {
 	pid_t		pid;
 	size_t		exe_flag;
-	char		**command;
 }				t_exe;
+
+typedef struct s_pipe
+{
+	int				pipe_fd[2];
+	pid_t			pid;
+	size_t			head;
+	struct s_pipe	*prev;
+	struct s_pipe	*next;
+}			t_pipe;
 
 typedef struct s_init
 {
 	char		*prompt;
 	t_exe		*exe;
+	t_pipe		*pipe;
 	t_signal	*signal;
 	t_parser	*parser;
 	t_env		*env;
@@ -90,13 +99,13 @@ t_init	*init_exp(t_init *state);
 t_env	*new_env_node(char *content, size_t head);
 t_exp	*new_exp_node(char *content, size_t head);
 void	execution_main(t_init *state);
-int		check_cmd_file(t_parser *parser, t_env *env_variable, char *file);
 void	env_nodeadd_back(t_env **env, t_env *new);
 void	exp_nodeadd_back(t_exp **env, t_exp *new);
 void	standby_state(t_init *state);
 
 /*---external_command---*/
-void	external_command(t_init *state, t_exe *exe, t_parser *parser, char *file);
+void	fork_and_execve(t_init *state, t_exe *exe, \
+							t_parser *parser, char *file);
 /*---------------------*/
 
 /*---signal---*/
