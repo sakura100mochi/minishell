@@ -6,11 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/09/30 17:54:03 by csakamot         ###   ########.fr       */
-=======
-/*   Updated: 2023/09/30 17:59:00 by yhirai           ###   ########.fr       */
->>>>>>> 8b77250ee73b5fc47e5efb8c0a0a213b4585f7ca
+/*   Updated: 2023/09/30 18:27:36 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +57,6 @@ char	*format_command(t_parser *parser)
 	file = ft_substr(parser->cmd, cmd_len + 1, file_len);
 	free(parser->cmd);
 	parser->cmd = tmp;
-	unfold_main(parser, file);
-	printf("%s, %s", parser->cmd, file);
 	return (file);
 }
 
@@ -82,17 +76,10 @@ void	execution_main(t_data *data)
 	{
 		redirect_main(data, data->parser);
 		return ;
-<<<<<<< HEAD
-	file = format_command(state->parser);
-	unfold_main(state->parser, file);
-	if (!judge_built_in(state, state->parser, file))
-		fork_and_execve(state, state->exe, state->parser, file);
-=======
 	}
 	file = format_command(data->parser);
 	if (!judge_built_in(data, data->parser, file))
 		fork_and_execve(data, data->exe, data->parser, file);
->>>>>>> 8b77250ee73b5fc47e5efb8c0a0a213b4585f7ca
 	free(file);
 }
 
