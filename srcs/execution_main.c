@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 17:59:00 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 19:41:18 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,6 @@
 #include "../includes/built_in.h"
 #include "../includes/pipe.h"
 #include "../includes/redirect.h"
-
-static int	check_headoc(t_file *redirect)
-{
-	if (!redirect)
-		return (1);
-	while (redirect != NULL)
-	{
-		if (redirect->type == HEREDOC)
-			return (0);
-		redirect = redirect->next;
-	}
-	return (1);
-}
 
 static size_t	count_listlen(t_parser *list)
 {
@@ -71,11 +58,8 @@ void	execution_main(t_data *data)
 		pipe_main(data, data->parser, data->pipe->next, len);
 		return ;
 	}
-	if (!check_headoc(data->parser->redirect))
-	{
-		redirect_main(data, data->parser);
-		return ;
-	}
+	if (data->parser->redirect)
+		return (redirect_main(data, data->parser));
 	file = format_command(data->parser);
 	if (!judge_built_in(data, data->parser, file))
 		fork_and_execve(data, data->exe, data->parser, file);

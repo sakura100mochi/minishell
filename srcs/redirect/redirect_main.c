@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:09:45 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/30 17:58:54 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 19:53:53 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	check_fd(t_data *data, t_parser *node, t_file *file, char *str)
 			fd = file->fd;
 		file = file->next;
 	}
-	cmd_redirect(data, node, fd, str);
+	cmd_heredoc(data, node, fd, str);
 	while (head != NULL)
 	{
 		if (head->fd)
@@ -67,7 +67,7 @@ void	check_fd(t_data *data, t_parser *node, t_file *file, char *str)
 	(void)node;
 }
 
-void	cmd_redirect(t_data *data, t_parser *node, int fd, char *str)
+void	cmd_heredoc(t_data *data, t_parser *node, int fd, char *str)
 {
 	char	*file;
 
