@@ -3,34 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 17:41:22 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 18:24:57 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/built_in.h"
 #include "../../includes/pipe.h"
-
-static char	*format_command(t_parser *parser)
-{
-	size_t	cmd_len;
-	size_t	file_len;
-	char	*tmp;
-	char	*file;
-
-	cmd_len = 0;
-	while (parser->cmd[cmd_len] != ' ' && parser->cmd[cmd_len] != '\0')
-		cmd_len++;
-	file_len = ft_strlen(parser->cmd) - (cmd_len + 1);
-	tmp = ft_substr(parser->cmd, 0, cmd_len);
-	file = ft_substr(parser->cmd, cmd_len + 1, file_len);
-	free(parser->cmd);
-	parser->cmd = tmp;
-	return (file);
-}
 
 static int	check_pipe_exec(t_data *data, t_parser *parser,
 									t_pipe *pipelist, char *file)
