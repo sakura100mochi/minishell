@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:09:45 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/30 12:41:35 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 14:31:05 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,9 @@ int	main(void)
 	t_parser	*node;
 	t_parser	*head;
 	char		**result;
-	char		*str = "echo << \'aa\'";
-	size_t		i = 0;
+	char		*str = "echo > a";
 
 	result = lexer_main(str);
-	while (result[i] != NULL)
-	{
-		printf("lexer:[%s]\n", result[i]);
-		if (result[i][0] == '|')
-			printf("=============================\n");
-		i++;
-	}
 	node = parser_main(lexer_main(str));
 	head = node;
 	redirect_main(node);

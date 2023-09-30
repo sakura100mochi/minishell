@@ -6,7 +6,7 @@
 #    By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/09/30 12:42:53 by yhirai           ###   ########.fr        #
+#    Updated: 2023/09/30 14:05:03 by yhirai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ ERROR_P_SRC		= malloc_error.c
 
 REDIRECTSRC		= redirect_main.c append.c heredoc.c input.c output.c quote_heredoc.c
 
-ERROR_R_SRC		= syntax.c no_file.c
+ERROR_R_SRC		= syntax.c file.c
 
 PIPESRC			= pipe_main.c init_pipe.c pipe_execve.c
 
