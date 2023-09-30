@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 18:09:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/29 15:36:30 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/30 14:56:29 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static t_pipe	*new_pipe_node(size_t head)
 	else
 	{
 		pipe(new->pipe_fd);
-		perror("minishell: pipe: ");
 		new->next = NULL;
 		new->prev = NULL;
 	}
