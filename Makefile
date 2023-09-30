@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+         #
+#    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/09/30 17:44:22 by yhirai           ###   ########.fr        #
+#    Updated: 2023/09/30 18:37:38 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,8 @@ ERROR_P		= parser/Error_parser/
 REDIRECT	= redirect/
 
 ERROR_R		= redirect/Error_redirect/
+
+UNFOLD		= unfold/
 
 PIPE		= pipe/
 
@@ -62,6 +64,8 @@ REDIRECTSRC		= redirect_main.c append.c heredoc.c input.c output.c quote_heredoc
 
 ERROR_R_SRC		= syntax.c file.c
 
+UNFOLDSRC		= unfold_main.c
+
 PIPESRC			= pipe_main.c init_pipe.c pipe_execve.c
 
 ERROR_PIPE_SRC	= pipe_error_main.c
@@ -69,6 +73,7 @@ ERROR_PIPE_SRC	= pipe_error_main.c
 SRCS		= ${MAINSRC} ${addprefix ${BUILTIN}, ${BULITINSRC}} ${addprefix ${LEXER}, ${LEXERSRC}} \
 				${addprefix ${PARSER}, ${PARSERSRC}} ${addprefix ${ERROR_P}, ${ERROR_P_SRC}} \
 				${addprefix ${REDIRECT}, ${REDIRECTSRC}} ${addprefix ${ERROR_R}, ${ERROR_R_SRC}} \
+				${addprefix ${UNFOLD}, ${UNFOLDSRC}} \
 				${addprefix ${PIPE}, ${PIPESRC}} ${addprefix ${ERROR_PIPE}, ${ERROR_PIPE_SRC}}
 ##-----------------------------##
 

@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 18:29:37 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/30 18:40:16 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ char	*format_command(t_parser *parser)
 	file = ft_substr(parser->cmd, cmd_len + 1, file_len);
 	free(parser->cmd);
 	parser->cmd = tmp;
+	unfold_main(parser, file);
+	printf("%s, %s, %s\n", parser->cmd, parser->option, file);
 	return (file);
 }
 
