@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:09:45 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/30 18:29:50 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/30 20:05:12 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	cmd_redirect(t_data *data, t_parser *node, int fd, char *str)
 	}
 	else
 	{
-		file = format_command(data->parser);
+		file = format_command(data->env, data->parser);
 		if (!judge_built_in(data, data->parser, file))
 			fork_and_execve(data, data->exe, data->parser, file);
 		free(file);

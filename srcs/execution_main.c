@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 18:40:16 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/30 20:06:08 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static size_t	count_listlen(t_parser *list)
 	return (len - 1);
 }
 
-char	*format_command(t_parser *parser)
+char	*format_command(t_env *env, t_parser *parser)
 {
 	size_t	cmd_len;
 	size_t	file_len;
@@ -57,7 +57,7 @@ char	*format_command(t_parser *parser)
 	file = ft_substr(parser->cmd, cmd_len + 1, file_len);
 	free(parser->cmd);
 	parser->cmd = tmp;
-	unfold_main(parser, file);
+	unfold_main(env, parser, file);
 	printf("%s, %s, %s\n", parser->cmd, parser->option, file);
 	return (file);
 }
@@ -79,7 +79,7 @@ void	execution_main(t_data *data)
 		redirect_main(data, data->parser);
 		return ;
 	}
-	file = format_command(data->parser);
+	file = format_command(data->env, data->parser);
 	if (!judge_built_in(data, data->parser, file))
 		fork_and_execve(data, data->exe, data->parser, file);
 	free(file);

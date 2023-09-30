@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 17:59:11 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 20:04:43 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ t_data	*init_exp(t_data *data);
 t_env	*new_env_node(char *content, size_t head);
 t_exp	*new_exp_node(char *content, size_t head);
 void	execution_main(t_data *data);
-char	*format_command(t_parser *parser);
+char	*format_command(t_env *env, t_parser *parser);
 void	env_nodeadd_back(t_env **env, t_env *new);
 void	exp_nodeadd_back(t_exp **env, t_exp *new);
 void	standby_state(t_data *data);
