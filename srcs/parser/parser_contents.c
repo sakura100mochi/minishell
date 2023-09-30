@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:05:35 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/09/24 16:49:36 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 12:01:20 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ char	*ft_command(char **one_phrase)
 			i++;
 		else if (one_phrase[i][0] != '-')
 			cmd = ft_command_add(cmd, one_phrase[i]);
-		i++;
+		if (one_phrase[i] != NULL)
+			i++;
 	}
 	return (cmd);
 }

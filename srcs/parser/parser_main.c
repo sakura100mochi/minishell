@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:54 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/24 17:11:19 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 12:02:15 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_parser	*parser_main(char **str)
 // 	t_file		*file;
 // 	char		**result;
 // 	size_t		i;
-// 	char		*str = "<< \'ghdi\'";
+// 	char		*str = "cat < a";
 
 // 	i = 0;
 // 	result = lexer_main(str);
