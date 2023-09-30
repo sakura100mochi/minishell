@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 18:54:21 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/30 12:43:52 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 15:36:43 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef enum e_redirect_type
 
 typedef struct s_file
 {
+	int				fd;
+	char			*heredoc;
 	char			*file_name;
 	t_redirect_type	type;
 	struct s_file	*next;

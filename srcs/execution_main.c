@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/29 13:51:51 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:13:30 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	execution_main(t_init *state)
 		return ;
 	}
 	file = format_command(state->parser);
-	printf("%s, %s, %s\n", state->parser->cmd, state->parser->option, file);
 	if (!judge_built_in(state, state->parser, file))
 		fork_and_execve(state, state->exe, state->parser, file);
 	free(file);

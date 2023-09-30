@@ -6,7 +6,7 @@
 #    By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/09/30 14:05:03 by yhirai           ###   ########.fr        #
+#    Updated: 2023/09/30 15:09:07 by yhirai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ PARSERSRC		= parser_main.c split_pipe.c list_new.c list_add_back.c parser_conten
 
 ERROR_P_SRC		= malloc_error.c
 
-REDIRECTSRC		= redirect_main.c append.c heredoc.c input.c output.c quote_heredoc.c
+REDIRECTSRC		= redirect_main.c append.c heredoc.c input.c output.c quote_heredoc.c redirect_utils.c
 
 ERROR_R_SRC		= syntax.c file.c
 

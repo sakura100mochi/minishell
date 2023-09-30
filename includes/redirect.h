@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:11:32 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/30 14:30:43 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 16:42:21 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 # define REDIRECT_H
 
 void	redirect_main(t_parser *node);
-void	quote_heredoc(t_parser *node, t_file *file);
-void	heredoc(t_parser *node, t_file *file);
+void	check_fd(t_parser *node, t_file *file, char *str);
+char	*quote_heredoc(t_parser *node, t_file *file);
+char	*heredoc(t_parser *node, char *file_name);
 void	input(t_parser *node, t_file *file);
 void	append(t_parser *node, t_file *file);
-int		output(t_parser *node, t_file *file);
+void	output(t_parser *node, t_file *file);
+char	*ft_strjoin_red(char *s1, char const *s2);
 
 /*---Error---*/
-void	syntax(void);
+void	syntax(char *str);
 void	no_file(char *file_name);
-int		permission(char *file_name);
+void	permission(char *file_name);
 /*-----------*/
 
 #endif

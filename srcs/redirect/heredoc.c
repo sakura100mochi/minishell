@@ -6,20 +6,26 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/30 13:36:03 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 16:34:06 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	heredoc(t_parser *node, t_file *file)
+char	*heredoc(t_parser *node, char *file_name)
 {
 	char	*exit;
+	char	*str;
 	size_t	len;
 
-	len = ft_strlen(exit) + ft_strlen(file->file_name);
 	exit = readline(">");
-	while (ft_strncmp(exit, file->file_name, len) != 0)
+	len = ft_strlen(exit) + ft_strlen(file_name);
+	str = NULL;
+	while (ft_strncmp(exit, file_name, len) != 0)
+	{
+		str = ft_strjoin_red(str, exit);
 		exit = readline(">");
+	}
 	(void)node;
+	return (str);
 }
