@@ -82,17 +82,11 @@ void	execution_main(t_data *data)
 	{
 		redirect_main(data, data->parser);
 		return ;
-<<<<<<< HEAD
+	}
 	file = format_command(state->parser);
 	unfold_main(state->parser, file);
 	if (!judge_built_in(state, state->parser, file))
 		fork_and_execve(state, state->exe, state->parser, file);
-=======
-	}
-	file = format_command(data->parser);
-	if (!judge_built_in(data, data->parser, file))
-		fork_and_execve(data, data->exe, data->parser, file);
->>>>>>> 8b77250ee73b5fc47e5efb8c0a0a213b4585f7ca
 	free(file);
 }
 
