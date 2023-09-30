@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:51 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/18 13:22:46 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 12:41:49 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,7 @@ char	**lexer_main(char *str)
 		return (NULL);
 	while (*str != '\0')
 	{
-		if (*str == '\'')
-			result[i] = single_quotation(&str);
-		else if (*str == '\"')
-			result[i] = double_quotation(&str);
-		else
-			result[i] = split_word(&str);
+		result[i] = split_word(&str);
 		if (result[i] == NULL)
 			return (ft_free(result));
 		i++;

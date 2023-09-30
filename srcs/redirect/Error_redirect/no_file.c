@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect.h                                         :+:      :+:    :+:   */
+/*   no_file.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/24 18:11:32 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/30 12:09:34 by yhirai           ###   ########.fr       */
+/*   Created: 2023/09/30 12:08:01 by yhirai            #+#    #+#             */
+/*   Updated: 2023/09/30 12:09:21 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REDIRECT_H
-# define REDIRECT_H
+# include "../../../includes/minishell.h"
 
-void	redirect_main(t_parser *node);
-void	quote_heredoc(t_parser *node, t_file *file);
-void	heredoc(t_parser *node, t_file *file);
-void	input(t_parser *node, t_file *file);
-void	append(t_parser *node, t_file *file);
-void	output(t_parser *node, t_file *file);
-
-/*---Error---*/
-void	syntax(void);
-void	no_file(char *file_name);
-/*-----------*/
-
-#endif
+void	no_file(char *file_name)
+{
+	ft_printf("minishell: no such file or directory : %s\n", file_name);
+}

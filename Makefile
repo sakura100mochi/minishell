@@ -6,7 +6,7 @@
 #    By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/09/30 11:48:52 by yhirai           ###   ########.fr        #
+#    Updated: 2023/09/30 12:42:53 by yhirai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ BULITINSRC		= built_in.c built_in_cd.c built_in_echo.c built_in_env.c \
 				built_in_exit.c built_in_pwd.c built_in_unset.c built_in_export.c \
 				built_in_helper.c built_in_export_helper.c
 
-LEXERSRC		= lexer_main.c split_word.c single_quotation.c double_quotation.c
+LEXERSRC		= lexer_main.c split_word.c
 
 PARSERSRC		= parser_main.c split_pipe.c list_new.c list_add_back.c parser_contents.c parser_utils.c
 
@@ -60,7 +60,7 @@ ERROR_P_SRC		= malloc_error.c
 
 REDIRECTSRC		= redirect_main.c append.c heredoc.c input.c output.c quote_heredoc.c
 
-ERROR_R_SRC		= syntax.c
+ERROR_R_SRC		= syntax.c no_file.c
 
 PIPESRC			= pipe_main.c init_pipe.c pipe_execve.c
 

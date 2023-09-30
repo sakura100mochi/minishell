@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 17:02:15 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/18 12:12:07 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 12:40:27 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static size_t	count_char(char *str)
 	if (str[i] == '|' || str[i] == '<' || str[i] == '>')
 		return (1);
 	while (str[i] != ' ' && str[i] != '|' && str[i] != '<'
-		&& str[i] != '>' && str[i] != '\'' && str[i] != '\"' && str[i] != '\0')
+		&& str[i] != '>' && str[i] != '\0')
 		i++;
 	return (i);
 }

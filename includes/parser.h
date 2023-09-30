@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 18:54:21 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/24 19:45:55 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 12:43:52 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ typedef struct s_parser
 
 /*---lexer---*/
 char			**lexer_main(char *str);
-char			*single_quotation(char **str);
-char			*double_quotation(char **str);
 char			*split_word(char **str);
 /*-----------*/
 
