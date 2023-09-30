@@ -6,7 +6,7 @@
 /*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:09:45 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/25 16:38:06 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/09/28 12:14:57 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	main(void)
 	t_parser	*node;
 	t_parser	*head;
 	char		**result;
-	char		*str = "echo << a";
+	char		*str = "echo <<";
 
 	result = lexer_main(str);
 	node = parser_main(lexer_main(str));
