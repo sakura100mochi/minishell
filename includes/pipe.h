@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   pipe.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/29 11:18:44 by csakamot         ###   ########.fr       */
+/*   Created: 2023/09/25 12:55:54 by csakamot          #+#    #+#             */
+/*   Updated: 2023/09/29 13:57:44 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#ifndef PIPE_H
+# define PIPE_H
 
-int	main(void)
-{
-	t_init	*state;
+/*---include---*/
+# include "minishell.h"
+/*-------------*/
 
-	state = NULL;
-	state = init_minishell(state);
-	signal_minishell(state->signal->action);
-	standby_state(state);
-	return (0);
-}
+/*---pipe---*/
+int		pipe_main(t_init *state, t_parser *parser, t_pipe *pipe, size_t len);
+int		execve_without_fork(t_init *state, t_parser *parser, char *file);
+t_init	*init_pipe(t_init *state, size_t len);
+/*----------*/
 
-// __attribute__((destructor))
-// static void destructor() {
-//     system("leaks -q minishell");
-// }
+#endif
