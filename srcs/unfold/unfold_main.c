@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:16:53 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 16:51:30 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/30 17:54:47 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 int	unfold_main(t_parser *parser, char *file)
 {
+	(void)parser;
+	(void)file;
 	return (0);
 }

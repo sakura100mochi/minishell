@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 16:55:26 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/09/30 17:54:03 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	execution_main(t_init *state)
 	if (!check_headoc(state->parser->redirect))
 		return ;
 	file = format_command(state->parser);
+	unfold_main(state->parser, file);
 	if (!judge_built_in(state, state->parser, file))
 		fork_and_execve(state, state->exe, state->parser, file);
 	free(file);

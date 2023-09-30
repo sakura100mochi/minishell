@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_main.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:09:45 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/30 16:43:14 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/09/30 17:55:39 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	check_fd(t_parser *node, t_file *file, char *str)
 	int		fd;
 	t_file	*head;
 
+	(void)node;
 	head = file;
 	if (str == NULL)
 		return ;
