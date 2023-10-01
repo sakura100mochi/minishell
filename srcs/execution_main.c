@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/01 16:32:47 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/01 16:35:53 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,6 @@
 #include "../includes/built_in.h"
 #include "../includes/pipe.h"
 #include "../includes/redirect.h"
-
-static int	check_headoc(t_file *redirect)
-{
-	if (!redirect)
-		return (1);
-	while (redirect != NULL)
-	{
-		if (redirect->type == HEREDOC)
-			return (0);
-		redirect = redirect->next;
-	}
-	return (1);
-}
-
-static size_t	count_listlen(t_parser *list)
-{
-	size_t	len;
-
-	len = 0;
-	while (list != NULL)
-	{
-		list = list->next;
-		len++;
-	}
-	return (len - 1);
-}
 
 char	*format_command(t_env *env, t_parser *parser)
 {

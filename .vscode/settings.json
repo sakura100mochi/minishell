@@ -6,6 +6,7 @@
 		"pipe.h": "c",
 		"redirect.h": "c",
 		"libft.h": "c",
-		"unfold.h": "c"
+		"unfold.h": "c",
+		"parser.h": "c"
 	}
 }
