@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:16:53 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/01 17:03:21 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/01 17:05:27 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ static int	input_variable(t_env *env, char *str, char **strage)
 		if (str[index] == '$' && !start && (str[index] != ' ' || \
 												str[index] != '	'))
 			start = index + 1;
-		if (start && str[index - 1] != '$' && (str[index + 1] == ' ' || \
-					str[index + 1] == '	' || str[index + 1] == '\0' || \
-													str[index + 1] == '$'))
+		else if (start && (str[index + 1] == ' ' || str[index + 1] == '	' || \
+							str[index + 1] == '\0' || str[index + 1] == '$'))
 		{
 			strage[cnt++] = ft_substr(str, start, index - start + 1);
 			start = 0;
