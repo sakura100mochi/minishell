@@ -25,7 +25,7 @@ void	standby_state(t_data *data)
 			free(data->prompt);
 			continue ;
 		}
-		else if (data->prompt == NULL)
+		else if (data->prompt[0] == EOF)
 		{
 			printf("^D\n");
 			continue ;
