@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:16:53 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/01 17:05:27 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/01 17:50:59 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,23 @@ static int	input_variable(t_env *env, char *str, char **strage)
 	return (0);
 }
 
+static char	*create_unfoled_str(char *str, char **strage)
+{
+	return (str);
+}
+
 static char	*unfold_variable(t_env *env, char *str, size_t len)
 {
 	char	*result;
 	char	**strage;
 
-	(void)result;
 	strage = (char **)ft_calloc(sizeof(char *), len + 1);
 	input_variable(env, str, strage);
 	for (int i = 0; strage[i] != NULL; i++)
 		printf("%s\n", strage[i]);
+	result = create_unfoled_str(str, strage);
 	double_array_free(strage);
-	return (NULL);
+	return (result);
 }
 
 static size_t	find_env_variable(char *str)
