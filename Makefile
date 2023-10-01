@@ -6,7 +6,7 @@
 #    By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/01 16:41:52 by yhirai           ###   ########.fr        #
+#    Updated: 2023/10/01 17:41:15 by yhirai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -114,7 +114,7 @@ ARCHIVES	= ${addprefix ${LIBFT}, libft.a}
 all:		${NAME}
 
 %.o:%.c
-			${CC} ${CFLAGS}  -c $< -o $@
+			${CC} ${CFLAGS} -c $< -o $@
 
 ${NAME}:	${OBJS}
 			@${CCLIBFT}
@@ -131,6 +131,9 @@ ${NAME}:	${OBJS}
 
 # -L /Users/csakamot/.brew/Cellar/readline/8.2.1/lib -I /Users/csakamot/.brew/Cellar/readline/8.2.1/include
 # -I /Users/csakamot/.brew/Cellar/readline/8.2.1/include
+
+# -L /Users/yhirai/.brew/Cellar/readline/8.2.1/lib -I /Users/yhirai/.brew/Cellar/readline/8.2.1/include
+# -I /Users/yhirai/.brew/Cellar/readline/8.2.1/include
 
 # -I/usr/local/opt/readline/include
 # -L/usr/local/Cellar/readline/8.2.1/lib/
