@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 18:54:21 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/30 17:17:19 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/01 13:06:55 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char			*split_word(char **str);
 
 /*---parser---*/
 t_parser		*parser_main(char **str);
-t_parser		*split_pipe(char **str, char **one_phrase);
+t_parser		*split_pipe(char **str);
 char			*ft_strjoin_minis(char *s1, char const *s2);
 t_parser		*ft_parsernew(char *cmd, char *option, t_file *redirect);
 void			ft_parseradd_back(t_parser **node, t_parser *new);
