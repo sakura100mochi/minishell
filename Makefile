@@ -6,7 +6,7 @@
 #    By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/09/30 17:44:22 by yhirai           ###   ########.fr        #
+#    Updated: 2023/10/01 16:41:52 by yhirai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,10 @@ NAME		= minishell
 HEAD		= ./includes/
 
 PRE			= ./srcs/
+
+INIT		= init/
+
+SIGNAL		= signal/
 
 BUILTIN		= built_in/
 
@@ -38,15 +42,18 @@ PIPE		= pipe/
 
 ERROR_PIPE	= pipe/Error_pipe/
 
-LIBFT		= ${addprefix ${PRE}, libft/}
+LIBFT		= libft/
 ##-----------------------------##
 
 
 
 ##------------Srcs-------------##
-MAINSRC			= minishell.c init_minishell.c init_env.c init_exp.c \
-				standby_state.c signal.c execution_main.c external_command.c \
-				malloc_free.c
+MAINSRC			= main.c standby_state.c \
+				execution_main.c external_command.c malloc_free.c
+
+INITSRC			= init_minishell.c init_env.c init_exp.c
+
+SIGNALSRC		= signal.c
 
 BULITINSRC		= built_in.c built_in_cd.c built_in_echo.c built_in_env.c \
 				built_in_exit.c built_in_pwd.c built_in_unset.c built_in_export.c \
@@ -69,7 +76,8 @@ ERROR_PIPE_SRC	= pipe_error_main.c
 SRCS		= ${MAINSRC} ${addprefix ${BUILTIN}, ${BULITINSRC}} ${addprefix ${LEXER}, ${LEXERSRC}} \
 				${addprefix ${PARSER}, ${PARSERSRC}} ${addprefix ${ERROR_P}, ${ERROR_P_SRC}} \
 				${addprefix ${REDIRECT}, ${REDIRECTSRC}} ${addprefix ${ERROR_R}, ${ERROR_R_SRC}} \
-				${addprefix ${PIPE}, ${PIPESRC}} ${addprefix ${ERROR_PIPE}, ${ERROR_PIPE_SRC}}
+				${addprefix ${PIPE}, ${PIPESRC}} ${addprefix ${ERROR_PIPE}, ${ERROR_PIPE_SRC}} \
+				${addprefix ${INIT}, ${INITSRC}} ${addprefix ${SIGNAL}, ${SIGNALSRC}}
 ##-----------------------------##
 
 
@@ -83,13 +91,13 @@ OBJS		= ${addprefix ${PRE}, ${SRCS:.c=.o}}
 ##----------conpiler-----------##
 CFLAGS		= -Wall -Wextra -Werror
 
-CCLIBFT		= make -s -C srcs/libft
+CCLIBFT		= make -s -C libft
 ##-----------------------------##
 
 
 
 ##------------remove-----------##
-RMLIBFT		= make fclean -s -C srcs/libft
+RMLIBFT		= make fclean -s -C libft
 ##-----------------------------##
 
 

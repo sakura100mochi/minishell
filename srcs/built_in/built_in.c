@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:18:37 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 17:41:22 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/01 16:23:39 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ int	judge_built_in(t_data *data, t_parser *parser, char *file)
 	else if (len == 5 && !ft_strncmp(parser->cmd, "unset", len))
 		built_in_unset(data->parser, data->env, data->exp, file);
 	else
-		return (0);
-	return (1);
+		return (NO);
+	return (YES);
 }
