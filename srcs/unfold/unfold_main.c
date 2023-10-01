@@ -6,17 +6,48 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:16:53 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/01 13:15:13 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/01 16:19:15 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/unfold.h"
 
-static char	*unfold_variable(t_env *env, char *str)
+static int	input_variable(t_env *env, char *str, char **strage, size_t len)
 {
-	char	*variable;
+	size_t	index;
+	size_t	cnt;
+	size_t	start;
 
-	variable = get_variable(str);
+	(void)env;
+	index = 0;
+	cnt = 0;
+	start = 0;
+	while (cnt < len)
+	{
+		if (str[index] == '$' && !start && (str[index] != ' ' || \
+												str[index] != '	'))
+			start = index + 1;
+		if (start && (str[index] == ' ' || str[index] == '	' || \
+												str[index] == '$'))
+		strage[cnt] = ft_substr(str, start, index - start);
+		index++;
+		cnt++;
+	}
+	strage[cnt] = NULL;
+	return (0);
+}
+
+static char	*unfold_variable(t_env *env, char *str, size_t len)
+{
+	char	*result;
+	char	**strage;
+
+	(void)result;
+	strage = (char **)ft_calloc(sizeof(char *), len + 1);
+	input_variable(env, str, strage, len);
+	for (int i = 0; strage[i] != NULL; i++)
+		printf("%s\n", strage[i]);
+	double_array_free(strage);
 	return (NULL);
 }
 
@@ -29,31 +60,29 @@ static size_t	find_env_variable(char *str)
 	nbr = 0;
 	while (str[index] != '\0')
 	{
-		if (str[index] == '$' && str[index + 1] != '\0')
+		if (str[index] == '$' && (str[index + 1] != '\0' || \
+				str[index + 1] != ' ' || str[index + 1] != '	'))
 		{
 			nbr++;
 			index++;
 		}
 		index++;
 	}
-	if (nbr)
-		return (0);
-	return (1);
+	return (nbr);
 }
 
 int	unfold_main(t_env *env, t_parser *parser, char *file)
 {
-	char	**strage;
 	size_t	len;
 
 	len = find_env_variable(parser->cmd);
 	if (!len)
 	{
-		strage = (char **)ft_calloc(sizeof(char *), len + 1);
-		unfold_variable(env, *parser->cmd);
-		return ;
+		unfold_variable(env, parser->cmd, len);
+		return (0);
 	}
-	else if (!find_env_variable(file))
-		unfold_variable(env, file);
+	len = find_env_variable(file);
+	if (!len)
+		unfold_variable(env, file, len);
 	return (0);
 }
