@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 09:01:05 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/17 17:04:14 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/01 14:11:50 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <limits.h>
 # include "ft_printf.h"
+# include "get_next_line.h"
 
 # ifndef SIZE_MAX
 #  define SIZE_MAX 0xffffffffffffffff
