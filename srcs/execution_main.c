@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 19:41:18 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/01 16:15:53 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,7 @@
 #include "../includes/built_in.h"
 #include "../includes/pipe.h"
 #include "../includes/redirect.h"
-
-static size_t	count_listlen(t_parser *list)
-{
-	size_t	len;
-
-	len = 0;
-	while (list != NULL)
-	{
-		list = list->next;
-		len++;
-	}
-	return (len - 1);
-}
+#include "../includes/parser.h"
 
 char	*format_command(t_parser *parser)
 {
@@ -51,15 +39,15 @@ void	execution_main(t_data *data)
 	char	*file;
 	size_t	len;
 
-	len = count_listlen(data->parser);
-	if (len)
+	len = ft_parsersize(data->parser) - 1;
+	if (len != 0)
 	{
 		data = init_pipe(data, len);
 		pipe_main(data, data->parser, data->pipe->next, len);
 		return ;
 	}
 	if (data->parser->redirect)
-		return (redirect_main(data, data->parser));
+		return (redirect_main(data->parser));
 	file = format_command(data->parser);
 	if (!judge_built_in(data, data->parser, file))
 		fork_and_execve(data, data->exe, data->parser, file);

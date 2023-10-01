@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:07:28 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/10/01 13:12:56 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/01 13:17:30 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ static char	**one_phrase_malloc(char **str, size_t *len)
 	i = 0;
 	one_phrase = malloc(sizeof(char *) * (count_pointer(str) + 1));
 	if (one_phrase == NULL)
-		return (NULL);
+		return (chardouble_malloc_error());
 	while (str[i] != NULL && str[i][0] != '|')
 	{
 		one_phrase[i] = ft_calloc(sizeof(char), ft_strlen(str[i]) + 1);
 		if (one_phrase[i] == NULL)
-			return (NULL);
+			return (chardouble_malloc_error());
 		j = 0;
 		while (str[i][j] != '\0')
 		{

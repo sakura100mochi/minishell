@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 18:54:21 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/01 13:06:55 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/01 16:17:14 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char			*ft_strjoin_minis(char *s1, char const *s2);
 t_parser		*ft_parsernew(char *cmd, char *option, t_file *redirect);
 void			ft_parseradd_back(t_parser **node, t_parser *new);
 t_parser		*ft_parserlast(t_parser *node);
+size_t			ft_parsersize(t_parser *node);
 t_file			*ft_filenew(char **one_phrase);
 t_redirect_type	file_type(char **one_phrase);
 void			ft_fileadd_back(t_file **file, t_file *new);
@@ -45,7 +46,9 @@ t_file			*ft_redirect(char **one_phrase);
 /*---Error_parser---*/
 t_parser		*parser_malloc_error(void);
 char			*char_malloc_error(void);
+char			**chardouble_malloc_error(void);
 t_file			*file_malloc_error(void);
+void			void_malloc_error(void);
 /*------------------*/
 
 #endif

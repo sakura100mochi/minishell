@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:09:45 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/30 19:53:53 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/01 16:15:32 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,75 +15,32 @@
 #include "../../includes/parser.h"
 #include "../../includes/built_in.h"
 
-void	redirect_main(t_data *data, t_parser *node)
+void	redirect_main(t_parser *node)
 {
 	t_file	*file;
-	char	*str;
 
-	file = node->redirect;
-	str = NULL;
-	while (file != NULL)
+	while (node != NULL)
 	{
-		if (file->type == UNKNOWN)
-			return ;
-		if (file->file_name == NULL)
-			return (syntax(NULL));
-		else if (file->type == QUOTE_HEREDOC)
-			str = quote_heredoc(node, file);
-		else if (file->type == HEREDOC)
-			str = heredoc(node, file->file_name);
-		else if (file->type == INPUT)
-			input(node, file);
-		else if (file->type == APPEND)
-			append(node, file);
-		else if (file->type == OUTPUT)
-			output(node, file);
-		file = file->next;
-	}
-	check_fd(data, node, node->redirect, str);
-}
-
-void	check_fd(t_data *data, t_parser *node, t_file *file, char *str)
-{
-	int		fd;
-	t_file	*head;
-
-	head = file;
-	if (str == NULL)
-		return ;
-	while (file != NULL)
-	{
-		if (file->fd)
-			fd = file->fd;
-		file = file->next;
-	}
-	cmd_heredoc(data, node, fd, str);
-	while (head != NULL)
-	{
-		if (head->fd)
-			close(head->fd);
-		head = head->next;
-	}
-	(void)node;
-}
-
-void	cmd_heredoc(t_data *data, t_parser *node, int fd, char *str)
-{
-	char	*file;
-
-	if (node->cmd == NULL)
-		return ;
-	if (ft_strncmp(node->cmd, "cat", ft_strlen(node->cmd)) == 0)
-	{
-		dup2(fd, STDOUT_FILENO);
-		ft_printf("%s\n", str);
-	}
-	else
-	{
-		file = format_command(data->parser);
-		if (!judge_built_in(data, data->parser, file))
-			fork_and_execve(data, data->exe, data->parser, file);
-		free(file);
+		file = node->redirect;
+		while (file != NULL)
+		{
+			if (file->type == UNKNOWN)
+				return ;
+			if (file->file_name == NULL)
+				return (syntax(NULL));
+			else if (file->type == QUOTE_HEREDOC)
+				quote_heredoc(file);
+			else if (file->type == HEREDOC)
+				heredoc(file, file->file_name);
+			else if (file->type == INPUT)
+				input(file);
+			else if (file->type == APPEND)
+				append(file);
+			else if (file->type == OUTPUT)
+				output(file);
+			file = file->next;
+		}
+		node = node->next;
 	}
 }
 
