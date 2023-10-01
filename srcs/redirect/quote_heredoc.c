@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:45 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/30 17:34:36 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/01 16:17:21 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../includes/redirect.h"
 #include "../../includes/parser.h"
 
-char	*quote_heredoc(t_parser *node, t_file *file)
+void	quote_heredoc(t_file *file)
 {
 	char	*name;
 	size_t	i;
@@ -24,7 +24,7 @@ char	*quote_heredoc(t_parser *node, t_file *file)
 	j = 0;
 	name = ft_calloc(sizeof(char), ft_strlen(file->file_name));
 	if (name == NULL)
-		return (char_malloc_error());
+		return (void_malloc_error());
 	while (file->file_name[i] != '\0')
 	{
 		if (file->file_name[i] != '\'' && file->file_name[i] != '\"')
@@ -34,6 +34,5 @@ char	*quote_heredoc(t_parser *node, t_file *file)
 		}
 		i++;
 	}
-	return (heredoc(node, name));
-	(void)node;
+	heredoc(file, name);
 }

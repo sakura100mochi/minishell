@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 20:04:43 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/01 16:21:02 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef struct s_pipe
 typedef struct s_file
 {
 	int				fd;
-	char			*heredoc;
+	char			*result;
 	char			*file_name;
 	t_redirect_type	type;
 	struct s_file	*next;
@@ -97,7 +97,6 @@ typedef struct s_parser
 	char			*cmd;
 	char			*option;
 	t_file			*redirect;
-	char			*result;
 	struct s_parser	*next;
 	struct s_parser	*prev;
 }			t_parser;

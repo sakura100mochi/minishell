@@ -6,14 +6,14 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:36 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/30 17:27:25 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/01 15:46:31 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/redirect.h"
 
-void	output(t_parser *node, t_file *file)
+void	output(t_file *file)
 {
 	int	fd;
 
@@ -26,5 +26,4 @@ void	output(t_parser *node, t_file *file)
 		fd = open(file->file_name, O_WRONLY | O_TRUNC);
 	if (fd != -1)
 		file->fd = fd;
-	(void)node;
 }

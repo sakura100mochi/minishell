@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:58:27 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/09/30 17:25:13 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/01 13:26:57 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,19 @@ t_parser	*ft_parserlast(t_parser *node)
 	while (node->next != NULL)
 		node = node->next;
 	return (node);
+}
+
+size_t	ft_parsersize(t_parser *node)
+{
+	size_t	len;
+
+	len = 0;
+	while (node != NULL)
+	{
+		node = node->next;
+		len++;
+	}
+	return (len);
 }
 
 void	ft_fileadd_back(t_file **file, t_file *new)

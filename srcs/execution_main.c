@@ -6,11 +6,12 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 20:06:08 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/01 16:26:35 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include "../includes/parser.h"
 #include "../includes/unfold.h"
 #include "../includes/built_in.h"
 #include "../includes/pipe.h"
@@ -67,18 +68,15 @@ void	execution_main(t_data *data)
 	char	*file;
 	size_t	len;
 
-	len = count_listlen(data->parser);
-	if (len)
+	len = ft_parsersize(data->parser) - 1;
+	if (len != 0)
 	{
 		data = init_pipe(data, len);
 		pipe_main(data, data->parser, data->pipe->next, len);
 		return ;
 	}
-	if (!check_headoc(data->parser->redirect))
-	{
-		redirect_main(data, data->parser);
-		return ;
-	}
+	if (data->parser->redirect)
+		return (redirect_main(data->parser));
 	file = format_command(data->env, data->parser);
 	if (!judge_built_in(data, data->parser, file))
 		fork_and_execve(data, data->exe, data->parser, file);
