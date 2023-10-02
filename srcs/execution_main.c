@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/01 16:35:53 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/02 10:16:55 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,31 @@
 #include "../includes/built_in.h"
 #include "../includes/pipe.h"
 #include "../includes/redirect.h"
+
+static int	check_quote(char *str)
+{
+	size_t	index;
+	size_t	single;
+	size_t	twofold;
+
+	index = 0;
+	single = 0;
+	twofold = 0;
+	while (str[index] != '\0')
+	{
+		if (!single && str[index] == '\'')
+			single++;
+		if (!twofold && str[index] == '"')
+			twofold++;
+		index++;
+	}
+}
+
+static int	remove_quote_in_command(t_parser *parser, char *str)
+{
+	
+	return (0);
+}
 
 char	*format_command(t_env *env, t_parser *parser)
 {
@@ -32,6 +57,7 @@ char	*format_command(t_env *env, t_parser *parser)
 	file = ft_substr(parser->cmd, cmd_len + 1, file_len);
 	free(parser->cmd);
 	parser->cmd = tmp;
+	remove_quote_in_command(parser, file);
 	unfold_main(env, parser, file);
 	printf("%s, %s, %s\n", parser->cmd, parser->option, file);
 	return (file);
