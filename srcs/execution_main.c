@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/02 10:16:55 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/03 13:39:10 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@ static int	check_quote(char *str)
 	}
 }
 
-static int	remove_quote_in_command(t_parser *parser, char *str)
-{
-	
-	return (0);
-}
-
 char	*format_command(t_env *env, t_parser *parser)
 {
 	size_t	cmd_len;
@@ -57,7 +51,7 @@ char	*format_command(t_env *env, t_parser *parser)
 	file = ft_substr(parser->cmd, cmd_len + 1, file_len);
 	free(parser->cmd);
 	parser->cmd = tmp;
-	remove_quote_in_command(parser, file);
+	// remove_quote_in_command(parser, file);
 	unfold_main(env, parser, file);
 	printf("%s, %s, %s\n", parser->cmd, parser->option, file);
 	return (file);

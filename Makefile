@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/01 17:27:42 by csakamot         ###   ########.fr        #
+#    Updated: 2023/10/03 14:59:39 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ REDIRECTSRC		= redirect_main.c append.c heredoc.c input.c output.c quote_heredoc
 
 ERROR_R_SRC		= syntax.c file.c
 
-UNFOLDSRC		= unfold_main.c
+UNFOLDSRC		= unfold_main.c remove_quote.c unfold_quote_variable.c
 
 PIPESRC			= pipe_main.c init_pipe.c pipe_execve.c
 
