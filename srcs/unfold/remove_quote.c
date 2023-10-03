@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 12:55:26 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/03 15:11:48 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:12:33 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*remove_single_quote(char *str, int end)
 	return (result);
 }
 
-static char	*remove_twofold_quote(char *str, int end)
+static char	*remove_twofold_quote(char *str, t_env *env, int end)
 {
 	size_t	index;
 	size_t	start;
@@ -55,11 +55,11 @@ static char	*remove_twofold_quote(char *str, int end)
 		result[index - 2] = str[index];
 	result[index - 2] = '\0';
 	free(str);
-	result = unfold_quote_variable(result, start, end - 1);
+	result = unfold_quote_variable(result, env, start, end - 1);
 	return (result);
 }
 
-static int	check_quote_in_str(char *str)
+static char	*check_quote_in_str(char *str, t_env *env)
 {
 	size_t	index;
 	size_t	single;
@@ -71,7 +71,7 @@ static int	check_quote_in_str(char *str)
 	while (str[index] != '\0')
 	{
 		if (!(single % 2) && !(twofold % 2) && str[index] == '$')
-			unfold_str(str, index);
+			unfold_str(str, env, index);
 		if (!(single % 2) && !(twofold % 2) && str[index] == '\'')
 			single++;
 		else if (!(single % 2) && !(twofold % 2) && str[index] == '"')
@@ -79,16 +79,16 @@ static int	check_quote_in_str(char *str)
 		else if (single && str[index] == '\'')
 			str = remove_single_quote(str, index);
 		else if (twofold && str[index] == '"')
-			str = remove_twofold_quote(str, index);
+			str = remove_twofold_quote(str, env, index);
 		index++;
 	}
-	return (0);
+	return (str);
 }
 
-int	remove_quote_in_command(t_parser *parser, char *str)
+int	remove_quote_in_command(t_parser *parser, t_env *env, char *str)
 {
-	check_quote_in_str(parser->cmd);
+	parser->cmd = check_quote_in_str(parser->cmd, env);
 	if (str)
-		check_quote_in_str(str);
+		str = check_quote_in_str(str, env);
 	return (0);
 }

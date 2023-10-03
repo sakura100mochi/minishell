@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:16:53 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/03 15:12:50 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:17:20 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,40 +58,43 @@
 // 	return (NULL);
 // }
 
-// static size_t	find_env_variable(char *str)
-// {
-// 	size_t	index;
-// 	size_t	nbr;
+size_t	cnt_env_variable(char *str)
+{
+	size_t	index;
+	size_t	nbr;
 
-// 	index = 0;
-// 	nbr = 0;
-// 	while (str[index] != '\0')
-// 	{
-// 		if (str[index] == '$' && (str[index + 1] != '\0' || \
-// 				str[index + 1] != ' ' || str[index + 1] != '	'))
-// 		{
-// 			nbr++;
-// 			index++;
-// 		}
-// 		index++;
-// 	}
-// 	return (nbr);
-// }
+	index = 0;
+	nbr = 0;
+	while (str[index] != '\0')
+	{
+		if (str[index]!= '$')
+			nbr++;
+		if (str[index] == '$' && (str[index + 1] != '\0' || \
+		str[index + 1] != ' ' || str[index + 1] != '	') || \
+		str[index + 1] != '\'')
+		{
+			nbr++;
+			index++;
+		}
+		index++;
+	}
+	return (nbr);
+}
 
 int	unfold_main(t_env *env, t_parser *parser, char *file)
 {
 	// size_t	len;
 
-	unfold_unquote_command(parser, file);
-	remove_quote_in_command(parser, file);
-	// len = find_env_variable(parser->cmd);
+	unfold_unquote_command(parser, env, file);
+	remove_quote_in_command(parser, env, file);
+	// len = cnt_env_variable(parser->cmd);
 	// if (len)
 	// {
 	// 	printf("%zu\n", len);
 	// 	unfold_variable(env, parser->cmd, len);
 	// 	return (0);
 	// }
-	// len = find_env_variable(file);
+	// len = cnt_env_variable(file);
 	// if (len)
 	// 	unfold_variable(env, file, len);
 	return (0);
