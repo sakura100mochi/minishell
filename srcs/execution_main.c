@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/01 16:24:28 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/03 14:45:00 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	execution_main(t_data *data)
 		return ;
 	}
 	if (data->parser->redirect)
-		return (redirect_main(data->parser));
+		return (redirect_main(data, data->parser));
 	file = format_command(data->parser);
 	if (judge_built_in(data, data->parser, file) == NO)
 		fork_and_execve(data, data->exe, data->parser, file);

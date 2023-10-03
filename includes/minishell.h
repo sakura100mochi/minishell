@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/01 16:39:46 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/03 14:42:00 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_exp
 typedef struct s_signal
 {
 	struct sigaction	action;
+	int					interactive_mode;
 }						t_signal;
 
 typedef struct s_exe

@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:40:38 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/01 16:29:00 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/03 14:42:42 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_data	*init_minishell(t_data *data)
 	data = init_exp(data);
 	data->exe = exe_built;
 	data->signal = sig_act;
+	data->signal->interactive_mode = NO;
 	return (data);
 }
 

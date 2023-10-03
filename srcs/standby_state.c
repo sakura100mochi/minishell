@@ -21,6 +21,7 @@ void	standby_state(t_data *data)
 		data->prompt = readline("minishell$");
 		if (data->prompt == NULL)
 		{
+			ft_printf("exit\n");
 			exit(EXIT_SUCCESS);
 		}
 		if (*data->prompt == '\0')
