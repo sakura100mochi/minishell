@@ -6,7 +6,7 @@
 #    By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/01 17:41:15 by yhirai           ###   ########.fr        #
+#    Updated: 2023/10/03 13:04:37 by yhirai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -114,12 +114,12 @@ ARCHIVES	= ${addprefix ${LIBFT}, libft.a}
 all:		${NAME}
 
 %.o:%.c
-			${CC} ${CFLAGS} -c $< -o $@
+			${CC} ${CFLAGS} -c $< -I /Users/yhirai/.brew/Cellar/readline/8.2.1/include -o $@
 
 ${NAME}:	${OBJS}
 			@${CCLIBFT}
 			@echo "object file		compiled"
-			@${CC} ${CFLAGS} ${OBJS} -Lsrcs -lreadline ${ARCHIVES} -o ${NAME}
+			@${CC} ${CFLAGS} ${OBJS} -Lsrcs -L /Users/yhirai/.brew/Cellar/readline/8.2.1/lib -I /Users/yhirai/.brew/Cellar/readline/8.2.1/include -lreadline ${ARCHIVES} -o ${NAME}
 #			@echo "minishell		created\n\n"
 #			@echo "    ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗     "
 #			@echo "    ████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     "

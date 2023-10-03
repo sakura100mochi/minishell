@@ -6,15 +6,14 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 12:50:11 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/01 17:29:56 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/03 14:12:35 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 //ctrl+c : SIGINT
-//ctrl+D :
-//ctrl+\ :
+//ctrl+\ : SIGQUIT
 
 static void	signal_handler(int signum, siginfo_t *info, void *dummy)
 {
@@ -23,13 +22,12 @@ static void	signal_handler(int signum, siginfo_t *info, void *dummy)
 	if (signum == SIGINT)
 	{
 		ft_printf("\n");
+		rl_replace_line("", 0);
 		rl_on_new_line();
-		rl_replace_line("", 1);
 		rl_redisplay();
-		return ;
 	}
 	else if (signum == SIGQUIT)
-		return ;
+		rl_redisplay();
 	return ;
 }
 

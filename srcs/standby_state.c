@@ -19,17 +19,16 @@ void	standby_state(t_data *data)
 	while (1)
 	{
 		data->prompt = readline("minishell$");
-		add_history(data->prompt);
-		if (!*(data)->prompt)
+		if (data->prompt == NULL)
+		{
+			exit(EXIT_SUCCESS);
+		}
+		if (*data->prompt == '\0')
 		{
 			free(data->prompt);
 			continue ;
 		}
-		else if (data->prompt == NULL)
-		{
-			printf("^D\n");
-			continue ;
-		}
+		add_history(data->prompt);
 		data->parser = parser_main(lexer_main(data->prompt));
 		execution_main(data);
 		free(data->prompt);
