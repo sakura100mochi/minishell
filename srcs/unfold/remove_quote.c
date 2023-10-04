@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 12:55:26 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/04 15:08:27 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:38:49 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static char	*remove_twofold_quote(char *str, t_env *env, size_t *end)
 	return (result);
 }
 
-static char	*check_quote_in_str(char *str, t_env *env)
+char	*check_quote_in_str(char *str, t_env *env)
 {
 	size_t	index;
 	size_t	single;
@@ -84,12 +84,4 @@ static char	*check_quote_in_str(char *str, t_env *env)
 		index++;
 	}
 	return (str);
-}
-
-int	remove_quote_in_command(t_parser *parser, t_env *env, char *str)
-{
-	parser->cmd = check_quote_in_str(parser->cmd, env);
-	if (str)
-		str = check_quote_in_str(str, env);
-	return (0);
 }

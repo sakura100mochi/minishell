@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:16:53 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/04 15:02:54 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:33:58 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,19 +91,8 @@ size_t	cnt_env_variable(char *str)
 
 int	unfold_main(t_env *env, t_parser *parser, char *file)
 {
-	// size_t	len;
-
-	// unfold_unquote_command(parser, env, file);
-	remove_quote_in_command(parser, env, file);
-	// len = cnt_env_variable(parser->cmd);
-	// if (len)
-	// {
-	// 	printf("%zu\n", len);
-	// 	unfold_variable(env, parser->cmd, len);
-	// 	return (0);
-	// }
-	// len = cnt_env_variable(file);
-	// if (len)
-	// 	unfold_variable(env, file, len);
+	parser->cmd = check_quote_in_str(parser->cmd, env);
+	if (file)
+		file = check_quote_in_str(file, env);
 	return (0);
 }
