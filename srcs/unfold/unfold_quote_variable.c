@@ -6,13 +6,13 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:59:58 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/03 17:08:34 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/04 15:11:37 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/unfold.h"
 
-static int	check_env_variable(char *str, size_t start, size_t end)
+int	check_env_variable(char *str, size_t start, size_t end)
 {
 	size_t	index;
 
@@ -26,7 +26,7 @@ static int	check_env_variable(char *str, size_t start, size_t end)
 	return (1);
 }
 
-static char	**split_env_variable(char *tmp, size_t len)
+char	**split_env_variable(char *tmp, size_t len)
 {
 	size_t	index;
 	size_t	start;
@@ -39,14 +39,16 @@ static char	**split_env_variable(char *tmp, size_t len)
 	result = (char **)ft_calloc(sizeof(char *), len + 1);
 	while (tmp[index] != '\0')
 	{
-		if (tmp[index] == '\'' || tmp[index] == ' ' || \
-				tmp[index] == '	' || tmp[index] == '$')
+		if (tmp[index] == '$' && (tmp[index + 1] != '\0' || \
+		tmp[index + 1] != ' ' || tmp[index + 1] != '	' || \
+		tmp[index + 1] != '\''))
 		{
 			result[cnt++] = ft_substr(tmp, start, index);
 			start = index + 1;
 		}
 		index++;
 	}
+	result[cnt++] = ft_substr(tmp, start, index);
 	result[cnt] = NULL;
 	return (result);
 }
@@ -54,7 +56,6 @@ static char	**split_env_variable(char *tmp, size_t len)
 static char	*find_env_variable(t_env *env, char *str)
 {
 	size_t	len;
-	char	*result;
 
 	len = ft_strlen(str);
 	while (!env->head)
@@ -66,7 +67,7 @@ static char	*find_env_variable(t_env *env, char *str)
 	return ("\0");
 }
 
-static int	unfold_split_words(char **strage, t_env *env)
+int	unfold_split_words(char **strage, t_env *env)
 {
 	size_t	index;
 	char	*tmp;
@@ -96,16 +97,18 @@ char	*unfold_quote_variable(char *str, t_env *env, size_t start, size_t end)
 
 	index = 0;
 	if (check_env_variable(str, start, end))
-	return (str);
+		return (str);
 	tmp = ft_substr(str, start, end);
 	len = cnt_env_variable(tmp);
 	strage = split_env_variable(tmp, len);
 	unfold_split_words(strage, env);
 	while (strage[index] != NULL)
 	{
-		result = ft_strjoin_gnl(result, strage[index]);
+		result = strjoin_mini(result, strage[index]);
 		index++;
 	}
+	result = str_connection(result, str, start, end);
+	free(str);
 	free(tmp);
 	double_array_free(strage);
 	return (result);

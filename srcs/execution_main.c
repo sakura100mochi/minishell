@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/03 13:39:10 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:10:42 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,24 @@
 #include "../includes/pipe.h"
 #include "../includes/redirect.h"
 
-static int	check_quote(char *str)
-{
-	size_t	index;
-	size_t	single;
-	size_t	twofold;
+// static int	check_quote(char *str)
+// {
+// 	size_t	index;
+// 	size_t	single;
+// 	size_t	twofold;
 
-	index = 0;
-	single = 0;
-	twofold = 0;
-	while (str[index] != '\0')
-	{
-		if (!single && str[index] == '\'')
-			single++;
-		if (!twofold && str[index] == '"')
-			twofold++;
-		index++;
-	}
-}
+// 	index = 0;
+// 	single = 0;
+// 	twofold = 0;
+// 	while (str[index] != '\0')
+// 	{
+// 		if (!single && str[index] == '\'')
+// 			single++;
+// 		if (!twofold && str[index] == '"')
+// 			twofold++;
+// 		index++;
+// 	}
+// }
 
 char	*format_command(t_env *env, t_parser *parser)
 {
@@ -51,7 +51,6 @@ char	*format_command(t_env *env, t_parser *parser)
 	file = ft_substr(parser->cmd, cmd_len + 1, file_len);
 	free(parser->cmd);
 	parser->cmd = tmp;
-	// remove_quote_in_command(parser, file);
 	unfold_main(env, parser, file);
 	printf("%s, %s, %s\n", parser->cmd, parser->option, file);
 	return (file);

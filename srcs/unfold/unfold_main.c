@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:16:53 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/03 16:17:20 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/04 15:02:54 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,16 @@
 // 	return (NULL);
 // }
 
+char	*str_connection(char *result, char *str, size_t start, size_t end)
+{
+	char	*tmp_f;
+	char	*tmp_b;
+
+	tmp_f = ft_substr(str, 0, start);
+	tmp_b = ft_substr(str, end, ft_strlen(str));
+	return (result);
+}
+
 size_t	cnt_env_variable(char *str)
 {
 	size_t	index;
@@ -67,25 +77,23 @@ size_t	cnt_env_variable(char *str)
 	nbr = 0;
 	while (str[index] != '\0')
 	{
-		if (str[index]!= '$')
-			nbr++;
 		if (str[index] == '$' && (str[index + 1] != '\0' || \
-		str[index + 1] != ' ' || str[index + 1] != '	') || \
-		str[index + 1] != '\'')
+		str[index + 1] != ' ' || str[index + 1] != '	' || \
+		str[index + 1] != '\''))
 		{
 			nbr++;
 			index++;
 		}
 		index++;
 	}
-	return (nbr);
+	return (nbr * 2 + 1);
 }
 
 int	unfold_main(t_env *env, t_parser *parser, char *file)
 {
 	// size_t	len;
 
-	unfold_unquote_command(parser, env, file);
+	// unfold_unquote_command(parser, env, file);
 	remove_quote_in_command(parser, env, file);
 	// len = cnt_env_variable(parser->cmd);
 	// if (len)
