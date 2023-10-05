@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:16:53 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/05 10:55:46 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:07:59 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,21 @@
 // 	return (NULL);
 // }
 
-char	*str_connection(char *result, char *str, size_t start, size_t end)
+char	*str_connection(char *result, char *str, size_t *start, size_t *end)
 {
 	char	*tmp_f;
 	char	*tmp_b;
+	char	*tmp;
 
-	tmp_f = ft_substr(str, 0, start);
-	tmp_b = ft_substr(str, end, ft_strlen(str));
+	tmp_f = ft_substr(str, 0, *start);
+	tmp_b = ft_substr(str, *end + 1, ft_strlen(str));
+	tmp = ft_strjoin(tmp_f, result);
+	free(result);
+	*end = ft_strlen(result) - 1;
+	*start = ft_strlen(result) - 1;
+	result = ft_strjoin(result, tmp_b);
+	free(tmp_f);
+	free(tmp_b);
 	return (result);
 }
 

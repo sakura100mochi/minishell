@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:59:58 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/05 10:55:32 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:04:43 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,26 @@ char	**split_env_variable(char *tmp, size_t len)
 	cnt = 0;
 	flag = 0;
 	result = (char **)ft_calloc(sizeof(char *), len + 1);
-	while (tmp[index] != '\0')
+	while (index < ft_strlen(tmp) + 1)
 	{
 		if (tmp[index] == '$' && (tmp[index + 1] != '\0' || \
 		tmp[index + 1] != ' ' || tmp[index + 1] != '	' || \
 		tmp[index + 1] != '\''))
 		{
-			result[cnt++] = ft_substr(tmp, start, index);
+			result[cnt++] = ft_substr(tmp, start, index - start);
 			flag++;
 			start = index;
 		}
-		if (flag && (tmp[index] == '\'' || tmp[index] == ' ' || \
-		tmp[index] == '	' || tmp[index + 1] == '\0'))
+		else if (flag && (tmp[index] == '\'' || tmp[index] == ' ' || \
+		tmp[index] == '	' || tmp[index] == '\0'))
 		{
-			result[cnt++] = ft_substr(tmp, start, index + 1);
+			result[cnt++] = ft_substr(tmp, start, index - start);
 			flag = 0;
-			start = index + 1;
+			start = index;
 		}
 		index++;
 	}
-	result[cnt++] = ft_substr(tmp, start, index);
+	result[cnt++] = ft_substr(tmp, start, index - start);
 	result[cnt] = NULL;
 	return (result);
 }
@@ -79,7 +79,8 @@ static char	*find_env_variable(t_env *env, char *str)
 		}
 		env = env->next;
 	}
-	return ("\0");
+	tmp = ft_calloc(sizeof(char), 0);
+	return (tmp);
 }
 
 int	unfold_split_words(char **strage, t_env *env)
@@ -102,7 +103,7 @@ int	unfold_split_words(char **strage, t_env *env)
 	return (0);
 }
 
-char	*unfold_quote_variable(char *str, t_env *env, size_t start, size_t end)
+char	*unfold_quote_variable(char *str, t_env *env, size_t start, size_t *end)
 {
 	size_t	len;
 	size_t	index;
@@ -112,22 +113,22 @@ char	*unfold_quote_variable(char *str, t_env *env, size_t start, size_t end)
 
 	index = 0;
 	result = NULL;
-	if (check_env_variable(str, start, end))
+	if (check_env_variable(str, start, *end))
 		return (str);
-	tmp = ft_substr(str, start, end + 1);
+	tmp = ft_substr(str, start, *end + 1);
 	len = cnt_env_variable(tmp);
 	strage = split_env_variable(tmp, len);
-	unfold_split_words(strage, env);
 	// for (int i = 0; strage[i] != NULL; i++)
 	// 	printf("%s\n", strage[i]);
+	unfold_split_words(strage, env);
 	while (strage[index] != NULL)
 	{
 		result = strjoin_mini(result, strage[index]);
 		index++;
 	}
-	result = str_connection(result, str, start, end);
+	result = str_connection(result, str, &start, end);
 	free(str);
-	free(tmp);
 	double_array_free(strage);
+	free(tmp);
 	return (result);
 }

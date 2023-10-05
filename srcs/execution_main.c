@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/05 11:53:17 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:01:10 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,32 @@
 #include "../includes/pipe.h"
 #include "../includes/redirect.h"
 
-// static int	check_quote(char *str)
-// {
-// 	size_t	index;
-// 	size_t	single;
-// 	size_t	twofold;
+static size_t	check_quote_in_command(char *str)
+{
+	size_t	index;
+	size_t	single;
+	size_t	twofold;
 
-// 	index = 0;
-// 	single = 0;
-// 	twofold = 0;
-// 	while (str[index] != '\0')
-// 	{
-// 		if (!single && str[index] == '\'')
-// 			single++;
-// 		if (!twofold && str[index] == '"')
-// 			twofold++;
-// 		index++;
-// 	}
-// }
+	index = 0;
+	single = 0;
+	twofold = 0;
+	while (str[index] != '\0')
+	{
+		if (!(single % 2) && !(twofold % 2) && str[index] == '\'')
+			single++;
+		else if (!(single % 2) && !(twofold % 2) && str[index] == '"')
+			twofold++;
+		else if (single % 2 && str[index] == '\'')
+			single++;
+		else if (twofold % 2 && str[index] == '"')
+			twofold++;
+		else if (!(single % 2) && !(twofold % 2) && \
+		(str[index] == ' ' || str[index] == '	'))
+			return (index);
+		index++;
+	}
+	return (index);
+}
 
 char	*format_command(t_env *env, t_parser *parser)
 {
@@ -43,9 +51,7 @@ char	*format_command(t_env *env, t_parser *parser)
 	char	*tmp;
 	char	*file;
 
-	cmd_len = 0;
-	while (parser->cmd[cmd_len] != ' ' && parser->cmd[cmd_len] != '\0')
-		cmd_len++;
+	cmd_len = check_quote_in_command(parser->cmd);
 	file_len = ft_strlen(parser->cmd) - (cmd_len + 1);
 	tmp = ft_substr(parser->cmd, 0, cmd_len);
 	file = ft_substr(parser->cmd, cmd_len + 1, file_len);

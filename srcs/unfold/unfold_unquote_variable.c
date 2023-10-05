@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:14:51 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/04 15:15:04 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:25:26 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*unfold_str(char *str, t_env *env, size_t *start)
 	char	*result;
 
 	index = 0;
+	result = NULL;
 	tmp = trim_unquote_str(str, *start);
 	len = cnt_env_variable(tmp);
 	strage = split_env_variable(tmp, len);
@@ -46,10 +47,11 @@ char	*unfold_str(char *str, t_env *env, size_t *start)
 		result = strjoin_mini(result, strage[index]);
 		index++;
 	}
-	result = str_connection(result, str, *start, *start + ft_strlen(tmp));
+	len = *start + ft_strlen(tmp);
+	printf("|%s, %zu, %zu|\n", str, *start, len);
+	result = str_connection(result, str, start, &len);
 	free(str);
 	free(tmp);
 	double_array_free(strage);
-	*start += ft_strlen(result);
 	return (result);
 }

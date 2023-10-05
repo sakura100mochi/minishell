@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 12:55:26 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/05 12:25:56 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:17:16 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static char	*remove_twofold_quote(char *str, t_env *env, size_t *end)
 			result[*end - 2 - index] = str[*end - index - 1];
 		else
 			start = *end - 1 - index;
-		// printf("%zu, %zu\n", start, *end);
 		index++;
 	}
 	index = *end;
@@ -55,9 +54,8 @@ static char	*remove_twofold_quote(char *str, t_env *env, size_t *end)
 		result[index - 2] = str[index];
 	result[index - 2] = '\0';
 	free(str);
-	result = unfold_quote_variable(result, env, start, *end - 2);
-	*end = start + ft_strlen(result);
-	// printf("ok!two %zu, %zu\n", start, *end);
+	*end -= 2;
+	result = unfold_quote_variable(result, env, start, end);
 	return (result);
 }
 
@@ -73,15 +71,16 @@ char	*check_quote_in_str(char *str, t_env *env)
 	while (str[index] != '\0')
 	{
 		if (!(single % 2) && !(twofold % 2) && str[index] == '$')
-			unfold_str(str, env, &index);
+			str = unfold_str(str, env, &index);
 		if (!(single % 2) && !(twofold % 2) && str[index] == '\'')
 			single++;
-		else if (!(single % 2) && !(twofold % 2) && str[index] == '"')
+		if (!(single % 2) && !(twofold % 2) && str[index] == '"')
 			twofold++;
-		else if (single && str[index] == '\'')
+		else if (single % 2 && str[index] == '\'' && single++)
 			str = remove_single_quote(str, &index);
-		else if (twofold && str[index] == '"')
+		else if (twofold % 2 && str[index] == '"' && twofold++)
 			str = remove_twofold_quote(str, env, &index);
+		// printf("%zu, %zu, %zu, %s\n", index, single, twofold, str);
 		index++;
 	}
 	return (str);
