@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 14:24:31 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/04 17:09:14 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/05 12:00:11 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*strjoin_mini(const char *s1, const char *s2)
 		return (NULL);
 	}
 	result = in_strjoin_mini(result, s1, s2);
-	if (s1)
+	if (s1 != NULL)
 		free((void *)s1);
 	return (result);
 }

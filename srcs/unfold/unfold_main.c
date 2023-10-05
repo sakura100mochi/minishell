@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:16:53 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/04 16:33:58 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/05 10:55:46 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,12 @@ size_t	cnt_env_variable(char *str)
 	return (nbr * 2 + 1);
 }
 
-int	unfold_main(t_env *env, t_parser *parser, char *file)
+char	*unfold_main(t_env *env, t_parser *parser, char *file)
 {
 	parser->cmd = check_quote_in_str(parser->cmd, env);
 	if (file)
+	{
 		file = check_quote_in_str(file, env);
-	return (0);
+	}
+	return (file);
 }

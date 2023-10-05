@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 12:55:26 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/04 16:38:49 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/05 12:25:56 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ static char	*remove_twofold_quote(char *str, t_env *env, size_t *end)
 	index = 0;
 	start = 0;
 	result = (char *)ft_calloc(sizeof(char), ft_strlen(str) + 1);
-	while (str[*end - index - 1] != '\0')
+	while (index < *end - 1)
 	{
 		if (str[*end - index - 1] != '"')
-		{
 			result[*end - 2 - index] = str[*end - index - 1];
-			start = *end - 2 - index;
-		}
+		else
+			start = *end - 1 - index;
+		// printf("%zu, %zu\n", start, *end);
 		index++;
 	}
 	index = *end;
@@ -56,7 +56,8 @@ static char	*remove_twofold_quote(char *str, t_env *env, size_t *end)
 	result[index - 2] = '\0';
 	free(str);
 	result = unfold_quote_variable(result, env, start, *end - 2);
-	*end = start + ft_strlen(result) - 2;
+	*end = start + ft_strlen(result);
+	// printf("ok!two %zu, %zu\n", start, *end);
 	return (result);
 }
 

@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:59:58 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/04 17:31:01 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/05 10:55:32 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,13 @@ static char	*find_env_variable(t_env *env, char *str)
 	size_t	len;
 	char	*tmp;
 
-	len = ft_strlen(str);
+	len = ft_strlen(str) + 1;
+	env = env->next;
 	while (!env->head)
 	{
-		if (!ft_strncmp(env->variable, str, len))
+		if (ft_strncmp(env->variable, str, len) == '=')
 		{
-			tmp = ft_strdup(env->variable);
+			tmp = ft_substr(env->variable, len, ft_strlen(env->variable));
 			return (tmp);
 		}
 		env = env->next;
@@ -110,18 +111,18 @@ char	*unfold_quote_variable(char *str, t_env *env, size_t start, size_t end)
 	char	**strage;
 
 	index = 0;
+	result = NULL;
 	if (check_env_variable(str, start, end))
 		return (str);
 	tmp = ft_substr(str, start, end + 1);
 	len = cnt_env_variable(tmp);
 	strage = split_env_variable(tmp, len);
 	unfold_split_words(strage, env);
-	for (int i = 0; strage[i] != NULL; i++)
-		printf("%s\n", strage[i]);
+	// for (int i = 0; strage[i] != NULL; i++)
+	// 	printf("%s\n", strage[i]);
 	while (strage[index] != NULL)
 	{
 		result = strjoin_mini(result, strage[index]);
-		printf("ok!\n");
 		index++;
 	}
 	result = str_connection(result, str, start, end);
