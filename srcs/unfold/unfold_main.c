@@ -24,10 +24,10 @@
 // 	start = 0;
 // 	while (str[index] != '\0')
 // 	{
-// 		if (str[index] == '$' && !start && (str[index] != ' ' || \
+// 		if (str[index] == '$' && !start && (str[index] != ' ' ||
 // 												str[index] != '	'))
 // 			start = index + 1;
-// 		else if (start && (str[index + 1] == ' ' || str[index + 1] == '	' || \
+// 		else if (start && (str[index + 1] == ' ' || str[index + 1] == '	' ||
 // 							str[index + 1] == '\0' || str[index + 1] == '$'))
 // 		{
 // 			strage[cnt++] = ft_substr(str, start, index - start + 1);
@@ -70,7 +70,7 @@ char	*str_connection(char *result, char *str, size_t *start, size_t *end)
 	free(result);
 	*end = ft_strlen(result) - 1;
 	*start = ft_strlen(result) - 1;
-	result = ft_strjoin(result, tmp_b);
+	result = ft_strjoin(tmp, tmp_b);
 	free(tmp_f);
 	free(tmp_b);
 	return (result);
