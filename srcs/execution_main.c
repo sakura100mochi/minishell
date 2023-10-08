@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/08 14:09:19 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/08 17:14:31 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ char	*format_command(t_env *env, t_parser *parser)
 	free(parser->cmd);
 	parser->cmd = tmp;
 	file = unfold_main(env, parser, file);
-	printf("%s, %s, %s\n", parser->cmd, parser->option, file);
 	return (file);
 }
 

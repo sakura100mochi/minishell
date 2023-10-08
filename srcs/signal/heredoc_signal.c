@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   heredoc_signal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 12:50:11 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/08 16:49:50 by yhirai           ###   ########.fr       */
+/*   Created: 2023/10/08 16:51:23 by yhirai            #+#    #+#             */
+/*   Updated: 2023/10/08 17:08:54 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,14 @@
 
 static void	signal_handler(int signum, siginfo_t *info, void *dummy)
 {
-	int		status;
-	pid_t	pid;
-
+	exit(EXIT_SUCCESS);
 	(void)signum;
 	(void)dummy;
 	(void)info;
-	pid = wait(&status);
-	if (pid != -1)
-	{
-		ft_printf("\n");
-		rl_replace_line("", 0);
-	}
-	else
-	{
-		ft_printf("\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
-	}
 	return ;
 }
 
-void	signal_minishell(t_signal *signal)
+void	signal_heredoc(t_signal *signal)
 {
 	signal->act1.sa_sigaction = signal_handler;
 	sigemptyset(&signal->act1.sa_mask);
