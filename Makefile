@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/08 16:16:14 by csakamot         ###   ########.fr        #
+#    Updated: 2023/10/08 19:37:05 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ MAINSRC			= main.c standby_state.c \
 
 INITSRC			= init_minishell.c init_env.c init_exp.c
 
-SIGNALSRC		= signal.c
+SIGNALSRC		= signal.c heredoc_signal.c
 
 BULITINSRC		= built_in.c built_in_cd.c built_in_echo.c built_in_env.c \
 				built_in_exit.c built_in_pwd.c built_in_unset.c built_in_export.c \

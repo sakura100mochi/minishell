@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/08 14:00:11 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/08 17:12:45 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ void	fork_and_execve(t_data *data, t_exe *exe, \
 
 /*---signal---*/
 void	signal_minishell(t_signal *signal);
+void	signal_heredoc(t_signal *signal);
 /*------------*/
 
 /*---free---*/

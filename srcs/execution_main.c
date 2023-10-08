@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/08 14:37:06 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/08 19:37:13 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ char	*format_command(t_env *env, t_parser *parser)
 	free(parser->cmd);
 	parser->cmd = tmp;
 	file = unfold_main(env, parser, file);
-	printf("%s, %s, %s\n", parser->cmd, parser->option, file);
 	return (file);
 }
 
