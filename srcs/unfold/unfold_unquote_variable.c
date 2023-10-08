@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:14:51 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/05 17:25:26 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/08 13:36:57 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*unfold_str(char *str, t_env *env, size_t *start)
 		index++;
 	}
 	len = *start + ft_strlen(tmp);
-	printf("|%s, %zu, %zu|\n", str, *start, len);
+	// printf("|%s, %zu, %zu|\n", str, *start, len);
 	result = str_connection(result, str, start, &len);
 	free(str);
 	free(tmp);
