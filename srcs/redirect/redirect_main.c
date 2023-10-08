@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:09:45 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/01 16:33:19 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/08 14:01:02 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../../includes/parser.h"
 #include "../../includes/built_in.h"
 
-void	redirect_main(t_parser *node)
+void	redirect_main(t_data *data, t_parser *node)
 {
 	t_file	*file;
 
@@ -29,9 +29,9 @@ void	redirect_main(t_parser *node)
 			if (file->file_name == NULL)
 				return (syntax(NULL));
 			else if (file->type == QUOTE_HEREDOC)
-				quote_heredoc(file);
+				quote_heredoc(data, file);
 			else if (file->type == HEREDOC)
-				heredoc(file, file->file_name);
+				heredoc(data, file, file->file_name);
 			else if (file->type == INPUT)
 				input(file);
 			else if (file->type == APPEND)

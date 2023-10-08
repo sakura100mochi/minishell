@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:11:32 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/01 16:15:39 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/03 14:46:35 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 # include "minishell.h"
 
-void	redirect_main(t_parser *node);
+void	redirect_main(t_data *data, t_parser *node);
 void	check_fd(t_data *data, t_parser *node, t_file *file, char *str);
 void	cmd_heredoc(t_data *data, t_parser *node, int fd, char *str);
-void	quote_heredoc(t_file *file);
-void	heredoc(t_file *file, char *name);
+void	quote_heredoc(t_data *data, t_file *file);
+void	heredoc(t_data *data, t_file *file, char *name);
 void	input(t_file *file);
 void	append(t_file *file);
 void	output(t_file *file);

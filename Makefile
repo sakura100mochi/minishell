@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/08 13:56:01 by csakamot         ###   ########.fr        #
+#    Updated: 2023/10/08 13:59:55 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,7 +112,7 @@ ARCHIVES	= ${addprefix ${LIBFT}, libft.a}
 all:		${NAME}
 
 %.o:%.c
-			${CC} ${CFLAGS}  -c $< -o $@
+			${CC} ${CFLAGS} -c $< -o $@
 
 ${NAME}:	${OBJS}
 			@${CCLIBFT}
@@ -127,12 +127,22 @@ ${NAME}:	${OBJS}
 #			@echo "    ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝"
 #			@echo "                                                                       "
 
+#csakamoto_42
 # -L /Users/csakamot/.brew/Cellar/readline/8.2.1/lib -I /Users/csakamot/.brew/Cellar/readline/8.2.1/include
 # -I /Users/csakamot/.brew/Cellar/readline/8.2.1/include
-
+#csakamoto_windows
 # -I/usr/local/opt/readline/include
 # -L/usr/local/Cellar/readline/8.2.1/lib/
+
+#yhirai_42
+# -L /Users/yhirai/.brew/Cellar/readline/8.2.1/lib -I /Users/yhirai/.brew/Cellar/readline/8.2.1/include
+# -I /Users/yhirai/.brew/Cellar/readline/8.2.1/include
+#yhirai_mac
+# -L /opt/homebrew/Cellar/readline/8.2.1/lib -I /opt/homebrew/Cellar/readline/8.2.1/include
+# -I /opt/homebrew/Cellar/readline/8.2.1/include
+
 # -fsanitize=address
+
 clean:
 			@${RM} ${OBJS}
 			@${RMLIBFT}

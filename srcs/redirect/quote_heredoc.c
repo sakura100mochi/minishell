@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:45 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/01 16:17:21 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/03 14:46:00 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../includes/redirect.h"
 #include "../../includes/parser.h"
 
-void	quote_heredoc(t_file *file)
+void	quote_heredoc(t_data *data, t_file *file)
 {
 	char	*name;
 	size_t	i;
@@ -34,5 +34,5 @@ void	quote_heredoc(t_file *file)
 		}
 		i++;
 	}
-	heredoc(file, name);
+	heredoc(data, file, name);
 }

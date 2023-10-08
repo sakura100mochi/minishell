@@ -3,29 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/01 16:16:04 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/04 14:28:40 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/redirect.h"
 
-void	heredoc(t_file *file, char *name)
+void	heredoc(t_data *data, t_file *file, char *name)
 {
-	char	*exit;
+	char	*prompt;
 	char	*str;
 	size_t	len;
 
-	exit = readline(">");
-	len = ft_strlen(exit) + ft_strlen(name);
+	prompt = readline(">");
+	len = ft_strlen(prompt) + ft_strlen(name);
 	str = NULL;
-	while (ft_strncmp(exit, name, len) != 0)
+	while (ft_strncmp(prompt, name, len) != 0)
 	{
-		str = ft_strjoin_red(str, exit);
-		exit = readline(">");
+		str = ft_strjoin_red(str, prompt);
+		prompt = readline(">");
 	}
 	file->result = str;
+	(void)data;
 }

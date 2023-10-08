@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/08 13:53:28 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/08 14:00:11 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ typedef struct s_exp
 
 typedef struct s_signal
 {
-	struct sigaction	action;
+	struct sigaction	act1;
+	struct sigaction	act2;
 }						t_signal;
 
 typedef struct s_exe
@@ -136,7 +137,7 @@ void	fork_and_execve(t_data *data, t_exe *exe, \
 /*---------------------*/
 
 /*---signal---*/
-void	signal_minishell(struct sigaction action);
+void	signal_minishell(t_signal *signal);
 /*------------*/
 
 /*---free---*/
