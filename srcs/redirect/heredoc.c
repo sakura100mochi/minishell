@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/03 14:45:22 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/04 14:28:40 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,18 @@
 
 void	heredoc(t_data *data, t_file *file, char *name)
 {
-	char	*exit;
+	char	*prompt;
 	char	*str;
 	size_t	len;
 
-	exit = readline(">");
-	len = ft_strlen(exit) + ft_strlen(name);
+	prompt = readline(">");
+	len = ft_strlen(prompt) + ft_strlen(name);
 	str = NULL;
-	data->signal->interactive_mode = YES;
-	while (ft_strncmp(exit, name, len) != 0)
+	while (ft_strncmp(prompt, name, len) != 0)
 	{
-		str = ft_strjoin_red(str, exit);
-		exit = readline(">");
+		str = ft_strjoin_red(str, prompt);
+		prompt = readline(">");
 	}
-	data->signal->interactive_mode = NO;
 	file->result = str;
+	(void)data;
 }
