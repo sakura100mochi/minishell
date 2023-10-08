@@ -6,11 +6,11 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 09:37:18 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 17:41:22 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/01 16:29:10 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 static char	*exp_variable_format(char *variable)
 {

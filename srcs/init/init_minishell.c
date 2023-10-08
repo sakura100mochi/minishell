@@ -6,11 +6,11 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:40:38 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 17:41:22 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/01 16:29:00 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 t_data	*init_minishell(t_data *data)
 {

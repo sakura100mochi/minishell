@@ -6,11 +6,11 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 12:50:11 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/01 17:28:45 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/08 13:52:59 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 static void	signal_handler(int signum, siginfo_t *info, void *dummy)
 {
@@ -36,4 +36,5 @@ void	signal_minishell(struct sigaction action)
 	action.sa_flags = SA_SIGINFO;
 	sigaction(SIGINT, &action, NULL);
 	sigaction(SIGQUIT, &action, NULL);
+	return ;
 }

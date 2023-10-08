@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/04 12:08:15 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/08 13:53:28 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINISHELL_H
 
 /*---include---*/
-# include "../srcs/libft/libft_include/libft.h"
+# include "../libft/libft_include/libft.h"
 # include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
@@ -29,6 +29,11 @@
 # include <termios.h>
 # include <termcap.h>
 /*-------------*/
+
+/*---maclo---*/
+# define YES 1
+# define NO 0
+/*-----------*/
 
 /*---Structure_Declaration---*/
 
