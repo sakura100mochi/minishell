@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/08 19:27:27 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/08 20:08:12 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ static void	interactive_heredoc(t_file *file, char *name)
 	char	*str;
 	size_t	len;
 
+	file->fd = open("/tmp", O_CREAT | O_RDWR | O_TRUNC,
+			S_IREAD | S_IWRITE | S_IRGRP | S_IROTH);
+	printf("%d\n", file->fd);
 	prompt = readline(">");
 	if (prompt == NULL)
 		exit(EXIT_SUCCESS);
+	free(prompt);
 	len = ft_strlen(prompt) + ft_strlen(name);
 	str = NULL;
 	while (ft_strncmp(prompt, name, len) != 0)
@@ -30,8 +34,10 @@ static void	interactive_heredoc(t_file *file, char *name)
 		prompt = readline(">");
 		if (prompt == NULL)
 			exit(EXIT_SUCCESS);
+		free(prompt);
 	}
 	file->result = str;
+	write(file->fd, str, ft_strlen(str));
 	exit(EXIT_SUCCESS);
 }
 
