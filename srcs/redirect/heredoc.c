@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/08 18:26:47 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/08 19:27:27 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	heredoc(t_data *data, t_file *file, char *name)
 	status = 0;
 	pid = fork();
 	if (pid == -1)
+	{
+		exit(EXIT_FAILURE);
 		return ;
+	}
 	else if (pid == 0)
 	{
 		signal_heredoc(data->signal);
