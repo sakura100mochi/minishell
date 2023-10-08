@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 12:50:11 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/08 14:09:46 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/08 16:51:00 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ static void	signal_handler(int signum, siginfo_t *info, void *dummy)
 {
 	(void)dummy;
 	(void)info;
-	if (isatty(STDIN_FILENO) == YES) {
-	    printf("Interactive shell\n");
-	}
-	else {
-	    printf("Redirected stdin\n");
-	}
+	// if (isatty(STDIN_FILENO) == YES) {
+	//     printf("Interactive shell\n");
+	// }
+	// else {
+	//     printf("Redirected stdin\n");
+	// }
 	if (signum == SIGINT)
 	{
 		ft_printf("\n");
-		// rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}

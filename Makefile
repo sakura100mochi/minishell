@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/08 14:10:05 by csakamot         ###   ########.fr        #
+#    Updated: 2023/10/08 16:16:14 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -120,12 +120,12 @@ ARCHIVES	= ${addprefix ${LIBFT}, libft.a}
 all:		${NAME}
 
 %.o:%.c
-			${CC} ${CFLAGS} -c $< -o $@
+			${CC} ${CFLAGS} -c -I /Users/csakamot/.brew/Cellar/readline/8.2.1/include $< -o $@
 
 ${NAME}:	${OBJS}
 			@${CCLIBFT}
 			@echo "object file		compiled"
-			@${CC} ${CFLAGS} ${OBJS} -Lsrcs -lreadline ${ARCHIVES} -o ${NAME}
+			@${CC} ${CFLAGS} ${OBJS} -Lsrcs -lreadline -I /Users/csakamot/.brew/Cellar/readline/8.2.1/include -L /Users/csakamot/.brew/Cellar/readline/8.2.1/lib -I /Users/csakamot/.brew/Cellar/readline/8.2.1/include ${ARCHIVES} -o ${NAME}
 #			@echo "minishell		created\n\n"
 #			@echo "    ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗     "
 #			@echo "    ████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     "
