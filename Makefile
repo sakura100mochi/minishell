@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/08 13:59:55 by csakamot         ###   ########.fr        #
+#    Updated: 2023/10/08 14:10:05 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,10 @@ NAME		= minishell
 HEAD		= ./includes/
 
 PRE			= ./srcs/
+
+INIT		= init/
+
+SIGNAL		= signal/
 
 BUILTIN		= built_in/
 
@@ -46,9 +50,12 @@ LIBFT		= libft/
 
 
 ##------------Srcs-------------##
-MAINSRC			= main.c init_minishell.c init_env.c init_exp.c \
-				standby_state.c signal.c execution_main.c external_command.c \
-				malloc_free.c
+MAINSRC			= main.c standby_state.c \
+					execution_main.c external_command.c malloc_free.c
+
+INITSRC			= init_minishell.c init_env.c init_exp.c
+
+SIGNALSRC		= signal.c
 
 BULITINSRC		= built_in.c built_in_cd.c built_in_echo.c built_in_env.c \
 				built_in_exit.c built_in_pwd.c built_in_unset.c built_in_export.c \
@@ -75,6 +82,7 @@ SRCS		= ${MAINSRC} ${addprefix ${BUILTIN}, ${BULITINSRC}} ${addprefix ${LEXER}, 
 				${addprefix ${PARSER}, ${PARSERSRC}} ${addprefix ${ERROR_P}, ${ERROR_P_SRC}} \
 				${addprefix ${REDIRECT}, ${REDIRECTSRC}} ${addprefix ${ERROR_R}, ${ERROR_R_SRC}} \
 				${addprefix ${UNFOLD}, ${UNFOLDSRC}} \
+				${addprefix ${INIT}, ${INITSRC}} ${addprefix ${SIGNAL}, ${SIGNALSRC}} \
 				${addprefix ${PIPE}, ${PIPESRC}} ${addprefix ${ERROR_PIPE}, ${ERROR_PIPE_SRC}}
 ##-----------------------------##
 
@@ -89,13 +97,13 @@ OBJS		= ${addprefix ${PRE}, ${SRCS:.c=.o}}
 ##----------conpiler-----------##
 CFLAGS		= -Wall -Wextra -Werror
 
-CCLIBFT		= make -s -C srcs/libft
+CCLIBFT		= make -s -C libft
 ##-----------------------------##
 
 
 
 ##------------remove-----------##
-RMLIBFT		= make fclean -s -C srcs/libft
+RMLIBFT		= make fclean -s -C libft
 ##-----------------------------##
 
 
