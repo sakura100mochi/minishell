@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:18:37 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/08 18:47:36 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:04:47 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,35 @@ static int	do_built_in(t_data *data, t_parser *parser, char *file)
 static int	do_dup_built_in(t_data *data, t_parser *parser,
 									t_file *file, char *str)
 {
-	int		status;
-	pid_t	pid;
+	int	backup;
+	// int		status;
+	// pid_t	pid;
 
-	status = 0;
-	pid = fork();
-	if (pid == -1)
-		exit (EXIT_FAILURE);
-	if (pid == 0)
+	backup = 0;
+	// status = 0;
+	// pid = fork();
+	// if (pid == -1)
+	// 	exit (EXIT_FAILURE);
+	// if (pid == 0)
+	// {
+	if (file->type == OUTPUT || file->type == APPEND)
 	{
-		if (file->type == OUTPUT || file->type == APPEND)
-		{
-			dup2(file->fd, STDOUT_FILENO);
-			do_built_in(data, parser, str);
-		}
-		else if (file->type == INPUT)
-		{
-			dup2(STDIN_FILENO, file->fd);
-			do_built_in(data, parser, str);
-		}
-		exit(EXIT_SUCCESS);
+		backup = dup(1);
+		dup2(file->fd, STDOUT_FILENO);
+		do_built_in(data, parser, str);
+		close(file->fd);
+		dup2(backup, STDOUT_FILENO);
+		close(backup);
 	}
-	waitpid(pid, &status, 0);
+	else if (file->type == INPUT)
+	{
+		dup2(STDIN_FILENO, file->fd);
+		do_built_in(data, parser, str);
+		close(file->fd);
+	}
+	// 	exit(EXIT_SUCCESS);
+	// }
+	// waitpid(pid, &status, 0);
 	return (NO);
 }
 
