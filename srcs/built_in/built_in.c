@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:18:37 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/11 12:07:08 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/12 21:17:11 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,25 +80,7 @@ static int	do_built_in(t_data *data, t_parser *parser, char *file)
 
 int	judge_built_in(t_data *data, t_parser *parser, char *file)
 {
-	// size_t	len;
-
-	// len = ft_strlen(parser->cmd);
-	// if ((len == 2 && !ft_strncmp(parser->cmd, "cd", len)) || \
-	// (len == 4 && !ft_strncmp(parser->cmd, "echo", len)) || \
-	// (len == 3 && !ft_strncmp(parser->cmd, "env", len)) || \
-	// (len == 4 && !ft_strncmp(parser->cmd, "exit", len)) || \
-	// (len == 6 && !ft_strncmp(parser->cmd, "export", len)) || \
-	// (len == 3 && !ft_strncmp(parser->cmd, "pwd", len)) || \
-	// (len == 5 && !ft_strncmp(parser->cmd, "unset", len)))
-	// {
-	// 	if (parser->redirect)
-	// 	{
-	// 		check_fd(data, parser, parser->redirect, file);
-	// 	}
-	// 	else
 	if (do_built_in(data, parser, file))
 		return (YES);
 	return (NO);
-	// }
-	// return (NO);
 }
