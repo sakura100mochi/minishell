@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:59:58 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/11 17:31:14 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/12 15:16:02 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ char	**split_env_variable(char *tmp, size_t len)
 		}
 		index++;
 	}
-	
 	result[cnt++] = ft_substr(tmp, start, index - start);
 	result[cnt] = NULL;
 	return (result);
@@ -116,17 +115,18 @@ char	*unfold_quote_variable(char *str, t_env *env, size_t start, size_t *end)
 	result = NULL;
 	if (check_env_variable(str, start, *end))
 		return (str);
-	tmp = ft_substr(str, start, *end + 1);
+	tmp = ft_substr(str, start, *end + 1 - start);
 	len = cnt_env_variable(tmp);
 	strage = split_env_variable(tmp, len);
-	for (int i = 0; strage[i] != NULL; i++)
-		printf("%s\n", strage[i]);
+	// for (int i = 0; strage[i] != NULL; i++)
+	// 	printf("%s\n", strage[i]);
 	unfold_split_words(strage, env);
 	while (strage[index] != NULL)
 	{
 		result = strjoin_mini(result, strage[index]);
 		index++;
 	}
+	*end = *end + 1;
 	result = str_connection(result, str, &start, end);
 	free(str);
 	double_array_free(strage);

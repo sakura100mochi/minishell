@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:16:53 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/08 13:38:15 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:29:47 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,11 @@ char	*str_connection(char *result, char *str, size_t *start, size_t *end)
 	char	*tmp;
 
 	tmp_f = ft_substr(str, 0, *start);
-	// printf("%s, %s\n", str, tmp_f);
-	tmp_b = ft_substr(str, *end + 1, ft_strlen(str));
+	tmp_b = ft_substr(str, *end, ft_strlen(str) - *end);
 	tmp = ft_strjoin(tmp_f, result);
+	*end = ft_strlen(tmp) - 1;
+	*start = ft_strlen(tmp) - 1;
 	free(result);
-	*end = ft_strlen(result) - 1;
-	*start = ft_strlen(result) - 1;
 	result = ft_strjoin(tmp, tmp_b);
 	free(tmp_f);
 	free(tmp_b);

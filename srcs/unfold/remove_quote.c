@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 12:55:26 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/08 13:37:41 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:37:27 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,26 @@
 static char	*remove_single_quote(char *str, size_t *end)
 {
 	size_t	index;
+	size_t	start;
 	char	*result;
 
 	index = 0;
+	start = 0;
 	result = (char *)ft_calloc(sizeof(char), ft_strlen(str) - 1);
-	while (str[*end - index] != '\0')
+	while (index < *end)
 	{
-		if (str[*end - index] != '\'')
-			result[*end - 2 - index] = str[*end - index];
+		if (str[*end - index - 1] != '\'' && !start)
+			result[*end - 2 - index] = str[*end - index - 1];
+		else if (start)
+			result[*end - 1 - index] = str[*end - index - 1];
+		else
+			start = *end - 1 - index;
 		index++;
 	}
-	while (str[*end++])
-		result[*end - 2] = str[*end];
-	result[*end - 2] = '\0';
+	while (str[index++])
+		result[index - 2] = str[index];
+	result[index - 2] = '\0';
+	*end -= 2;
 	free(str);
 	return (result);
 }
@@ -45,19 +52,17 @@ static char	*remove_twofold_quote(char *str, t_env *env, size_t *end)
 	{
 		if (str[*end - index - 1] != '"' && !start)
 			result[*end - 2 - index] = str[*end - index - 1];
-		else if (str[*end - index - 1] != '"' && start)
+		else if (start)
 			result[*end - 1 - index] = str[*end - index - 1];
 		else
 			start = *end - 1 - index;
 		index++;
 	}
-	index = *end;
 	while (str[index++])
 		result[index - 2] = str[index];
 	result[index - 2] = '\0';
 	free(str);
 	*end -= 2;
-	// printf("%s\n", result);
 	result = unfold_quote_variable(result, env, start, end);
 	return (result);
 }
@@ -77,14 +82,14 @@ char	*check_quote_in_str(char *str, t_env *env)
 			str = unfold_str(str, env, &index);
 		if (!(single % 2) && !(twofold % 2) && str[index] == '\'')
 			single++;
-		if (!(single % 2) && !(twofold % 2) && str[index] == '"')
+		else if (!(single % 2) && !(twofold % 2) && str[index] == '"')
 			twofold++;
 		else if (single % 2 && str[index] == '\'' && single++)
 			str = remove_single_quote(str, &index);
 		else if (twofold % 2 && str[index] == '"' && twofold++)
 			str = remove_twofold_quote(str, env, &index);
-		// printf("%zu, %zu, %zu, %s\n", index, single, twofold, str);
 		index++;
+		// printf("%zu, %zu, %zu, %s\n", index, single, twofold, str);
 	}
 	return (str);
 }
