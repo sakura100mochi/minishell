@@ -6,7 +6,7 @@
 #    By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/08 20:04:37 by yhirai           ###   ########.fr        #
+#    Updated: 2023/10/13 14:32:25 by yhirai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ HEAD		= ./includes/
 
 PRE			= ./srcs/
 
+ERROR		= error/
+
 INIT		= init/
 
 SIGNAL		= signal/
@@ -32,11 +34,7 @@ LEXER		= lexer/
 
 PARSER		= parser/
 
-ERROR_P		= parser/Error_parser/
-
 REDIRECT	= redirect/
-
-ERROR_R		= redirect/Error_redirect/
 
 UNFOLD		= unfold/
 
@@ -53,6 +51,8 @@ LIBFT		= libft/
 MAINSRC			= main.c standby_state.c free.c\
 					execution_main.c external_command.c malloc_free.c
 
+ERRORSRC		= malloc_error.c syntax.c file.c
+
 INITSRC			= init_minishell.c init_env.c init_exp.c
 
 SIGNALSRC		= signal.c heredoc_signal.c
@@ -65,11 +65,7 @@ LEXERSRC		= lexer_main.c split_word.c
 
 PARSERSRC		= parser_main.c split_pipe.c list_new.c list_add_back.c parser_contents.c parser_utils.c
 
-ERROR_P_SRC		= malloc_error.c
-
 REDIRECTSRC		= redirect_main.c append.c heredoc.c input.c output.c quote_heredoc.c redirect_utils.c
-
-ERROR_R_SRC		= syntax.c file.c
 
 UNFOLDSRC		= unfold_main.c remove_quote.c unfold_quote_variable.c unfold_unquote_variable.c \
 					unfold_helper.c
@@ -78,9 +74,8 @@ PIPESRC			= pipe_main.c init_pipe.c pipe_execve.c
 
 ERROR_PIPE_SRC	= pipe_error_main.c
 
-SRCS		= ${MAINSRC} ${addprefix ${BUILTIN}, ${BULITINSRC}} ${addprefix ${LEXER}, ${LEXERSRC}} \
-				${addprefix ${PARSER}, ${PARSERSRC}} ${addprefix ${ERROR_P}, ${ERROR_P_SRC}} \
-				${addprefix ${REDIRECT}, ${REDIRECTSRC}} ${addprefix ${ERROR_R}, ${ERROR_R_SRC}} \
+SRCS		= ${MAINSRC} ${addprefix ${ERROR}, ${ERRORSRC}} ${addprefix ${BUILTIN}, ${BULITINSRC}} ${addprefix ${LEXER}, ${LEXERSRC}} \
+				${addprefix ${PARSER}, ${PARSERSRC}} ${addprefix ${REDIRECT}, ${REDIRECTSRC}} \
 				${addprefix ${UNFOLD}, ${UNFOLDSRC}} \
 				${addprefix ${INIT}, ${INITSRC}} ${addprefix ${SIGNAL}, ${SIGNALSRC}} \
 				${addprefix ${PIPE}, ${PIPESRC}} ${addprefix ${ERROR_PIPE}, ${ERROR_PIPE_SRC}}

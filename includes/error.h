@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect.h                                         :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/24 18:11:32 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/13 14:50:40 by yhirai           ###   ########.fr       */
+/*   Created: 2023/10/13 14:24:18 by yhirai            #+#    #+#             */
+/*   Updated: 2023/10/13 14:50:22 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REDIRECT_H
-# define REDIRECT_H
+#ifndef ERROR_H
+# define ERROR_H
 
 # include "minishell.h"
 
-int		redirect_main(t_data *data, t_parser *node);
-int		quote_heredoc(t_data *data, t_file *file);
-int		heredoc(t_data *data, t_file *file, char *name);
-int		input(t_file *file);
-int		append(t_file *file);
-int		output(t_file *file);
-char	*ft_strjoin_red(char *s1, char const *s2, t_parser *node);
+/*---Error_malloc---*/
+t_parser	*parser_malloc_error(t_parser *node);
+char		**onephrase_malloc_error(char **one_phrase, t_parser *node);
+char		*char_malloc_error(t_parser *node);
+int			int_malloc_error(t_parser *node);
+/*------------------*/
+
+/*---Error---*/
+int			syntax(char *str);
+int			no_file(char *file_name);
+int			permission(char *file_name);
+/*-----------*/
 
 #endif

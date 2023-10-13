@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:09:45 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/08 17:13:18 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/13 14:55:24 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,34 @@
 #include "../../includes/redirect.h"
 #include "../../includes/parser.h"
 #include "../../includes/built_in.h"
+#include "../../includes/error.h"
 
-void	redirect_main(t_data *data, t_parser *node)
+int	redirect_main(t_data *data, t_parser *node)
 {
-	t_file	*file;
-
 	while (node != NULL)
 	{
-		file = node->redirect;
-		while (file != NULL)
+		while (node->redirect != NULL)
 		{
-			if (file->type == UNKNOWN)
-				return ;
-			if (file->file_name == NULL)
+			if (node->redirect->type == UNKNOWN)
+				return (NO);
+			if (node->redirect->file_name == NULL)
 				return (syntax(NULL));
-			else if (file->type == QUOTE_HEREDOC)
-				quote_heredoc(data, file);
-			else if (file->type == HEREDOC)
-				heredoc(data, file, file->file_name);
-			else if (file->type == INPUT)
-				input(file);
-			else if (file->type == APPEND)
-				append(file);
-			else if (file->type == OUTPUT)
-				output(file);
-			file = file->next;
+			else if (node->redirect->type == QUOTE_HEREDOC)
+				return (quote_heredoc(data, node->redirect));
+			else if (node->redirect->type == HEREDOC)
+				return (heredoc(data, node->redirect,
+						node->redirect->file_name));
+			else if (node->redirect->type == INPUT)
+				return (input(node->redirect));
+			else if (node->redirect->type == APPEND)
+				return (append(node->redirect));
+			else if (node->redirect->type == OUTPUT)
+				return (output(node->redirect));
+			node->redirect = node->redirect->next;
 		}
 		node = node->next;
 	}
+	return (YES);
 }
 
 // static char	**ft_free(char **result, t_parser *node)

@@ -6,13 +6,13 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 18:29:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/08 19:38:40 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/13 14:20:09 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void	parser_free(t_parser *node)
+void	parser_free(t_parser *node)
 {
 	t_parser	*tmp_node;
 	t_file		*file;

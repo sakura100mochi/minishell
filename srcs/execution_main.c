@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/08 19:37:13 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/13 14:52:16 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,17 @@ static size_t	check_quote_in_command(char *str)
 	return (index);
 }
 
+static int	check_redirect(t_parser *node)
+{
+	while (node != NULL)
+	{
+		if (node->redirect != NULL)
+			return (YES);
+		node = node->next;
+	}
+	return (NO);
+}
+
 char	*format_command(t_env *env, t_parser *parser)
 {
 	size_t	cmd_len;
@@ -73,10 +84,13 @@ void	execution_main(t_data *data)
 		pipe_main(data, data->parser, data->pipe->next, len);
 		return ;
 	}
-	if (data->parser->redirect)
-		redirect_main(data, data->parser);
+	if (check_redirect(data->parser) == YES)
+	{
+		if (redirect_main(data, data->parser) == NO)
+			return ;
+	}
 	file = format_command(data->env, data->parser);
-	if (!judge_built_in(data, data->parser, file))
+	if (judge_built_in(data, data->parser, file) == NO)
 		fork_and_execve(data, data->exe, data->parser, file);
 	free(file);
 }

@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/08 19:53:47 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/13 14:20:18 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ void	signal_heredoc(t_signal *signal);
 void	double_array_free(char **array);
 void	delete_all_env_node(t_env *env_variable);
 void	delete_all_exp_node(t_exp *exp_variable);
+void	parser_free(t_parser *node);
 void	free_all(t_data *data);
 /*----------*/
 #endif
