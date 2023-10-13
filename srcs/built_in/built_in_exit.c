@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/08 19:41:29 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/13 15:01:17 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ void	built_in_exit(t_data *data, char *file)
 	if (!*file)
 		ft_printf("exit\n");
 	free(data->prompt);
-	delete_all_env_node(data->env);
-	delete_all_exp_node(data->exp);
 	free_all(data);
 	exit(EXIT_SUCCESS);
 	return ;
