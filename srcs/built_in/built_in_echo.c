@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/14 16:58:17 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/14 17:00:23 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	check_echo_option(t_parser *parser, char *str)
 	return (YES);
 }
 
-static void	do_built_in_echo(t_parser *parser, char *str)
+void	built_in_echo(t_parser *parser, char *str)
 {
 	if (check_echo_option(parser, str))
 		return ;
@@ -64,11 +64,5 @@ static void	do_built_in_echo(t_parser *parser, char *str)
 		ft_printf("\n");
 	else if (!parser->option && *str)
 		ft_printf("%s\n", str);
-	return ;
-}
-
-void	built_in_echo(t_parser *parser, char *str)
-{
-	do_built_in_echo(parser, str);
 	return ;
 }
