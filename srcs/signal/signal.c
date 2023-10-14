@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 12:50:11 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/08 19:52:43 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/14 20:46:22 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,37 @@ static void	signal_handler(int signum, siginfo_t *info, void *dummy)
 	return ;
 }
 
+static void	signal_handler_quit(int signum, siginfo_t *info, void *dummy)
+{
+	int		status;
+	pid_t	pid;
+
+	(void)signum;
+	(void)dummy;
+	(void)info;
+	pid = wait(&status);
+	if (pid != -1)
+	{
+		ft_printf("Quit: 3\n");
+	}
+	// else
+	// {
+	// 	rl_replace_line("", 0);
+	// 	rl_on_new_line();
+	// 	rl_redisplay();
+	// }
+}
+
 void	signal_minishell(t_signal *signal)
 {
 	signal->act1.sa_sigaction = signal_handler;
 	sigemptyset(&signal->act1.sa_mask);
-	signal->act1.sa_flags = SA_SIGINFO;
+	signal->act1.sa_flags = 0;
 	sigaction(SIGINT, &signal->act1, NULL);
 
-	signal->act2.sa_handler = SIG_IGN;
+	signal->act2.sa_sigaction = signal_handler_quit;
+	sigemptyset(&signal->act2.sa_mask);
+	signal->act2.sa_flags = 0;
 	sigaction(SIGQUIT, &signal->act2, NULL);
 	return ;
 }
