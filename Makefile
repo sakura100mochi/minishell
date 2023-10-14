@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/14 15:10:13 by csakamot         ###   ########.fr        #
+#    Updated: 2023/10/14 18:05:27 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,8 +40,6 @@ UNFOLD		= unfold/
 
 PIPE		= pipe/
 
-ERROR_PIPE	= pipe/Error_pipe/
-
 LIBFT		= libft/
 ##-----------------------------##
 
@@ -71,8 +69,6 @@ UNFOLDSRC		= unfold_main.c remove_quote.c unfold_quote_variable.c unfold_unquote
 					unfold_helper.c
 
 PIPESRC			= pipe_main.c init_pipe.c pipe_execve.c
-
-ERROR_PIPE_SRC	= pipe_error_main.c
 
 SRCS		= ${MAINSRC} ${addprefix ${ERROR}, ${ERRORSRC}} ${addprefix ${BUILTIN}, ${BULITINSRC}} ${addprefix ${LEXER}, ${LEXERSRC}} \
 				${addprefix ${PARSER}, ${PARSERSRC}} ${addprefix ${REDIRECT}, ${REDIRECTSRC}} \
