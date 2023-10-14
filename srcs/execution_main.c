@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/14 15:10:30 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/14 17:48:30 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static size_t	check_quote_in_command(char *str)
 	index = 0;
 	single = 0;
 	twofold = 0;
-	while (str[index] != '\0')
+	while (str != NULL && str[index] != '\0')
 	{
 		if (!(single % 2) && !(twofold % 2) && str[index] == '\'')
 			single++;
@@ -62,6 +62,8 @@ char	*format_command(t_env *env, t_parser *parser)
 	char	*tmp;
 	char	*file;
 
+	if (parser->cmd == NULL)
+		return (NULL);
 	cmd_len = check_quote_in_command(parser->cmd);
 	file_len = ft_strlen(parser->cmd) - (cmd_len + 1);
 	tmp = ft_substr(parser->cmd, 0, cmd_len);
@@ -90,6 +92,8 @@ void	execution_main(t_data *data)
 			return ;
 	}
 	file = format_command(data->env, data->parser);
+	if (file == NULL)
+		return ;
 	if (check_redirect(data->parser))
 		dup_command(data, data->parser, data->parser->redirect, file);
 	else

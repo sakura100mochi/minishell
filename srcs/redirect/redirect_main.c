@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:09:45 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/13 14:55:24 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/14 17:43:54 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,19 @@ int	redirect_main(t_data *data, t_parser *node)
 		while (node->redirect != NULL)
 		{
 			if (node->redirect->type == UNKNOWN)
-				return (NO);
+				return (syntax());
 			if (node->redirect->file_name == NULL)
-				return (syntax(NULL));
+				return (syntax());
 			else if (node->redirect->type == QUOTE_HEREDOC)
-				return (quote_heredoc(data, node->redirect));
+				quote_heredoc(data, node->redirect);
 			else if (node->redirect->type == HEREDOC)
-				return (heredoc(data, node->redirect,
-						node->redirect->file_name));
+				heredoc(data, node->redirect, node->redirect->file_name);
 			else if (node->redirect->type == INPUT)
-				return (input(node->redirect));
+				input(node->redirect);
 			else if (node->redirect->type == APPEND)
-				return (append(node->redirect));
+				append(node->redirect);
 			else if (node->redirect->type == OUTPUT)
-				return (output(node->redirect));
+				output(node->redirect);
 			node->redirect = node->redirect->next;
 		}
 		node = node->next;

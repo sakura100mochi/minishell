@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/14 18:05:27 by csakamot         ###   ########.fr        #
+#    Updated: 2023/10/14 18:05:58 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ LIBFT		= libft/
 MAINSRC			= main.c standby_state.c \
 					execution_main.c external_command.c malloc_free.c command_in_redirect.c
 
-ERRORSRC		= malloc_error.c syntax.c file.c
+ERRORSRC		= malloc_error.c syntax.c file.c no_command.c
 
 INITSRC			= init_minishell.c init_env.c init_exp.c
 
@@ -74,7 +74,7 @@ SRCS		= ${MAINSRC} ${addprefix ${ERROR}, ${ERRORSRC}} ${addprefix ${BUILTIN}, ${
 				${addprefix ${PARSER}, ${PARSERSRC}} ${addprefix ${REDIRECT}, ${REDIRECTSRC}} \
 				${addprefix ${UNFOLD}, ${UNFOLDSRC}} \
 				${addprefix ${INIT}, ${INITSRC}} ${addprefix ${SIGNAL}, ${SIGNALSRC}} \
-				${addprefix ${PIPE}, ${PIPESRC}} ${addprefix ${ERROR_PIPE}, ${ERROR_PIPE_SRC}}
+				${addprefix ${PIPE}, ${PIPESRC}}
 ##-----------------------------##
 
 
@@ -111,12 +111,12 @@ ARCHIVES	= ${addprefix ${LIBFT}, libft.a}
 all:		${NAME}
 
 %.o:%.c
-			${CC} ${CFLAGS} -I /Users/csakamot/.brew/Cellar/readline/8.2.1/include -c $< -o $@
+			${CC} ${CFLAGS} -I /Users/yhirai/.brew/Cellar/readline/8.2.1/include -c $< -o $@
 
 ${NAME}:	${OBJS}
 			@${CCLIBFT}
 			@echo "object file		compiled"
-			@${CC} ${CFLAGS} ${OBJS} -Lsrcs -lreadline -L /Users/csakamot/.brew/Cellar/readline/8.2.1/lib -I /Users/csakamot/.brew/Cellar/readline/8.2.1/include ${ARCHIVES} -o ${NAME}
+			@${CC} ${CFLAGS} ${OBJS} -Lsrcs -lreadline -L /Users/yhirai/.brew/Cellar/readline/8.2.1/lib -I /Users/yhirai/.brew/Cellar/readline/8.2.1/include ${ARCHIVES} -o ${NAME}
 #			@echo "minishell		created\n\n"
 #			@echo "    ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗     "
 #			@echo "    ████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     "

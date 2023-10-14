@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:05:35 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/10/13 14:15:01 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/14 17:42:18 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,12 @@ t_file	*ft_redirect(char **one_phrase, t_parser *node)
 			if (new == NULL)
 				return (NULL);
 			ft_fileadd_back(&file, new);
-			if (one_phrase[i + 1] != NULL &&
-				(one_phrase[i + 1][0] == '<' || one_phrase[i + 1][0] == '>'))
+			while (one_phrase[i] != NULL &&
+				(one_phrase[i][0] == '<' || one_phrase[i][0] == '>'))
 				i++;
 		}
-		i++;
+		if (one_phrase[i] != NULL)
+			i++;
 	}
 	return (file);
 }
