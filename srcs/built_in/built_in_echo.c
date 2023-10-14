@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_echo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/08 18:26:40 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/14 15:17:28 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	do_built_in_echo(t_parser *parser, char *str)
 	size_t	len;
 
 	len = 0;
+	printf("--------%s\n", parser->option);
 	if (parser->option)
 		len = ft_strlen(parser->option);
 	if (!parser->option && !*str)

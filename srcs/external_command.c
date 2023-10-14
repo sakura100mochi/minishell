@@ -6,11 +6,12 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/03 14:39:18 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/14 15:37:44 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include "../includes/error.h"
 
 static char	**struct_to_array(t_env *env)
 {
@@ -125,7 +126,7 @@ void	fork_and_execve(t_data *data, t_exe *exe,
 	status = 0;
 	full_path = check_cmd_path(data->env, parser);
 	if (!full_path)
-		return ;
+		return (command_not_found(parser->cmd));
 	command = create_command(parser, file);
 	env = struct_to_array(data->env);
 	exe->pid = fork();
