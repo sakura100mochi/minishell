@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_in_redirect.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:40:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/11 12:40:25 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/14 16:27:16 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static void	close_fd(t_file *file)
 {
 	while (file != NULL)
 	{
+		if (file->type == HEREDOC || file->type == QUOTE_HEREDOC)
+			unlink("/tmp/tmp");
 		if (file->fd)
 			close(file->fd);
 		file = file->next;

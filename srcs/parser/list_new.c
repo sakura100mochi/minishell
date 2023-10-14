@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:53:36 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/10/13 14:14:07 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/14 17:34:22 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,15 @@ static int	quote_check(char *str)
 
 t_redirect_type	file_type(char **one_phrase)
 {
-	if (one_phrase[0] != NULL && one_phrase[0][0] == '<' &&
+	size_t	i;
+
+	i = 0;
+	while (one_phrase[i] != NULL &&
+		(one_phrase[i][0] == '<' || one_phrase[i][0] == '>'))
+		i++;
+	if (i >= 3)
+		return (UNKNOWN);
+	else if (one_phrase[0] != NULL && one_phrase[0][0] == '<' &&
 			one_phrase[1] != NULL && one_phrase[1][0] == '<' &&
 			one_phrase[2] != NULL && quote_check(one_phrase[2]) == YES)
 		return (QUOTE_HEREDOC);
