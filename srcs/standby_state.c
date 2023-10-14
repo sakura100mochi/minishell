@@ -22,6 +22,7 @@ void	standby_state(t_data *data)
 		if (data->prompt == NULL)
 		{
 			ft_printf("exit\n");
+			free_all(data);
 			exit(EXIT_SUCCESS);
 		}
 		if (*data->prompt == '\0')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:18:37 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/08 18:47:36 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/14 14:49:02 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ static int	do_built_in(t_data *data, t_parser *parser, char *file)
 	return (YES);
 }
 
-static int	do_dup_built_in(t_data *data, t_parser *parser,
-									t_file *file, char *str)
+static int	do_dup_built_in(t_data *data, t_file *file, int fd, char *str)
 {
 	int		status;
 	pid_t	pid;
@@ -50,13 +49,13 @@ static int	do_dup_built_in(t_data *data, t_parser *parser,
 	{
 		if (file->type == OUTPUT || file->type == APPEND)
 		{
-			dup2(file->fd, STDOUT_FILENO);
-			do_built_in(data, parser, str);
+			dup2(fd, STDOUT_FILENO);
+			do_built_in(data, data->parser, str);
 		}
 		else if (file->type == INPUT)
 		{
-			dup2(STDIN_FILENO, file->fd);
-			do_built_in(data, parser, str);
+			dup2(STDIN_FILENO, fd);
+			do_built_in(data, data->parser, str);
 		}
 		exit(EXIT_SUCCESS);
 	}
@@ -64,16 +63,21 @@ static int	do_dup_built_in(t_data *data, t_parser *parser,
 	return (NO);
 }
 
-static void	check_fd(t_data *data, t_parser *parser, t_file *file, char *str)
+static void	check_fd(t_data *data, t_file *file, char *str)
 {
 	t_file	*head;
+	int		fd;
 
 	head = file;
 	if (str == NULL)
 		return ;
 	while (file->next != NULL)
+	{
+		if (file->type != HEREDOC)
+			fd = file->fd;
 		file = file->next;
-	do_dup_built_in(data, parser, file, str);
+	}
+	do_dup_built_in(data, file, fd, str);
 	while (head != NULL)
 	{
 		if (head->fd)
@@ -97,7 +101,7 @@ int	judge_built_in(t_data *data, t_parser *parser, char *file)
 	{
 		if (parser->redirect)
 		{
-			check_fd(data, parser, parser->redirect, file);
+			check_fd(data, parser->redirect, file);
 		}
 		else
 			do_built_in(data, parser, file);
