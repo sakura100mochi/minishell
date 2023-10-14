@@ -6,12 +6,13 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:07:28 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/10/01 13:17:30 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/13 14:34:36 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/parser.h"
+#include "../../includes/error.h"
 
 static size_t	count_pointer(char **str)
 {
@@ -23,7 +24,7 @@ static size_t	count_pointer(char **str)
 	return (count);
 }
 
-static char	**one_phrase_malloc(char **str, size_t *len)
+static char	**one_phrase_malloc(char **str, size_t *len, t_parser *node)
 {
 	char	**one_phrase;
 	size_t	i;
@@ -32,12 +33,12 @@ static char	**one_phrase_malloc(char **str, size_t *len)
 	i = 0;
 	one_phrase = malloc(sizeof(char *) * (count_pointer(str) + 1));
 	if (one_phrase == NULL)
-		return (chardouble_malloc_error());
+		return (onephrase_malloc_error(one_phrase, node));
 	while (str[i] != NULL && str[i][0] != '|')
 	{
 		one_phrase[i] = ft_calloc(sizeof(char), ft_strlen(str[i]) + 1);
 		if (one_phrase[i] == NULL)
-			return (chardouble_malloc_error());
+			return (onephrase_malloc_error(one_phrase, node));
 		j = 0;
 		while (str[i][j] != '\0')
 		{
@@ -63,9 +64,11 @@ t_parser	*split_pipe(char **str)
 	node = NULL;
 	while (str[i] != NULL)
 	{
-		one_phrase = one_phrase_malloc(&str[i], &i);
-		new = ft_parsernew(ft_command(one_phrase), ft_option(one_phrase),
-				ft_redirect(one_phrase));
+		one_phrase = one_phrase_malloc(&str[i], &i, node);
+		new = ft_parsernew(ft_command(one_phrase, node),
+				ft_option(one_phrase, node), ft_redirect(one_phrase, node));
+		if (new == NULL)
+			return (parser_malloc_error(node));
 		ft_parseradd_back(&node, new);
 		if (str[i] != NULL)
 			i++;

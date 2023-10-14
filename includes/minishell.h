@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/11 11:58:39 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/14 14:53:02 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ void	signal_heredoc(t_signal *signal);
 void	double_array_free(char **array);
 void	delete_all_env_node(t_env *env_variable);
 void	delete_all_exp_node(t_exp *exp_variable);
+void	parser_free(t_parser *node);
 void	free_all(t_data *data);
 /*----------*/
 #endif

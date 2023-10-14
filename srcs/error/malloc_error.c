@@ -6,43 +6,51 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:02:09 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/10/01 16:17:00 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/13 14:49:45 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
-#include "../../../includes/parser.h"
+#include "../../includes/minishell.h"
+#include "../../includes/error.h"
 
-t_parser	*parser_malloc_error(void)
+t_parser	*parser_malloc_error(t_parser *node)
 {
 	write(STDOUT_FILENO, "malloc_error\n", 13);
-	exit(0);
+	parser_free(node);
+	exit(EXIT_FAILURE);
 	return (NULL);
 }
 
-char	*char_malloc_error(void)
+char	*char_malloc_error(t_parser *node)
 {
 	write(STDOUT_FILENO, "malloc_error\n", 13);
-	exit(0);
+	parser_free(node);
+	exit(EXIT_FAILURE);
 	return (NULL);
 }
 
-char	**chardouble_malloc_error(void)
+char	**onephrase_malloc_error(char **one_phrase, t_parser *node)
 {
+	size_t	i;
+
+	i = 0;
 	write(STDOUT_FILENO, "malloc_error\n", 13);
-	exit(0);
+	parser_free(node);
+	while (one_phrase[i] != NULL)
+	{
+		free(one_phrase[i]);
+		i++;
+	}
+	if (one_phrase != NULL)
+		free(one_phrase);
+	exit(EXIT_FAILURE);
 	return (NULL);
 }
 
-t_file	*file_malloc_error(void)
+int	int_malloc_error(t_parser *node)
 {
 	write(STDOUT_FILENO, "malloc_error\n", 13);
-	exit(0);
-	return (NULL);
-}
-
-void	void_malloc_error(void)
-{
-	write(STDOUT_FILENO, "malloc_error\n", 13);
-	exit(0);
+	parser_free(node);
+	exit(EXIT_FAILURE);
+	return (NO);
 }

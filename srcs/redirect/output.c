@@ -6,14 +6,15 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:36 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/01 15:46:31 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/13 14:48:56 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/redirect.h"
+#include "../../includes/error.h"
 
-void	output(t_file *file)
+int	output(t_file *file)
 {
 	int	fd;
 
@@ -26,4 +27,5 @@ void	output(t_file *file)
 		fd = open(file->file_name, O_WRONLY | O_TRUNC);
 	if (fd != -1)
 		file->fd = fd;
+	return (YES);
 }

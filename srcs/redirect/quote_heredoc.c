@@ -6,15 +6,16 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:45 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/08 17:13:07 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/13 14:51:06 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/redirect.h"
 #include "../../includes/parser.h"
+#include "../../includes/error.h"
 
-void	quote_heredoc(t_data *data, t_file *file)
+int	quote_heredoc(t_data *data, t_file *file)
 {
 	char	*name;
 	size_t	i;
@@ -24,7 +25,7 @@ void	quote_heredoc(t_data *data, t_file *file)
 	j = 0;
 	name = ft_calloc(sizeof(char), ft_strlen(file->file_name));
 	if (name == NULL)
-		return (void_malloc_error());
+		return (int_malloc_error(data->parser));
 	while (file->file_name[i] != '\0')
 	{
 		if (file->file_name[i] != '\'' && file->file_name[i] != '\"')
@@ -34,5 +35,5 @@ void	quote_heredoc(t_data *data, t_file *file)
 		}
 		i++;
 	}
-	heredoc(data, file, name);
+	return (heredoc(data, file, name));
 }

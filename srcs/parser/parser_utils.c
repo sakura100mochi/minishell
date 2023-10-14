@@ -6,14 +6,15 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:28:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/30 17:25:25 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/13 14:34:31 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/parser.h"
+#include "../../includes/error.h"
 
-char	*ft_strjoin_minis(char *s1, char const *s2)
+char	*ft_strjoin_minis(char *s1, char const *s2, t_parser *node)
 {
 	char	*str;
 	size_t	len;
@@ -27,7 +28,7 @@ char	*ft_strjoin_minis(char *s1, char const *s2)
 		len = ft_strlen(s1) + ft_strlen(s2) + 1;
 	str = ft_calloc(sizeof(char), (len + 1));
 	if (str == NULL)
-		return (char_malloc_error());
+		return (char_malloc_error(node));
 	i = 0;
 	while (s1 != NULL && *s1 != '\0')
 		str[i++] = *s1++;
