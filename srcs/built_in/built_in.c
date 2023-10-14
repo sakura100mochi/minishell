@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:18:37 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/12 21:17:11 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/14 15:00:47 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static int	do_built_in(t_data *data, t_parser *parser, char *file)
 	return (YES);
 }
 
-// static int	do_dup_built_in(t_data *data, t_parser *parser,
-// 									t_file *file, char *str)
-// {
-// 	int	backup;
+static int	do_dup_built_in(t_data *data, t_file *file, int fd, char *str)
+{
+	int		status;
+	pid_t	pid;
 
 // 	backup = 0;
 // 	if (file->type == OUTPUT || file->type == APPEND)
@@ -60,9 +60,10 @@ static int	do_built_in(t_data *data, t_parser *parser, char *file)
 // 	return (NO);
 // }
 
-// static void	check_fd(t_data *data, t_parser *parser, t_file *file, char *str)
-// {
-// 	t_file	*head;
+static void	check_fd(t_data *data, t_file *file, char *str)
+{
+	t_file	*head;
+	int		fd;
 
 // 	head = file;
 // 	if (str == NULL)
