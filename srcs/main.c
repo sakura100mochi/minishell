@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/13 15:04:29 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/14 16:19:38 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(void)
 	return (0);
 }
 
-__attribute__((destructor))
-static void destructor() {
-    system("leaks -q minishell");
-}
+// __attribute__((destructor))
+// static void destructor() {
+//     system("leaks -q minishell");
+// }
