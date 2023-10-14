@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:18:37 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/08 18:47:36 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/12 21:17:11 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,72 +36,51 @@ static int	do_built_in(t_data *data, t_parser *parser, char *file)
 	return (YES);
 }
 
-static int	do_dup_built_in(t_data *data, t_parser *parser,
-									t_file *file, char *str)
-{
-	int		status;
-	pid_t	pid;
+// static int	do_dup_built_in(t_data *data, t_parser *parser,
+// 									t_file *file, char *str)
+// {
+// 	int	backup;
 
-	status = 0;
-	pid = fork();
-	if (pid == -1)
-		exit (EXIT_FAILURE);
-	if (pid == 0)
-	{
-		if (file->type == OUTPUT || file->type == APPEND)
-		{
-			dup2(file->fd, STDOUT_FILENO);
-			do_built_in(data, parser, str);
-		}
-		else if (file->type == INPUT)
-		{
-			dup2(STDIN_FILENO, file->fd);
-			do_built_in(data, parser, str);
-		}
-		exit(EXIT_SUCCESS);
-	}
-	waitpid(pid, &status, 0);
-	return (NO);
-}
+// 	backup = 0;
+// 	if (file->type == OUTPUT || file->type == APPEND)
+// 	{
+// 		backup = dup(1);
+// 		dup2(file->fd, STDOUT_FILENO);
+// 		do_built_in(data, parser, str);
+// 		close(file->fd);
+// 		dup2(backup, STDOUT_FILENO);
+// 		close(backup);
+// 	}
+// 	else if (file->type == INPUT)
+// 	{
+// 		dup2(STDIN_FILENO, file->fd);
+// 		do_built_in(data, parser, str);
+// 		close(file->fd);
+// 	}
+// 	return (NO);
+// }
 
-static void	check_fd(t_data *data, t_parser *parser, t_file *file, char *str)
-{
-	t_file	*head;
+// static void	check_fd(t_data *data, t_parser *parser, t_file *file, char *str)
+// {
+// 	t_file	*head;
 
-	head = file;
-	if (str == NULL)
-		return ;
-	while (file->next != NULL)
-		file = file->next;
-	do_dup_built_in(data, parser, file, str);
-	while (head != NULL)
-	{
-		if (head->fd)
-			close(head->fd);
-		head = head->next;
-	}
-}
+// 	head = file;
+// 	if (str == NULL)
+// 		return ;
+// 	while (file->next != NULL)
+// 		file = file->next;
+// 	do_dup_built_in(data, parser, file, str);
+// 	while (head != NULL)
+// 	{
+// 		if (head->fd)
+// 			close(head->fd);
+// 		head = head->next;
+// 	}
+// }
 
 int	judge_built_in(t_data *data, t_parser *parser, char *file)
 {
-	size_t	len;
-
-	len = ft_strlen(parser->cmd);
-	if ((len == 2 && !ft_strncmp(parser->cmd, "cd", len)) || \
-	(len == 4 && !ft_strncmp(parser->cmd, "echo", len)) || \
-	(len == 3 && !ft_strncmp(parser->cmd, "env", len)) || \
-	(len == 4 && !ft_strncmp(parser->cmd, "exit", len)) || \
-	(len == 6 && !ft_strncmp(parser->cmd, "export", len)) || \
-	(len == 3 && !ft_strncmp(parser->cmd, "pwd", len)) || \
-	(len == 5 && !ft_strncmp(parser->cmd, "unset", len)))
-	{
-		if (parser->redirect)
-		{
-			check_fd(data, parser, parser->redirect, file);
-		}
-		else
-			do_built_in(data, parser, file);
+	if (do_built_in(data, parser, file))
 		return (YES);
-	}
 	return (NO);
 }
