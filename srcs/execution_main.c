@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/14 14:54:32 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/14 15:04:53 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,6 @@ void	execution_main(t_data *data)
 			return ;
 	}
 	file = format_command(data->env, data->parser);
-	if (judge_built_in(data, data->parser, file) == NO)
-		fork_and_execve(data, data->exe, data->parser, file);
 	if (check_redirect(data->parser))
 		dup_command(data, data->parser, data->parser->redirect, file);
 	else

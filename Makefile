@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/14 14:52:43 by csakamot         ###   ########.fr        #
+#    Updated: 2023/10/14 15:08:39 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ LIBFT		= libft/
 
 ##------------Srcs-------------##
 MAINSRC			= main.c standby_state.c \
-					execution_main.c external_command.c malloc_free.c
+					execution_main.c external_command.c malloc_free.c command_in_redirect.c
 
 ERRORSRC		= malloc_error.c syntax.c file.c
 
@@ -115,12 +115,12 @@ ARCHIVES	= ${addprefix ${LIBFT}, libft.a}
 all:		${NAME}
 
 %.o:%.c
-			${CC} ${CFLAGS} -I/usr/local/opt/readline/include -c $< -o $@
+			${CC} ${CFLAGS} -I /Users/csakamot/.brew/Cellar/readline/8.2.1/include -c $< -o $@
 
 ${NAME}:	${OBJS}
 			@${CCLIBFT}
 			@echo "object file		compiled"
-			@${CC} ${CFLAGS} ${OBJS} -Lsrcs -lreadline -L/usr/local/Cellar/readline/8.2.1/lib/ ${ARCHIVES} -o ${NAME}
+			@${CC} ${CFLAGS} ${OBJS} -Lsrcs -lreadline -L /Users/csakamot/.brew/Cellar/readline/8.2.1/lib -I /Users/csakamot/.brew/Cellar/readline/8.2.1/include ${ARCHIVES} -o ${NAME}
 #			@echo "minishell		created\n\n"
 #			@echo "    ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗     "
 #			@echo "    ████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     "
