@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:26 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/14 15:10:37 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/14 15:41:11 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ int	input(t_file *file)
 		return (no_file(file->file_name));
 	fd = open(file->file_name, O_RDONLY);
 	if (fd != -1)
-	{
 		file->fd = fd;
-		file->result = get_next_line(fd);
-	}
 	return (YES);
 }
