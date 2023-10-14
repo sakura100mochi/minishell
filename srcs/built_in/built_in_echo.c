@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/14 17:00:23 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:03:09 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,21 @@ static void	print_echo_option(t_parser *parser, size_t flag,
 	return ;
 }
 
+static int	check_n_option(t_parser *parser, size_t start)
+{
+	size_t	index;
+
+	index = start;
+	while (parser->option[index] != '\0' && parser->option[index] != ' ' \
+	&& parser->option[index] != '	')
+	{
+		if (parser->option[index] != 'n')
+			return (NO);
+		index++;
+	}
+	return (YES);
+}
+
 static int	check_echo_option(t_parser *parser, char *str)
 {
 	size_t	i;
@@ -38,11 +53,11 @@ static int	check_echo_option(t_parser *parser, char *str)
 	tmp = NULL;
 	if (parser->option == NULL)
 		return (NO);
-	if (parser->option[0] == '-' && parser->option[1] == 'n')
+	if (parser->option[i] == '-' && check_n_option(parser, i + 1))
 		flag++;
 	while (parser->option[i++] != '\0' && flag)
 	{
-		if (parser->option[i] == '-' && parser->option[i + 1] != 'n')
+		if (parser->option[i] == '-' && !check_n_option(parser, i + 1))
 		{
 			tmp = ft_substr(parser->option, i, ft_strlen(parser->option));
 			if (tmp == NULL)
