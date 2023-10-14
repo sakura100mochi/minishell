@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 18:29:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/14 15:39:45 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/14 20:07:48 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ void	parser_free(t_parser *node)
 		while (file != NULL)
 		{
 			tmp_file = file->next;
-			if (file->file_name)
+			if (file->file_name != NULL)
 				free(file->file_name);
-			if (file->result)
-				free(file->result);
 			free(file);
 			file = tmp_file;
 		}
@@ -72,7 +70,7 @@ void	delete_all_env_node(t_env *env_variable)
 	t_env	*current_location;
 
 	start = env_variable;
-	if (env_variable == NULL)
+	if (env_variable != NULL)
 	{
 		if (env_variable -> next == env_variable)
 		{

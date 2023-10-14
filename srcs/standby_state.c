@@ -23,7 +23,6 @@ void	standby_state(t_data *data)
 		if (data->prompt == NULL)
 		{
 			ft_printf("exit\n");
-			free_all(data);
 			exit(EXIT_SUCCESS);
 		}
 		if (*data->prompt == '\0')
@@ -34,12 +33,11 @@ void	standby_state(t_data *data)
 		add_history(data->prompt);
 		data->parser = parser_main(lexer_main(data->prompt));
 		if (data->parser->cmd == NULL && data->parser->redirect == NULL)
-		{
-			syntax_void();
-			continue ;
-		}
-		execution_main(data);
+			syntax();
+		else
+			execution_main(data);
 		free(data->prompt);
+		parser_free(data->parser);
 	}
 	return ;
 }

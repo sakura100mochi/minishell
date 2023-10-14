@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/14 17:48:30 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/14 20:10:23 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,16 @@ static size_t	check_quote_in_command(char *str)
 
 static int	check_redirect(t_parser *node)
 {
+	t_parser	*head;
+
+	head = node;
 	while (node != NULL)
 	{
 		if (node->redirect != NULL)
 			return (YES);
 		node = node->next;
 	}
+	node = head;
 	return (NO);
 }
 
@@ -94,7 +98,7 @@ void	execution_main(t_data *data)
 	file = format_command(data->env, data->parser);
 	if (file == NULL)
 		return ;
-	if (check_redirect(data->parser))
+	if (check_redirect(data->parser) == YES)
 		dup_command(data, data->parser, data->parser->redirect, file);
 	else
 	{

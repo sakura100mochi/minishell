@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:24:18 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/14 16:37:16 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/14 18:38:20 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int			int_malloc_error(t_parser *node);
 /*---Error---*/
 void		command_not_found(char *str);
 int			syntax(void);
-void		syntax_void(void);
 int			no_file(char *file_name);
 int			permission(char *file_name);
 /*-----------*/
