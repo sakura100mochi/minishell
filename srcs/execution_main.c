@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/14 19:10:34 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/14 20:49:57 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	execution_main(t_data *data)
 		pipe_main(data, data->parser, data->pipe->next, len);
 		return ;
 	}
-	printf("%p\n", data->parser);
 	if (check_redirect(data->parser) == YES)
 	{
 		if (redirect_main(data, data->parser) == NO)
