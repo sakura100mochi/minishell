@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 18:09:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/14 20:45:45 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/14 21:15:58 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,11 @@ t_data	*init_pipe(t_data *data, size_t len)
 	{
 		new = new_pipe_node(0);
 		if (new == NULL)
+		{
+			free(new);
+			free(new->pipe_fd);
 			break ;
+		}
 		pipe_nodeadd_back(&pipe, new);
 		index++;
 	}

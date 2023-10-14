@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/13 15:01:17 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/14 21:04:22 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	built_in_exit(t_data *data, char *file)
 	if (!*file)
 		ft_printf("exit\n");
 	free(data->prompt);
-	free_all(data);
+	// free_all(data);
 	exit(EXIT_SUCCESS);
 	return ;
 }
