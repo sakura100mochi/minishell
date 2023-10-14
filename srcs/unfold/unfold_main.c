@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:16:53 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/12 16:29:47 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:34:13 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ char	*str_connection(char *result, char *str, size_t *start, size_t *end)
 	result = ft_strjoin(tmp, tmp_b);
 	free(tmp_f);
 	free(tmp_b);
+	free(tmp);
 	return (result);
 }
 

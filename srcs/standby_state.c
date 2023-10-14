@@ -40,6 +40,7 @@ void	standby_state(t_data *data)
 		}
 		execution_main(data);
 		free(data->prompt);
+		parser_free(data->parser);
 	}
 	return ;
 }
