@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/14 17:48:30 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/14 19:10:34 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,20 @@ void	execution_main(t_data *data)
 		pipe_main(data, data->parser, data->pipe->next, len);
 		return ;
 	}
+	printf("%p\n", data->parser);
 	if (check_redirect(data->parser) == YES)
 	{
 		if (redirect_main(data, data->parser) == NO)
 			return ;
+		printf("%p\n", data->parser);
 	}
 	file = format_command(data->env, data->parser);
 	if (file == NULL)
 		return ;
-	if (check_redirect(data->parser))
+	if (check_redirect(data->parser) == YES)
+	{
 		dup_command(data, data->parser, data->parser->redirect, file);
+	}
 	else
 	{
 		if (!judge_built_in(data, data->parser, file))

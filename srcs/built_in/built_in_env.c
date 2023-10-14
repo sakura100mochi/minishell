@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:17 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 11:49:23 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/14 18:40:55 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,6 @@ void	built_in_env(t_env *env_variable, t_parser *parser, char *file)
 	if ((len == 1 && !ft_strncmp(parser->option, "-", len)) || len > 2)
 		return ;
 	env_variable = env_variable->next;
-	if (env_variable->head)
-	{
-		ft_printf("minishell: env: No such file or directory");
-		return ;
-	}
 	while (!env_variable->head)
 	{
 		ft_printf("%s\n", env_variable->variable);
