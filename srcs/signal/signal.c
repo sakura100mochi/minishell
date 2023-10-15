@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 12:50:11 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 14:58:56 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/15 17:59:34 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ static void	signal_handler_quit(int signum, siginfo_t *info, void *dummy)
 	(void)signum;
 	(void)dummy;
 	(void)info;
-	pid = wait(&status);
-	if (pid != -1)
+	pid = waitpid(-1, &status, WNOHANG);
+	if (pid == 0)
 		write(STDOUT_FILENO, "Quit: 3\n", 8);
-	else
+	else if (pid == -1)
 	{
 		rl_replace_line("", 0);
 		rl_on_new_line();
