@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 14:15:03 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:39:46 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ static char	*check_cmd_access(t_parser *parser, char **path)
 {
 	size_t	index;
 	char	*tmp;
+	char	*cwd;
 	char	*full_path;
 
+	cwd = NULL;
 	index = 0;
 	while (path[index] != NULL)
 	{
@@ -58,7 +60,12 @@ static char	*check_cmd_access(t_parser *parser, char **path)
 		index++;
 	}
 	double_array_free(path);
-	full_path = ft_strjoin("/", parser->cmd);
+	cwd = getcwd(cwd, PATH_MAX);
+	tmp = ft_strjoin(cwd, "/");
+	full_path = ft_strjoin(tmp, parser->cmd);
+	printf("%s\n", full_path);
+	free(cwd);
+	free(tmp);
 	if (!access(full_path, X_OK))
 		return (full_path);
 	free(full_path);
