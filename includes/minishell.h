@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/14 19:27:05 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/15 13:33:53 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,9 @@ void	standby_state(t_data *data);
 /*---external_command---*/
 void	fork_and_execve(t_data *data, t_exe *exe, \
 							t_parser *parser, char *file);
+size_t	count_file_nbr(char *file);
+char	**add_file_to_array(char **result, char *file, size_t index, \
+																size_t len);
 /*---------------------*/
 
 /*---signal---*/

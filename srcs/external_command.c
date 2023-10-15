@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   external_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/14 15:42:14 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/15 14:15:03 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,14 @@ static char	**create_command(t_parser *parser, char *file)
 	if (parser->option)
 		words++;
 	if (file)
-		words++;
+		words += count_file_nbr(file);
 	result = (char **)ft_calloc(sizeof(char *), words + 1);
 	result[index++] = ft_strdup(parser->cmd);
 	if (parser->option)
 		result[index++] = ft_strdup(parser->option);
 	if (*file)
-		result[index++] = ft_strdup(file);
+		add_file_to_array(result, file, index, words);
+	result[words] = NULL;
 	return (result);
 }
 

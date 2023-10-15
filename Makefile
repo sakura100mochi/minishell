@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/14 18:12:18 by csakamot         ###   ########.fr        #
+#    Updated: 2023/10/15 13:40:14 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ LIBFT		= libft/
 
 ##------------Srcs-------------##
 MAINSRC			= main.c standby_state.c \
-					execution_main.c external_command.c malloc_free.c command_in_redirect.c
+					execution_main.c external_command.c malloc_free.c command_in_redirect.c \
+					external_command_helper.c
 
 ERRORSRC		= malloc_error.c syntax.c file.c no_command.c
 
