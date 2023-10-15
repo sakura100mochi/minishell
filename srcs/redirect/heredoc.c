@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/15 15:37:17 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/15 15:37:46 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ int	heredoc(t_data *data, t_file *file, char *name)
 	file->fd = open("/tmp/tmp", O_CREAT | O_RDWR | O_TRUNC,
 			S_IREAD | S_IWRITE | S_IRGRP | S_IROTH);
 	status = 0;
-	file->fd = open("/tmp/tmp", O_CREAT | O_RDWR | O_TRUNC,
-			S_IREAD | S_IWRITE | S_IRGRP | S_IROTH);
 	pid = fork();
 	if (pid == -1)
 	{
