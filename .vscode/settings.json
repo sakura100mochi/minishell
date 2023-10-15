@@ -3,6 +3,7 @@
 		"parser.h": "c",
 		"redirect.h": "c",
 		"minishell.h": "c",
-		"built_in.h": "c"
+		"built_in.h": "c",
+		"pipe.h": "c"
 	}
 }

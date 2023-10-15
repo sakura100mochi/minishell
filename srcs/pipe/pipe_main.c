@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/14 21:11:39 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/15 13:18:02 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,14 @@ static int	check_pipe_exec(t_data *data, t_parser *parser,
 
 int	pipe_main(t_data *data, t_parser *parser, t_pipe *pipelist, size_t len)
 {
+	size_t	index;
 	int		status;
 	char	*file;
 
+	index = 0;
 	status = 0;
 	(void)len;
-	while (!pipelist->head)
+	while (index <= len)
 	{
 		file = format_command(data->env, parser);
 		pipelist->pid = fork();
@@ -54,6 +56,7 @@ int	pipe_main(t_data *data, t_parser *parser, t_pipe *pipelist, size_t len)
 		free(file);
 		parser = parser->next;
 		pipelist = pipelist->next;
+		index++;
 	}
 	return (0);
 }

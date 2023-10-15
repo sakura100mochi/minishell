@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 18:09:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/14 21:15:58 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/15 13:19:31 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ static t_pipe	*new_pipe_node(size_t head)
 	else
 	{
 		if (pipe(new->pipe_fd) == -1)
+		{
+			free(new);
 			return (NULL);
+		}
 		new->next = NULL;
 		new->prev = NULL;
 	}
@@ -57,11 +60,7 @@ t_data	*init_pipe(t_data *data, size_t len)
 	{
 		new = new_pipe_node(0);
 		if (new == NULL)
-		{
-			free(new);
-			free(new->pipe_fd);
 			break ;
-		}
 		pipe_nodeadd_back(&pipe, new);
 		index++;
 	}
@@ -69,4 +68,18 @@ t_data	*init_pipe(t_data *data, size_t len)
 	pipe->next->next = head;
 	data->pipe = head;
 	return (data);
+}
+
+size_t	count_pipelist(t_pipe *pipelist)
+{
+	size_t	index;
+
+	index = 0;
+	pipelist = pipelist->next;
+	while (!pipelist->head)
+	{
+		pipelist = pipelist->next;
+		index++;
+	}
+	return (index);
 }
