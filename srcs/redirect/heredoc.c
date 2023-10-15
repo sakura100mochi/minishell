@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/14 19:26:55 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/15 15:17:39 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,19 @@ static void	interactive_heredoc(t_file *file, char *name, t_parser *node)
 	char	*str;
 	size_t	len;
 
-	file->fd = open("/tmp/tmp", O_CREAT | O_RDWR | O_TRUNC,
-			S_IREAD | S_IWRITE | S_IRGRP | S_IROTH);
-	prompt = readline(">");
-	if (prompt == NULL)
-		exit(EXIT_SUCCESS);
-	free(prompt);
-	len = ft_strlen(prompt) + ft_strlen(name);
 	str = NULL;
-	while (ft_strncmp(prompt, name, len) != 0)
+	while (1)
 	{
-		str = ft_strjoin_red(str, prompt, node);
 		prompt = readline(">");
 		if (prompt == NULL)
 			exit(EXIT_SUCCESS);
+		len = ft_strlen(prompt) + ft_strlen(name);
+		if (ft_strncmp(prompt, name, len) == 0)
+		{
+			free(prompt);
+			break ;
+		}
+		str = ft_strjoin_red(str, prompt, node);
 		free(prompt);
 	}
 	write(file->fd, str, ft_strlen(str));
@@ -44,6 +43,8 @@ int	heredoc(t_data *data, t_file *file, char *name)
 	pid_t	pid;
 	int		status;
 
+	file->fd = open("/tmp/tmp", O_CREAT | O_RDWR | O_TRUNC,
+			S_IREAD | S_IWRITE | S_IRGRP | S_IROTH);
 	status = 0;
 	pid = fork();
 	if (pid == -1)
