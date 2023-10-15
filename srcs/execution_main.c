@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 13:17:22 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/15 14:47:28 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ void	execution_main(t_data *data)
 	{
 		if (redirect_main(data, data->parser) == NO)
 			return ;
-		printf("%p\n", data->parser);
 	}
 	file = format_command(data->env, data->parser);
 	if (file == NULL)

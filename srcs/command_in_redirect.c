@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:40:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 12:52:00 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/15 15:32:54 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,37 +21,52 @@ static int	do_dup_command(t_data *data, t_parser *parser,
 
 	stdout = 0;
 	stdin = 0;
-	if (file->type == OUTPUT || file->type == APPEND)
+	while (file != NULL)
 	{
-		stdout = dup(1);
-		dup2(file->fd, STDOUT_FILENO);
-		if (!judge_built_in(data, parser, str))
-			fork_and_execve(data, data->exe, parser, str);
-		close(file->fd);
-		dup2(stdout, STDOUT_FILENO);
-		close(stdout);
+		if (file->type == OUTPUT || file->type == APPEND)
+		{
+			stdout = dup(1);
+			dup2(file->fd, STDOUT_FILENO);
+			if (!judge_built_in(data, parser, str))
+				fork_and_execve(data, data->exe, parser, str);
+			close(file->fd);
+			dup2(stdout, STDOUT_FILENO);
+			close(stdout);
+		}
+		else if (file->type == INPUT)
+		{
+			stdin = dup(0);
+			dup2(file->fd, STDIN_FILENO);
+			if (!judge_built_in(data, parser, str))
+				fork_and_execve(data, data->exe, parser, str);
+			close(file->fd);
+			dup2(stdin, STDIN_FILENO);
+			close(stdin);
+		}
+		else if (file->type == HEREDOC || file->type == QUOTE_HEREDOC)
+		{
+			printf("ok!%d, type:%d\n", file->fd, file->type);
+			stdin = dup(0);
+			dup2(file->fd, STDIN_FILENO);
+			if (!judge_built_in(data, parser, str))
+				fork_and_execve(data, data->exe, parser, str);
+			close(file->fd);
+			dup2(stdin, STDIN_FILENO);
+			close(stdin);
+		}
+		file = file->next;
 	}
-	else if (file->type == INPUT)
-	{
-		stdin = dup(0);
-		dup2(file->fd, STDIN_FILENO);
-		if (!judge_built_in(data, parser, str))
-			fork_and_execve(data, data->exe, parser, str);
-		close(file->fd);
-		dup2(stdin, STDIN_FILENO);
-		close(stdin);
-	}
-	return (NO);
+	return (YES);
 }
 
-static t_file	*check_fd(t_file *file, char *str)
-{
-	if (str == NULL)
-		return (NULL);
-	while (file->next != NULL)
-		file = file->next;
-	return (file);
-}
+// static t_file	*check_fd(t_file *file, char *str)
+// {
+// 	if (str == NULL)
+// 		return (NULL);
+// 	while (file->next != NULL)
+// 		file = file->next;
+// 	return (file);
+// }
 
 static void	close_fd(t_file *file)
 {
@@ -75,12 +90,12 @@ int	check_redirect(t_parser *parser)
 
 int	dup_command(t_data *data, t_parser *parser, t_file *file, char *str)
 {
-	t_file	*head;
-	t_file	*tmp_file;
+	// t_file	*head;
+	// t_file	*tmp_file;
 
-	head = file;
-	tmp_file = check_fd(file, str);
-	do_dup_command(data, parser, tmp_file, str);
-	close_fd(head);
+	// head = file;
+	// tmp_file = check_fd(file, str);
+	do_dup_command(data, parser, file, str);
+	close_fd(file);
 	return (YES);
 }
