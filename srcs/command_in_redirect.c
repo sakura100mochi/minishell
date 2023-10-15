@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:40:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/14 20:39:30 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/15 12:52:00 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ int	check_redirect(t_parser *parser)
 int	dup_command(t_data *data, t_parser *parser, t_file *file, char *str)
 {
 	t_file	*head;
+	t_file	*tmp_file;
 
 	head = file;
-	file = check_fd(file, str);
-	do_dup_command(data, parser, file, str);
+	tmp_file = check_fd(file, str);
+	do_dup_command(data, parser, tmp_file, str);
 	close_fd(head);
 	return (YES);
 }

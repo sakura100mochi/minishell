@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/14 20:49:57 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/15 12:54:00 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,16 @@ static size_t	check_quote_in_command(char *str)
 
 static int	check_redirect(t_parser *node)
 {
+	t_parser	*head;
+
+	head = node;
 	while (node != NULL)
 	{
 		if (node->redirect != NULL)
 			return (YES);
 		node = node->next;
 	}
+	node = head;
 	return (NO);
 }
 
@@ -96,7 +100,6 @@ void	execution_main(t_data *data)
 	if (file == NULL)
 		return ;
 	if (check_redirect(data->parser) == YES)
-	{
 		dup_command(data, data->parser, data->parser->redirect, file);
 	}
 	else
