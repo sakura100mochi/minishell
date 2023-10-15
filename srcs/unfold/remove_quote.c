@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 12:55:26 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/12 16:37:27 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/15 17:40:15 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ char	*check_quote_in_str(char *str, t_env *env)
 		else if (twofold % 2 && str[index] == '"' && twofold++)
 			str = remove_twofold_quote(str, env, &index);
 		index++;
-		// printf("%zu, %zu, %zu, %s\n", index, single, twofold, str);
 	}
 	return (str);
 }
