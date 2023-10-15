@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 12:50:11 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/14 20:46:22 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/15 14:58:56 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ static void	signal_handler(int signum, siginfo_t *info, void *dummy)
 	pid = wait(&status);
 	if (pid != -1)
 	{
-		ft_printf("\n");
+		write(STDOUT_FILENO, "\n", 1);
 		rl_replace_line("", 0);
 	}
 	else
 	{
-		ft_printf("\n");
+		write(STDOUT_FILENO, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
@@ -49,15 +49,13 @@ static void	signal_handler_quit(int signum, siginfo_t *info, void *dummy)
 	(void)info;
 	pid = wait(&status);
 	if (pid != -1)
+		write(STDOUT_FILENO, "Quit: 3\n", 8);
+	else
 	{
-		ft_printf("Quit: 3\n");
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
 	}
-	// else
-	// {
-	// 	rl_replace_line("", 0);
-	// 	rl_on_new_line();
-	// 	rl_redisplay();
-	// }
 }
 
 void	signal_minishell(t_signal *signal)
