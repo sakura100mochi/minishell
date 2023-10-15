@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 15:09:35 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/13 14:35:40 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/15 16:59:24 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@ char	*ft_strjoin_red(char *s1, char const *s2, t_parser *node)
 	i = 0;
 	while (s1 != NULL && *s1 != '\0')
 		str[i++] = *s1++;
-	if (s1 != NULL)
-		str[i++] = '\n';
 	while (*s2 != '\0')
 		str[i++] = *s2++;
+	str[i++] = '\n';
 	return (str);
 }
