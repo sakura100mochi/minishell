@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 15:50:07 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/15 22:17:59 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,9 @@ char	*format_command(t_env *env, t_parser *parser)
 
 void	execution_main(t_data *data)
 {
-	size_t	i;
 	char	*file;
 	size_t	len;
 
-	i = 0;
 	len = ft_parsersize(data->parser) - 1;
 	if (len != 0)
 	{

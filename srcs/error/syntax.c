@@ -6,7 +6,7 @@
 /*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:26:38 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/15 21:51:56 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/10/15 22:17:06 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	redirect_syntax(t_data *data, char *str)
 		if (file == NULL)
 		{
 			node = node->next;
-			file = node->redirect;
+			if (node != NULL)
+				file = node->redirect;
 			continue ;
 		}
 		else if (file->type == HEREDOC || file->type == QUOTE_HEREDOC)
@@ -51,7 +52,7 @@ int	redirect_syntax(t_data *data, char *str)
 			while (str[i] != '>' && str[i] != '\0')
 				i++;
 			if (str[i] != '\0' && str[i] == '>' && str[i + 1] != '\0' && str[i + 1] != '>')
-				return (NO);g
+				return (NO);
 			else if (file->next != NULL)
 				file = file->next;
 			i++;

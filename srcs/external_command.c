@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   external_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 18:39:46 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/15 22:11:40 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static char	*check_cmd_access(t_parser *parser, char **path)
 	cwd = getcwd(cwd, PATH_MAX);
 	tmp = ft_strjoin(cwd, "/");
 	full_path = ft_strjoin(tmp, parser->cmd);
-	printf("%s\n", full_path);
+	// printf("%s\n", full_path);
 	free(cwd);
 	free(tmp);
 	if (!access(full_path, X_OK))
