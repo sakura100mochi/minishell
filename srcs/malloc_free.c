@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 18:29:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/14 18:20:26 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/15 12:54:26 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ void	parser_free(t_parser *node)
 		while (file != NULL)
 		{
 			tmp_file = file->next;
-			if (file->file_name)
+			if (file->file_name != NULL)
 				free(file->file_name);
-			if (file->result)
-				free(file->result);
 			free(file);
 			file = tmp_file;
 		}
