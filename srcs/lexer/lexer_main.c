@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:51 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 17:33:14 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/15 17:58:52 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ static size_t	count_word(char *str)
 	count = 1;
 	while (str[i] != '\0')
 	{
+		while ((str[i + 1] == ' ' && str[i + 1] != '\0')
+			|| (str[i + 1] == '	' && str[i + 1] != '\0'))
+			i++;
 		if (str[i] == '\'' || str[i] == '\"')
 			count += count_quotation(&str[i], &i);
 		else
@@ -82,13 +85,14 @@ char	**lexer_main(char *str)
 			return (ft_free(result));
 		i++;
 	}
+	result[i] = NULL;
 	return (result);
 }
 
 // int	main(void)
 // {
 // 	char	**result;
-// 	char	str[] = "echo 'orld' \"hello\" cat < file | ";
+// 	char	str[] = "cat << a";
 // 	int		i;
 
 // 	result = lexer_main(str);

@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 17:02:15 by yhirai            #+#    #+#             */
-/*   Updated: 2023/09/30 17:33:28 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/15 17:57:45 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,18 @@ char	*split_word(char **str)
 	char	*result;
 	char	*tmp;
 	size_t	len;
+	size_t	i;
 
 	tmp = *str;
-	len = count_char(tmp);
-	result = ft_substr(tmp, 0, len);
-	if (tmp[len] == ' ' && tmp[len] != '\0')
+	i = 0;
+	while ((tmp[i] == ' ' && tmp[i] != '\0')
+		|| (tmp[i] == '	' && tmp[i] != '\0'))
+		i++;
+	len = count_char(&tmp[i]);
+	result = ft_substr(&tmp[i], 0, len);
+	while ((tmp[len + i] == ' ' && tmp[len + i] != '\0')
+		|| (tmp[len + i] == '	' && tmp[len + i] != '\0'))
 		len++;
-	*str += len;
+	*str += len + i;
 	return (result);
 }

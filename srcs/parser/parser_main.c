@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:54 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/14 18:05:41 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/15 17:59:15 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ t_parser	*parser_main(char **str)
 // 	t_file		*file;
 // 	char		**result;
 // 	size_t		i;
-// 	char		*str = "cat > a | echo a >> a | ls -l |";
+// 	char		*str = "          cat << a |        ls 			-l  |   ";
 
 // 	i = 0;
 // 	result = lexer_main(str);
+// 	printf("script:[%s]\n", str);
 // 	while (result[i] != NULL)
 // 	{
 // 		printf("lexer:[%s]\n", result[i]);
