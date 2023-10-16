@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 12:55:26 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 17:40:15 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/16 22:21:46 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static char	*remove_single_quote(char *str, size_t *end)
 	}
 	while (str[index++])
 		result[index - 2] = str[index];
-	result[index - 2] = '\0';
 	*end -= 2;
 	free(str);
 	return (result);
@@ -60,7 +59,6 @@ static char	*remove_twofold_quote(char *str, t_env *env, size_t *end)
 	}
 	while (str[index++])
 		result[index - 2] = str[index];
-	result[index - 2] = '\0';
 	free(str);
 	*end -= 2;
 	result = unfold_quote_variable(result, env, start, end);
@@ -80,7 +78,7 @@ char	*check_quote_in_str(char *str, t_env *env)
 	{
 		if (!(single % 2) && !(twofold % 2) && str[index] == '$')
 			str = unfold_str(str, env, &index);
-		if (!(single % 2) && !(twofold % 2) && str[index] == '\'')
+		else if (!(single % 2) && !(twofold % 2) && str[index] == '\'')
 			single++;
 		else if (!(single % 2) && !(twofold % 2) && str[index] == '"')
 			twofold++;
@@ -89,6 +87,7 @@ char	*check_quote_in_str(char *str, t_env *env)
 		else if (twofold % 2 && str[index] == '"' && twofold++)
 			str = remove_twofold_quote(str, env, &index);
 		index++;
+		// printf("signal:%ld, twofold:%ld, str:%s, index:%ld, |%c|\n", single, twofold, str, index, str[index]);
 	}
 	return (str);
 }

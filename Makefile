@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/15 16:38:41 by csakamot         ###   ########.fr        #
+#    Updated: 2023/10/16 12:12:53 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,7 @@ OBJS		= ${addprefix ${PRE}, ${SRCS:.c=.o}}
 
 
 ##----------conpiler-----------##
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=address
 
 CCLIBFT		= make -s -C libft
 ##-----------------------------##

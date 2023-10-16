@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:40:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 17:10:40 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/16 22:20:39 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static int	do_dup_command(t_data *data, t_parser *parser,
 	stdin = 0;
 	input = last_input_fd(file);
 	output = last_output_fd(file);
-	printf("input:%d, output:%d\n", input, output);
 	if (output)
 	{
 		stdout = dup(1);

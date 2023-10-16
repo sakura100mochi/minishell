@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:59:58 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 17:46:01 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/16 21:59:03 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,6 @@ char	*unfold_quote_variable(char *str, t_env *env, size_t start, size_t *end)
 	tmp = ft_substr(str, start, *end + 1 - start);
 	len = cnt_env_variable(tmp);
 	strage = split_env_variable(tmp, len);
-	// for (int i = 0; strage[i] != NULL; i++)
-	// 	printf("%s\n", strage[i]);
 	unfold_split_words(strage, env);
 	while (strage[index] != NULL)
 	{
