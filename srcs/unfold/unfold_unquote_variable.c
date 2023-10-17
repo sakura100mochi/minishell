@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:14:51 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/16 22:13:54 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/17 20:01:40 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static char	*trim_unquote_str(char *str, size_t start)
 			break ;
 		index++;
 	}
+	if (str[index] == '\0')
+		index++;
 	result = ft_substr(str, start, index - 1);
 	return (result);
 }
@@ -41,8 +43,6 @@ char	*unfold_str(char *str, t_env *env, size_t *start)
 	tmp = trim_unquote_str(str, *start);
 	len = cnt_env_variable(tmp);
 	strage = split_env_variable(tmp, len);
-	// for (int i = 0; strage[i] != NULL; i++)
-	// 	printf("|%s|, tmp:%s\n", strage[i], tmp);
 	unfold_split_words(strage, env);
 	while (strage[index] != NULL)
 	{

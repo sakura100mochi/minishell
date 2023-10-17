@@ -6,57 +6,34 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:16:53 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/17 11:04:55 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/17 19:26:54 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/unfold.h"
 
-// static int	input_variable(t_env *env, char *str, char **strage)
-// {
-// 	size_t	index;
-// 	size_t	cnt;
-// 	size_t	start;
+int	check_env_variable(char *str, size_t start, size_t end)
+{
+	size_t	index;
 
-// 	(void)env;
-// 	index = 0;
-// 	cnt = 0;
-// 	start = 0;
-// 	while (str[index] != '\0')
-// 	{
-// 		if (str[index] == '$' && !start && (str[index] != ' ' ||
-// 												str[index] != '	'))
-// 			start = index + 1;
-// 		else if (start && (str[index + 1] == ' ' || str[index + 1] == '	' ||
-// 							str[index + 1] == '\0' || str[index + 1] == '$'))
-// 		{
-// 			strage[cnt++] = ft_substr(str, start, index - start + 1);
-// 			start = 0;
-// 		}
-// 		index++;
-// 	}
-// 	strage[cnt] = NULL;
-// 	return (0);
-// }
+	index = start;
+	while (index < end)
+	{
+		if (str[index] == '$')
+			return (0);
+		index++;
+	}
+	return (1);
+}
 
-// // static char	*create_unfoled_str(char *str, char **strage)
-// // {
-// // 	return (str);
-// // }
-
-// static char	*unfold_variable(t_env *env, char *str, size_t len)
-// {
-// 	// char	*result;
-// 	char	**strage;
-
-// 	strage = (char **)ft_calloc(sizeof(char *), len + 1);
-// 	input_variable(env, str, strage);
-// 	for (int i = 0; strage[i] != NULL; i++)
-// 		printf("%s\n", strage[i]);
-// 	// result = create_unfoled_str(str, strage);
-// 	double_array_free(strage);
-// 	return (NULL);
-// }
+size_t	check_dollar_charactor(const char *str, size_t index)
+{
+	if (str[index] == '$' && (str[index + 1] != '\0' || \
+	str[index + 1] != ' ' || str[index + 1] != '	' || \
+	str[index + 1] != '\'') && ft_isalnum(str[index + 1]))
+		return (YES);
+	return (NO);
+}
 
 char	*str_connection(char *result, char *str, size_t *start, size_t *end)
 {
@@ -86,9 +63,7 @@ size_t	cnt_env_variable(char *str)
 	nbr = 0;
 	while (str[index] != '\0')
 	{
-		if (str[index] == '$' && (str[index + 1] != '\0' || \
-		str[index + 1] != ' ' || str[index + 1] != '	' || \
-		str[index + 1] != '\'') && ft_isalnum(str[index + 1]))
+		if (check_dollar_charactor(str, index))
 		{
 			nbr++;
 			index++;
