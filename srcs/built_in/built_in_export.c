@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:26:05 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 11:49:31 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/17 20:13:52 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,11 @@ static int	check_variable(char *variable)
 
 void	export_no_command(t_exp *exp_variable)
 {
-	// size_t	i;
-
-	// i = 0;
 	exp_variable = exp_variable->next;
 	while (!exp_variable->head)
 	{
 		ft_printf("%s\n", exp_variable->variable);
 		exp_variable = exp_variable->next;
-		// i++;
 	}
 	return ;
 }
