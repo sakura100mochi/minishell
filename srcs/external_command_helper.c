@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 13:23:10 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 14:14:21 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:20:03 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ char	**add_file_to_array(char **result, char *file, size_t index, size_t len)
 			flag++;
 			start = end;
 		}
-		else if (flag && (file[end] == ' ' || file[end] == '	'))
+		else if (flag && (file[end] == ' ' || file[end] == '	' || \
+														file[end] == '\0'))
 		{
 			result[index++] = ft_substr(file, start, end - start);
 			flag--;
