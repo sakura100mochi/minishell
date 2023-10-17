@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:59:58 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/16 21:59:03 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:12:42 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	**split_env_variable(char *tmp, size_t len)
 	{
 		if (tmp[index] == '$' && (tmp[index + 1] != '\0' || \
 		tmp[index + 1] != ' ' || tmp[index + 1] != '	' || \
-		tmp[index + 1] != '\''))
+		tmp[index + 1] != '\'') && ft_isalnum(tmp[index + 1]))
 		{
 			result[cnt++] = ft_substr(tmp, start, index - start);
 			flag++;
@@ -91,7 +91,8 @@ int	unfold_split_words(char **strage, t_env *env)
 	index = 0;
 	while (strage[index] != NULL)
 	{
-		if (strage[index][0] == '$')
+		if (strage[index][0] == '$' && strage[index][1] != '\0' && \
+											ft_isalnum(strage[index][1]))
 		{
 			tmp = ft_substr(strage[index], 1, ft_strlen(strage[index]));
 			free(strage[index]);

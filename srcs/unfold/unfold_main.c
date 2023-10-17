@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:16:53 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/16 21:43:52 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:04:55 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ size_t	cnt_env_variable(char *str)
 	{
 		if (str[index] == '$' && (str[index + 1] != '\0' || \
 		str[index + 1] != ' ' || str[index + 1] != '	' || \
-		str[index + 1] != '\''))
+		str[index + 1] != '\'') && ft_isalnum(str[index + 1]))
 		{
 			nbr++;
 			index++;
