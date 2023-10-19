@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/19 17:17:43 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/19 23:08:02 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,28 @@ static int	check_redirect(t_parser *node)
 	return (NO);
 }
 
+static void	no_pipe_exec(t_data *data)
+{
+	char	*file;
+
+	file = format_command(data->env, data->parser);
+	if (file == NULL)
+	{
+		if (data->parser->redirect)
+			close_fd(data->parser->redirect);
+		return ;
+	}
+	if (data->parser->redirect)
+		dup_command(data, data->parser, data->parser->redirect, file);
+	else
+	{
+		if (!judge_built_in(data, data->parser, file))
+			fork_and_execve(data, data->exe, data->parser, file);
+	}
+	free(file);
+	return ;
+}
+
 char	*format_command(t_env *env, t_parser *parser)
 {
 	size_t	cmd_len;
@@ -74,42 +96,25 @@ char	*format_command(t_env *env, t_parser *parser)
 	file = ft_substr(parser->cmd, cmd_len + 1, file_len);
 	free(parser->cmd);
 	parser->cmd = tmp;
-	printf("|%s|,|%s|\n", parser->cmd, file);
 	file = unfold_main(env, parser, file);
 	return (file);
 }
 
 void	execution_main(t_data *data)
 {
-	char	*file;
 	size_t	len;
 
 	len = ft_parsersize(data->parser) - 1;
-	if (len != 0)
-	{
-		pipe_main(data, data->parser, len);
-		return ;
-	}
 	if (check_redirect(data->parser) == YES)
 	{
 		if (redirect_main(data, data->parser) == NO)
 			return ;
 	}
-	file = format_command(data->env, data->parser);
-	if (file == NULL)
+	if (len != 0)
 	{
-		if (data->parser->redirect)
-			close_fd(data->parser->redirect);
+		pipe_main(data, data->parser, len);
 		return ;
 	}
-	if (check_redirect(data->parser) == YES)
-		dup_command(data, data->parser, data->parser->redirect, file);
-	else
-	{
-		if (!judge_built_in(data, data->parser, file))
-			fork_and_execve(data, data->exe, data->parser, file);
-	}
-	free(file);
+	no_pipe_exec(data);
+	return ;
 }
-
-	// printf("%s, %s, %s\n", data->parser->cmd, data->parser->option, file);

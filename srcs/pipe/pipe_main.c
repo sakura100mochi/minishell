@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/19 19:58:15 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/19 22:39:42 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,50 +97,3 @@ int	pipe_main(t_data *data, t_parser *parser, size_t len)
 	}
 	return (0);
 }
-
-// int	pipe_main(t_data *data, t_parser *parser, t_pipe *pipelist, size_t len)
-// {
-// 	size_t	index;
-// 	// int		pipe1[2];
-// 	// int		pipe2[2];
-// 	int		status;
-// 	char	*file;
-
-// 	index = 0;
-// 	status = 0;
-// 	while (index <= len)
-// 	{
-// 	// 	if (!(index % 2) && index != len)
-// 	// 		pipe(pipe1);
-// 	// 	if (index % 2 && len != 1 && index != len)
-// 	// 		pipe(pipe2);
-// 		file = format_command(data->env, parser);
-// 		pipelist->pid = fork();
-// 		if (pipelist->pid == -1)
-// 			exit(EXIT_FAILURE);
-// 		if (pipelist->pid == 0)
-// 		{
-// 			if (!pipelist->head)
-// 				close(pipelist->pipe_fd[0]);
-// 			if (!pipelist->prev->head)
-// 				dup2(pipelist->prev->pipe_fd[0], STDIN_FILENO);
-// 			if (!pipelist->head)
-// 				dup2(pipelist->pipe_fd[1], STDOUT_FILENO);
-// 			if (!judge_built_in(data, parser, file))
-// 				execve_without_fork(data, parser, file);
-// 			exit(EXIT_FAILURE);
-// 		}
-// 		if (!pipelist->prev->head)
-// 			close(pipelist->prev->pipe_fd[0]);
-// 		if (!pipelist->head)
-// 			close(pipelist->pipe_fd[1]);
-// 		waitpid(pipelist->pid, &status, 0);
-// 		free(file);
-// 		parser = parser->next;
-// 		pipelist = pipelist->next;
-// 		index++;
-// 	}
-// 	return (0);
-// }
-
-// printf("%zu, %s, %s, %s\n", pipelist->head,arser->cmd, parser->option, file);
