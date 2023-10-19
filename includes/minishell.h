@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 16:46:33 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/19 17:18:15 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,45 +77,46 @@ typedef struct s_signal
 
 typedef struct s_exe
 {
-	pid_t		pid;
-	size_t		exe_flag;
+	pid_t				pid;
+	size_t				exe_flag;
 }				t_exe;
 
 typedef struct s_pipe
 {
-	int				pipe_fd[2];
-	pid_t			pid;
-	size_t			head;
-	struct s_pipe	*prev;
-	struct s_pipe	*next;
+	int					pipe1[2];
+	int					pipe2[2];
+	int					status;
+	char				*file;
+	pid_t				pid;
+	size_t				index;
 }			t_pipe;
 
 typedef struct s_file
 {
-	int				fd;
-	char			*file_name;
-	t_redirect_type	type;
-	struct s_file	*next;
+	int					fd;
+	char				*file_name;
+	t_redirect_type		type;
+	struct s_file		*next;
 }			t_file;
 
 typedef struct s_parser
 {
-	char			*cmd;
-	char			*option;
-	t_file			*redirect;
-	struct s_parser	*next;
-	struct s_parser	*prev;
+	char				*cmd;
+	char				*option;
+	t_file				*redirect;
+	struct s_parser		*next;
+	struct s_parser		*prev;
 }			t_parser;
 
 typedef struct s_data
 {
-	char		*prompt;
-	t_exe		*exe;
-	t_pipe		*pipe;
-	t_signal	*signal;
-	t_parser	*parser;
-	t_env		*env;
-	t_exp		*exp;
+	char				*prompt;
+	t_exe				*exe;
+	t_pipe				*pipe;
+	t_signal			*signal;
+	t_parser			*parser;
+	t_env				*env;
+	t_exp				*exp;
 }				t_data;
 /*---------------------------*/
 
