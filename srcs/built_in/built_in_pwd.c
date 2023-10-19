@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:13 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/26 13:57:54 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/18 14:37:50 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ void	built_in_pwd(t_parser *parser)
 		return ;
 	}
 	wd_path = getcwd(wd_path, PATH_MAX);
+	if (!wd_path)
+	{
+		perror("");
+		return ;
+	}
 	ft_printf("%s\n", wd_path);
 	free(wd_path);
 	return ;
