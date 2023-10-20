@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:40:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/17 20:10:16 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/20 17:01:08 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	dup_command(t_data *data, t_parser *parser, t_file *file, char *str)
 	output = last_output_fd(file);
 	change_std_to_fd(&stdin, &stdout, input, output);
 	if (!judge_built_in(data, parser, str))
-		fork_and_execve(data, data->exe, parser, str);
+		fork_and_execve(data, parser, str);
 	change_fd_to_std(&stdin, &stdout, input, output);
 	close_fd(file);
 	return (YES);

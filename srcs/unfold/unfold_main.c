@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:16:53 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/17 19:26:54 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/20 14:12:38 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ int	check_env_variable(char *str, size_t start, size_t end)
 
 size_t	check_dollar_charactor(const char *str, size_t index)
 {
-	if (str[index] == '$' && (str[index + 1] != '\0' || \
-	str[index + 1] != ' ' || str[index + 1] != '	' || \
-	str[index + 1] != '\'') && ft_isalnum(str[index + 1]))
+	if (str[index] == '$' && (str[index + 1] == '?' || \
+								ft_isalnum(str[index + 1])))
 		return (YES);
 	return (NO);
 }

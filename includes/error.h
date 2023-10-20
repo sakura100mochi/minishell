@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:24:18 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/14 18:38:20 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/20 17:13:23 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			int_malloc_error(t_parser *node);
 /*------------------*/
 
 /*---Error---*/
-void		command_not_found(char *str);
+void		command_not_found(t_env *env, char *str);
 int			syntax(void);
 int			no_file(char *file_name);
 int			permission(char *file_name);

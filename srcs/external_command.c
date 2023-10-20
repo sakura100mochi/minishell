@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 18:39:46 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/20 17:12:49 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,71 +36,6 @@ static char	**struct_to_array(t_env *env)
 	return (result);
 }
 
-static char	*check_cmd_access(t_parser *parser, char **path)
-{
-	size_t	index;
-	char	*tmp;
-	char	*cwd;
-	char	*full_path;
-
-	cwd = NULL;
-	index = 0;
-	while (path[index] != NULL)
-	{
-		tmp = ft_strjoin(path[index], "/");
-		full_path = ft_strjoin(tmp, parser->cmd);
-		if (!access(full_path, X_OK))
-		{
-			double_array_free(path);
-			free(tmp);
-			return (full_path);
-		}
-		free(tmp);
-		free(full_path);
-		index++;
-	}
-	double_array_free(path);
-	cwd = getcwd(cwd, PATH_MAX);
-	tmp = ft_strjoin(cwd, "/");
-	full_path = ft_strjoin(tmp, parser->cmd);
-	printf("%s\n", full_path);
-	free(cwd);
-	free(tmp);
-	if (!access(full_path, X_OK))
-		return (full_path);
-	free(full_path);
-	return (NULL);
-}
-
-static char	*check_cmd_path(t_env *env_variable, t_parser *parser)
-{
-	size_t	len;
-	char	*tmp;
-	char	**path;
-	char	*full_path;
-
-	path = NULL;
-	env_variable = env_variable->next;
-	while (!env_variable->head)
-	{
-		len = ft_strlen(env_variable->variable);
-		if (len < 5)
-			return (NULL);
-		else if (!ft_strncmp(env_variable->variable, "PATH=", 5))
-		{
-			tmp = ft_substr(env_variable->variable, 5, len);
-			path = ft_split(tmp, ':');
-			free(tmp);
-			break ;
-		}
-		env_variable = env_variable->next;
-	}
-	full_path = check_cmd_access(parser, path);
-	if (!env_variable->head && full_path)
-		return (full_path);
-	return (NULL);
-}
-
 static char	**create_command(t_parser *parser, char *file)
 {
 	size_t	words;
@@ -123,9 +58,17 @@ static char	**create_command(t_parser *parser, char *file)
 	return (result);
 }
 
-void	fork_and_execve(t_data *data, t_exe *exe,
-						t_parser *parser, char *file)
+static void	do_child_process(char *full_path, char **command, char **env)
 {
+	execve(full_path, command, env);
+	perror("minishell:");
+	exit(EXIT_SUCCESS);
+	return ;
+}
+
+void	fork_and_execve(t_data *data, t_parser *parser, char *file)
+{
+	pid_t	pid;
 	int		status;
 	char	**command;
 	char	**env;
@@ -134,20 +77,17 @@ void	fork_and_execve(t_data *data, t_exe *exe,
 	status = 0;
 	full_path = check_cmd_path(data->env, parser);
 	if (!full_path)
-		return (command_not_found(parser->cmd));
+		return (command_not_found(data->env, parser->cmd));
 	command = create_command(parser, file);
 	env = struct_to_array(data->env);
-	exe->pid = fork();
-	if (exe->pid < 0)
+	pid = fork();
+	if (pid < 0)
 		exit(EXIT_FAILURE);
-	else if (exe->pid == 0)
-	{
-		exe->exe_flag = execve(full_path, command, env);
-		perror("minishell:");
-		exit(EXIT_SUCCESS);
-	}
+	else if (pid == 0)
+		do_child_process(full_path, command, env);
 	else
-		waitpid(exe->pid, &status, 0);
+		waitpid(pid, &status, 0);
+	data->env->status = status;
 	free(full_path);
 	double_array_free(command);
 	double_array_free(env);

@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/19 17:18:15 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/20 16:59:08 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef enum e_redirect_type
 typedef struct s_env
 {
 	int					head;
+	size_t				status;
 	char				*variable;
 	struct s_env		*prev;
 	struct s_env		*next;
@@ -136,11 +137,11 @@ void	exp_nodeadd_back(t_exp **env, t_exp *new);
 void	standby_state(t_data *data);
 
 /*---external_command---*/
-void	fork_and_execve(t_data *data, t_exe *exe, \
-							t_parser *parser, char *file);
+void	fork_and_execve(t_data *data, t_parser *parser, char *file);
 size_t	count_file_nbr(char *file);
 char	**add_file_to_array(char **result, char *file, size_t index, \
 																size_t len);
+char	*check_cmd_path(t_env *env_variable, t_parser *parser);
 /*---------------------*/
 
 /*---signal---*/

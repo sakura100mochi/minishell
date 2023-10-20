@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:59:58 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/17 19:59:18 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/20 16:48:00 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,11 @@ static char	*find_env_variable(t_env *env, char *str)
 	char	*tmp;
 
 	len = ft_strlen(str) + 1;
+	if (ft_strncmp("$?", str, len - 1))
+	{
+		tmp = ft_itoa((int)env->status);
+		return (tmp);
+	}
 	env = env->next;
 	while (!env->head)
 	{
@@ -82,7 +87,7 @@ int	unfold_split_words(char **strage, t_env *env)
 	while (strage[index] != NULL)
 	{
 		if (strage[index][0] == '$' && strage[index][1] != '\0' && \
-											ft_isalnum(strage[index][1]))
+				(ft_isalnum(strage[index][1]) || strage[index][1] == '?'))
 		{
 			tmp = ft_substr(strage[index], 1, ft_strlen(strage[index]));
 			free(strage[index]);

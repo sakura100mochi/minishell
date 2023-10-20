@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/19 23:08:02 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/20 17:00:28 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	no_pipe_exec(t_data *data)
 	else
 	{
 		if (!judge_built_in(data, data->parser, file))
-			fork_and_execve(data, data->exe, data->parser, file);
+			fork_and_execve(data, data->parser, file);
 	}
 	free(file);
 	return ;

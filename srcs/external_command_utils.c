@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   external_command_helper.c                          :+:      :+:    :+:   */
+/*   external_command_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 13:23:10 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/17 11:20:03 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/20 16:55:09 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,68 @@ char	**add_file_to_array(char **result, char *file, size_t index, size_t len)
 		end++;
 	}
 	return (result);
+}
+
+static char	*check_cmd_access(t_parser *parser, char **path)
+{
+	size_t	index;
+	char	*tmp;
+	char	*cwd;
+	char	*full_path;
+
+	cwd = NULL;
+	index = 0;
+	while (path[index] != NULL)
+	{
+		tmp = ft_strjoin(path[index], "/");
+		full_path = ft_strjoin(tmp, parser->cmd);
+		if (!access(full_path, X_OK))
+		{
+			double_array_free(path);
+			free(tmp);
+			return (full_path);
+		}
+		free(tmp);
+		free(full_path);
+		index++;
+	}
+	double_array_free(path);
+	cwd = getcwd(cwd, PATH_MAX);
+	tmp = ft_strjoin(cwd, "/");
+	full_path = ft_strjoin(tmp, parser->cmd);
+	free(cwd);
+	free(tmp);
+	if (!access(full_path, X_OK))
+		return (full_path);
+	free(full_path);
+	return (NULL);
+}
+
+char	*check_cmd_path(t_env *env_variable, t_parser *parser)
+{
+	size_t	len;
+	char	*tmp;
+	char	**path;
+	char	*full_path;
+
+	path = NULL;
+	env_variable = env_variable->next;
+	while (!env_variable->head)
+	{
+		len = ft_strlen(env_variable->variable);
+		if (len < 5)
+			return (NULL);
+		else if (!ft_strncmp(env_variable->variable, "PATH=", 5))
+		{
+			tmp = ft_substr(env_variable->variable, 5, len);
+			path = ft_split(tmp, ':');
+			free(tmp);
+			break ;
+		}
+		env_variable = env_variable->next;
+	}
+	full_path = check_cmd_access(parser, path);
+	if (!env_variable->head && full_path)
+		return (full_path);
+	return (NULL);
 }
