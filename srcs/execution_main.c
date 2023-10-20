@@ -6,7 +6,7 @@
 /*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 22:17:59 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/10/20 14:07:18 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,11 @@ void	execution_main(t_data *data)
 	else
 	{
 		if (!judge_built_in(data, data->parser, file))
+		{
+			signal_minishell(data->signal, IGN);
 			fork_and_execve(data, data->exe, data->parser, file);
+			signal_minishell(data->signal, NORMAL);
+		}
 	}
 	free(file);
 }

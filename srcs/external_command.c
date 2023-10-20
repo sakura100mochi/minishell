@@ -6,7 +6,7 @@
 /*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 22:11:40 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/10/20 14:07:55 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ void	fork_and_execve(t_data *data, t_exe *exe,
 	command = create_command(parser, file);
 	env = struct_to_array(data->env);
 	exe->pid = fork();
+	signal_minishell(data->signal, INTERACTIVE);
 	if (exe->pid < 0)
 		exit(EXIT_FAILURE);
 	else if (exe->pid == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 16:46:33 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/20 14:48:23 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,21 @@ typedef enum e_redirect_type
 	UNKNOWN
 }			t_redirect_type;
 
+typedef enum e_signal_type
+{
+	NORMAL,
+	REDIRECT,
+	INTERACTIVE,
+	IGN
+}			t_signal_type;
+
 typedef struct s_env
 {
 	int					head;
 	char				*variable;
 	struct s_env		*prev;
 	struct s_env		*next;
-}						t_env;
+}				t_env;
 
 typedef struct s_exp
 {
@@ -143,8 +151,9 @@ char	**add_file_to_array(char **result, char *file, size_t index, \
 /*---------------------*/
 
 /*---signal---*/
-void	signal_minishell(t_signal *signal);
+void	signal_minishell(t_signal *sig, int flag);
 void	signal_heredoc(t_signal *signal);
+void	signal_interactive(t_signal *signal);
 /*------------*/
 
 /*---free---*/

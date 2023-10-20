@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/15 21:58:59 by csakamot         ###   ########.fr        #
+#    Updated: 2023/10/20 14:44:15 by hiraiyuina       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ ERRORSRC		= malloc_error.c syntax.c file.c no_command.c
 
 INITSRC			= init_minishell.c init_env.c init_exp.c
 
-SIGNALSRC		= signal.c heredoc_signal.c
+SIGNALSRC		= signal.c heredoc_signal.c intetactive_signal.c
 
 BULITINSRC		= built_in.c built_in_cd.c built_in_echo.c built_in_env.c \
 				built_in_exit.c built_in_pwd.c built_in_unset.c built_in_export.c \

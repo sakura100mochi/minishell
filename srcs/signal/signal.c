@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 12:50:11 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 17:59:34 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/20 14:48:36 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,59 +15,37 @@
 //ctrl+c : SIGINT
 //ctrl+\ : SIGQUIT
 
-static void	signal_handler(int signum, siginfo_t *info, void *dummy)
+static void	normal_sigint(int signum)
 {
-	int		status;
-	pid_t	pid;
-
 	(void)signum;
-	(void)dummy;
-	(void)info;
-	pid = wait(&status);
-	if (pid != -1)
-	{
-		write(STDOUT_FILENO, "\n", 1);
-		rl_replace_line("", 0);
-	}
-	else
-	{
-		write(STDOUT_FILENO, "\n", 1);
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
-	}
+	printf("---normal_sigint---\n");
+	write(STDOUT_FILENO, "\n", 1);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 	return ;
 }
 
-static void	signal_handler_quit(int signum, siginfo_t *info, void *dummy)
+void	signal_minishell(t_signal *sig, int flag)
 {
-	int		status;
-	pid_t	pid;
-
-	(void)signum;
-	(void)dummy;
-	(void)info;
-	pid = waitpid(-1, &status, WNOHANG);
-	if (pid == 0)
-		write(STDOUT_FILENO, "Quit: 3\n", 8);
-	else if (pid == -1)
+	if (flag == NORMAL)
 	{
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
+		sig->act1.sa_handler = normal_sigint;
+		sigemptyset(&sig->act1.sa_mask);
+		sig->act1.sa_flags = 0;
+		sigaction(SIGINT, &sig->act1, NULL);
+	
+		sig->act2.sa_handler = SIG_IGN;
+		sigaction(SIGQUIT, &sig->act2, NULL);
 	}
-}
-
-void	signal_minishell(t_signal *signal)
-{
-	signal->act1.sa_sigaction = signal_handler;
-	sigemptyset(&signal->act1.sa_mask);
-	signal->act1.sa_flags = 0;
-	sigaction(SIGINT, &signal->act1, NULL);
-
-	signal->act2.sa_sigaction = signal_handler_quit;
-	sigemptyset(&signal->act2.sa_mask);
-	signal->act2.sa_flags = 0;
-	sigaction(SIGQUIT, &signal->act2, NULL);
+	else if (flag == REDIRECT)
+		signal_heredoc(sig);
+	else if (flag == INTERACTIVE)
+		signal_interactive(sig);
+	else
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+	}
 	return ;
 }

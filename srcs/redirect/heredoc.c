@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/15 16:10:20 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/20 14:05:23 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	heredoc(t_data *data, t_file *file, char *name)
 	file->fd = open("/tmp/tmp", O_CREAT | O_RDWR | O_TRUNC,
 			S_IREAD | S_IWRITE | S_IRGRP | S_IROTH);
 	status = 0;
+	signal_minishell(data->signal, IGN);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -54,9 +55,10 @@ int	heredoc(t_data *data, t_file *file, char *name)
 	}
 	else if (pid == 0)
 	{
-		signal_heredoc(data->signal);
+		signal_minishell(data->signal, REDIRECT);
 		interactive_heredoc(file, name, data->parser);
 	}
 	waitpid(pid, &status, 0);
+	signal_minishell(data->signal, NORMAL);
 	return (YES);
 }

@@ -6,7 +6,7 @@
 /*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 22:11:17 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/10/20 13:10:23 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(void)
 
 	data = NULL;
 	data = init_minishell(data);
-	signal_minishell(data->signal);
+	signal_minishell(data->signal, NORMAL);
 	standby_state(data);
 	return (0);
 }
