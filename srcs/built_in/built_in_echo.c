@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 12:54:53 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 05:51:17 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ static int	check_n_option(t_parser *parser, size_t start)
 	size_t	index;
 
 	index = start;
-	while (parser->option[index] != '\0' && parser->option[index] != ' ' \
-	&& parser->option[index] != '	')
+	while (parser->option[index] != ' ' && parser->option[index] != '	')
 	{
 		if (parser->option[index] != 'n')
 			return (NO);
@@ -71,13 +70,17 @@ static int	check_echo_option(t_parser *parser, char *str)
 	return (YES);
 }
 
-void	built_in_echo(t_parser *parser, char *str)
+void	built_in_echo(t_env *env, t_parser *parser, char *str)
 {
 	if (check_echo_option(parser, str))
+	{
+		env->status = 0;
 		return ;
+	}
 	if (!parser->option && !*str)
 		ft_printf("\n");
 	else if (!parser->option && *str)
 		ft_printf("%s\n", str);
+	env->status = 0;
 	return ;
 }

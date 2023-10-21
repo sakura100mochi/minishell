@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_contents.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:05:35 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/10/14 17:42:18 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/21 05:27:57 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_file	*ft_redirect(char **one_phrase, t_parser *node)
 			if (new == NULL)
 				return (NULL);
 			ft_fileadd_back(&file, new);
-			while (one_phrase[i] != NULL &&
+			while (one_phrase[i] != NULL && \
 				(one_phrase[i][0] == '<' || one_phrase[i][0] == '>'))
 				i++;
 		}

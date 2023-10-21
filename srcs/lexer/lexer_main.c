@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:51 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 17:58:52 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/21 14:09:56 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,22 @@
 static size_t	count_quotation(char *str, size_t *i)
 {
 	size_t	j;
+	size_t	single;
+	size_t	twofold;
 
 	j = 1;
-	while (str[j] != '\"' && str[j] != '\'' && str[j] != '\0')
+	single = 0;
+	twofold = 0;
+	if (str[0] == '\'')
+		single++;
+	else if (str[0] == '"')
+		twofold++;
+	while (single && str[j] != '\'' && str[j] != '\0')
 		j++;
+	single = 0;
+	while (twofold && str[j] != '"' && str[j] != '\0')
+		j++;
+	twofold = 0;
 	j++;
 	*i += j;
 	return (1);

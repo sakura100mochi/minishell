@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:10 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/26 14:04:48 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 09:35:23 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ static t_exp	*rm_exp_str(char *str, t_exp *exp_variable)
 void	built_in_unset(t_parser *parser, t_env *env_variable, \
 									t_exp *exp_variable, char *str)
 {
-	(void)exp_variable;
 	if (!*str)
 		return ;
 	else if (!parser->option)
@@ -122,5 +121,6 @@ void	built_in_unset(t_parser *parser, t_env *env_variable, \
 		exp_variable = rm_exp_variable(str, exp_variable);
 		exp_variable = rm_exp_str(str, exp_variable);
 	}
+	env_variable->status = 0;
 	return ;
 }

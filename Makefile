@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+         #
+#    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/20 14:44:15 by hiraiyuina       ###   ########.fr        #
+#    Updated: 2023/10/21 14:05:33 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,11 +46,11 @@ LIBFT		= libft/
 
 
 ##------------Srcs-------------##
-MAINSRC			= main.c standby_state.c \
-					execution_main.c external_command.c malloc_free.c external_command_helper.c \
-					command_in_redirect.c command_in_redirect_helper.c
+MAINSRC			= main.c standby_state.c check_cmd_path_utils.c\
+					execution_main.c external_command.c malloc_free.c external_command_utils.c \
+					command_in_redirect.c command_in_redirect_utils.c
 
-ERRORSRC		= malloc_error.c syntax.c file.c no_command.c
+ERRORSRC		= malloc_error.c syntax.c file.c no_command.c exit.c
 
 INITSRC			= init_minishell.c init_env.c init_exp.c
 
@@ -58,7 +58,7 @@ SIGNALSRC		= signal.c heredoc_signal.c intetactive_signal.c
 
 BULITINSRC		= built_in.c built_in_cd.c built_in_echo.c built_in_env.c \
 				built_in_exit.c built_in_pwd.c built_in_unset.c built_in_export.c \
-				built_in_helper.c built_in_export_helper.c
+				built_in_utils.c built_in_export_utils.c
 
 LEXERSRC		= lexer_main.c split_word.c
 
@@ -67,9 +67,9 @@ PARSERSRC		= parser_main.c split_pipe.c list_new.c list_add_back.c parser_conten
 REDIRECTSRC		= redirect_main.c append.c heredoc.c input.c output.c quote_heredoc.c redirect_utils.c
 
 UNFOLDSRC		= unfold_main.c remove_quote.c unfold_quote_variable.c unfold_unquote_variable.c \
-					unfold_helper.c
+					unfold_utils.c
 
-PIPESRC			= pipe_main.c init_pipe.c pipe_execve.c
+PIPESRC			= pipe_main.c pipe_execve.c
 
 SRCS		= ${MAINSRC} ${addprefix ${ERROR}, ${ERRORSRC}} ${addprefix ${BUILTIN}, ${BULITINSRC}} ${addprefix ${LEXER}, ${LEXERSRC}} \
 				${addprefix ${PARSER}, ${PARSERSRC}} ${addprefix ${REDIRECT}, ${REDIRECTSRC}} \
@@ -87,7 +87,7 @@ OBJS		= ${addprefix ${PRE}, ${SRCS:.c=.o}}
 
 
 ##----------conpiler-----------##
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=address
 
 CCLIBFT		= make -s -C libft
 ##-----------------------------##
@@ -112,7 +112,7 @@ ARCHIVES	= ${addprefix ${LIBFT}, libft.a}
 all:		${NAME}
 
 %.o:%.c
-			${CC} ${CFLAGS} -I /opt/homebrew/Cellar/readline/8.2.1/include -c $< -o $@
+			${CC} ${CFLAGS} -I /Users/yhirai/.brew/Cellar/readline/8.2.1/include -c $< -o $@
 
 ${NAME}:	${OBJS}
 			@${CCLIBFT}

@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 13:18:02 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 11:43:16 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,121 +14,103 @@
 #include "../../includes/built_in.h"
 #include "../../includes/pipe.h"
 
-static int	check_pipe_exec(t_data *data, t_parser *parser,
-									t_pipe *pipelist, char *file)
+static void	pipe_exec(t_data *data, t_parser *parser, t_pipe *pipelist)
 {
-	if (!pipelist->head)
-		close(pipelist->pipe_fd[0]);
-	if (!pipelist->prev->head)
-		dup2(pipelist->prev->pipe_fd[0], STDIN_FILENO);
-	if (!pipelist->head)
-		dup2(pipelist->pipe_fd[1], STDOUT_FILENO);
-	if (!judge_built_in(data, parser, file))
-		execve_without_fork(data, parser, file);
+	if (pipelist->file == NULL)
+	{
+		if (parser->redirect)
+			close_fd(parser->redirect);
+		return ;
+	}
+	if (data->parser->redirect)
+		dup_command(data, parser, parser->redirect, pipelist->file);
+	else
+	{
+		if (!judge_built_in(data, parser, pipelist->file))
+			execve_without_fork(data, parser, pipelist->file);
+	}
+	return ;
+}
+
+static int	do_pipe_dup(t_data *data, t_parser *parser, \
+								t_pipe *pipelist, size_t len)
+{
+	if (pipelist->index != len)
+	{
+		if (!(pipelist->index % 2))
+			close(pipelist->pipe1[0]);
+		else
+			close(pipelist->pipe2[0]);
+	}
+	if (pipelist->index > 0)
+	{
+		if (!(pipelist->index % 2))
+			dup2(pipelist->pipe2[0], STDIN_FILENO);
+		else
+			dup2(pipelist->pipe1[0], STDIN_FILENO);
+	}
+	if (pipelist->index != len)
+	{
+		if (!(pipelist->index % 2))
+			dup2(pipelist->pipe1[1], STDOUT_FILENO);
+		else
+			dup2(pipelist->pipe2[1], STDOUT_FILENO);
+	}
+	pipe_exec(data, parser, pipelist);
 	return (0);
 }
 
-int	pipe_main(t_data *data, t_parser *parser, t_pipe *pipelist, size_t len)
+static void	close_pipe(t_pipe *pipelist, size_t len)
 {
-	size_t	index;
-	int		status;
-	char	*file;
-
-	index = 0;
-	status = 0;
-	(void)len;
-	while (index <= len)
+	if (pipelist->index > 0)
 	{
-		file = format_command(data->env, parser);
-		pipelist->pid = fork();
-		if (pipelist->pid == -1)
-			exit(EXIT_FAILURE);
-		if (pipelist->pid == 0)
+		if (!(pipelist->index % 2))
+			close(pipelist->pipe2[0]);
+		else
+			close(pipelist->pipe1[0]);
+	}
+	if (pipelist->index != len)
+	{
+		if (!(pipelist->index % 2))
+			close(pipelist->pipe1[1]);
+		else
+			close(pipelist->pipe2[1]);
+	}
+}
+
+static void	open_pipe(t_data *data, t_parser *parser, \
+							t_pipe *pipelist, size_t len)
+{
+	if (!(pipelist->index % 2) && pipelist->index != len)
+		pipe(pipelist->pipe1);
+	if (pipelist->index % 2 && len != 1 && pipelist->index != len)
+		pipe(pipelist->pipe2);
+	pipelist->file = format_command(data->env, parser);
+	return ;
+}
+
+int	pipe_main(t_data *data, t_parser *parser, size_t len)
+{
+	t_pipe	pipelist;
+
+	pipelist.index = 0;
+	pipelist.status = 0;
+	while (pipelist.index <= len)
+	{
+		open_pipe(data, parser, &pipelist, len);
+		pipelist.pid = fork();
+		if (pipelist.pid == -1)
+			break ;
+		if (pipelist.pid == 0)
 		{
-			check_pipe_exec(data, parser, pipelist, file);
+			do_pipe_dup(data, parser, &pipelist, len);
 			exit(EXIT_FAILURE);
 		}
-		if (!pipelist->prev->head)
-			close(pipelist->prev->pipe_fd[0]);
-		if (!pipelist->head)
-			close(pipelist->pipe_fd[1]);
-		waitpid(pipelist->pid, &status, 0);
-		free(file);
+		close_pipe(&pipelist, len);
+		waitpid(pipelist.pid, &(pipelist.status), 0);
+		free(pipelist.file);
 		parser = parser->next;
-		pipelist = pipelist->next;
-		index++;
+		pipelist.index++;
 	}
 	return (0);
 }
-
-// printf("%zu, %s, %s, %s\n", pipelist->head,arser->cmd, parser->option, file);
-
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <unistd.h>
-// #include <string.h>
-
-// int main() {
-//     int pipe_ls_to_grep[2];
-//     int pipe_grep_to_wc[2];
-//     pid_t ls_pid, grep_pid, wc_pid;
-
-//     // パイプを作成
-//     if (pipe(pipe_ls_to_grep) == -1 || pipe(pipe_grep_to_wc) == -1) {
-//         perror("pipe");
-//         exit(EXIT_FAILURE);
-//     }
-//     // ls -l を実行する子プロセスをフォーク
-//     if ((ls_pid = fork()) == -1) {
-//         perror("ls fork");
-//         exit(EXIT_FAILURE);
-//     }
-//     if (ls_pid == 0) {
-//         // 子プロセス内で ls -l を実行し、結果をパイプに書き込む
-//         close(pipe_ls_to_grep[0]);  // パイプの読み込み側を閉じる
-//         dup2(pipe_ls_to_grep[1], STDOUT_FILENO);
-//         execlp("ls", "ls", "-l", NULL);
-//         perror("ls execlp");
-//         exit(EXIT_FAILURE);
-//     }
-// 	// 親プロセス
-// 	close(pipe_ls_to_grep[1]);  // パイプの書き込み側を閉じる
-// 	waitpid(ls_pid, NULL, 0);
-// 	// grep srcs を実行する子プロセスをフォーク
-// 	if ((grep_pid = fork()) == -1) {
-// 		perror("grep fork");
-// 		exit(EXIT_FAILURE);
-// 	}
-// 	if (grep_pid == 0)
-// 	{
-// 		// 子プロセス内で grep srcs を実行し、結果を別のパイプに書き込む
-// 		close(pipe_grep_to_wc[0]);  // パイプの読み込み側を閉じる
-// 		dup2(pipe_ls_to_grep[0], STDIN_FILENO);
-// 		dup2(pipe_grep_to_wc[1], STDOUT_FILENO);
-// 		execlp("grep", "grep", "srcs", NULL);
-// 		perror("grep execlp");
-// 		exit(EXIT_FAILURE);
-// 	}
-// 	// 親プロセス
-// 	close(pipe_ls_to_grep[0]);
-// 	close(pipe_grep_to_wc[1]);  // パイプの書き込み側を閉じる
-// 	waitpid(grep_pid, NULL, 0);
-// 	// wc -l を実行する子プロセスをフォーク
-// 	if ((wc_pid = fork()) == -1)
-// 	{
-// 		perror("wc fork");
-// 		exit(EXIT_FAILURE);
-// 	}
-// 	if (wc_pid == 0)
-// 	{
-// 		// 子プロセス内で wc -l を実行し、結果を表示
-// 		dup2(pipe_grep_to_wc[0], STDIN_FILENO);  // grep の出力をパイプから読み取る
-// 		execlp("wc", "wc", "-l", NULL);
-// 		perror("wc execlp");
-// 		exit(EXIT_FAILURE);
-// 	}
-// 	// 親プロセスはすべての子プロセスの終了を待つ
-// 	close(pipe_grep_to_wc[0]);
-// 	waitpid(wc_pid, NULL, 0);
-//     return 0;
-// }

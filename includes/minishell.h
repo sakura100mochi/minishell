@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/20 14:48:23 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/10/21 14:06:11 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef enum e_signal_type
 typedef struct s_env
 {
 	int					head;
+	size_t				status;
 	char				*variable;
 	struct s_env		*prev;
 	struct s_env		*next;
@@ -85,45 +86,46 @@ typedef struct s_signal
 
 typedef struct s_exe
 {
-	pid_t		pid;
-	size_t		exe_flag;
+	pid_t				pid;
+	size_t				exe_flag;
 }				t_exe;
 
 typedef struct s_pipe
 {
-	int				pipe_fd[2];
-	pid_t			pid;
-	size_t			head;
-	struct s_pipe	*prev;
-	struct s_pipe	*next;
+	int					pipe1[2];
+	int					pipe2[2];
+	int					status;
+	char				*file;
+	pid_t				pid;
+	size_t				index;
 }			t_pipe;
 
 typedef struct s_file
 {
-	int				fd;
-	char			*file_name;
-	t_redirect_type	type;
-	struct s_file	*next;
+	int					fd;
+	char				*file_name;
+	t_redirect_type		type;
+	struct s_file		*next;
 }			t_file;
 
 typedef struct s_parser
 {
-	char			*cmd;
-	char			*option;
-	t_file			*redirect;
-	struct s_parser	*next;
-	struct s_parser	*prev;
+	char				*cmd;
+	char				*option;
+	t_file				*redirect;
+	struct s_parser		*next;
+	struct s_parser		*prev;
 }			t_parser;
 
 typedef struct s_data
 {
-	char		*prompt;
-	t_exe		*exe;
-	t_pipe		*pipe;
-	t_signal	*signal;
-	t_parser	*parser;
-	t_env		*env;
-	t_exp		*exp;
+	char				*prompt;
+	t_exe				*exe;
+	t_pipe				*pipe;
+	t_signal			*signal;
+	t_parser			*parser;
+	t_env				*env;
+	t_exp				*exp;
 }				t_data;
 /*---------------------------*/
 
@@ -143,11 +145,12 @@ void	exp_nodeadd_back(t_exp **env, t_exp *new);
 void	standby_state(t_data *data);
 
 /*---external_command---*/
-void	fork_and_execve(t_data *data, t_exe *exe, \
-							t_parser *parser, char *file);
+void	fork_and_execve(t_data *data, t_parser *parser, char *file);
 size_t	count_file_nbr(char *file);
 char	**add_file_to_array(char **result, char *file, size_t index, \
 																size_t len);
+char	*check_cmd_path(t_env *env_variable, t_parser *parser);
+char	*check_cmd_access(t_parser *parser, char **path);
 /*---------------------*/
 
 /*---signal---*/

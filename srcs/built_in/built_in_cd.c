@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:22 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/26 14:10:23 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 08:44:01 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,44 @@ static t_env	*set_pwd(t_env *env_variable, char *head_variable)
 	return (env_variable);
 }
 
+static int	change_home_path(char *file)
+{
+	char	*home_path;
+	char	*tmp_path;
+
+	home_path = getenv("HOME");
+	tmp_path = NULL;
+	if (file[0] == '\0')
+		chdir(home_path);
+	else if (file[1] != '\0' && file[1] == '/')
+	{
+		tmp_path = ft_strjoin(home_path, file + 2);
+		chdir (tmp_path);
+		free(tmp_path);
+	}
+	else
+		chdir(file);
+	return (YES);
+}
+
 static int	change_directory(t_parser *parser, char *file)
 {
 	char	*wd_path;
 	char	*tmp_path;
 	char	*absolute_path;
 
-	if (!*file)
+	if ((file[0] == '\0' || file[0] == '~') && !parser->option)
 	{
-		chdir("~/");
-		return (1);
+		change_home_path(file);
+		return (YES);
+	}
+	else if (file[0] == '/' && !parser->option)
+	{
+		chdir(file);
+		return (YES);
 	}
 	if (parser->option)
-		return (0);
+		return (NO);
 	wd_path = NULL;
 	wd_path = getcwd(wd_path, PATH_MAX);
 	tmp_path = ft_strjoin(wd_path, "/");
@@ -47,7 +72,7 @@ static int	change_directory(t_parser *parser, char *file)
 	free(wd_path);
 	free(tmp_path);
 	free(absolute_path);
-	return (1);
+	return (YES);
 }
 
 t_env	*built_in_cd(t_env *env_variable, t_parser *parser, char *file)
@@ -63,6 +88,12 @@ t_env	*built_in_cd(t_env *env_variable, t_parser *parser, char *file)
 		env_variable = serch_env_variable(head, "PWD=");
 		if (env_variable != head)
 			env_variable = set_pwd(env_variable, "PWD=");
+		head->status = 0;
+	}
+	else
+	{
+		ft_printf("minishell: cd: %s: invalid option\n", parser->option);
+		head->status = 2;
 	}
 	return (head);
 }

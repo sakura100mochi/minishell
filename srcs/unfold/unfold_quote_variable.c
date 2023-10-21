@@ -6,60 +6,50 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:59:58 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 17:46:01 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/20 16:48:00 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/unfold.h"
 
-int	check_env_variable(char *str, size_t start, size_t end)
+static char	*input_env_variable(char *str, size_t *start, \
+									size_t index, size_t *flag)
 {
-	size_t	index;
+	char	*result;
 
-	index = start;
-	while (index < end)
-	{
-		if (str[index] == '$')
-			return (0);
-		index++;
-	}
-	return (1);
+	result = ft_substr(str, *start, index - *start);
+	if (!flag)
+		*flag = 1;
+	else
+		*flag = 0;
+	*start = index;
+	return (result);
 }
 
 char	**split_env_variable(char *tmp, size_t len)
 {
 	size_t	index;
 	size_t	start;
-	size_t	cnt;
 	size_t	flag;
+	char	**tmp_array;
 	char	**result;
 
 	index = 0;
 	start = 0;
-	cnt = 0;
 	flag = 0;
 	result = (char **)ft_calloc(sizeof(char *), len + 1);
+	tmp_array = result;
 	while (index < ft_strlen(tmp) + 1)
 	{
-		if (tmp[index] == '$' && (tmp[index + 1] != '\0' || \
-		tmp[index + 1] != ' ' || tmp[index + 1] != '	' || \
-		tmp[index + 1] != '\''))
-		{
-			result[cnt++] = ft_substr(tmp, start, index - start);
-			flag++;
-			start = index;
-		}
+		if (check_dollar_charactor(tmp, index))
+			*tmp_array++ = input_env_variable(tmp, &start, index, &flag);
 		else if (flag && (tmp[index] == '\'' || tmp[index] == ' ' || \
 		tmp[index] == '	' || tmp[index] == '\0'))
-		{
-			result[cnt++] = ft_substr(tmp, start, index - start);
-			flag = 0;
-			start = index;
-		}
+			*tmp_array++ = input_env_variable(tmp, &start, index, &flag);
 		index++;
 	}
-	result[cnt++] = ft_substr(tmp, start, index - start);
-	result[cnt] = NULL;
+	*tmp_array++ = ft_substr(tmp, start, index - start);
+	*tmp_array = NULL;
 	return (result);
 }
 
@@ -69,6 +59,11 @@ static char	*find_env_variable(t_env *env, char *str)
 	char	*tmp;
 
 	len = ft_strlen(str) + 1;
+	if (ft_strncmp("$?", str, len - 1))
+	{
+		tmp = ft_itoa((int)env->status);
+		return (tmp);
+	}
 	env = env->next;
 	while (!env->head)
 	{
@@ -91,7 +86,8 @@ int	unfold_split_words(char **strage, t_env *env)
 	index = 0;
 	while (strage[index] != NULL)
 	{
-		if (strage[index][0] == '$')
+		if (strage[index][0] == '$' && strage[index][1] != '\0' && \
+				(ft_isalnum(strage[index][1]) || strage[index][1] == '?'))
 		{
 			tmp = ft_substr(strage[index], 1, ft_strlen(strage[index]));
 			free(strage[index]);
@@ -118,8 +114,6 @@ char	*unfold_quote_variable(char *str, t_env *env, size_t start, size_t *end)
 	tmp = ft_substr(str, start, *end + 1 - start);
 	len = cnt_env_variable(tmp);
 	strage = split_env_variable(tmp, len);
-	// for (int i = 0; strage[i] != NULL; i++)
-	// 	printf("%s\n", strage[i]);
 	unfold_split_words(strage, env);
 	while (strage[index] != NULL)
 	{

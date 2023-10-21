@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_execve.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:56:11 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 17:41:22 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/21 12:06:34 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../includes/minishell.h"
 #include "../../includes/pipe.h"
+#include "../../includes/error.h"
 
 static char	**struct_to_array(t_env *env)
 {
@@ -25,72 +27,18 @@ static char	**struct_to_array(t_env *env)
 		env = env->next;
 	}
 	result = (char **)ft_calloc(sizeof(char *), index + 1);
+	if (!result)
+		exit_malloc_error();
 	env = env->next;
 	index = 0;
 	while (!env->head)
 	{
 		result[index++] = ft_strdup(env->variable);
+		if (!result[index - 1])
+			exit_malloc_error();
 		env = env->next;
 	}
 	return (result);
-}
-
-static char	*check_cmd_access(t_parser *parser, char **path)
-{
-	size_t	index;
-	char	*tmp;
-	char	*full_path;
-
-	index = 0;
-	while (path[index] != NULL)
-	{
-		tmp = ft_strjoin(path[index], "/");
-		full_path = ft_strjoin(tmp, parser->cmd);
-		if (!access(full_path, X_OK))
-		{
-			double_array_free(path);
-			free(tmp);
-			return (full_path);
-		}
-		free(tmp);
-		free(full_path);
-		index++;
-	}
-	double_array_free(path);
-	full_path = ft_strjoin("/", parser->cmd);
-	if (!access(full_path, X_OK))
-		return (full_path);
-	free(full_path);
-	return (NULL);
-}
-
-static char	*check_cmd_path(t_env *env_variable, t_parser *parser)
-{
-	size_t	len;
-	char	*tmp;
-	char	**path;
-	char	*full_path;
-
-	path = NULL;
-	env_variable = env_variable->next;
-	while (!env_variable->head)
-	{
-		len = ft_strlen(env_variable->variable);
-		if (len < 5)
-			return (NULL);
-		else if (!ft_strncmp(env_variable->variable, "PATH=", 5))
-		{
-			tmp = ft_substr(env_variable->variable, 5, len);
-			path = ft_split(tmp, ':');
-			free(tmp);
-			break ;
-		}
-		env_variable = env_variable->next;
-	}
-	full_path = check_cmd_access(parser, path);
-	if (!env_variable->head && full_path)
-		return (full_path);
-	return (NULL);
 }
 
 static char	**create_command(t_parser *parser, char *file)
@@ -106,11 +54,19 @@ static char	**create_command(t_parser *parser, char *file)
 	if (file)
 		words++;
 	result = (char **)ft_calloc(sizeof(char *), words + 1);
+	if (!result)
+		exit_malloc_error();
 	result[index++] = ft_strdup(parser->cmd);
+	if (result[index - 1])
+		exit_malloc_error();
 	if (parser->option)
 		result[index++] = ft_strdup(parser->option);
+	if (result[index - 1])
+		exit_malloc_error();
 	if (*file)
 		result[index++] = ft_strdup(file);
+	if (result[index - 1])
+		exit_malloc_error();
 	return (result);
 }
 

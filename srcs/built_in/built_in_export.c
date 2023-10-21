@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:26:05 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 11:49:31 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/21 09:37:23 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,18 @@ static int	check_equal(char *str)
 	return (1);
 }
 
-static int	check_variable(char *variable)
+static int	check_variable(t_env *env, char *variable)
 {
 	size_t	index;
 	size_t	flag;
 
 	index = 0;
 	flag = 0;
-	while (variable[index] != '\0' && variable[index] != ' ' \
-										&& variable[index] != '	')
-		index++;
 	if (variable[index] == '=')
+	{
+		env->status = 1;
 		return (0);
+	}
 	while (variable[index] != '\0')
 	{
 		if (variable[index] == '=')
@@ -45,21 +45,20 @@ static int	check_variable(char *variable)
 		index++;
 	}
 	if (variable[flag - 1] == ' ' || variable[flag - 1] == '	')
+	{
+		env->status = 1;
 		return (0);
+	}
 	return (1);
 }
 
 void	export_no_command(t_exp *exp_variable)
 {
-	// size_t	i;
-
-	// i = 0;
 	exp_variable = exp_variable->next;
 	while (!exp_variable->head)
 	{
 		ft_printf("%s\n", exp_variable->variable);
 		exp_variable = exp_variable->next;
-		// i++;
 	}
 	return ;
 }
@@ -78,6 +77,7 @@ t_env	*input_env_variable(char *str, t_env *env_variable)
 	env_variable->next = new;
 	new->prev = env_variable;
 	new->next = head;
+	head->status = 0;
 	return (head);
 }
 
@@ -88,22 +88,24 @@ void	built_in_export(t_parser *parser, t_env *env_variable, \
 
 	if (parser->option)
 	{
-		ft_printf("minishell: export: %s: not a valid identifier\n", \
+		env_variable->status = 1;
+		ft_printf("minishell: export: '%s': not a valid identifier\n", \
 														parser->option);
 		return ;
 	}
-	variable = variable_format(str);
+	variable = variable_format(env_variable, str);
 	if (!*str)
 		export_no_command(exp_variable);
 	else if (!*variable)
 		ft_printf("minishell: export: enclose in quotation marks\n");
 	else if (check_equal(str))
-		exp_variable = input_exp_variable(str, exp_variable, 0);
-	else if (*variable && !check_variable(variable))
+		exp_variable = input_exp_variable(str, env_variable, exp_variable, 0);
+	else if (*variable && !check_variable(env_variable, variable))
 		ft_printf("minishell: export: '=': not a valid identifier\n");
-	else if (*variable && check_variable(variable))
+	else if (*variable && check_variable(env_variable, variable))
 	{
-		exp_variable = input_exp_variable(variable, exp_variable, 1);
+		exp_variable = input_exp_variable(variable, env_variable, \
+														exp_variable, 1);
 		env_variable = input_env_variable(variable, env_variable);
 	}
 	free(variable);

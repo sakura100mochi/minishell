@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:28:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/01 16:29:13 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/21 11:33:25 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../includes/error.h"
 
 void	env_nodeadd_back(t_env **env, t_env *new)
 {
@@ -45,10 +46,14 @@ t_data	*init_env(t_data *data)
 
 	index = 0;
 	env_variable = new_env_node("head", 1);
+	if (!env_variable)
+		exit_malloc_error();
 	start = env_variable;
 	while (environ[index])
 	{
 		new = new_env_node(ft_strdup(environ[index]), 0);
+		if (!new)
+			exit_malloc_error();
 		env_nodeadd_back(&env_variable, new);
 		index++;
 	}

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in_helper.c                                  :+:      :+:    :+:   */
+/*   built_in_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:42:14 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/26 10:56:08 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 06:25:24 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,15 @@ char	*wrap_with_quotes(char *str)
 	}
 	result[i - 1] = '"';
 	result[i] = '\0';
+	return (result);
+}
+
+char	*create_file_path(char *file)
+{
+	char	*result;
+
+	result = ft_strjoin("/", file);
+	if (!result)
+		exit (EXIT_FAILURE);
 	return (result);
 }
