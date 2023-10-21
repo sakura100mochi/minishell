@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 18:29:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/15 12:54:26 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:54:34 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	parser_free(t_parser *node)
 			file = tmp_file;
 		}
 		tmp_node = node->next;
+		free(node->all);
 		free(node->cmd);
 		free(node->option);
 		free(node);

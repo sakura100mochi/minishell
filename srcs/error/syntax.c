@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:26:38 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/21 14:49:24 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/21 16:35:32 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,69 +19,47 @@ int	syntax(void)
 	return (NO);
 }
 
-static int	check_redirect(size_t *i, char *str, char c)
+static int	check_redirect(char *all, size_t *i, char c)
 {
-	int	j;
+	size_t	j;
 
 	j = *i;
-	while (str[j] != c && str[j] != '\0')
+	while (all[j] != '\0' && all[j] != c)
 		j++;
-	if (str[j + 1] != '\0')
+	if (all[j + 1] != '\0')
 		j++;
 	else
 		return (NO);
 	*i += j;
-	if (str[j - 1] == c && str[j] == c)
+	if (all[j - 1] == c && all[j] == c)
 		return (YES);
 	return (NO);
 }
 
-int	redirect_syntax(t_data *data, char *str)
+int	redirect_syntax(t_data *data)
 {
 	size_t		i;
 	t_parser	*node;
 	t_file		*file;
+	char		*all;
 
-	i = 0;
 	node = data->parser;
-	while (str[i] != '\0' && node != NULL)
+	while (node != NULL)
 	{
+		i = 0;
+		all = node->all;
 		file = node->redirect;
-		if (file == NULL)
-			i++;
 		while (file != NULL)
 		{
-			if (file->type == HEREDOC || file->type == QUOTE_HEREDOC)
-			{
-				if (check_redirect(&i, str, '<') == NO)
-					return (NO);
-				else
-				{
-					node = node->next;
-					while (str[i] != '\0' && str[i] != '|')
-						i++;
-				}
-			}
-			else if (file->type == APPEND)
-			{
-				if (check_redirect(&i, str, '>') == NO)
-					return (NO);
-				else
-				{
-					node = node->next;
-					while (str[i] != '\0' && str[i] != '|')
-						i++;
-				}
-			}
-			else
-				i++;
+			if ((file->type == HEREDOC || file->type == QUOTE_HEREDOC)
+				&& check_redirect(all, &i, '<') == NO)
+				return (NO);
+			else if ((file->type == APPEND)
+				&& check_redirect(all, &i, '>') == NO)
+				return (NO);
 			file = file->next;
 		}
-		if (str[i] == '|')
-		{
-			node = node->next;
-			i++;
-		}
+		node = node->next;
 	}
 	return (YES);
 }
