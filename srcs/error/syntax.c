@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:26:38 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/15 22:17:06 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/10/17 14:41:17 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,22 @@ int	syntax(void)
 {
 	ft_printf("minishell: syntax error\n");
 	return (NO);
+}
+
+static int	check_redirect(t_file *file, int *i, char *str, char c)
+{
+	int	j;
+
+	j = *i;
+	while (str[j] != c && str[j] != '\0')
+		j++;
+	if (str[j] != '\0' && str[j] == c && str[j + 1] != '\0' && str[j + 1] != c)
+		return (NO);
+	else if (file->next != NULL)
+		file = file->next;
+	j++;
+	*i += j;
+	return (YES);
 }
 
 int	redirect_syntax(t_data *data, char *str)
@@ -39,23 +55,13 @@ int	redirect_syntax(t_data *data, char *str)
 		}
 		else if (file->type == HEREDOC || file->type == QUOTE_HEREDOC)
 		{
-			while (str[i] != '<' && str[i] != '\0')
-				i++;
-			if (str[i] != '\0' && str[i] == '<' && str[i + 1] != '\0' && str[i + 1] != '<')
+			if (check_redirect(file, &i, str, '<') == NO)
 				return (NO);
-			else if (file->next != NULL)
-				file = file->next;
-			i++;
 		}
 		else if (file->type == APPEND)
 		{
-			while (str[i] != '>' && str[i] != '\0')
-				i++;
-			if (str[i] != '\0' && str[i] == '>' && str[i + 1] != '\0' && str[i + 1] != '>')
+			if (check_redirect(file, &i, str, '>') == NO)
 				return (NO);
-			else if (file->next != NULL)
-				file = file->next;
-			i++;
 		}
 		if (str[i] == '|')
 		{
