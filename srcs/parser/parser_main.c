@@ -6,20 +6,20 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:54 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 17:59:15 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/21 16:17:37 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/parser.h"
 
-t_parser	*parser_main(char **str)
+t_parser	*parser_main(char **str, char *prompt)
 {
 	t_parser	*node;
 	size_t		i;
 
 	i = 0;
-	node = split_pipe(str);
+	node = split_pipe(str, prompt, NULL);
 	while (str[i] != NULL)
 		free(str[i++]);
 	free(str);

@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:07:28 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/10/13 14:34:36 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/21 16:18:03 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,20 @@ static char	**one_phrase_malloc(char **str, size_t *len, t_parser *node)
 	return (one_phrase);
 }
 
-t_parser	*split_pipe(char **str)
+t_parser	*split_pipe(char **str, char *prompt, t_parser	*node)
 {
 	char		**one_phrase;
 	t_parser	*new;
-	t_parser	*node;
 	size_t		i;
 	size_t		j;
+	size_t		k;
 
 	i = 0;
-	node = NULL;
+	k = 0;
 	while (str[i] != NULL)
 	{
 		one_phrase = one_phrase_malloc(&str[i], &i, node);
-		new = ft_parsernew(ft_command(one_phrase, node),
+		new = ft_parsernew(ft_all(prompt, &k), ft_command(one_phrase, node),
 				ft_option(one_phrase, node), ft_redirect(one_phrase, node));
 		if (new == NULL)
 			return (parser_malloc_error(node));

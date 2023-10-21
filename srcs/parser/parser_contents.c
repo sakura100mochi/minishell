@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_contents.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:05:35 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/10/21 05:27:57 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 16:24:51 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,21 @@ t_file	*ft_redirect(char **one_phrase, t_parser *node)
 			i++;
 	}
 	return (file);
+}
+
+char	*ft_all(char *prompt, size_t *k)
+{
+	size_t	i;
+	size_t	j;
+	char	*all;
+
+	i = *k;
+	while (prompt[i] == '|')
+		i++;
+	j = i;
+	while (prompt[j] != '\0' && prompt[j] != '|')
+		j++;
+	all = ft_substr(prompt, i, j);
+	*k += i + j;
+	return (all);
 }
