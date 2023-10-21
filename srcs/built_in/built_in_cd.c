@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:22 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 16:35:00 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 17:12:48 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	change_home_directory(char *file)
 		if (ft_strlen(tmp_path) < PATH_MAX)
 			chdir (tmp_path);
 		else
-			ft_printf("minishell: cd: %s: File name too long\n", absolute_path);
+			ft_printf("minishell: cd: %s: File name too long\n", file);
 		free(tmp_path);
 	}
 	else
