@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/16 12:12:23 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 14:09:20 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(void)
 
 	data = NULL;
 	data = init_minishell(data);
-	signal_minishell(data->signal);
+	signal_minishell(data->signal, NORMAL);
 	standby_state(data);
 	return (0);
 }

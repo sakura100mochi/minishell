@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 12:50:11 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 05:27:11 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 14:10:36 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,58 +15,36 @@
 //ctrl+c : SIGINT
 //ctrl+\ : SIGQUIT
 
-static void	signal_handler(int signum, siginfo_t *info, void *dummy)
+static void	normal_sigint(int signum)
 {
-	int		status;
-	pid_t	pid;
-
 	(void)signum;
-	(void)dummy;
-	(void)info;
-	pid = wait(&status);
-	if (pid != -1)
-	{
-		write(STDOUT_FILENO, "\n", 1);
-		rl_replace_line("", 0);
-	}
-	else
-	{
-		write(STDOUT_FILENO, "\n", 1);
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
-	}
+	write(STDOUT_FILENO, "\n", 1);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 	return ;
 }
 
-static void	signal_handler_quit(int signum, siginfo_t *info, void *dummy)
+void	signal_minishell(t_signal *sig, int flag)
 {
-	int		status;
-	pid_t	pid;
-
-	(void)signum;
-	(void)dummy;
-	(void)info;
-	pid = wait(&status);
-	if (pid != -1)
-		write(STDOUT_FILENO, "Quit: 3\n", 8);
+	if (flag == NORMAL)
+	{
+		sig->act1.sa_handler = normal_sigint;
+		sigemptyset(&sig->act1.sa_mask);
+		sig->act1.sa_flags = 0;
+		sigaction(SIGINT, &sig->act1, NULL);
+	
+		sig->act2.sa_handler = SIG_IGN;
+		sigaction(SIGQUIT, &sig->act2, NULL);
+	}
+	else if (flag == REDIRECT)
+		signal_heredoc(sig);
+	else if (flag == INTERACTIVE)
+		signal_interactive(sig);
 	else
 	{
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 	}
-}
-
-void	signal_minishell(t_signal *signal)
-{
-	signal->act1.sa_sigaction = signal_handler;
-	sigemptyset(&signal->act1.sa_mask);
-	signal->act1.sa_flags = 0;
-	sigaction(SIGINT, &signal->act1, NULL);
-	signal->act2.sa_sigaction = signal_handler_quit;
-	sigemptyset(&signal->act2.sa_mask);
-	signal->act2.sa_flags = 0;
-	sigaction(SIGQUIT, &signal->act2, NULL);
 	return ;
 }
