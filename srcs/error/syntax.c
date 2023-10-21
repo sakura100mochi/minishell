@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:26:38 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/17 14:41:17 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/21 14:13:30 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	syntax(void)
 	return (NO);
 }
 
-static int	check_redirect(t_file *file, int *i, char *str, char c)
+static int	check_redirect(t_file *file, size_t *i, char *str, char c)
 {
 	int	j;
 
@@ -43,9 +43,9 @@ int	redirect_syntax(t_data *data, char *str)
 
 	i = 0;
 	node = data->parser;
-	file = node->redirect;
 	while (str[i] != '\0' && node != NULL)
 	{
+		file = node->redirect;
 		if (file == NULL)
 		{
 			node = node->next;
@@ -53,21 +53,14 @@ int	redirect_syntax(t_data *data, char *str)
 				file = node->redirect;
 			continue ;
 		}
-		else if (file->type == HEREDOC || file->type == QUOTE_HEREDOC)
-		{
-			if (check_redirect(file, &i, str, '<') == NO)
-				return (NO);
-		}
-		else if (file->type == APPEND)
-		{
-			if (check_redirect(file, &i, str, '>') == NO)
-				return (NO);
-		}
+		else if ((file->type == HEREDOC || file->type == QUOTE_HEREDOC)
+			&& check_redirect(file, &i, str, '<') == NO)
+			return (NO);
+		else if (file->type == APPEND
+			&& check_redirect(file, &i, str, '>') == NO)
+			return (NO);
 		if (str[i] == '|')
-		{
 			node = node->next;
-			file = node->redirect;
-		}
 		i++;
 	}
 	return (YES);
