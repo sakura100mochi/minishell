@@ -18,12 +18,20 @@
 static int	syntax_check(t_data *data)
 {
 	t_parser	*node;
+	t_file		*file;
 
 	node = data->parser;
 	while (node != NULL)
 	{
 		if (node->cmd == NULL && node->redirect == NULL)
 			return (NO);
+		file = node->redirect;
+		while (file != NULL)
+		{
+			if (quote_check(file->file_name) == 2)
+				return (NO);
+			file = file->next;
+		}
 		node = node->next;
 	}
 	return (YES);
