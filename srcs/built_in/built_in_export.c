@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:26:05 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 09:33:54 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 09:37:23 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ void	built_in_export(t_parser *parser, t_env *env_variable, \
 		ft_printf("minishell: export: '=': not a valid identifier\n");
 	else if (*variable && check_variable(env_variable, variable))
 	{
-		exp_variable = input_exp_variable(variable, env_variable, exp_variable, 1);
+		exp_variable = input_exp_variable(variable, env_variable, \
+														exp_variable, 1);
 		env_variable = input_env_variable(variable, env_variable);
 	}
 	free(variable);
