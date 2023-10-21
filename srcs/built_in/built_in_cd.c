@@ -6,11 +6,12 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:22 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 08:44:01 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:56:08 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/built_in.h"
+#include "../../includes/error.h"
 
 static t_env	*set_pwd(t_env *env_variable, char *head_variable)
 {
@@ -26,7 +27,7 @@ static t_env	*set_pwd(t_env *env_variable, char *head_variable)
 	return (env_variable);
 }
 
-static int	change_home_path(char *file)
+static int	change_home_directory(char *file)
 {
 	char	*home_path;
 	char	*tmp_path;
@@ -46,15 +47,29 @@ static int	change_home_path(char *file)
 	return (YES);
 }
 
-static int	change_directory(t_parser *parser, char *file)
+static void	change_cwd_directory(char *wd_path, char *file)
 {
-	char	*wd_path;
 	char	*tmp_path;
 	char	*absolute_path;
 
+	tmp_path = create_file_path(file);
+	absolute_path = ft_strjoin(wd_path, tmp_path);
+	if (!absolute_path)
+		exit_malloc_error();
+	chdir(absolute_path);
+	free(wd_path);
+	free(tmp_path);
+	free(absolute_path);
+	return ;
+}
+
+static int	change_directory(t_parser *parser, char *file)
+{
+	char	*wd_path;
+
 	if ((file[0] == '\0' || file[0] == '~') && !parser->option)
 	{
-		change_home_path(file);
+		change_home_directory(file);
 		return (YES);
 	}
 	else if (file[0] == '/' && !parser->option)
@@ -66,12 +81,12 @@ static int	change_directory(t_parser *parser, char *file)
 		return (NO);
 	wd_path = NULL;
 	wd_path = getcwd(wd_path, PATH_MAX);
-	tmp_path = ft_strjoin(wd_path, "/");
-	absolute_path = ft_strjoin(tmp_path, file);
-	chdir(absolute_path);
-	free(wd_path);
-	free(tmp_path);
-	free(absolute_path);
+	if (!wd_path)
+	{
+		perror("");
+		return (NO);
+	}
+	change_cwd_directory(wd_path, file);
 	return (YES);
 }
 
