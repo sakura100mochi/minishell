@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/21 14:05:33 by csakamot         ###   ########.fr        #
+#    Updated: 2023/10/21 14:37:36 by yhirai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,7 +117,7 @@ all:		${NAME}
 ${NAME}:	${OBJS}
 			@${CCLIBFT}
 			@echo "object file		compiled"
-			@${CC} ${CFLAGS} ${OBJS} -Lsrcs -lreadline -L /opt/homebrew/Cellar/readline/8.2.1/lib -I /opt/homebrew/Cellar/readline/8.2.1/include ${ARCHIVES} -o ${NAME}
+			@${CC} ${CFLAGS} ${OBJS} -Lsrcs -lreadline -L /Users/yhirai/.brew/Cellar/readline/8.2.1/lib -I /Users/yhirai/.brew/Cellar/readline/8.2.1/include ${ARCHIVES} -o ${NAME}
 #			@echo "minishell		created\n\n"
 #			@echo "    ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗     "
 #			@echo "    ████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     "
