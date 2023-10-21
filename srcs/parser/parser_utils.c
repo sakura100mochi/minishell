@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:28:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/21 16:11:35 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/21 16:42:57 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static size_t	ft_strlen_all(char *all)
 	size_t	i;
 
 	i = 0;
-	while (all[i] != '\0' & all[i] != '|')
+	while (all[i] != '\0' && all[i] != '|')
 		i++;
 	return (i);
 }

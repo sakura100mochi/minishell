@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   external_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 14:08:49 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 17:03:25 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	fork_and_execve(t_data *data, t_parser *parser, char *file)
 	command = create_command(parser, file);
 	env = struct_to_array(data->env);
 	pid = fork();
+	signal_minishell(data->signal, INTERACTIVE);
 	if (pid < 0)
 		exit(EXIT_FAILURE);
 	else if (pid == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 15:18:11 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 16:39:10 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	pipe_main(t_data *data, t_parser *parser, size_t len)
 
 	pipelist.index = 0;
 	pipelist.status = 0;
+	signal_minishell(data->signal, IGN);
 	while (pipelist.index <= len)
 	{
 		open_pipe(data, parser, &pipelist, len);
@@ -112,5 +113,6 @@ int	pipe_main(t_data *data, t_parser *parser, size_t len)
 		free(pipelist.file);
 		parser = parser->next;
 	}
+	signal_minishell(data->signal, NORMAL);
 	return (0);
 }

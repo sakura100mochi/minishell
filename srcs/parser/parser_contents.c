@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:05:35 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/10/21 16:24:51 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/21 17:00:37 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ char	*ft_all(char *prompt, size_t *k)
 	j = i;
 	while (prompt[j] != '\0' && prompt[j] != '|')
 		j++;
-	all = ft_substr(prompt, i, j);
-	*k += i + j;
+	all = ft_substr(prompt, i, j - i);
+	*k += j;
 	return (all);
 }
