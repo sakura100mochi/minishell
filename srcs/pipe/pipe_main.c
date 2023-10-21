@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 11:43:16 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:18:11 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	pipe_exec(t_data *data, t_parser *parser, t_pipe *pipelist)
 	return ;
 }
 
-static int	do_pipe_dup(t_data *data, t_parser *parser, \
+static int	do_pipe_dup_exec(t_data *data, t_parser *parser, \
 								t_pipe *pipelist, size_t len)
 {
 	if (pipelist->index != len)
@@ -103,14 +103,14 @@ int	pipe_main(t_data *data, t_parser *parser, size_t len)
 			break ;
 		if (pipelist.pid == 0)
 		{
-			do_pipe_dup(data, parser, &pipelist, len);
+			do_pipe_dup_exec(data, parser, &pipelist, len);
 			exit(EXIT_FAILURE);
 		}
 		close_pipe(&pipelist, len);
 		waitpid(pipelist.pid, &(pipelist.status), 0);
+		pipelist.index++;
 		free(pipelist.file);
 		parser = parser->next;
-		pipelist.index++;
 	}
 	return (0);
 }

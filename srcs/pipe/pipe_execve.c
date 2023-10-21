@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:56:11 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 12:06:34 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:17:44 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,15 @@ static char	**create_command(t_parser *parser, char *file)
 	if (!result)
 		exit_malloc_error();
 	result[index++] = ft_strdup(parser->cmd);
-	if (result[index - 1])
+	if (!result[index - 1])
 		exit_malloc_error();
 	if (parser->option)
 		result[index++] = ft_strdup(parser->option);
-	if (result[index - 1])
+	if (parser->option && !result[index - 1])
 		exit_malloc_error();
 	if (*file)
 		result[index++] = ft_strdup(file);
-	if (result[index - 1])
+	if (*file && !result[index - 1])
 		exit_malloc_error();
 	return (result);
 }

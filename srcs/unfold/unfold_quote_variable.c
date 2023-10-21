@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:59:58 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/20 16:48:00 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:04:07 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static char	*find_env_variable(t_env *env, char *str)
 	char	*tmp;
 
 	len = ft_strlen(str) + 1;
-	if (ft_strncmp("$?", str, len - 1))
+	if (!ft_strncmp("?", str, len))
 	{
 		tmp = ft_itoa((int)env->status);
 		return (tmp);
