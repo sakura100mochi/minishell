@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:22 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 16:26:57 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 16:35:00 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ static int	change_home_directory(char *file)
 	else if (file[1] != '\0' && file[1] == '/')
 	{
 		tmp_path = ft_strjoin(home_path, file + 2);
-		chdir (tmp_path);
+		if (ft_strlen(tmp_path) < PATH_MAX)
+			chdir (tmp_path);
+		else
+			ft_printf("minishell: cd: %s: File name too long\n", absolute_path);
 		free(tmp_path);
 	}
 	else
@@ -59,7 +62,7 @@ static void	change_cwd_directory(char *wd_path, char *file)
 	if (ft_strlen(absolute_path) < PATH_MAX)
 		chdir(absolute_path);
 	else
-		ft_printf(": File name too long\n");
+		ft_printf("minishell: cd: %s: File name too long\n", absolute_path);
 	free(wd_path);
 	free(tmp_path);
 	free(absolute_path);
@@ -72,7 +75,10 @@ static int	change_directory(t_parser *parser, char *file)
 
 	if ((file[0] == '\0' || file[0] == '~') && !parser->option)
 	{
-		change_home_directory(file);
+		if (ft_strlen(file) < PATH_MAX)
+			change_home_directory(file);
+		else
+			ft_printf("minishell: cd: %s: File name too long\n", file);
 		return (YES);
 	}
 	else if (file[0] == '/' && !parser->option)
