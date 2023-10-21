@@ -6,13 +6,31 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/19 22:39:42 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 11:43:16 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/built_in.h"
 #include "../../includes/pipe.h"
+
+static void	pipe_exec(t_data *data, t_parser *parser, t_pipe *pipelist)
+{
+	if (pipelist->file == NULL)
+	{
+		if (parser->redirect)
+			close_fd(parser->redirect);
+		return ;
+	}
+	if (data->parser->redirect)
+		dup_command(data, parser, parser->redirect, pipelist->file);
+	else
+	{
+		if (!judge_built_in(data, parser, pipelist->file))
+			execve_without_fork(data, parser, pipelist->file);
+	}
+	return ;
+}
 
 static int	do_pipe_dup(t_data *data, t_parser *parser, \
 								t_pipe *pipelist, size_t len)
@@ -38,8 +56,7 @@ static int	do_pipe_dup(t_data *data, t_parser *parser, \
 		else
 			dup2(pipelist->pipe2[1], STDOUT_FILENO);
 	}
-	if (!judge_built_in(data, parser, pipelist->file))
-		execve_without_fork(data, parser, pipelist->file);
+	pipe_exec(data, parser, pipelist);
 	return (0);
 }
 

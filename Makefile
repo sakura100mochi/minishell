@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/19 17:12:35 by csakamot         ###   ########.fr        #
+#    Updated: 2023/10/21 12:19:25 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,11 +46,11 @@ LIBFT		= libft/
 
 
 ##------------Srcs-------------##
-MAINSRC			= main.c standby_state.c \
+MAINSRC			= main.c standby_state.c check_cmd_path_utils.c\
 					execution_main.c external_command.c malloc_free.c external_command_utils.c \
 					command_in_redirect.c command_in_redirect_utils.c
 
-ERRORSRC		= malloc_error.c syntax.c file.c no_command.c
+ERRORSRC		= malloc_error.c syntax.c file.c no_command.c exit.c
 
 INITSRC			= init_minishell.c init_env.c init_exp.c
 

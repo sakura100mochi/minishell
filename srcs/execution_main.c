@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/20 17:00:28 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 11:42:50 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "../includes/built_in.h"
 #include "../includes/pipe.h"
 #include "../includes/redirect.h"
+#include "../includes/error.h"
 
 static size_t	check_quote_in_command(char *str)
 {
@@ -59,23 +60,23 @@ static int	check_redirect(t_parser *node)
 	return (NO);
 }
 
-static void	no_pipe_exec(t_data *data)
+static void	no_pipe_exec(t_data *data, t_parser *parser)
 {
 	char	*file;
 
 	file = format_command(data->env, data->parser);
 	if (file == NULL)
 	{
-		if (data->parser->redirect)
-			close_fd(data->parser->redirect);
+		if (parser->redirect)
+			close_fd(parser->redirect);
 		return ;
 	}
-	if (data->parser->redirect)
-		dup_command(data, data->parser, data->parser->redirect, file);
+	if (parser->redirect)
+		dup_command(data, parser, parser->redirect, file);
 	else
 	{
-		if (!judge_built_in(data, data->parser, file))
-			fork_and_execve(data, data->parser, file);
+		if (!judge_built_in(data, parser, file))
+			fork_and_execve(data, parser, file);
 	}
 	free(file);
 	return ;
@@ -93,7 +94,11 @@ char	*format_command(t_env *env, t_parser *parser)
 	cmd_len = check_quote_in_command(parser->cmd);
 	file_len = ft_strlen(parser->cmd) - (cmd_len + 1);
 	tmp = ft_substr(parser->cmd, 0, cmd_len);
+	if (!tmp)
+		exit_malloc_error();
 	file = ft_substr(parser->cmd, cmd_len + 1, file_len);
+	if (!file)
+		exit_malloc_error();
 	free(parser->cmd);
 	parser->cmd = tmp;
 	file = unfold_main(env, parser, file);
@@ -115,6 +120,6 @@ void	execution_main(t_data *data)
 		pipe_main(data, data->parser, len);
 		return ;
 	}
-	no_pipe_exec(data);
+	no_pipe_exec(data, data->parser);
 	return ;
 }

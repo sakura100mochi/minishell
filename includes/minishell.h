@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/20 16:59:08 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 12:28:33 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ size_t	count_file_nbr(char *file);
 char	**add_file_to_array(char **result, char *file, size_t index, \
 																size_t len);
 char	*check_cmd_path(t_env *env_variable, t_parser *parser);
+char	*check_cmd_access(t_parser *parser, char **path);
 /*---------------------*/
 
 /*---signal---*/

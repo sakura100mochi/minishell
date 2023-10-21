@@ -6,11 +6,12 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 13:23:10 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 08:35:44 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 12:28:01 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include "../includes/error.h"
 
 size_t	count_file_nbr(char *file)
 {
@@ -80,7 +81,7 @@ static char	*check_cwd_path(t_parser *parser)
 	return (NULL);
 }
 
-static char	*check_cmd_access(t_parser *parser, char **path)
+char	*check_cmd_access(t_parser *parser, char **path)
 {
 	size_t	index;
 	char	*tmp;
@@ -104,35 +105,6 @@ static char	*check_cmd_access(t_parser *parser, char **path)
 	double_array_free(path);
 	full_path = check_cwd_path(parser);
 	if (full_path)
-		return (full_path);
-	return (NULL);
-}
-
-char	*check_cmd_path(t_env *env_variable, t_parser *parser)
-{
-	size_t	len;
-	char	*tmp;
-	char	**path;
-	char	*full_path;
-
-	path = NULL;
-	env_variable = env_variable->next;
-	while (!env_variable->head)
-	{
-		len = ft_strlen(env_variable->variable);
-		if (len < 5)
-			return (NULL);
-		else if (!ft_strncmp(env_variable->variable, "PATH=", 5))
-		{
-			tmp = ft_substr(env_variable->variable, 5, len);
-			path = ft_split(tmp, ':');
-			free(tmp);
-			break ;
-		}
-		env_variable = env_variable->next;
-	}
-	full_path = check_cmd_access(parser, path);
-	if (!env_variable->head && full_path)
 		return (full_path);
 	return (NULL);
 }
