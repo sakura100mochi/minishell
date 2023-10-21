@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:22 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 17:12:48 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 17:58:38 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ static int	change_home_directory(char *file)
 	{
 		tmp_path = ft_strjoin(home_path, file + 2);
 		if (ft_strlen(tmp_path) < PATH_MAX)
+		{
 			chdir (tmp_path);
+			perror("minishell");
+		}
 		else
 			ft_printf("minishell: cd: %s: File name too long\n", file);
 		free(tmp_path);
@@ -55,12 +58,18 @@ static void	change_cwd_directory(char *wd_path, char *file)
 	char	*tmp_path;
 	char	*absolute_path;
 
-	tmp_path = create_file_path(file);
+	if (*file)
+		tmp_path = create_file_path(file++);
+	else
+		tmp_path = create_file_path(file);
 	absolute_path = ft_strjoin(wd_path, tmp_path);
 	if (!absolute_path)
 		exit_malloc_error();
 	if (ft_strlen(absolute_path) < PATH_MAX)
+	{
 		chdir(absolute_path);
+		perror("minishell");
+	}
 	else
 		ft_printf("minishell: cd: %s: File name too long\n", absolute_path);
 	free(wd_path);
@@ -84,6 +93,7 @@ static int	change_directory(t_parser *parser, char *file)
 	else if (file[0] == '/' && !parser->option)
 	{
 		chdir(file);
+		perror("minishell");
 		return (YES);
 	}
 	if (parser->option)
