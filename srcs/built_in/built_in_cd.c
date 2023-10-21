@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:22 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 15:56:08 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 16:26:57 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ static void	change_cwd_directory(char *wd_path, char *file)
 	absolute_path = ft_strjoin(wd_path, tmp_path);
 	if (!absolute_path)
 		exit_malloc_error();
-	chdir(absolute_path);
+	if (ft_strlen(absolute_path) < PATH_MAX)
+		chdir(absolute_path);
+	else
+		ft_printf(": File name too long\n");
 	free(wd_path);
 	free(tmp_path);
 	free(absolute_path);
@@ -81,11 +84,6 @@ static int	change_directory(t_parser *parser, char *file)
 		return (NO);
 	wd_path = NULL;
 	wd_path = getcwd(wd_path, PATH_MAX);
-	if (!wd_path)
-	{
-		perror("");
-		return (NO);
-	}
 	change_cwd_directory(wd_path, file);
 	return (YES);
 }
