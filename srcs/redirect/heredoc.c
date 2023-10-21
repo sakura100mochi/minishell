@@ -3,17 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/20 14:05:23 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/10/21 14:33:48 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../includes/unfold.h"
 #include "../../includes/redirect.h"
 
-static void	interactive_heredoc(t_file *file, char *name, t_parser *node)
+static char	*unfold_variable(t_env *env, t_file *file, char *prompt)
+{
+	size_t	index;
+
+	index = 0;
+	if (file->type == QUOTE_HEREDOC)
+		return (prompt);
+	while (prompt[index] != '\0')
+	{
+		if (prompt[index] == '$' && prompt[index + 1] != '\0' && \
+			(ft_isalnum(prompt[index + 1]) || prompt[index + 1] == '?'))
+			prompt = unfold_str(prompt, env, &index);
+		index++;
+	}
+	return (prompt);
+}
+
+static void	interactive_heredoc(t_env *env, t_file *file, \
+									char *name, t_parser *node)
 {
 	char	*prompt;
 	char	*str;
@@ -25,6 +44,7 @@ static void	interactive_heredoc(t_file *file, char *name, t_parser *node)
 		prompt = readline(">");
 		if (prompt == NULL)
 			exit(EXIT_SUCCESS);
+		prompt = unfold_variable(env, file, prompt);
 		len = ft_strlen(prompt) + ft_strlen(name);
 		if (ft_strncmp(prompt, name, len) == 0)
 		{
@@ -56,7 +76,7 @@ int	heredoc(t_data *data, t_file *file, char *name)
 	else if (pid == 0)
 	{
 		signal_minishell(data->signal, REDIRECT);
-		interactive_heredoc(file, name, data->parser);
+		interactive_heredoc(data->env, file, name, data->parser);
 	}
 	waitpid(pid, &status, 0);
 	signal_minishell(data->signal, NORMAL);
