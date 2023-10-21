@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 15:11:04 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 16:53:11 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,11 @@ static void	no_pipe_exec(t_data *data, t_parser *parser)
 	else
 	{
 		if (!judge_built_in(data, parser, file))
+		{
+			signal_minishell(data->signal, IGN);
 			fork_and_execve(data, parser, file);
+			signal_minishell(data->signal, NORMAL);
+		}
 	}
 	free(file);
 	return ;
