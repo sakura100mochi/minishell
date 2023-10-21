@@ -6,11 +6,12 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 13:23:10 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 12:28:01 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 13:56:06 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include "../includes/built_in.h"
 #include "../includes/error.h"
 
 size_t	count_file_nbr(char *file)
@@ -90,8 +91,8 @@ char	*check_cmd_access(t_parser *parser, char **path)
 	index = 0;
 	while (path[index] != NULL)
 	{
-		tmp = ft_strjoin(path[index], "/");
-		full_path = ft_strjoin(tmp, parser->cmd);
+		tmp = create_file_path(parser->cmd);
+		full_path = ft_strjoin(path[index], tmp);
 		if (!access(full_path, X_OK))
 		{
 			double_array_free(path);
