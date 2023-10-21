@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+         #
+#    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/21 14:37:36 by yhirai           ###   ########.fr        #
+#    Updated: 2023/10/21 19:23:46 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ LIBFT		= libft/
 
 
 ##------------Srcs-------------##
-MAINSRC			= main.c standby_state.c check_cmd_path_utils.c\
+MAINSRC			= main.c standby_state.c check_cmd_path_utils.c exit_status.c\
 					execution_main.c external_command.c malloc_free.c external_command_utils.c \
 					command_in_redirect.c command_in_redirect_utils.c
 
@@ -58,7 +58,7 @@ SIGNALSRC		= signal.c heredoc_signal.c intetactive_signal.c
 
 BULITINSRC		= built_in.c built_in_cd.c built_in_echo.c built_in_env.c \
 				built_in_exit.c built_in_pwd.c built_in_unset.c built_in_export.c \
-				built_in_utils.c built_in_export_utils.c
+				built_in_utils.c built_in_export_utils.c built_in_export_more_utils.c
 
 LEXERSRC		= lexer_main.c split_word.c
 

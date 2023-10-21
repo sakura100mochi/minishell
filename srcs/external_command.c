@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   external_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 17:03:25 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/21 18:27:51 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,15 @@ static void	do_child_process(char *full_path, char **command, char **env)
 	return ;
 }
 
+static void	fork_process(pid_t pid, char *full_path, char **command, char **env)
+{
+	if (pid < 0)
+		exit(EXIT_FAILURE);
+	else if (pid == 0)
+		do_child_process(full_path, command, env);
+	return ;
+}
+
 void	fork_and_execve(t_data *data, t_parser *parser, char *file)
 {
 	pid_t	pid;
@@ -82,13 +91,11 @@ void	fork_and_execve(t_data *data, t_parser *parser, char *file)
 	env = struct_to_array(data->env);
 	pid = fork();
 	signal_minishell(data->signal, INTERACTIVE);
-	if (pid < 0)
-		exit(EXIT_FAILURE);
-	else if (pid == 0)
-		do_child_process(full_path, command, env);
-	else
+	fork_process(pid, full_path, command, env);
+	if (pid > 0)
 		waitpid(pid, &status, 0);
 	data->env->status = status;
+	exit_status_format(data->env, status);
 	free(full_path);
 	double_array_free(command);
 	double_array_free(env);
