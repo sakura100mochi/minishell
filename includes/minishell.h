@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 18:28:07 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:44:56 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef enum e_signal_type
 	REDIRECT,
 	INTERACTIVE,
 	IGN
-}			t_signal_type;
+}						t_signal_type;
 
 typedef struct s_env
 {
@@ -68,7 +68,16 @@ typedef struct s_env
 	char				*variable;
 	struct s_env		*prev;
 	struct s_env		*next;
-}				t_env;
+}						t_env;
+
+typedef struct s_dolnbr
+{
+	int					head;
+	size_t				nbr;
+	char				*variable;
+	struct s_dolnbr		*prev;
+	struct s_dolnbr		*next;
+}						t_dolnbr;
 
 typedef struct s_exp
 {
@@ -126,6 +135,7 @@ typedef struct s_data
 	t_signal			*signal;
 	t_parser			*parser;
 	t_env				*env;
+	t_dolnbr			*dolnbr;
 	t_exp				*exp;
 }				t_data;
 /*---------------------------*/

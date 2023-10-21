@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/21 19:23:46 by csakamot         ###   ########.fr        #
+#    Updated: 2023/10/21 19:35:53 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ MAINSRC			= main.c standby_state.c check_cmd_path_utils.c exit_status.c\
 
 ERRORSRC		= malloc_error.c syntax.c file.c no_command.c exit.c
 
-INITSRC			= init_minishell.c init_env.c init_exp.c
+INITSRC			= init_minishell.c init_env.c init_exp.c init_doller_nbr.c
 
 SIGNALSRC		= signal.c heredoc_signal.c intetactive_signal.c
 
