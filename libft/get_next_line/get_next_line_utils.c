@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 15:46:35 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/01 16:03:13 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/21 05:26:13 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ size_t	ft_strlen_g(const char *s1, const char *s2)
 	else
 	{
 		while (s1[i] != '\0')
-		i++;
+			i++;
 	}
 	if (s2 == NULL)
 		j = 0;

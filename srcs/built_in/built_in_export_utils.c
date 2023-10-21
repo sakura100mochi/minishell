@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in_export_helper.c                           :+:      :+:    :+:   */
+/*   built_in_export_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 10:55:19 by csakamot          #+#    #+#             */
-/*   Updated: 2023/09/30 15:01:35 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 09:33:33 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/built_in.h"
 
-t_exp	*input_exp_variable(char *str, t_exp *exp_variable, int flag)
+t_exp	*input_exp_variable(char *str, t_env *env_variable, \
+									t_exp *exp_variable, int flag)
 {
 	char	*tmp_str;
 	char	*variable;
@@ -35,6 +36,7 @@ t_exp	*input_exp_variable(char *str, t_exp *exp_variable, int flag)
 	exp_variable->next = new;
 	new->prev = exp_variable;
 	new->next = head;
+	env_variable->status = 0;
 	return (head);
 }
 
@@ -122,7 +124,7 @@ static char	*input_no_enclose(char *result, char *str)
 	return (result);
 }
 
-char	*variable_format(char *str)
+char	*variable_format(t_env *env, char *str)
 {
 	size_t	index;
 	size_t	flag;
@@ -139,7 +141,10 @@ char	*variable_format(char *str)
 	if (!flag)
 		return (ft_strdup(str));
 	if (check_wrap_with_quotes(str))
+	{
+		env->status = 1;
 		return ((char *)ft_calloc(sizeof(char), 0));
+	}
 	result = no_enclose_malloc(str);
 	result = input_no_enclose(result, str);
 	return (result);

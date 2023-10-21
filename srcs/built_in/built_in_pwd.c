@@ -6,13 +6,13 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:13 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/18 14:37:50 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 09:30:47 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/built_in.h"
 
-void	built_in_pwd(t_parser *parser)
+void	built_in_pwd(t_env *env, t_parser *parser)
 {
 	char	*wd_path;
 
@@ -26,10 +26,12 @@ void	built_in_pwd(t_parser *parser)
 	wd_path = getcwd(wd_path, PATH_MAX);
 	if (!wd_path)
 	{
+		env->status = 1;
 		perror("");
 		return ;
 	}
 	ft_printf("%s\n", wd_path);
 	free(wd_path);
+	env->status = 0;
 	return ;
 }

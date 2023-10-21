@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_new.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:53:36 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/10/14 17:34:22 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/21 05:27:39 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_redirect_type	file_type(char **one_phrase)
 	size_t	i;
 
 	i = 0;
-	while (one_phrase[i] != NULL &&
+	while (one_phrase[i] != NULL && \
 		(one_phrase[i][0] == '<' || one_phrase[i][0] == '>'))
 		i++;
 	if (i >= 3)

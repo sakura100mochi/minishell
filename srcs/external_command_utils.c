@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 13:23:10 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/20 16:55:09 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 08:35:44 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,30 @@ char	**add_file_to_array(char **result, char *file, size_t index, size_t len)
 	return (result);
 }
 
+static char	*check_cwd_path(t_parser *parser)
+{
+	char	*cwd;
+	char	*tmp;
+	char	*full_path;
+
+	cwd = NULL;
+	cwd = getcwd(cwd, PATH_MAX);
+	tmp = ft_strjoin(cwd, "/");
+	full_path = ft_strjoin(tmp, parser->cmd);
+	free(cwd);
+	free(tmp);
+	if (!access(full_path, X_OK))
+		return (full_path);
+	free(full_path);
+	return (NULL);
+}
+
 static char	*check_cmd_access(t_parser *parser, char **path)
 {
 	size_t	index;
 	char	*tmp;
-	char	*cwd;
 	char	*full_path;
 
-	cwd = NULL;
 	index = 0;
 	while (path[index] != NULL)
 	{
@@ -86,14 +102,9 @@ static char	*check_cmd_access(t_parser *parser, char **path)
 		index++;
 	}
 	double_array_free(path);
-	cwd = getcwd(cwd, PATH_MAX);
-	tmp = ft_strjoin(cwd, "/");
-	full_path = ft_strjoin(tmp, parser->cmd);
-	free(cwd);
-	free(tmp);
-	if (!access(full_path, X_OK))
+	full_path = check_cwd_path(parser);
+	if (full_path)
 		return (full_path);
-	free(full_path);
 	return (NULL);
 }
 

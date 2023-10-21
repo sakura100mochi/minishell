@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 12:50:11 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 14:58:56 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/21 05:27:11 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	signal_minishell(t_signal *signal)
 	sigemptyset(&signal->act1.sa_mask);
 	signal->act1.sa_flags = 0;
 	sigaction(SIGINT, &signal->act1, NULL);
-
 	signal->act2.sa_sigaction = signal_handler_quit;
 	sigemptyset(&signal->act2.sa_mask);
 	signal->act2.sa_flags = 0;
