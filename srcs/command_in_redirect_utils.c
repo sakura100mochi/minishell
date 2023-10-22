@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_in_redirect_utils.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 16:38:01 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 17:37:28 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 17:42:27 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	last_input_fd(t_file *file)
 	{
 		if (file->type == INPUT)
 			fd = file->fd;
-		else if (file->type == HEREDOC || file->type == QUOTE_HEREDOC)
+		else if (file->type == HEREDOC || file->type == Q_H)
 		{
 			close(file->fd);
 			file->fd = open("/tmp/tmp", O_RDONLY);
@@ -51,7 +51,7 @@ void	close_fd(t_file *file)
 {
 	while (file != NULL)
 	{
-		if (file->type == HEREDOC || file->type == QUOTE_HEREDOC)
+		if (file->type == HEREDOC || file->type == Q_H)
 			unlink("/tmp/tmp");
 		if (file->fd)
 			close(file->fd);

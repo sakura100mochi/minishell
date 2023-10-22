@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:26:38 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/22 14:47:06 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 17:42:47 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	redirect_syntax(t_data *data)
 		file = node->redirect;
 		while (file != NULL)
 		{
-			if ((file->type == HEREDOC || file->type == QUOTE_HEREDOC)
+			if ((file->type == HEREDOC || file->type == Q_H)
 				&& check_redirect(node->all, &i, '<') == NO)
 				return (NO);
 			else if ((file->type == APPEND)

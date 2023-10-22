@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 14:43:12 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 17:51:41 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,6 @@ int	pipe_main(t_data *data, t_parser *parser, size_t len)
 		parser = parser->next;
 	}
 	signal_minishell(data->signal, NORMAL);
-	exit_status_format(data->env, pipelist.status);
+	exit_status_format(pipelist.status);
 	return (0);
 }
