@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/21 16:47:13 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 17:43:32 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	*unfold_variable(t_env *env, t_file *file, char *prompt)
 	size_t	index;
 
 	index = 0;
-	if (file->type == QUOTE_HEREDOC)
+	if (file->type == Q_H)
 		return (prompt);
 	while (prompt[index] != '\0')
 	{
@@ -62,11 +62,11 @@ static void	interactive_heredoc(t_env *env, t_file *file, \
 int	heredoc(t_data *data, t_file *file, char *name)
 {
 	pid_t	pid;
-	int		status;
+	int		nbr;
 
 	file->fd = open("/tmp/tmp", O_CREAT | O_RDWR | O_TRUNC,
 			S_IREAD | S_IWRITE | S_IRGRP | S_IROTH);
-	status = 0;
+	nbr = 0;
 	signal_minishell(data->signal, IGN);
 	pid = fork();
 	if (pid == -1)
@@ -79,7 +79,11 @@ int	heredoc(t_data *data, t_file *file, char *name)
 		signal_minishell(data->signal, REDIRECT);
 		interactive_heredoc(data->env, file, name, data->parser);
 	}
-	waitpid(pid, &status, 0);
+	waitpid(pid, &nbr, 0);
+	status = nbr;
+	exit_status_format(nbr);
 	signal_minishell(data->signal, NORMAL);
+	if (status != 0)
+		return (NO);
 	return (YES);
 }

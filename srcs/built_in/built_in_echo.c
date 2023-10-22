@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_echo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 05:51:17 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 14:36:05 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,14 @@ void	built_in_echo(t_env *env, t_parser *parser, char *str)
 {
 	if (check_echo_option(parser, str))
 	{
-		env->status = 0;
+		status = 0;
 		return ;
 	}
 	if (!parser->option && !*str)
 		ft_printf("\n");
 	else if (!parser->option && *str)
 		ft_printf("%s\n", str);
-	env->status = 0;
+	status = 0;
+	(void)env;
 	return ;
 }

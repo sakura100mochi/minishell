@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 17:47:36 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 17:53:03 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	pipe_main(t_data *data, t_parser *parser, size_t len)
 		if (pipelist.pid == 0)
 		{
 			do_pipe_dup_exec(data, parser, &pipelist, len);
-			exit(data->env->status);
+			exit(status);
 		}
 		close_pipe(&pipelist, len);
 		waitpid(pipelist.pid, &(pipelist.status), 0);
@@ -119,6 +119,6 @@ int	pipe_main(t_data *data, t_parser *parser, size_t len)
 		parser = parser->next;
 	}
 	signal_minishell(data->signal, NORMAL);
-	exit_status_format(data->env, pipelist.status);
+	exit_status_format(pipelist.status);
 	return (0);
 }
