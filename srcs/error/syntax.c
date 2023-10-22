@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:26:38 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/22 17:42:47 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 18:03:44 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	syntax(void)
 {
 	ft_printf("minishell: syntax error\n");
-	status = 258;
+	g_status = 258;
 	return (NO);
 }
 
@@ -26,7 +26,7 @@ static int	check_redirect(char *all, size_t *i, char c)
 
 	if (all == NULL)
 	{
-		status = 258;
+		g_status = 258;
 		return (NO);
 	}
 	j = *i;
@@ -36,13 +36,13 @@ static int	check_redirect(char *all, size_t *i, char c)
 		j++;
 	else
 	{
-		status = 258;
+		g_status = 258;
 		return (NO);
 	}
 	*i += j;
 	if (all[j - 1] == c && all[j] == c)
 		return (YES);
-	status = 258;
+	g_status = 258;
 	return (NO);
 }
 

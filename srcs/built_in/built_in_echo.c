@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 14:36:05 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 18:02:42 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,14 @@ void	built_in_echo(t_env *env, t_parser *parser, char *str)
 {
 	if (check_echo_option(parser, str))
 	{
-		status = 0;
+		g_status = 0;
 		return ;
 	}
 	if (!parser->option && !*str)
 		ft_printf("\n");
 	else if (!parser->option && *str)
 		ft_printf("%s\n", str);
-	status = 0;
+	g_status = 0;
 	(void)env;
 	return ;
 }

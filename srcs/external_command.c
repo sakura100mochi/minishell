@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   external_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 17:52:33 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 18:02:29 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	fork_and_execve(t_data *data, t_parser *parser, char *file)
 	fork_process(pid, full_path, command, env);
 	if (pid > 0 && waitpid(pid, &nbr, 0) != -1)
 	{
-		status = nbr;
+		g_status = nbr;
 		exit_status_format(nbr);
 	}
 	free(full_path);

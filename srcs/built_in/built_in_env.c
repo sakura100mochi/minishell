@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:17 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 14:36:26 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 18:02:47 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ static void	end_status_echo(t_env *env, char *path, char *file)
 	if (access(path, F_OK))
 	{
 		ft_printf("env: '%s/': Permission denied\n", file);
-		status = 126;
+		g_status = 126;
 	}
 	else
 	{
 		ft_printf("env: '%s': No such file or directory\n", file);
-		status = 127;
+		g_status = 127;
 	}
 	(void)env;
 	return ;

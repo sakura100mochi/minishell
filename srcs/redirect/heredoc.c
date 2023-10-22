@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/22 17:43:32 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 18:04:04 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ int	heredoc(t_data *data, t_file *file, char *name)
 		interactive_heredoc(data->env, file, name, data->parser);
 	}
 	waitpid(pid, &nbr, 0);
-	status = nbr;
+	g_status = nbr;
 	exit_status_format(nbr);
 	signal_minishell(data->signal, NORMAL);
-	if (status != 0)
+	if (g_status != 0)
 		return (NO);
 	return (YES);
 }

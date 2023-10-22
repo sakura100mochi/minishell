@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 16:51:23 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/22 16:53:43 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 18:04:10 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	sigint(int signum)
 {
-	status = 1;
+	g_status = 1;
 	write(STDOUT_FILENO, "\n", 1);
-	exit(status);
+	exit(g_status);
 	(void)signum;
 }
 

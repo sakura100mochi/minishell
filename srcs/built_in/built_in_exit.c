@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 14:36:50 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 18:02:52 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	check_argument(t_env *env, char *file)
 		if (*file == ' ')
 		{
 			ft_printf("exit\nminishell: exit: numeric argument required\n");
-			status = 1;
+			g_status = 1;
 			return (1);
 		}
 		if (!ft_isdigit(*file))

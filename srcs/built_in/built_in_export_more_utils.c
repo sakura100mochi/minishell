@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:40:38 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 14:40:09 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 18:02:57 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_env	*input_env_variable(char *str, t_env *env_variable)
 	env_variable->next = new;
 	new->prev = env_variable;
 	new->next = head;
-	status = 0;
+	g_status = 0;
 	return (head);
 }
 
@@ -38,7 +38,7 @@ void	export_no_command(t_env *env_variable, t_exp *exp_variable)
 		ft_printf("%s\n", exp_variable->variable);
 		exp_variable = exp_variable->next;
 	}
-	status = 0;
+	g_status = 0;
 	(void)env_variable;
 	return ;
 }
