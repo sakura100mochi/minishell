@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_in_redirect.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:40:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 17:39:31 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:37:48 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,11 @@ int	dup_command(t_data *data, t_parser *parser, t_file *file, char *str)
 	output = last_output_fd(file);
 	change_std_to_fd(&stdin, &stdout, input, output);
 	if (!judge_built_in(data, parser, str))
+	{
+		signal_minishell(data->signal, IGN);
 		fork_and_execve(data, parser, str);
+		signal_minishell(data->signal, NORMAL);
+	}
 	change_fd_to_std(&stdin, &stdout, input, output);
 	close_fd(file);
 	return (YES);
@@ -86,7 +90,10 @@ int	without_fork_dup_command(t_data *data, t_parser *parser, \
 	output = last_output_fd(file);
 	change_std_to_fd(&stdin, &stdout, input, output);
 	if (!judge_built_in(data, parser, str))
+	{
 		without_fork_dup_command(data, parser, file, str);
+		signal_minishell(data->signal, NORMAL);
+	}
 	change_fd_to_std(&stdin, &stdout, input, output);
 	close_fd(file);
 	return (YES);

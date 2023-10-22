@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:51 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 13:09:31 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 13:22:30 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ static size_t	count_quotation(char *str, size_t *i)
 	return (1);
 }
 
-static int	check_char(char c)
+static int	check_char(char c, char d)
 {
-	if (c == ' ' || c == '|' || c == '<' || c == '>')
+	if (c == '|' || c == '<' || c == '>')
+		return (YES);
+	else if (c == ' ' && d != '\0' && d != ' ' && d != '	')
 		return (YES);
 	return (NO);
 }
@@ -54,14 +56,11 @@ static size_t	count_word(char *str)
 	count = 1;
 	while (str[i] != '\0')
 	{
-		while ((str[i + 1] != '\0' && str[i + 1] == ' ')
-			|| (str[i + 1] != '\0' && str[i + 1] == '	'))
-			i++;
 		if (str[i] == '\'' || str[i] == '\"')
 			count += count_quotation(&str[i], &i);
 		else
 		{
-			if (check_char(str[i] == YES))
+			if (check_char(str[i], str[i + 1]) == YES)
 				count++;
 			i++;
 		}

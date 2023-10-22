@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 19:02:27 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:38:10 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ static void	pipe_exec(t_data *data, t_parser *parser, t_pipe *pipelist)
 	else
 	{
 		if (!judge_built_in(data, parser, pipelist->file))
+		{
 			execve_without_fork(data, parser, pipelist->file);
+			signal_minishell(data->signal, NORMAL);
+		}
 	}
 	return ;
 }
