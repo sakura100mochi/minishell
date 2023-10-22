@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_new.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:53:36 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/10/21 16:26:17 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/21 20:58:11 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_file	*ft_filenew(char **one_phrase, t_parser *node)
 	return (file);
 }
 
-static int	quote_check(char *str)
+int	quote_check(char *str)
 {
 	size_t	i;
 	size_t	count_single;
@@ -64,6 +64,9 @@ static int	quote_check(char *str)
 			count_double++;
 		i++;
 	}
+	if ((count_double != 2 && count_double != 0)
+		|| (count_single != 2 && count_single != 0))
+		return (2);
 	if (count_double == 2 || count_single == 2)
 		return (YES);
 	return (NO);

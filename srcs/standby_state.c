@@ -15,6 +15,28 @@
 #include "../includes/pipe.h"
 #include "../includes/error.h"
 
+static int	syntax_check(t_data *data)
+{
+	t_parser	*node;
+	t_file		*file;
+
+	node = data->parser;
+	while (node != NULL)
+	{
+		if (node->cmd == NULL && node->redirect == NULL)
+			return (NO);
+		file = node->redirect;
+		while (file != NULL)
+		{
+			if (quote_check(file->file_name) == 2)
+				return (NO);
+			file = file->next;
+		}
+		node = node->next;
+	}
+	return (YES);
+}
+
 void	standby_state(t_data *data)
 {
 	while (1)
@@ -32,9 +54,7 @@ void	standby_state(t_data *data)
 		}
 		add_history(data->prompt);
 		data->parser = parser_main(lexer_main(data->prompt), data->prompt);
-		if (redirect_syntax(data) == NO)
-			syntax();
-		else if (data->parser->cmd == NULL && data->parser->redirect == NULL)
+		if (redirect_syntax(data) == NO || syntax_check(data) == NO)
 			syntax();
 		else
 			execution_main(data);
