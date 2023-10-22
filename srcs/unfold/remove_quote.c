@@ -6,11 +6,12 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 12:55:26 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/20 12:53:23 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:57:07 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/unfold.h"
+#include "../../includes/error.h"
 
 static char	*remove_single_quote(char *str, size_t *end)
 {
@@ -88,6 +89,8 @@ char	*check_quote_in_str(char *str, t_env *env)
 			str = remove_single_quote(str, &index);
 		else if (twofold % 2 && str[index] == '"' && twofold++)
 			str = remove_twofold_quote(str, env, &index);
+		if (!str)
+			exit_malloc_error();
 		index++;
 	}
 	return (str);

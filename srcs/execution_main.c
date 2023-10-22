@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 16:53:11 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 12:45:47 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,11 @@ char	*format_command(t_env *env, t_parser *parser)
 	cmd_len = check_quote_in_command(parser->cmd);
 	file_len = ft_strlen(parser->cmd) - (cmd_len + 1);
 	tmp = ft_substr(parser->cmd, 0, cmd_len);
+	if (!tmp)
+		exit_malloc_error();
 	file = ft_substr(parser->cmd, cmd_len + 1, file_len);
+	if (!file)
+		exit_malloc_error();
 	free(parser->cmd);
 	parser->cmd = tmp;
 	file = unfold_main(env, parser, file);

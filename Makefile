@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/21 19:35:53 by csakamot         ###   ########.fr        #
+#    Updated: 2023/10/22 12:36:09 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ MAINSRC			= main.c standby_state.c check_cmd_path_utils.c exit_status.c\
 
 ERRORSRC		= malloc_error.c syntax.c file.c no_command.c exit.c
 
-INITSRC			= init_minishell.c init_env.c init_exp.c init_doller_nbr.c
+INITSRC			= init_minishell.c init_env.c init_exp.c
 
 SIGNALSRC		= signal.c heredoc_signal.c intetactive_signal.c
 
@@ -67,7 +67,7 @@ PARSERSRC		= parser_main.c split_pipe.c list_new.c list_add_back.c parser_conten
 REDIRECTSRC		= redirect_main.c append.c heredoc.c input.c output.c quote_heredoc.c redirect_utils.c
 
 UNFOLDSRC		= unfold_main.c remove_quote.c unfold_quote_variable.c unfold_unquote_variable.c \
-					unfold_utils.c
+					unfold_utils.c unfold_quote_variable_utils.c
 
 PIPESRC			= pipe_main.c pipe_execve.c
 

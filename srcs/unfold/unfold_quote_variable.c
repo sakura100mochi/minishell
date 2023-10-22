@@ -6,50 +6,32 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:59:58 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 15:04:07 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:00:46 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/unfold.h"
+#include "../../includes/error.h"
 
-static char	*input_env_variable(char *str, size_t *start, \
-									size_t index, size_t *flag)
+static char	*find_nbr_questoin(t_env *env, char *str, size_t len)
 {
 	char	*result;
 
-	result = ft_substr(str, *start, index - *start);
-	if (!flag)
-		*flag = 1;
-	else
-		*flag = 0;
-	*start = index;
-	return (result);
-}
-
-char	**split_env_variable(char *tmp, size_t len)
-{
-	size_t	index;
-	size_t	start;
-	size_t	flag;
-	char	**tmp_array;
-	char	**result;
-
-	index = 0;
-	start = 0;
-	flag = 0;
-	result = (char **)ft_calloc(sizeof(char *), len + 1);
-	tmp_array = result;
-	while (index < ft_strlen(tmp) + 1)
+	result = NULL;
+	if (!ft_strncmp("?", str, len))
 	{
-		if (check_dollar_charactor(tmp, index))
-			*tmp_array++ = input_env_variable(tmp, &start, index, &flag);
-		else if (flag && (tmp[index] == '\'' || tmp[index] == ' ' || \
-		tmp[index] == '	' || tmp[index] == '\0'))
-			*tmp_array++ = input_env_variable(tmp, &start, index, &flag);
-		index++;
+		result = ft_itoa((int)env->status);
+		if (!result)
+			exit_malloc_error();
+		return (result);
 	}
-	*tmp_array++ = ft_substr(tmp, start, index - start);
-	*tmp_array = NULL;
+	else if (!ft_strncmp("0", str, len))
+	{
+		result = ft_strdup("minishell");
+		if (!result)
+			exit_malloc_error();
+		return (result);
+	}
 	return (result);
 }
 
@@ -59,11 +41,9 @@ static char	*find_env_variable(t_env *env, char *str)
 	char	*tmp;
 
 	len = ft_strlen(str) + 1;
-	if (!ft_strncmp("?", str, len))
-	{
-		tmp = ft_itoa((int)env->status);
+	tmp = find_nbr_questoin(env, str, len);
+	if (tmp)
 		return (tmp);
-	}
 	env = env->next;
 	while (!env->head)
 	{
