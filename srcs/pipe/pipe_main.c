@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 13:38:10 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 14:08:40 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	pipe_exec(t_data *data, t_parser *parser, t_pipe *pipelist)
 			close_fd(parser->redirect);
 		return ;
 	}
-	if (data->parser->redirect)
+	if (parser->redirect)
 		without_fork_dup_command(data, parser, \
 				parser->redirect, pipelist->file);
 	else
