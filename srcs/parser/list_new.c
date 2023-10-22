@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_new.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:53:36 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/10/21 20:58:11 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/10/22 14:05:02 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	quote_check(char *str)
 	return (NO);
 }
 
-t_redirect_type	file_type(char **one_phrase)
+t_r_type	file_type(char **one_phrase)
 {
 	size_t	i;
 

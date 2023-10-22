@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 12:20:01 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 14:05:27 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 // APPEND >>  (追加)
 // OUTPUT >
 // UNKNOWN
-typedef enum e_redirect_type
+typedef enum e_r_type
 {
 	QUOTE_HEREDOC,
 	HEREDOC,
@@ -51,7 +51,7 @@ typedef enum e_redirect_type
 	APPEND,
 	OUTPUT,
 	UNKNOWN
-}			t_redirect_type;
+}			t_r_type;
 
 typedef enum e_signal_type
 {
@@ -104,7 +104,7 @@ typedef struct s_file
 {
 	int					fd;
 	char				*file_name;
-	t_redirect_type		type;
+	t_r_type			type;
 	struct s_file		*next;
 }			t_file;
 

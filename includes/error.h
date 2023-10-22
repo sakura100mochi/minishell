@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:24:18 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/21 16:28:07 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 14:07:23 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void		exit_malloc_error(void);
 
 /*---Error---*/
 void		command_not_found(t_env *env, char *str);
-int			syntax(void);
+int			syntax(t_data *data);
 int			redirect_syntax(t_data *data);
-int			no_file(char *file_name);
-int			permission(char *file_name);
+int			no_file(t_data *data, char *file_name);
+int			permission(t_data *data, char *file_name);
 /*-----------*/
 
 #endif

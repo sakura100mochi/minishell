@@ -6,16 +6,17 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:26:38 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/22 13:32:50 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 14:00:33 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/error.h"
 
-int	syntax(void)
+int	syntax(t_data *data)
 {
 	ft_printf("minishell: syntax error\n");
+	data->env->status = 258;
 	return (NO);
 }
 
@@ -61,5 +62,6 @@ int	redirect_syntax(t_data *data)
 		}
 		node = node->next;
 	}
+	data->env->status = 258;
 	return (YES);
 }
