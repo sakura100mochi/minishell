@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 15:51:07 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 12:20:01 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef enum e_signal_type
 	REDIRECT,
 	INTERACTIVE,
 	IGN
-}			t_signal_type;
+}						t_signal_type;
 
 typedef struct s_env
 {
@@ -68,7 +68,7 @@ typedef struct s_env
 	char				*variable;
 	struct s_env		*prev;
 	struct s_env		*next;
-}				t_env;
+}						t_env;
 
 typedef struct s_exp
 {
@@ -137,6 +137,8 @@ t_env	*new_env_node(char *content, size_t head);
 t_exp	*new_exp_node(char *content, size_t head);
 void	execution_main(t_data *data);
 int		dup_command(t_data *data, t_parser *parser, t_file *file, char *str);
+int		without_fork_dup_command(t_data *data, t_parser *parser, \
+												t_file *file, char *str);
 void	close_fd(t_file *file);
 int		last_input_fd(t_file *file);
 int		last_output_fd(t_file *file);
@@ -144,6 +146,7 @@ char	*format_command(t_env *env, t_parser *parser);
 void	env_nodeadd_back(t_env **env, t_env *new);
 void	exp_nodeadd_back(t_exp **env, t_exp *new);
 void	standby_state(t_data *data);
+void	exit_status_format(t_env *env, int status);
 
 /*---external_command---*/
 void	fork_and_execve(t_data *data, t_parser *parser, char *file);

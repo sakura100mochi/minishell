@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+         #
+#    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/21 20:07:24 by hiraiyuina       ###   ########.fr        #
+#    Updated: 2023/10/22 13:05:34 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ LIBFT		= libft/
 
 
 ##------------Srcs-------------##
-MAINSRC			= main.c standby_state.c check_cmd_path_utils.c\
+MAINSRC			= main.c standby_state.c check_cmd_path_utils.c exit_status.c\
 					execution_main.c external_command.c malloc_free.c external_command_utils.c \
 					command_in_redirect.c command_in_redirect_utils.c
 
@@ -58,7 +58,7 @@ SIGNALSRC		= signal.c heredoc_signal.c intetactive_signal.c
 
 BULITINSRC		= built_in.c built_in_cd.c built_in_echo.c built_in_env.c \
 				built_in_exit.c built_in_pwd.c built_in_unset.c built_in_export.c \
-				built_in_utils.c built_in_export_utils.c
+				built_in_utils.c built_in_export_utils.c built_in_export_more_utils.c
 
 LEXERSRC		= lexer_main.c split_word.c
 
@@ -67,7 +67,7 @@ PARSERSRC		= parser_main.c split_pipe.c list_new.c list_add_back.c parser_conten
 REDIRECTSRC		= redirect_main.c append.c heredoc.c input.c output.c quote_heredoc.c redirect_utils.c
 
 UNFOLDSRC		= unfold_main.c remove_quote.c unfold_quote_variable.c unfold_unquote_variable.c \
-					unfold_utils.c
+					unfold_utils.c unfold_quote_variable_utils.c
 
 PIPESRC			= pipe_main.c pipe_execve.c
 

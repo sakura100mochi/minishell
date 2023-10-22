@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_in_redirect_helper.c                       :+:      :+:    :+:   */
+/*   command_in_redirect_utils.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 16:38:01 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/15 17:11:22 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 17:37:28 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,17 @@ int	last_output_fd(t_file *file)
 		file = file->next;
 	}
 	return (fd);
+}
+
+void	close_fd(t_file *file)
+{
+	while (file != NULL)
+	{
+		if (file->type == HEREDOC || file->type == QUOTE_HEREDOC)
+			unlink("/tmp/tmp");
+		if (file->fd)
+			close(file->fd);
+		file = file->next;
+	}
+	return ;
 }

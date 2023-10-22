@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 17:07:26 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/21 19:02:27 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static void	pipe_exec(t_data *data, t_parser *parser, t_pipe *pipelist)
 		return ;
 	}
 	if (data->parser->redirect)
-		dup_command(data, parser, parser->redirect, pipelist->file);
+		without_fork_dup_command(data, parser, \
+				parser->redirect, pipelist->file);
 	else
 	{
 		if (!judge_built_in(data, parser, pipelist->file))
@@ -105,7 +106,7 @@ int	pipe_main(t_data *data, t_parser *parser, size_t len)
 		if (pipelist.pid == 0)
 		{
 			do_pipe_dup_exec(data, parser, &pipelist, len);
-			exit(EXIT_FAILURE);
+			exit(data->env->status);
 		}
 		close_pipe(&pipelist, len);
 		waitpid(pipelist.pid, &(pipelist.status), 0);
@@ -114,5 +115,6 @@ int	pipe_main(t_data *data, t_parser *parser, size_t len)
 		parser = parser->next;
 	}
 	signal_minishell(data->signal, NORMAL);
+	exit_status_format(data->env, pipelist.status);
 	return (0);
 }

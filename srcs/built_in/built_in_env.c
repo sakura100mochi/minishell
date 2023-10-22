@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:17 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 06:28:48 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:05:44 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	end_status_echo(t_env *env, char *path, char *file)
 {
-	if (!access(path, F_OK))
+	if (access(path, F_OK))
 	{
 		ft_printf("env: '%s/': Permission denied\n", file);
 		env->status = 126;
@@ -37,7 +37,7 @@ static void	check_cwd_file(t_env *env, char *file)
 	cwd = getcwd(cwd, PATH_MAX);
 	if (!cwd)
 	{
-		perror("minishell: ");
+		perror("minishell");
 		return ;
 	}
 	tmp = create_file_path(file);

@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:10 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 09:35:23 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:14:10 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,14 +113,23 @@ static t_exp	*rm_exp_str(char *str, t_exp *exp_variable)
 void	built_in_unset(t_parser *parser, t_env *env_variable, \
 									t_exp *exp_variable, char *str)
 {
-	if (!*str)
+	if (!*str && !parser->option)
+	{
+		env_variable->status = 0;
 		return ;
-	else if (!parser->option)
+	}
+	else if (!parser->option || (parser->option && \
+						ft_strlen(parser->option) == 1))
 	{
 		env_variable = rm_env_variable(str, env_variable);
 		exp_variable = rm_exp_variable(str, exp_variable);
 		exp_variable = rm_exp_str(str, exp_variable);
+		env_variable->status = 0;
 	}
-	env_variable->status = 0;
+	else if (parser->option && ft_strlen(parser->option) > 1)
+	{
+		ft_printf("minishell: unset: -%c: invalid option\n", parser->option[1]);
+		env_variable->status = 2;
+	}
 	return ;
 }
