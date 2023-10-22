@@ -6,13 +6,14 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 14:08:40 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 17:47:36 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/built_in.h"
 #include "../../includes/pipe.h"
+#include "../../includes/error.h"
 
 static void	pipe_exec(t_data *data, t_parser *parser, t_pipe *pipelist)
 {
@@ -24,12 +25,12 @@ static void	pipe_exec(t_data *data, t_parser *parser, t_pipe *pipelist)
 	}
 	if (parser->redirect)
 		without_fork_dup_command(data, parser, \
-				parser->redirect, pipelist->file);
+				parser->redirect, pipelist);
 	else
 	{
 		if (!judge_built_in(data, parser, pipelist->file))
 		{
-			execve_without_fork(data, parser, pipelist->file);
+			execve_without_fork(data, parser, pipelist, pipelist->file);
 			signal_minishell(data->signal, NORMAL);
 		}
 	}
@@ -97,8 +98,7 @@ int	pipe_main(t_data *data, t_parser *parser, size_t len)
 {
 	t_pipe	pipelist;
 
-	pipelist.index = 0;
-	pipelist.status = 0;
+	ft_bzero(&pipelist, sizeof(pipelist) * 1);
 	signal_minishell(data->signal, IGN);
 	while (pipelist.index <= len)
 	{
@@ -113,6 +113,7 @@ int	pipe_main(t_data *data, t_parser *parser, size_t len)
 		}
 		close_pipe(&pipelist, len);
 		waitpid(pipelist.pid, &(pipelist.status), 0);
+		pipe_execve_error(parser, pipelist.status);
 		pipelist.index++;
 		free(pipelist.file);
 		parser = parser->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_execve.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:56:11 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 17:07:46 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 17:13:00 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,23 @@ static char	**create_command(t_parser *parser, char *file)
 	return (result);
 }
 
-int	execve_without_fork(t_data *data, t_parser *parser, char *file)
+int	execve_without_fork(t_data *data, t_parser *parser, \
+								t_pipe *pipelist, char *file)
 {
 	char	**command;
 	char	**env;
 	char	*full_path;
 
+	(void)pipelist;
 	full_path = check_cmd_path(data->env, parser);
 	if (!full_path)
-		return (1);
+	{
+		data->env->status = 127;
+		return (YES);
+	}
 	command = create_command(parser, file);
 	env = struct_to_array(data->env);
 	signal_minishell(data->signal, INTERACTIVE);
 	execve(full_path, command, env);
-	return (1);
+	return (YES);
 }

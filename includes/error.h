@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:24:18 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/22 14:07:23 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 17:20:46 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int			syntax(t_data *data);
 int			redirect_syntax(t_data *data);
 int			no_file(t_data *data, char *file_name);
 int			permission(t_data *data, char *file_name);
+void		pipe_execve_error(t_parser *parser, size_t status);
 /*-----------*/
 
 #endif

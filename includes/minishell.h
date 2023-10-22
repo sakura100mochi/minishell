@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 14:05:27 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 17:34:04 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef enum e_signal_type
 typedef struct s_env
 {
 	int					head;
-	size_t				status;
+	int					status;
 	char				*variable;
 	struct s_env		*prev;
 	struct s_env		*next;
@@ -95,6 +95,7 @@ typedef struct s_pipe
 	int					pipe1[2];
 	int					pipe2[2];
 	int					status;
+	size_t				execve;
 	char				*file;
 	pid_t				pid;
 	size_t				index;
@@ -138,7 +139,7 @@ t_exp	*new_exp_node(char *content, size_t head);
 void	execution_main(t_data *data);
 int		dup_command(t_data *data, t_parser *parser, t_file *file, char *str);
 int		without_fork_dup_command(t_data *data, t_parser *parser, \
-												t_file *file, char *str);
+												t_file *file, t_pipe *pipelist);
 void	close_fd(t_file *file);
 int		last_input_fd(t_file *file);
 int		last_output_fd(t_file *file);

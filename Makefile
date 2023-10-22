@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+         #
+#    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/22 13:13:20 by yhirai           ###   ########.fr        #
+#    Updated: 2023/10/22 15:15:12 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ MAINSRC			= main.c standby_state.c check_cmd_path_utils.c exit_status.c\
 					execution_main.c external_command.c malloc_free.c external_command_utils.c \
 					command_in_redirect.c command_in_redirect_utils.c
 
-ERRORSRC		= malloc_error.c syntax.c file.c no_command.c exit.c
+ERRORSRC		= malloc_error.c syntax.c file.c no_command.c exit.c pipe_error.c
 
 INITSRC			= init_minishell.c init_env.c init_exp.c
 
