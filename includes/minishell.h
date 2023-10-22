@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 14:05:27 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 14:33:52 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ typedef enum e_signal_type
 typedef struct s_env
 {
 	int					head;
-	size_t				status;
 	char				*variable;
 	struct s_env		*prev;
 	struct s_env		*next;
@@ -130,6 +129,8 @@ typedef struct s_data
 }				t_data;
 /*---------------------------*/
 
+size_t	status;
+
 t_data	*init_minishell(t_data *data);
 t_data	*init_env(t_data *data);
 t_data	*init_exp(t_data *data);
@@ -146,7 +147,7 @@ char	*format_command(t_env *env, t_parser *parser);
 void	env_nodeadd_back(t_env **env, t_env *new);
 void	exp_nodeadd_back(t_exp **env, t_exp *new);
 void	standby_state(t_data *data);
-void	exit_status_format(t_env *env, int status);
+void	exit_status_format(t_env *env, int nbr);
 
 /*---external_command---*/
 void	fork_and_execve(t_data *data, t_parser *parser, char *file);

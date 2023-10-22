@@ -6,17 +6,17 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:26:38 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/22 14:00:33 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 14:47:06 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/error.h"
 
-int	syntax(t_data *data)
+int	syntax(void)
 {
 	ft_printf("minishell: syntax error\n");
-	data->env->status = 258;
+	status = 258;
 	return (NO);
 }
 
@@ -25,17 +25,24 @@ static int	check_redirect(char *all, size_t *i, char c)
 	size_t	j;
 
 	if (all == NULL)
+	{
+		status = 258;
 		return (NO);
+	}
 	j = *i;
 	while (all[j] != '\0' && all[j] != c)
 		j++;
 	if (all[j + 1] != '\0')
 		j++;
 	else
+	{
+		status = 258;
 		return (NO);
+	}
 	*i += j;
 	if (all[j - 1] == c && all[j] == c)
 		return (YES);
+	status = 258;
 	return (NO);
 }
 
@@ -62,6 +69,5 @@ int	redirect_syntax(t_data *data)
 		}
 		node = node->next;
 	}
-	data->env->status = 258;
 	return (YES);
 }

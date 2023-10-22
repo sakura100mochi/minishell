@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_pwd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:13 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 19:03:52 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 14:37:14 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,19 @@ void	built_in_pwd(t_env *env, t_parser *parser)
 	{
 		ft_printf("minishell: pwd: -%c: not a valid identifier\n", \
 														parser->option[1]);
-		env->status = 2;
+		status = 2;
 		return ;
 	}
 	wd_path = getcwd(wd_path, PATH_MAX);
 	if (!wd_path)
 	{
-		env->status = 1;
+		status = 1;
 		perror("");
 		return ;
 	}
 	ft_printf("%s\n", wd_path);
 	free(wd_path);
-	env->status = 0;
+	status = 0;
+	(void)env;
 	return ;
 }

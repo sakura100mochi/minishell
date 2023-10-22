@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:09:45 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/22 14:09:01 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 14:41:55 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ int	redirect_main(t_data *data, t_parser *node)
 		while (file != NULL)
 		{
 			if (file->type == UNKNOWN || file->file_name == NULL)
-				return (syntax(data));
+				return (syntax());
 			else if (file->type == QUOTE_HEREDOC)
 				quote_heredoc(data, file);
 			else if (file->type == HEREDOC)
 				heredoc(data, file, file->file_name);
-			else if (file->type == INPUT && input(data, file) == NO)
+			else if (file->type == INPUT && input(file) == NO)
 				return (NO);
 			else if (file->type == APPEND)
-				append(data, file);
+				append(file);
 			else if (file->type == OUTPUT)
-				output(data, file);
+				output(file);
 			file = file->next;
 		}
 		node = node->next;

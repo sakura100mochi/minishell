@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   external_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 18:27:51 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 16:32:50 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,24 +78,24 @@ static void	fork_process(pid_t pid, char *full_path, char **command, char **env)
 void	fork_and_execve(t_data *data, t_parser *parser, char *file)
 {
 	pid_t	pid;
-	int		status;
+	int		nbr;
 	char	**command;
 	char	**env;
 	char	*full_path;
 
-	status = 0;
+	nbr = 0;
 	full_path = check_cmd_path(data->env, parser);
 	if (!full_path)
-		return (command_not_found(data->env, parser->cmd));
+		return (command_not_found(parser->cmd));
 	command = create_command(parser, file);
 	env = struct_to_array(data->env);
 	pid = fork();
 	signal_minishell(data->signal, INTERACTIVE);
 	fork_process(pid, full_path, command, env);
 	if (pid > 0)
-		waitpid(pid, &status, 0);
-	data->env->status = status;
-	exit_status_format(data->env, status);
+		waitpid(pid, &nbr, 0);
+	status = nbr;
+	exit_status_format(data->env, nbr);
 	free(full_path);
 	double_array_free(command);
 	double_array_free(env);
