@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:24:18 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/22 17:51:48 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 17:54:28 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int			syntax(void);
 int			redirect_syntax(t_data *data);
 int			no_file(char *file_name);
 int			permission(char *file_name);
+void		pipe_execve_error(t_parser *parser, size_t status);
 /*-----------*/
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:56:11 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 17:52:49 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 17:54:50 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	execve_without_fork(t_data *data, t_parser *parser, \
 	full_path = check_cmd_path(data->env, parser);
 	if (!full_path)
 	{
-		data->env->status = 127;
+		status = 127;
 		return (YES);
 	}
 	command = create_command(parser, file);
