@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_in_redirect.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:40:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 13:37:48 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 13:50:43 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	without_fork_dup_command(t_data *data, t_parser *parser, \
 	change_std_to_fd(&stdin, &stdout, input, output);
 	if (!judge_built_in(data, parser, str))
 	{
-		without_fork_dup_command(data, parser, file, str);
+		execve_without_fork(data, parser, str);
 		signal_minishell(data->signal, NORMAL);
 	}
 	change_fd_to_std(&stdin, &stdout, input, output);

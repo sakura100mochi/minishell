@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 12:35:26 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:23:49 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*input_env_variable(char *str, size_t *start, \
 	char	*result;
 
 	result = ft_substr(str, *start, index - *start);
-	if (!flag)
+	if (!*flag)
 		*flag = 1;
 	else
 		*flag = 0;
