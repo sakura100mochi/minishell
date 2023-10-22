@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:51 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 20:26:24 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/10/22 13:09:31 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ static size_t	count_quotation(char *str, size_t *i)
 	return (1);
 }
 
+static int	check_char(char c)
+{
+	if (c == ' ' || c == '|' || c == '<' || c == '>')
+		return (YES);
+	return (NO);
+}
+
 static size_t	count_word(char *str)
 {
 	size_t	i;
@@ -54,8 +61,7 @@ static size_t	count_word(char *str)
 			count += count_quotation(&str[i], &i);
 		else
 		{
-			if (str[i] == ' ' || str[i] == '|'
-				|| str[i] == '<' || str[i] == '>')
+			if (check_char(str[i] == YES))
 				count++;
 			i++;
 		}

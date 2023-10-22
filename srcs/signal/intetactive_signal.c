@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:44:30 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/10/21 16:51:05 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 13:10:35 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	signal_interactive(t_signal *signal)
 	sigemptyset(&signal->act1.sa_mask);
 	signal->act1.sa_flags = 0;
 	sigaction(SIGINT, &signal->act1, NULL);
-
 	signal->act2.sa_handler = sigquit;
 	sigemptyset(&signal->act2.sa_mask);
 	signal->act2.sa_flags = 0;
