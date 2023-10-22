@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:51 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 14:09:56 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/21 20:26:24 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,12 @@ static size_t	count_quotation(char *str, size_t *i)
 		single++;
 	else if (str[0] == '"')
 		twofold++;
-	while (single && str[j] != '\'' && str[j] != '\0')
+	while (single != 0 && str[j] != '\'' && str[j] != '\0')
 		j++;
-	single = 0;
-	while (twofold && str[j] != '"' && str[j] != '\0')
+	while (twofold != 0 && str[j] != '"' && str[j] != '\0')
 		j++;
-	twofold = 0;
-	j++;
+	if (str[j] != '\0')
+		j++;
 	*i += j;
 	return (1);
 }
@@ -48,8 +47,8 @@ static size_t	count_word(char *str)
 	count = 1;
 	while (str[i] != '\0')
 	{
-		while ((str[i + 1] == ' ' && str[i + 1] != '\0')
-			|| (str[i + 1] == '	' && str[i + 1] != '\0'))
+		while ((str[i + 1] != '\0' && str[i + 1] == ' ')
+			|| (str[i + 1] != '\0' && str[i + 1] == '	'))
 			i++;
 		if (str[i] == '\'' || str[i] == '\"')
 			count += count_quotation(&str[i], &i);

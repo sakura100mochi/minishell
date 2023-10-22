@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:45 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/21 17:16:45 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:03:30 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ int	quote_heredoc(t_data *data, t_file *file)
 	}
 	free(file->file_name);
 	file->file_name = name;
-	return (heredoc(data, file, file->file_name));
+	return (heredoc(data, file, name));
 }
