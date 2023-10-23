@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   no_command.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 15:34:29 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/20 17:13:59 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 18:03:32 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/error.h"
 
-void	command_not_found(t_env *env, char *str)
+void	command_not_found(char *str)
 {
-	env->status = 127;
+	g_status = 127;
 	ft_printf("minishell: %s: command not found\n", str);
 	return ;
 }

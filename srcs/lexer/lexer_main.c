@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:51 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 13:22:30 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/23 18:29:15 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ static int	check_char(char c, char d)
 {
 	if (c == '|' || c == '<' || c == '>')
 		return (YES);
-	else if (c == ' ' && d != '\0' && d != ' ' && d != '	')
+	if ((c != ' ' && c != '	' && c != '|' && c != '<' && c != '>')
+		&& (d == ' ' || d == '	' || d == '|' || d == '<' || d == '>'
+			|| d == '\'' || d == '\"' || d == '\0'))
 		return (YES);
 	return (NO);
 }
@@ -53,7 +55,7 @@ static size_t	count_word(char *str)
 	if (str == NULL)
 		return (0);
 	i = 0;
-	count = 1;
+	count = 0;
 	while (str[i] != '\0')
 	{
 		if (str[i] == '\'' || str[i] == '\"')
@@ -65,9 +67,6 @@ static size_t	count_word(char *str)
 			i++;
 		}
 	}
-	i--;
-	if (str[i] != ' ' && str[i] != '|' && str[i] != '<' && str[i] != '>')
-		count++;
 	return (count);
 }
 
@@ -82,6 +81,7 @@ static char	**ft_free(char **result)
 		i++;
 	}
 	free(result);
+	write(STDOUT_FILENO, "error\n", 6);
 	return (NULL);
 }
 
@@ -108,10 +108,12 @@ char	**lexer_main(char *str)
 // int	main(void)
 // {
 // 	char	**result;
-// 	char	str[] = "cat << a";
+// 	char	str[] = "cat<infile0>>outfile0";
 // 	int		i;
 
 // 	result = lexer_main(str);
+// 	if (result == NULL)
+// 		return (0);
 // 	i = 0;
 // 	while (result[i] != '\0')
 // 	{

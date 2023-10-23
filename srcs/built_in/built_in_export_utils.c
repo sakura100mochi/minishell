@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_export_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 10:55:19 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 09:33:33 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 18:03:01 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ t_exp	*input_exp_variable(char *str, t_env *env_variable, \
 	exp_variable->next = new;
 	new->prev = exp_variable;
 	new->next = head;
-	env_variable->status = 0;
+	g_status = 0;
+	(void)env_variable;
 	return (head);
 }
 
@@ -142,10 +143,11 @@ char	*variable_format(t_env *env, char *str)
 		return (ft_strdup(str));
 	if (check_wrap_with_quotes(str))
 	{
-		env->status = 1;
+		g_status = 1;
 		return ((char *)ft_calloc(sizeof(char), 0));
 	}
 	result = no_enclose_malloc(str);
 	result = input_no_enclose(result, str);
+	(void)env;
 	return (result);
 }

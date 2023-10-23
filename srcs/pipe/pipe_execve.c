@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_execve.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:56:11 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 17:13:00 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 18:03:48 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	execve_without_fork(t_data *data, t_parser *parser, \
 	full_path = check_cmd_path(data->env, parser);
 	if (!full_path)
 	{
-		data->env->status = 127;
+		g_status = 127;
 		return (YES);
 	}
 	command = create_command(parser, file);

@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   exit_status.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:13 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 17:47:41 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 18:02:26 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	exit_status_format(t_env *env, int status)
+void	exit_status_format(int nbr)
 {
-	if (status == 512)
-		env->status = 2;
-	else if (status == 256)
-		env->status = 1;
+	if (nbr == 512)
+		g_status = 2;
+	else if (nbr == 256)
+		g_status = 1;
 	return ;
 }

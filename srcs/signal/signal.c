@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 12:50:11 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 17:02:42 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/22 18:04:20 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 static void	normal_sigint(int signum)
 {
+	g_status = 1;
 	(void)signum;
 	write(STDOUT_FILENO, "\n", 1);
 	rl_replace_line("", 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:26:05 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 19:30:53 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 18:03:13 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	check_variable(t_env *env, char *variable)
 	flag = 0;
 	if (variable[index] == '=')
 	{
-		env->status = 1;
+		g_status = 1;
 		return (0);
 	}
 	while (variable[index] != '\0')
@@ -46,9 +46,10 @@ static int	check_variable(t_env *env, char *variable)
 	}
 	if (variable[flag - 1] == ' ' || variable[flag - 1] == '	')
 	{
-		env->status = 1;
+		g_status = 1;
 		return (0);
 	}
+	(void)env;
 	return (1);
 }
 
@@ -57,7 +58,7 @@ static void	do_export(t_env *env_variable, t_exp *exp_variable, char *variable)
 	if (*variable && !check_variable(env_variable, variable))
 	{
 		ft_printf("minishell: export: '=': not a valid identifier\n");
-		env_variable->status = 1;
+		g_status = 1;
 	}
 	else if (*variable && check_variable(env_variable, variable))
 	{
@@ -75,10 +76,10 @@ void	built_in_export(t_parser *parser, t_env *env_variable, \
 
 	if (parser->option)
 	{
-		env_variable->status = 1;
+		g_status = 1;
 		ft_printf("minishell: export: '%s': not a valid identifier\n", \
 														parser->option);
-		env_variable->status = 2;
+		g_status = 2;
 		return ;
 	}
 	variable = variable_format(env_variable, str);
@@ -87,7 +88,7 @@ void	built_in_export(t_parser *parser, t_env *env_variable, \
 	else if (!*variable)
 	{
 		ft_printf("minishell: export: enclose in quotation marks\n");
-		env_variable->status = 2;
+		g_status = 2;
 	}
 	else if (check_equal(str))
 		exp_variable = input_exp_variable(str, env_variable, exp_variable, 0);

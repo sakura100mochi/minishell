@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 08:29:16 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/22 18:02:52 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	check_argument(t_env *env, char *file)
 		if (*file == ' ')
 		{
 			ft_printf("exit\nminishell: exit: numeric argument required\n");
-			env->status = 1;
+			g_status = 1;
 			return (1);
 		}
 		if (!ft_isdigit(*file))
@@ -31,6 +31,7 @@ static int	check_argument(t_env *env, char *file)
 		file++;
 	}
 	ft_printf("exit\n");
+	(void)env;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:22 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/23 15:43:20 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:46:53 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,12 @@ t_env	*built_in_cd(t_env *env_variable, t_parser *parser, char *file)
 		env_variable = serch_env_variable(head, "PWD=");
 		if (env_variable != head)
 			env_variable = set_pwd(env_variable, "PWD=");
-		head->status = 0;
+		g_status = 0;
 	}
 	else
 	{
 		ft_printf("minishell: cd: %s: invalid option\n", parser->option);
-		head->status = 2;
+		g_status = 2;
 	}
 	return (head);
 }
