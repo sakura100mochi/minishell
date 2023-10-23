@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:51 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 13:22:30 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/23 17:44:10 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static char	**ft_free(char **result)
 		i++;
 	}
 	free(result);
+	write(STDOUT_FILENO, "error\n", 6);
 	return (NULL);
 }
 
@@ -108,10 +109,12 @@ char	**lexer_main(char *str)
 // int	main(void)
 // {
 // 	char	**result;
-// 	char	str[] = "cat << a";
+// 	char	str[] = "echo \"cat lol.c | cat > lol.c\"";
 // 	int		i;
 
 // 	result = lexer_main(str);
+// 	if (result == NULL)
+// 		return (0);
 // 	i = 0;
 // 	while (result[i] != '\0')
 // 	{
