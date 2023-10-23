@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 16:52:33 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/23 13:56:52 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	**create_command(t_parser *parser, char *file)
 static void	do_child_process(char *full_path, char **command, char **env)
 {
 	execve(full_path, command, env);
-	perror("");
+	perror("minishell:");
 	exit(EXIT_SUCCESS);
 	return ;
 }

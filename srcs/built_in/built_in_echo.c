@@ -6,78 +6,65 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 05:51:17 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/23 15:35:22 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/built_in.h"
+#include "../../includes/error.h"
 
-static void	print_echo_option(t_parser *parser, size_t flag,
-											char *tmp, char *str)
+static void	print_echo_option(char *tmp, char *str, size_t index)
 {
-	if (!flag)
-		ft_printf("%s %s\n", parser->option, str);
-	else if (flag && tmp == NULL)
-		ft_printf("%s", str);
-	else if (flag && tmp)
-	{
+	if (!tmp)
+		ft_printf("%s\n", str);
+	else if (!index)
+		ft_printf("%s %s\n", tmp, str);
+	else if (index)
 		ft_printf("%s %s", tmp, str);
-		free(tmp);
-	}
 	return ;
 }
 
-static int	check_n_option(t_parser *parser, size_t start)
+static int	check_echo_option(char *option, size_t index)
 {
-	size_t	index;
-
-	index = start;
-	while (parser->option[index] != ' ' && parser->option[index] != '	')
-	{
-		if (parser->option[index] != 'n')
-			return (NO);
+	while (option[index] != '\0' && option[index] == 'n')
 		index++;
-	}
-	return (YES);
+	if (option[index] == ' ' || option[index] == '	' \
+									|| option[index] == '\0')
+		return (YES);
+	return (NO);
 }
 
-static int	check_echo_option(t_parser *parser, char *str)
+static void	do_echo_option(t_parser *parser, char *str)
 {
-	size_t	i;
-	size_t	flag;
+	size_t	index;
 	char	*tmp;
 
-	i = 0;
-	flag = 0;
+	index = 0;
 	tmp = NULL;
-	if (parser->option == NULL)
-		return (NO);
-	if (parser->option[i] == '-' && check_n_option(parser, i + 1))
-		flag++;
-	while (parser->option[i++] != '\0' && flag)
+	while (parser->option[index] != '\0')
 	{
-		if (parser->option[i] == '-' && !check_n_option(parser, i + 1))
+		if (index > 0 && parser->option[index - 1] == '-' && \
+			!check_echo_option(parser->option, index))
 		{
-			tmp = ft_substr(parser->option, i, ft_strlen(parser->option));
-			if (tmp == NULL)
-			{
-				ft_printf("malloc error\n");
-				return (YES);
-			}
+			tmp = ft_substr(parser->option, index - 1, \
+					ft_strlen(parser->option) - index + 1);
+			if (!tmp)
+				exit_malloc_error();
+			break ;
 		}
+		index++;
 	}
-	print_echo_option(parser, flag, tmp, str);
-	return (YES);
+	print_echo_option(tmp, str, index - 1);
+	if (tmp)
+		free(tmp);
+	return ;
 }
 
 void	built_in_echo(t_env *env, t_parser *parser, char *str)
 {
-	if (check_echo_option(parser, str))
-	{
-		env->status = 0;
-		return ;
-	}
-	if (!parser->option && !*str)
+	if (parser->option)
+		do_echo_option(parser, str);
+	else if (!parser->option && !*str)
 		ft_printf("\n");
 	else if (!parser->option && *str)
 		ft_printf("%s\n", str);
