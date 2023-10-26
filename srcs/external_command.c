@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/23 19:46:20 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/23 13:56:52 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,25 +78,24 @@ static void	fork_process(pid_t pid, char *full_path, char **command, char **env)
 void	fork_and_execve(t_data *data, t_parser *parser, char *file)
 {
 	pid_t	pid;
-	int		nbr;
+	int		status;
 	char	**command;
 	char	**env;
 	char	*full_path;
 
-	nbr = 0;
+	status = 0;
 	full_path = check_cmd_path(data->env, parser);
 	if (!full_path)
-		return (command_not_found(parser->cmd));
+		return (command_not_found(data->env, parser->cmd));
 	command = create_command(parser, file);
 	env = struct_to_array(data->env);
 	pid = fork();
 	signal_minishell(data->signal, INTERACTIVE);
 	fork_process(pid, full_path, command, env);
-	if (pid > 0 && waitpid(pid, &nbr, 0) != -1)
-	{
-		g_status = nbr;
-		exit_status_format(nbr);
-	}
+	if (pid > 0)
+		waitpid(pid, &status, 0);
+	data->env->status = status;
+	exit_status_format(data->env, status);
 	free(full_path);
 	double_array_free(command);
 	double_array_free(env);

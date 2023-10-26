@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_in_redirect_utils.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 16:38:01 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 17:42:27 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/23 20:28:38 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

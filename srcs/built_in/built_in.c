@@ -6,17 +6,22 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:18:37 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 09:29:56 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/26 09:01:48 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/built_in.h"
+#include "../../includes/error.h"
 
-static int	do_built_in(t_data *data, t_parser *parser, char *file)
+int	judge_built_in(t_data *data, t_parser *parser, char *file)
 {
 	size_t	len;
+	// char	**file_array;
 
 	len = ft_strlen(parser->cmd);
+	// file_array = str_to_array(file);
+	// if (!file_array)
+	// 	exit_malloc_error();
 	if (len == 2 && !ft_strncmp(parser->cmd, "cd", len))
 		data->env = built_in_cd(data->env, data->parser, file);
 	else if (len == 4 && !ft_strncmp(parser->cmd, "echo", len))
@@ -34,11 +39,4 @@ static int	do_built_in(t_data *data, t_parser *parser, char *file)
 	else
 		return (NO);
 	return (YES);
-}
-
-int	judge_built_in(t_data *data, t_parser *parser, char *file)
-{
-	if (do_built_in(data, parser, file))
-		return (YES);
-	return (NO);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_unset.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:10 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 18:03:25 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/21 19:14:10 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	built_in_unset(t_parser *parser, t_env *env_variable, \
 {
 	if (!*str && !parser->option)
 	{
-		g_status = 0;
+		env_variable->status = 0;
 		return ;
 	}
 	else if (!parser->option || (parser->option && \
@@ -124,12 +124,12 @@ void	built_in_unset(t_parser *parser, t_env *env_variable, \
 		env_variable = rm_env_variable(str, env_variable);
 		exp_variable = rm_exp_variable(str, exp_variable);
 		exp_variable = rm_exp_str(str, exp_variable);
-		g_status = 0;
+		env_variable->status = 0;
 	}
 	else if (parser->option && ft_strlen(parser->option) > 1)
 	{
 		ft_printf("minishell: unset: -%c: invalid option\n", parser->option[1]);
-		g_status = 2;
+		env_variable->status = 2;
 	}
 	return ;
 }

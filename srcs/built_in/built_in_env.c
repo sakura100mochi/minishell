@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:17 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 18:02:47 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/21 18:05:44 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,13 @@ static void	end_status_echo(t_env *env, char *path, char *file)
 	if (access(path, F_OK))
 	{
 		ft_printf("env: '%s/': Permission denied\n", file);
-		g_status = 126;
+		env->status = 126;
 	}
 	else
 	{
 		ft_printf("env: '%s': No such file or directory\n", file);
-		g_status = 127;
+		env->status = 127;
 	}
-	(void)env;
 	return ;
 }
 

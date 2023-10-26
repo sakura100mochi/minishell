@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:26:38 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/22 18:03:44 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/23 20:28:45 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/error.h"
 
-int	syntax(void)
+int	syntax(t_data *data)
 {
 	ft_printf("minishell: syntax error\n");
-	g_status = 258;
+	data->env->status = 258;
 	return (NO);
 }
 
@@ -25,24 +25,17 @@ static int	check_redirect(char *all, size_t *i, char c)
 	size_t	j;
 
 	if (all == NULL)
-	{
-		g_status = 258;
 		return (NO);
-	}
 	j = *i;
 	while (all[j] != '\0' && all[j] != c)
 		j++;
 	if (all[j + 1] != '\0')
 		j++;
 	else
-	{
-		g_status = 258;
 		return (NO);
-	}
 	*i += j;
 	if (all[j - 1] == c && all[j] == c)
 		return (YES);
-	g_status = 258;
 	return (NO);
 }
 
@@ -69,5 +62,6 @@ int	redirect_syntax(t_data *data)
 		}
 		node = node->next;
 	}
+	data->env->status = 258;
 	return (YES);
 }

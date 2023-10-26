@@ -6,11 +6,12 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:42:14 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 06:25:24 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/26 09:01:26 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/built_in.h"
+#include "../../includes/error.h"
 
 t_env	*serch_env_variable(t_env *head, char *variable)
 {
@@ -66,3 +67,60 @@ char	*create_file_path(char *file)
 		exit (EXIT_FAILURE);
 	return (result);
 }
+
+// size_t	count_file_nbr(char *file)
+// {
+// 	size_t	index;
+// 	size_t	count;
+// 	size_t	single;
+// 	size_t	twofold;
+// 	size_t	flag;
+
+// 	index = 0;
+// 	count = 0;
+// 	single = 0;
+// 	twofold = 0;
+// 	flag = 0;
+// 	while (file[index] != '\0')
+// 	{
+// 		if (file[index] == '\'')
+// 			single++;
+// 		else if (file[index] == '"')
+// 			twofold++; 
+// 		if (!flag && (file[index] != ' ' && file[index] != '	'))
+// 		{
+// 			count++;
+// 			flag++;
+// 		}
+// 		else if (file[index] == ' ' || file[index] == '	')
+// 			flag = 0;
+// 		index++;
+// 	}
+// 	return (count);
+// }
+
+// char	**str_to_array(const char *str)
+// {
+// 	size_t	index;
+// 	size_t	start;
+// 	size_t	count;
+// 	char	**result;
+
+// 	index = 0;
+// 	start = 0;
+// 	count = 0;
+// 	result = (char **)ft_calloc(sizeof(char *), count_file_nbr(str) + 1);
+// 	if (!result)
+// 		exit_malloc_error();
+// 	while (str[index] != '\0')
+// 	{
+// 		if (str[index] == ' ' || str[index] == '	')
+// 		{
+// 			result[count++] = ft_substr(str, start, index - start);
+// 		}
+// 		while (str[index] == ' ' || str[index] == '	')
+// 			index++;
+// 		index++;
+// 	}
+// 	return (result);
+// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/22 18:04:04 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/23 20:28:50 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ static void	interactive_heredoc(t_env *env, t_file *file, \
 int	heredoc(t_data *data, t_file *file, char *name)
 {
 	pid_t	pid;
-	int		nbr;
+	int		status;
 
 	file->fd = open("/tmp/tmp", O_CREAT | O_RDWR | O_TRUNC,
 			S_IREAD | S_IWRITE | S_IRGRP | S_IROTH);
-	nbr = 0;
+	status = 0;
 	signal_minishell(data->signal, IGN);
 	pid = fork();
 	if (pid == -1)
@@ -79,11 +79,7 @@ int	heredoc(t_data *data, t_file *file, char *name)
 		signal_minishell(data->signal, REDIRECT);
 		interactive_heredoc(data->env, file, name, data->parser);
 	}
-	waitpid(pid, &nbr, 0);
-	g_status = nbr;
-	exit_status_format(nbr);
+	waitpid(pid, &status, 0);
 	signal_minishell(data->signal, NORMAL);
-	if (g_status != 0)
-		return (NO);
 	return (YES);
 }

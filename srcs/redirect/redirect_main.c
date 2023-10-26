@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_main.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:09:45 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/22 17:41:55 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/23 20:28:00 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,17 @@ int	redirect_main(t_data *data, t_parser *node)
 		while (file != NULL)
 		{
 			if (file->type == UNKNOWN || file->file_name == NULL)
-				return (syntax());
-			else if (file->type == Q_H && quote_heredoc(data, file) == NO)
+				return (syntax(data));
+			else if (file->type == Q_H)
+				quote_heredoc(data, file);
+			else if (file->type == HEREDOC)
+				heredoc(data, file, file->file_name);
+			else if (file->type == INPUT && input(data, file) == NO)
 				return (NO);
-			else if (file->type == HEREDOC
-				&& heredoc(data, file, file->file_name) == NO)
-				return (NO);
-			else if (file->type == INPUT && input(file) == NO)
-				return (NO);
-			else if (file->type == APPEND && append(file) == NO)
-				return (NO);
-			else if (file->type == OUTPUT && output(file) == NO)
-				return (NO);
+			else if (file->type == APPEND)
+				append(data, file);
+			else if (file->type == OUTPUT)
+				output(data, file);
 			file = file->next;
 		}
 		node = node->next;
