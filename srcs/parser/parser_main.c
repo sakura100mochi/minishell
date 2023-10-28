@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:54 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 16:17:37 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/10/28 18:36:57 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_parser	*parser_main(char **str, char *prompt)
 // 	t_file		*file;
 // 	char		**result;
 // 	size_t		i;
-// 	char		*str = "          cat << a |        ls 			-l  |   ";
+// 	char		*str = "ABC=\"AAA\"";
 
 // 	i = 0;
 // 	result = lexer_main(str);
@@ -71,7 +71,7 @@ t_parser	*parser_main(char **str, char *prompt)
 // 		i++;
 // 	}
 // 	printf("\n---------------------------\n\n");
-// 	node = parser_main(result);
+// 	node = parser_main(result, str);
 // 	head = node;
 // 	while (node != NULL)
 // 	{
