@@ -56,6 +56,11 @@ void	standby_state(t_data *data)
 		data->parser = parser_main(lexer_main(data->prompt), data->prompt);
 		if (redirect_syntax(data) == NO || syntax_check(data) == NO)
 			syntax(data);
+		else if (data->parser == NULL)
+		{
+			free(data->prompt);
+			continue ;
+		}
 		else
 			execution_main(data);
 		free(data->prompt);
