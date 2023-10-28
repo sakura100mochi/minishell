@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+         #
+#    By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 02:35:02 by yayoi             #+#    #+#              #
-#    Updated: 2023/10/01 15:53:51 by yhirai           ###   ########.fr        #
+#    Updated: 2023/10/28 19:00:35 by hiraiyuina       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,24 +43,30 @@ CFLAGS			= -Wall -Wextra -Werror
 
 ARFLAG			= rcs
 
+CHECK		= \033[32m[✔]\033[0m
+REMOVE		= \033[31m[✘]\033[0m
+GENERATE	= \033[33m[➤]\033[0m
+BLUE		= \033[1;34m
+YELLOW		= \033[1;33m
+RESET		= \033[0m
+
 all:			$(NAME)
 
 %.o:%.c
-				@${CC} ${CFLAGS} -I libft_include -c $< -o $@
+	@ ${CC} ${CFLAGS} -I libft_include -c $< -o $@
+	@  printf "$(GENERATE) $(YELLOW)Generating $@... %-50.50s\r$(RESET)"
 
 $(NAME):		${OBJS}
-				@echo "libft			compiled"
-				@${CC} ${CFLAGS} -I libft_include -c ${addprefix ${FTPRINTF}, ${FTPRINTF_SRC}} ${addprefix ${GNL}, ${GNL_SRC}}
-				@${AR} ${ARFLAG} ${NAME} ${OBJS} ${FTPRINTF_OBJS} ${GNL_OBJS}
-				@echo "libft.a			created"
+	@ echo ""
+	@ ${CC} ${CFLAGS} -I libft_include -c ${addprefix ${FTPRINTF}, ${FTPRINTF_SRC}} ${addprefix ${GNL}, ${GNL_SRC}}
+	@ ${AR} ${ARFLAG} ${NAME} ${OBJS} ${FTPRINTF_OBJS} ${GNL_OBJS}
+	@ echo "$(CHECK) $(BLUE)finish Compiling libft. $(RESET)"
 
 clean:
-				@${RM} ${OBJS} ${FTPRINTF_OBJS} ${GNL_OBJS}
-				@echo "libft_object file	removed"
+	@${RM} ${OBJS} ${FTPRINTF_OBJS} ${GNL_OBJS}
 
 fclean:			clean
-				@${RM} ${NAME}
-				@echo "libft.a			removed"
+	@ ${RM} ${NAME}
 
 re:				fclean all
 

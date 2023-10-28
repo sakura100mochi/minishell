@@ -6,7 +6,7 @@
 #    By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/28 17:57:07 by hiraiyuina       ###   ########.fr        #
+#    Updated: 2023/10/28 19:11:52 by hiraiyuina       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,7 @@ OBJS		= ${addprefix ${PRE}, ${SRCS:.c=.o}}
 
 
 ##----------conpiler-----------##
-CFLAGS		= -Wall -Wextra -Werror -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror -I $(shell brew --prefix readline)/include
 
 CCLIBFT		= make -s -C libft
 ##-----------------------------##
@@ -106,56 +106,49 @@ ARFLAG		= rcs
 ARCHIVES	= ${addprefix ${LIBFT}, libft.a}
 ##-----------------------------##
 
-
+CHECK		= \033[32m[✔]\033[0m
+REMOVE		= \033[31m[✘]\033[0m
+GENERATE	= \033[33m[➤]\033[0m
+BLUE		= \033[1;34m
+YELLOW		= \033[1;33m
+RESET		= \033[0m
 
 ##--------Makefile rule--------##
 all:		${NAME}
 
 %.o:%.c
-			${CC} ${CFLAGS} -I /opt/homebrew/Cellar/readline/8.2.1/include -c $< -o $@
+	@ ${CC} ${CFLAGS} -c $< -o $@
+	@  printf "$(GENERATE) $(YELLOW)Generating $@... %-50.50s\r$(RESET)"
 
 ${NAME}:	${OBJS}
-			@${CCLIBFT}
-			@echo "object file		compiled"
-			@${CC} ${CFLAGS} ${OBJS} -Lsrcs -lreadline -L /opt/homebrew/Cellar/readline/8.2.1/lib -I /opt/homebrew/Cellar/readline/8.2.1/include ${ARCHIVES} -o ${NAME}
-#			@echo "minishell		created\n\n"
-#			@echo "    ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗     "
-#			@echo "    ████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     "
-#			@echo "    ██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║     "
-#			@echo "    ██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║     "
-#			@echo "    ██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗"
-#			@echo "    ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝"
-#			@echo "                                                                       "
+	@ echo ""
+	@ ${CCLIBFT}
+	@ ${CC} ${CFLAGS} ${OBJS} -lreadline -L $(shell brew --prefix readline)/lib ${ARCHIVES} -o ${NAME}
+	@ echo "$(CHECK) $(BLUE)finish Compiling minishell. $(RESET)"
+	@ echo "                                                                       "
+	@ echo "    ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗     "
+	@ echo "    ████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     "
+	@ echo "    ██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║     "
+	@ echo "    ██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║     "
+	@ echo "    ██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗"
+	@ echo "    ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝"
+	@ echo "                                                                       "
+	
 
-#csakamoto_42
-# -L /Users/csakamot/.brew/Cellar/readline/8.2.1/lib -I /Users/csakamot/.brew/Cellar/readline/8.2.1/include
-# -I /Users/csakamot/.brew/Cellar/readline/8.2.1/include
-#csakamoto_windows
-# -I/usr/local/opt/readline/include
-# -L/usr/local/Cellar/readline/8.2.1/lib/
-
-#yhirai_42
-# -L /Users/yhirai/.brew/Cellar/readline/8.2.1/lib -I /Users/yhirai/.brew/Cellar/readline/8.2.1/include
-# -I /Users/yhirai/.brew/Cellar/readline/8.2.1/include
-#yhirai_mac
-# -L /opt/homebrew/Cellar/readline/8.2.1/lib -I /opt/homebrew/Cellar/readline/8.2.1/include
-# -I /opt/homebrew/Cellar/readline/8.2.1/include
-
-# -fsanitize=address
 
 clean:
-			@${RM} ${OBJS}
-			@${RMLIBFT}
-			@echo "object file		removed"
+	@ ${RM} ${OBJS}
+	@ ${RMLIBFT}
+	@ printf "$(REMOVE) $(BLUE)Remove $(NAME) object files.$(RESET)\n"
 
 fclean:		clean
-			@${RM} ${NAME}
-			@echo "minishell		removed"
+	@ ${RM} ${NAME}
+	@ printf "$(REMOVE) $(BLUE)Remove $(NAME) $(NAME).$(RESET)\n"
 
 re:			fclean all
 
 exe:		re
-			@make -s clean
+	@ make -s clean
 
 .PHONY:		all clean fclean re exe
 ##-----------------------------##
