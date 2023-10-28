@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:42:14 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/29 06:29:28 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/29 06:40:05 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,16 @@ char	*create_file_path(char *file)
 	return (result);
 }
 
+static int	init_count_file(size_t *count, size_t *single, \
+								size_t *twofold, size_t *flag)
+{
+	*count = 0;
+	*single = 0;
+	*twofold = 0;
+	*flag = 0;
+	return (0);
+}
+
 size_t	count_file_nbrs(char *file)
 {
 	size_t	index;
@@ -76,11 +86,7 @@ size_t	count_file_nbrs(char *file)
 	size_t	twofold;
 	size_t	flag;
 
-	index = 0;
-	count = 0;
-	single = 0;
-	twofold = 0;
-	flag = 0;
+	index = init_count_file(&count, &single, &twofold, &flag);
 	while (file[index] != '\0')
 	{
 		if (!(twofold % 2) && file[index] == '\'')
