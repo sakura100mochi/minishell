@@ -6,7 +6,7 @@
 /*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:54 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/28 18:36:57 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/10/28 18:49:46 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_parser	*parser_main(char **str, char *prompt)
 	size_t		i;
 
 	i = 0;
+	if (str == NULL)
+		return (NULL);
 	node = split_pipe(str, prompt, NULL);
 	while (str[i] != NULL)
 		free(str[i++]);

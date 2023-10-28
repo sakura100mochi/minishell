@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+         #
+#    By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 02:35:02 by yayoi             #+#    #+#              #
-#    Updated: 2023/10/01 15:53:51 by yhirai           ###   ########.fr        #
+#    Updated: 2023/10/28 19:38:12 by hiraiyuina       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,24 +43,34 @@ CFLAGS			= -Wall -Wextra -Werror
 
 ARFLAG			= rcs
 
+CHECK		= \033[36m[\033[0m✔\033[36m]\033[0m
+REMOVE		= \033[38;5;211m[\033[0m✘\033[38;5;211m]\033[0m
+GENERATE	= \033[38;5;227m[\033[0m➤\033[38;5;227m]\033[0m
+BLUE		= \033[1;36m
+YELLOW		= \033[38;5;227m
+RED			= \033[38;5;211m
+RESET		= \033[0m
+
 all:			$(NAME)
 
 %.o:%.c
-				@${CC} ${CFLAGS} -I libft_include -c $< -o $@
+	@ ${CC} ${CFLAGS} -I libft_include -c $< -o $@
+	@  printf "$(GENERATE) $(YELLOW)Generating $@... %-50.50s\r$(RESET)"
 
 $(NAME):		${OBJS}
-				@echo "libft			compiled"
-				@${CC} ${CFLAGS} -I libft_include -c ${addprefix ${FTPRINTF}, ${FTPRINTF_SRC}} ${addprefix ${GNL}, ${GNL_SRC}}
-				@${AR} ${ARFLAG} ${NAME} ${OBJS} ${FTPRINTF_OBJS} ${GNL_OBJS}
-				@echo "libft.a			created"
+	@ echo ""
+	@ ${CC} ${CFLAGS} -I libft_include -c ${addprefix ${FTPRINTF}, ${FTPRINTF_SRC}} ${addprefix ${GNL}, ${GNL_SRC}}
+	@ ${AR} ${ARFLAG} ${NAME} ${OBJS} ${FTPRINTF_OBJS} ${GNL_OBJS}
+	@ echo "$(CHECK) $(BLUE)finish Compiling libft. $(RESET)"
 
 clean:
-				@${RM} ${OBJS} ${FTPRINTF_OBJS} ${GNL_OBJS}
-				@echo "libft_object file	removed"
+	@ ${RM} ${OBJS} ${FTPRINTF_OBJS} ${GNL_OBJS}
+	@ printf "$(REMOVE) $(RED)$(NAME) : Remove object files and $(NAME).$(RESET)\n"
 
-fclean:			clean
-				@${RM} ${NAME}
-				@echo "libft.a			removed"
+fclean:
+	@ ${RM} ${OBJS} ${FTPRINTF_OBJS} ${GNL_OBJS}
+	@ ${RM} ${NAME}
+	@ printf "$(REMOVE) $(RED)$(NAME) : Remove object files and $(NAME).$(RESET)\n"
 
 re:				fclean all
 
