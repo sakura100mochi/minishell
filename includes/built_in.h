@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:39:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/28 16:45:32 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/29 05:40:13 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,7 @@ int		check_expvariable_exist(t_exp *exp, char *str);
 void	built_in_pwd(t_env *env, t_parser *parser);
 void	built_in_unset(t_parser *parser, t_env *env_variable, \
 									t_exp *exp_variable, char **array);
+t_env	*rm_env_variable(char *str, t_env *env_variable);
+t_exp	*rm_exp_variable(char *str, t_exp *exp_variable);
 
 #endif
