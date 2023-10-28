@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:28:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/28 11:59:59 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/29 04:09:02 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,21 @@ t_env	*new_env_node(char *content, size_t head)
 	return (new);
 }
 
+static void	judge_env_pointer(t_env *start, t_env *env, size_t index)
+{
+	if (!index)
+	{
+		start->prev = env;
+		start->next = env;
+	}
+	else
+	{
+		start->prev = env->next;
+		env->next->next = start;
+	}
+	return ;
+}
+
 t_data	*init_env(t_data *data)
 {
 	size_t		index;
@@ -49,16 +64,17 @@ t_data	*init_env(t_data *data)
 	if (!env_variable)
 		exit_malloc_error();
 	start = env_variable;
-	while (environ[index + 1])
+	while (environ[index])
 	{
+		if (!environ[index + 1])
+			break ;
 		new = new_env_node(ft_strdup(environ[index]), 0);
 		if (!new)
 			exit_malloc_error();
 		env_nodeadd_back(&env_variable, new);
 		index++;
 	}
-	start->prev = env_variable->next;
-	env_variable->next->next = start;
+	judge_env_pointer(start, env_variable, index);
 	data->env = start;
 	return (data);
 }

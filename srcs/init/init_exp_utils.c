@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_exp_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/28 18:43:34 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/29 04:10:07 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
+#include "../../includes/error.h"
 
-int	main(void)
+t_exp	*new_exp_node(char *content, size_t head)
 {
-	t_data	*data;
+	t_exp	*new;
 
-	data = NULL;
-	data = init_minishell(data);
-	signal_minishell(data->signal, NORMAL);
-	standby_state(data);
-	return (0);
+	new = (t_exp *)ft_calloc(1, sizeof(t_exp));
+	if (!new)
+		return (NULL);
+	if (head)
+		new -> head = 1;
+	new -> variable = content;
+	new -> next = NULL;
+	new -> prev = NULL;
+	return (new);
 }
-
-// __attribute__((destructor))
-// static void destructor() {
-//     system("leaks -q minishell");
-// }
