@@ -6,7 +6,7 @@
 /*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:51 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/28 18:23:08 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/10/28 18:30:20 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,21 +105,21 @@ char	**lexer_main(char *str)
 	return (result);
 }
 
-int	main(void)
-{
-	char	**result;
-	char	str[] = "cat\"a\"";
-	int		i;
+// int	main(void)
+// {
+// 	char	**result;
+// 	char	str[] = "cat\"a\"";
+// 	int		i;
 
-	result = lexer_main(str);
-	if (result == NULL)
-		return (0);
-	i = 0;
-	while (result[i] != NULL)
-	{
-		printf("%s\n", result[i]);
-		i++;
-	}
-	ft_free(result);
-	return (0);
-}
+// 	result = lexer_main(str);
+// 	if (result == NULL)
+// 		return (0);
+// 	i = 0;
+// 	while (result[i] != NULL)
+// 	{
+// 		printf("%s\n", result[i]);
+// 		i++;
+// 	}
+// 	ft_free(result);
+// 	return (0);
+// }
