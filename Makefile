@@ -6,7 +6,7 @@
 #    By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/28 19:11:52 by hiraiyuina       ###   ########.fr        #
+#    Updated: 2023/10/28 19:38:48 by hiraiyuina       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,11 +106,12 @@ ARFLAG		= rcs
 ARCHIVES	= ${addprefix ${LIBFT}, libft.a}
 ##-----------------------------##
 
-CHECK		= \033[32m[✔]\033[0m
-REMOVE		= \033[31m[✘]\033[0m
-GENERATE	= \033[33m[➤]\033[0m
-BLUE		= \033[1;34m
-YELLOW		= \033[1;33m
+CHECK		= \033[36m[\033[0m✔\033[36m]\033[0m
+REMOVE		= \033[38;5;211m[\033[0m✘\033[38;5;211m]\033[0m
+GENERATE	= \033[38;5;227m[\033[0m➤\033[38;5;227m]\033[0m
+BLUE		= \033[1;36m
+YELLOW		= \033[38;5;227m
+RED			= \033[38;5;211m
 RESET		= \033[0m
 
 ##--------Makefile rule--------##
@@ -139,11 +140,13 @@ ${NAME}:	${OBJS}
 clean:
 	@ ${RM} ${OBJS}
 	@ ${RMLIBFT}
-	@ printf "$(REMOVE) $(BLUE)Remove $(NAME) object files.$(RESET)\n"
+	@ printf "$(REMOVE) $(RED)$(NAME) : Remove object files.$(RESET)\n"
 
-fclean:		clean
+fclean:
+	@ ${RM} ${OBJS}
+	@ ${RMLIBFT}
 	@ ${RM} ${NAME}
-	@ printf "$(REMOVE) $(BLUE)Remove $(NAME) $(NAME).$(RESET)\n"
+	@ printf "$(REMOVE) $(RED)$(NAME) : Remove object files and $(NAME).$(RESET)\n"
 
 re:			fclean all
 

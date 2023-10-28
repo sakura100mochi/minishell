@@ -6,7 +6,7 @@
 #    By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 02:35:02 by yayoi             #+#    #+#              #
-#    Updated: 2023/10/28 19:00:35 by hiraiyuina       ###   ########.fr        #
+#    Updated: 2023/10/28 19:38:12 by hiraiyuina       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,11 +43,12 @@ CFLAGS			= -Wall -Wextra -Werror
 
 ARFLAG			= rcs
 
-CHECK		= \033[32m[✔]\033[0m
-REMOVE		= \033[31m[✘]\033[0m
-GENERATE	= \033[33m[➤]\033[0m
-BLUE		= \033[1;34m
-YELLOW		= \033[1;33m
+CHECK		= \033[36m[\033[0m✔\033[36m]\033[0m
+REMOVE		= \033[38;5;211m[\033[0m✘\033[38;5;211m]\033[0m
+GENERATE	= \033[38;5;227m[\033[0m➤\033[38;5;227m]\033[0m
+BLUE		= \033[1;36m
+YELLOW		= \033[38;5;227m
+RED			= \033[38;5;211m
 RESET		= \033[0m
 
 all:			$(NAME)
@@ -63,10 +64,13 @@ $(NAME):		${OBJS}
 	@ echo "$(CHECK) $(BLUE)finish Compiling libft. $(RESET)"
 
 clean:
-	@${RM} ${OBJS} ${FTPRINTF_OBJS} ${GNL_OBJS}
+	@ ${RM} ${OBJS} ${FTPRINTF_OBJS} ${GNL_OBJS}
+	@ printf "$(REMOVE) $(RED)$(NAME) : Remove object files and $(NAME).$(RESET)\n"
 
-fclean:			clean
+fclean:
+	@ ${RM} ${OBJS} ${FTPRINTF_OBJS} ${GNL_OBJS}
 	@ ${RM} ${NAME}
+	@ printf "$(REMOVE) $(RED)$(NAME) : Remove object files and $(NAME).$(RESET)\n"
 
 re:				fclean all
 
