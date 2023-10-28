@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/23 20:25:18 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/27 12:12:08 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct s_pipe
 	int					status;
 	size_t				execve;
 	char				*file;
+	char				**array;
 	pid_t				pid;
 	size_t				index;
 }			t_pipe;
@@ -137,20 +138,21 @@ t_data	*init_exp(t_data *data);
 t_env	*new_env_node(char *content, size_t head);
 t_exp	*new_exp_node(char *content, size_t head);
 void	execution_main(t_data *data);
-int		dup_command(t_data *data, t_parser *parser, t_file *file, char *str);
+int		dup_command(t_data *data, t_parser *parser, char *str, char **array);
 int		without_fork_dup_command(t_data *data, t_parser *parser, \
 												t_file *file, t_pipe *pipelist);
 void	close_fd(t_file *file);
 int		last_input_fd(t_file *file);
 int		last_output_fd(t_file *file);
-char	*format_command(t_env *env, t_parser *parser);
+char	*format_command(t_parser *parser);
 void	env_nodeadd_back(t_env **env, t_env *new);
 void	exp_nodeadd_back(t_exp **env, t_exp *new);
 void	standby_state(t_data *data);
 void	exit_status_format(t_env *env, int status);
 
 /*---external_command---*/
-void	fork_and_execve(t_data *data, t_parser *parser, char *file);
+void	fork_and_execve(t_data *data, t_parser *parser, \
+								char *file, char **array);
 size_t	count_file_nbr(char *file);
 char	**add_file_to_array(char **result, char *file, size_t index, \
 																size_t len);

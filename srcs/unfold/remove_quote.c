@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 12:55:26 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 13:24:40 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/28 15:30:11 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,10 @@ char	*check_quote_in_str(char *str, t_env *env)
 			single++;
 		else if (!(single % 2) && !(twofold % 2) && str[index] == '"')
 			twofold++;
-		else if (single % 2 && str[index] == '\'' && single++)
+		else if (single % 2 && !(twofold % 2) && \
+					str[index] == '\'' && single++)
 			str = remove_single_quote(str, &index);
-		else if (twofold % 2 && str[index] == '"' && twofold++)
+		else if (twofold % 2 && !(single % 2) && str[index] == '"' && twofold++)
 			str = remove_twofold_quote(str, env, &index);
 		index++;
 	}

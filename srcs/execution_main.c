@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/23 15:39:41 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/28 14:59:18 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,14 @@ static int	check_redirect(t_parser *node)
 static void	no_pipe_exec(t_data *data, t_parser *parser)
 {
 	char	*file;
+	char	**file_array;
 
-	file = format_command(data->env, data->parser);
+	file = format_command(data->parser);
+	parser->cmd = unfold_main(data->env, parser->cmd);
+	file_array = file_to_array(data->env, file);
+	for (int i = 0; file_array[i] != NULL; i++)
+		printf("#%s#\n", file_array[i]);
+	file = unfold_main(data->env, file);
 	if (file == NULL)
 	{
 		if (parser->redirect)
@@ -72,21 +78,22 @@ static void	no_pipe_exec(t_data *data, t_parser *parser)
 		return ;
 	}
 	if (parser->redirect)
-		dup_command(data, parser, parser->redirect, file);
+		dup_command(data, parser, file, file_array);
 	else
 	{
-		if (!judge_built_in(data, parser, file))
+		if (!judge_built_in(data, parser, file, file_array))
 		{
 			signal_minishell(data->signal, IGN);
-			fork_and_execve(data, parser, file);
+			fork_and_execve(data, parser, file, file_array);
 			signal_minishell(data->signal, NORMAL);
 		}
 	}
+	double_array_free(file_array);
 	free(file);
 	return ;
 }
 
-char	*format_command(t_env *env, t_parser *parser)
+char	*format_command(t_parser *parser)
 {
 	size_t	cmd_len;
 	size_t	file_len;
@@ -105,7 +112,6 @@ char	*format_command(t_env *env, t_parser *parser)
 		exit_malloc_error();
 	free(parser->cmd);
 	parser->cmd = tmp;
-	file = unfold_main(env, parser, file);
 	return (file);
 }
 
@@ -124,6 +130,7 @@ void	execution_main(t_data *data)
 		pipe_main(data, data->parser, len);
 		return ;
 	}
+	ft_printf("&%s&\n", data->parser->cmd);
 	no_pipe_exec(data, data->parser);
 	return ;
 }

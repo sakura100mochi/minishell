@@ -6,42 +6,77 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 08:29:16 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/28 16:10:54 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/built_in.h"
 
-static int	check_argument(t_env *env, char *file)
+static int	ft_strdigit(char *str)
 {
-	while (*file != '\0')
+	size_t	index;
+
+	index = 0;
+	while (str[index] != '\0')
 	{
-		if (*file == ' ')
-		{
-			ft_printf("exit\nminishell: exit: numeric argument required\n");
-			env->status = 1;
-			return (1);
-		}
-		if (!ft_isdigit(*file))
-		{
-			ft_printf("exit\n");
-			ft_printf("minishell: exit: %s: numeric argument required\n", file);
-			return (0);
-		}
-		file++;
+		if (!ft_isdigit(str[index]))
+			return (NO);
+		index++;
 	}
-	ft_printf("exit\n");
-	return (0);
+	return (YES);
 }
 
-void	built_in_exit(t_data *data, char *file)
+static void	judge_exit_status(char **array, size_t index, size_t flag)
 {
-	if (*file && check_argument(data->env, file))
-		return ;
-	if (!*file)
+	if (!flag && index == 1)
+	{
 		ft_printf("exit\n");
-	free(data->prompt);
-	free_all(data);
-	exit(EXIT_SUCCESS);
+		exit(ft_atoi(array[0]));
+	}
+	else if (flag && index == 0)
+	{
+		ft_printf("exit\nminishell: exit: %s: \
+numeric argument required\n", array[0]);
+		exit(255);
+	}
+	return ;
+}
+
+static void	check_file_array(char **array, size_t *index, size_t *flag)
+{
+	while (array[*index] != NULL)
+	{
+		if (!ft_strdigit(array[*index]))
+		{
+			*flag = 1;
+			break ;
+		}
+		*index = *index + 1;
+	}
+	return ;
+}
+
+void	built_in_exit(t_env *env, t_parser *parser, char **array)
+{
+	size_t	index;
+	size_t	flag;
+
+	index = 0;
+	flag = 0;
+	if (parser->option != NULL)
+	{
+		ft_printf("exit\nminishell: exit: %s: numeric \
+argument required\n", parser->option);
+		exit(255);
+	}
+	check_file_array(array, &index, &flag);
+	if ((!flag && index > 1) || (flag && index > 0))
+	{
+		ft_printf("exit\nminishell: exit: too many arguments\n");
+		env->status = 1;
+		return ;
+	}
+	judge_exit_status(array, index, flag);
+	exit(env->status);
 	return ;
 }

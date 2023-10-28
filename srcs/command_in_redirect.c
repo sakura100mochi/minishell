@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:40:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 15:11:27 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/27 12:12:18 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	change_fd_to_std(int *stdin, int *stdout, int input, int output)
 	return (YES);
 }
 
-int	dup_command(t_data *data, t_parser *parser, t_file *file, char *str)
+int	dup_command(t_data *data, t_parser *parser, char *str, char **array)
 {
 	int	stdin;
 	int	stdout;
@@ -62,17 +62,17 @@ int	dup_command(t_data *data, t_parser *parser, t_file *file, char *str)
 
 	stdin = 0;
 	stdout = 0;
-	input = last_input_fd(file);
-	output = last_output_fd(file);
+	input = last_input_fd(parser->redirect);
+	output = last_output_fd(parser->redirect);
 	change_std_to_fd(&stdin, &stdout, input, output);
-	if (!judge_built_in(data, parser, str))
+	if (!judge_built_in(data, parser, str, array))
 	{
 		signal_minishell(data->signal, IGN);
-		fork_and_execve(data, parser, str);
+		fork_and_execve(data, parser, str, array);
 		signal_minishell(data->signal, NORMAL);
 	}
 	change_fd_to_std(&stdin, &stdout, input, output);
-	close_fd(file);
+	close_fd(parser->redirect);
 	return (YES);
 }
 
@@ -89,7 +89,7 @@ int	without_fork_dup_command(t_data *data, t_parser *parser, \
 	input = last_input_fd(file);
 	output = last_output_fd(file);
 	change_std_to_fd(&stdin, &stdout, input, output);
-	if (!judge_built_in(data, parser, pipelist->file))
+	if (!judge_built_in(data, parser, pipelist->file, pipelist->array))
 	{
 		execve_without_fork(data, parser, pipelist, pipelist->file);
 		signal_minishell(data->signal, NORMAL);

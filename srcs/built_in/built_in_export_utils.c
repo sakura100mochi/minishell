@@ -6,39 +6,11 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 10:55:19 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 09:33:33 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/28 12:09:56 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/built_in.h"
-
-t_exp	*input_exp_variable(char *str, t_env *env_variable, \
-									t_exp *exp_variable, int flag)
-{
-	char	*tmp_str;
-	char	*variable;
-	t_exp	*head;
-	t_exp	*new;
-
-	tmp_str = NULL;
-	head = exp_variable;
-	exp_variable = exp_variable->prev;
-	if (flag)
-	{
-		tmp_str = wrap_with_quotes(str);
-		variable = ft_strjoin("declear -x ", tmp_str);
-		free(tmp_str);
-	}
-	else
-		variable = ft_strjoin("declear -x ", str);
-	new = new_exp_node(variable, 0);
-	head->prev = new;
-	exp_variable->next = new;
-	new->prev = exp_variable;
-	new->next = head;
-	env_variable->status = 0;
-	return (head);
-}
 
 int	check_wrap_with_quotes(char *str)
 {
@@ -148,4 +120,16 @@ char	*variable_format(t_env *env, char *str)
 	result = no_enclose_malloc(str);
 	result = input_no_enclose(result, str);
 	return (result);
+}
+
+void	export_no_command(t_env *env_variable, t_exp *exp_variable)
+{
+	exp_variable = exp_variable->next;
+	while (!exp_variable->head)
+	{
+		ft_printf("%s\n", exp_variable->variable);
+		exp_variable = exp_variable->next;
+	}
+	env_variable->status = 0;
+	return ;
 }

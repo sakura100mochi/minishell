@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:14:51 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 14:53:15 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/28 15:23:54 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char	*unfold_str(char *str, t_env *env, size_t *start)
 	}
 	len = *start + ft_strlen(tmp);
 	result = str_connection(result, str, start, &len);
+	*start = *start - 1;
 	free(str);
 	free(tmp);
 	double_array_free(strage);

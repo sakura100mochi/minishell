@@ -6,13 +6,14 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/22 17:47:36 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/28 11:35:09 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/built_in.h"
 #include "../../includes/pipe.h"
+#include "../../includes/unfold.h"
 #include "../../includes/error.h"
 
 static void	pipe_exec(t_data *data, t_parser *parser, t_pipe *pipelist)
@@ -28,7 +29,7 @@ static void	pipe_exec(t_data *data, t_parser *parser, t_pipe *pipelist)
 				parser->redirect, pipelist);
 	else
 	{
-		if (!judge_built_in(data, parser, pipelist->file))
+		if (!judge_built_in(data, parser, pipelist->file, pipelist->array))
 		{
 			execve_without_fork(data, parser, pipelist, pipelist->file);
 			signal_minishell(data->signal, NORMAL);
@@ -90,7 +91,10 @@ static void	open_pipe(t_data *data, t_parser *parser, \
 		pipe(pipelist->pipe1);
 	if (pipelist->index % 2 && len != 1 && pipelist->index != len)
 		pipe(pipelist->pipe2);
-	pipelist->file = format_command(data->env, parser);
+	pipelist->file = format_command(parser);
+	parser->cmd = unfold_main(data->env, parser->cmd);
+	pipelist->array = file_to_array(data->env, pipelist->file);
+	pipelist->file = unfold_main(data->env, pipelist->file);
 	return ;
 }
 
@@ -115,7 +119,7 @@ int	pipe_main(t_data *data, t_parser *parser, size_t len)
 		waitpid(pipelist.pid, &(pipelist.status), 0);
 		pipe_execve_error(parser, pipelist.status);
 		pipelist.index++;
-		free(pipelist.file);
+		pipe_free(&pipelist);
 		parser = parser->next;
 	}
 	signal_minishell(data->signal, NORMAL);

@@ -6,11 +6,52 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:40:38 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 19:24:51 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/28 16:32:10 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/built_in.h"
+#include "../../includes/error.h"
+
+int	check_envvariable_exist(t_env *env, char *str)
+{
+	size_t	len;
+
+	len = 0;
+	env = env->next;
+	while (!env->head)
+	{
+		len = ft_strlen(str);
+		if (!ft_strncmp(str, env->variable, len))
+			return (YES);
+		env = env->next;
+	}
+	return (NO);
+}
+
+int	check_expvariable_exist(t_exp *exp, char *str)
+{
+	size_t	len;
+	char	*tmp;
+
+	tmp = ft_strjoin("declare -x ", str);
+	if (!tmp)
+		exit_malloc_error();
+	len = ft_strlen(tmp);
+	exp = exp->next;
+	while (!exp->head)
+	{
+		// printf("%s, %s, %ld, %d\n", exp->variable, tmp, len, ft_strncmp(tmp, exp->variable, len));
+		if (!ft_strncmp(tmp, exp->variable, len))
+		{
+			free(tmp);
+			return (YES);
+		}
+		exp = exp->next;
+	}
+	free(tmp);
+	return (NO);
+}
 
 t_env	*input_env_variable(char *str, t_env *env_variable)
 {
@@ -26,18 +67,31 @@ t_env	*input_env_variable(char *str, t_env *env_variable)
 	env_variable->next = new;
 	new->prev = env_variable;
 	new->next = head;
-	head->status = 0;
 	return (head);
 }
 
-void	export_no_command(t_env *env_variable, t_exp *exp_variable)
+t_exp	*input_exp_variable(char *str, t_exp *exp_variable, int flag)
 {
-	exp_variable = exp_variable->next;
-	while (!exp_variable->head)
+	char	*tmp_str;
+	char	*variable;
+	t_exp	*head;
+	t_exp	*new;
+
+	tmp_str = NULL;
+	head = exp_variable;
+	exp_variable = exp_variable->prev;
+	if (flag)
 	{
-		ft_printf("%s\n", exp_variable->variable);
-		exp_variable = exp_variable->next;
+		tmp_str = wrap_with_quotes(str);
+		variable = ft_strjoin("declare -x ", tmp_str);
+		free(tmp_str);
 	}
-	env_variable->status = 0;
-	return ;
+	else
+		variable = ft_strjoin("declare -x ", str);
+	new = new_exp_node(variable, 0);
+	head->prev = new;
+	exp_variable->next = new;
+	new->prev = exp_variable;
+	new->next = head;
+	return (head);
 }

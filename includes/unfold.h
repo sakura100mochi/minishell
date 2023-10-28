@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:14:50 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/18 13:06:28 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/28 04:03:23 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /*------------*/
 
 /*---unfold---*/
-char	*unfold_main(t_env *env, t_parser *parser, char *file);
+char	*unfold_main(t_env *env, char *str);
 char	*check_quote_in_str(char *str, t_env *env);
 int		check_env_variable(char *str, size_t start, size_t end);
 size_t	cnt_env_variable(char *str);

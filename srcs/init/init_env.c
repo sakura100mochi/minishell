@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:28:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 11:33:25 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/28 11:59:59 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_data	*init_env(t_data *data)
 	if (!env_variable)
 		exit_malloc_error();
 	start = env_variable;
-	while (environ[index])
+	while (environ[index + 1])
 	{
 		new = new_env_node(ft_strdup(environ[index]), 0);
 		if (!new)

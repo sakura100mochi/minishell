@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 09:37:18 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 11:36:15 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/28 12:00:05 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_data	*init_exp(t_data *data)
 	if (!exp_variable)
 		exit_malloc_error();
 	start = exp_variable;
-	while (environ[index])
+	while (environ[index + 1])
 	{
 		new = new_exp_node(exp_variable_format(environ[index]), 0);
 		if (!new)
