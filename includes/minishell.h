@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/28 17:29:21 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/29 16:12:54 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,14 +92,13 @@ typedef struct s_exe
 
 typedef struct s_pipe
 {
-	int					pipe1[2];
-	int					pipe2[2];
-	int					status;
-	size_t				execve;
-	char				*file;
-	char				**array;
-	pid_t				pid;
-	size_t				index;
+	pid_t			pid;
+	size_t			head;
+	int				pipe[2];
+	char			*file;
+	char			**array;
+	struct s_pipe	*prev;
+	struct s_pipe	*next;
 }			t_pipe;
 
 typedef struct s_file
@@ -124,7 +123,6 @@ typedef struct s_data
 {
 	char				*prompt;
 	t_exe				*exe;
-	t_pipe				*pipe;
 	t_signal			*signal;
 	t_parser			*parser;
 	t_env				*env;

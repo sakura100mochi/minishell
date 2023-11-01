@@ -54,9 +54,13 @@ static int	judge_readline(t_data *data)
 
 void	standby_state(t_data *data)
 {
+	int	fd;
+
 	while (1)
 	{
 		data->prompt = readline("minishell$");
+		fd = dup(2);
+		close(fd);
 		if (judge_readline(data))
 			continue ;
 		add_history(data->prompt);
