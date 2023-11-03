@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/01 18:12:14 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/04 05:37:09 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,18 @@ static void	open_pipe(t_data *data, t_parser *parser, \
 	return ;
 }
 
-static void	close_pipe(t_pipe *pipelist)
+static t_pipe	*close_pipe(t_pipe *pipelist)
 {
 	if (!pipelist->prev->head)
 		close(pipelist->prev->pipe[0]);
 	if (!pipelist->head)
 		close(pipelist->pipe[1]);
-	return ;
+	return (pipelist->next);
 }
 
-static void	wait_pipe(t_pipe *pipelist)
+static int	pipe_fork_error(void)
 {
-	int	status;
-
-	status = 0;
-	pipelist = pipelist->next;
-	while (!pipelist->head)
-	{
-		waitpid(pipelist->pid, &status, 0);
-		pipelist = pipelist->next;
-	}
-	waitpid(pipelist->pid, &status, 0);
-	return ;
+	return (YES);
 }
 
 int	pipe_main(t_data *data, t_parser *parser, size_t len)
@@ -57,45 +47,24 @@ int	pipe_main(t_data *data, t_parser *parser, size_t len)
 	size_t	index;
 	t_pipe	*head;
 	t_pipe	*pipelist;
-	int		fd;
 
-	(void)parser;
 	index = 0;
 	pipelist = init_pipe(data, len);
 	head = pipelist;
 	pipelist = pipelist->next;
+	signal_minishell(data->signal, IGN);
 	while (index <= len)
 	{
-		fd = dup(1);
-		close(fd);
 		open_pipe(data, parser, pipelist);
 		pipelist->pid = fork();
-		if (pipelist->pid == -1)
-		{
-			printf("error\n");
+		if (pipelist->pid == -1 && pipe_fork_error())
 			break ;
-		}
 		else if (pipelist->pid == 0)
-		{
-			if (!pipelist->head)
-				close(pipelist->pipe[0]);
-			if (!pipelist->prev->head)
-				dup2(pipelist->prev->pipe[0], STDIN_FILENO);
-			if (!pipelist->head)
-				dup2(pipelist->pipe[1], STDOUT_FILENO);
-			if (!judge_built_in(data, parser, pipelist->file, pipelist->array))
-				execve_without_fork(data, parser, pipelist, pipelist->file);
-			exit(data->env->status);
-		}
-		else if (pipelist->pid > 0)
-		{
-			close_pipe(pipelist);
-			parser = parser->next;
-			pipelist = pipelist->next;
-			index++;
-		}
+			do_pipe_dup_exec(data, parser, pipelist);
+		pipelist = close_pipe(pipelist);
+		parser = parser->next;
+		index++;
 	}
-	wait_pipe(head);
-	pipe_free(head);
+	pipe_end_process(head);
 	return (0);
 }
