@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:22 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/28 04:22:26 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/03 17:53:26 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_env	*built_in_cd(t_env *env_variable, t_parser *parser, char **array)
 	env_variable = serch_env_variable(head, "OLDPWD=");
 	if (env_variable != head)
 		env_variable = set_pwd(env_variable, "OLDPWD=");
-	if (array[1] != NULL)
+	if (array[0] != NULL && array[1] != NULL)
 	{
 		ft_printf("minishell: cd: too many arguments\n");
 		head->status = 1;

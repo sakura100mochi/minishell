@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/armeria/program/minishell/srcs/pipe",
-      "program": "/home/armeria/program/minishell/srcs/pipe/build/Debug/outDebug",
+      "cwd": "/home/armeria/program/minishell/srcs/built_in",
+      "program": "/home/armeria/program/minishell/srcs/built_in/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

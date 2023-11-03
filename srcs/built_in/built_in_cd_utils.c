@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:13 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/28 03:51:35 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/03 17:59:10 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	change_home_directory(t_env *head, char *file)
 
 	home_path = getenv("HOME");
 	tmp_path = NULL;
-	if (file[0] == '\0')
+	if (!file)
 		chdir(home_path);
 	else if (file[1] != '\0' && file[1] == '/')
 	{
@@ -85,7 +85,12 @@ int	change_directory(t_env *head, t_parser *parser, char *file)
 
 	if (parser->option)
 		return (NO);
-	if (((file[0] != '\0' && file[0] == '~') || !*file) && !parser->option)
+	if (!file)
+	{
+		change_home_directory(head, file);
+		return (YES);
+	}
+	else if (file[0] != '\0' && file[0] == '~' && !parser->option)
 	{
 		change_home_directory(head, file);
 		return (YES);
