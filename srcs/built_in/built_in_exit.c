@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/28 16:10:54 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/04 14:20:04 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int	ft_strdigit(char *str)
 	index = 0;
 	while (str[index] != '\0')
 	{
-		if (!ft_isdigit(str[index]))
+		if (!ft_isdigit(str[index]) && \
+			!(str[index] == '+' || str[index] == '-'))
 			return (NO);
 		index++;
 	}
@@ -63,8 +64,10 @@ void	built_in_exit(t_env *env, t_parser *parser, char **array)
 
 	index = 0;
 	flag = 0;
-	if (parser->option != NULL)
+	if (parser->option != NULL && array[0] == NULL)
 	{
+		if (ft_strdigit(parser->option))
+			exit(256 + ft_atoi(parser->option));
 		ft_printf("exit\nminishell: exit: %s: numeric \
 argument required\n", parser->option);
 		exit(255);
