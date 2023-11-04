@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/28 16:32:55 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/04 14:30:42 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static char	*split_variable(char *str)
 	char	*result;
 
 	index = 0;
+	result = NULL;
 	while (str[index] != '\0' && str[index] != '=')
 		index++;
 	if (str[index] != '\0')

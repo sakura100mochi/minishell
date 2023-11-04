@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/04 05:37:09 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/04 14:43:31 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,12 @@ static t_pipe	*close_pipe(t_pipe *pipelist)
 	return (pipelist->next);
 }
 
-static int	pipe_fork_error(void)
+static int	pipe_fork_error(t_pipe *pipelist)
 {
+	perror("minishell");
+	if (!pipelist->head)
+		close(pipelist->pipe[0]);
+	close_pipe(pipelist);
 	return (YES);
 }
 
@@ -57,7 +61,7 @@ int	pipe_main(t_data *data, t_parser *parser, size_t len)
 	{
 		open_pipe(data, parser, pipelist);
 		pipelist->pid = fork();
-		if (pipelist->pid == -1 && pipe_fork_error())
+		if (pipelist->pid == -1 && pipe_fork_error(pipelist))
 			break ;
 		else if (pipelist->pid == 0)
 			do_pipe_dup_exec(data, parser, pipelist);
