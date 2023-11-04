@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/27 12:28:14 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/04 12:03:59 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 
 static void	print_echo_option(char *tmp, char *str, size_t index)
 {
-	if (!tmp)
-		ft_printf("%s", *str);
+	if (!tmp && str)
+		ft_printf("%s", str);
 	else if (!index && str)
 		ft_printf("%s %s\n", tmp, str);
-	else if (!index && !*str)
+	else if (!index && !str)
 		ft_printf("%s\n", tmp);
 	else if (index && *str)
 		ft_printf("%s %s", tmp, str);
-	else if (index && !*str)
+	else if (index && !str)
 		ft_printf("%s", tmp);
 	return ;
 }
