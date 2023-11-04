@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:22 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/03 17:53:26 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/04 15:14:20 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ static t_env	*set_pwd(t_env *env_variable, char *head_variable)
 
 	wd_path = NULL;
 	wd_path = getcwd(wd_path, PATH_MAX);
+	if (wd_path == NULL)
+	{
+		wd_path = ft_calloc(sizeof(char *), 0);
+		if (!wd_path)
+			exit_malloc_error();
+	}
 	variable = ft_strjoin(head_variable, wd_path);
 	free(env_variable->variable);
 	env_variable->variable = variable;
