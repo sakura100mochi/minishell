@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:26:38 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/28 04:17:57 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/05 17:21:20 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ int	redirect_syntax(t_data *data)
 		}
 		node = node->next;
 	}
-	// data->env->status = 258;
+	data->env->status = 258;
 	return (YES);
 }

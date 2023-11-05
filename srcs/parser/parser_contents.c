@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_contents.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:05:35 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/10/28 18:06:15 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/11/05 17:18:45 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ char	*ft_all(char *prompt, size_t *k)
 
 	i = *k;
 	while (prompt[i] == '|')
+		i++;
+	while (prompt[i] == ' ' || prompt[i] == '	')
 		i++;
 	j = i;
 	while (prompt[j] != '\0' && prompt[j] != '|')

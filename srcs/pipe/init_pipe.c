@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/29 18:04:54 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/05 17:49:33 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,19 @@ t_pipe	*init_pipe(t_data *data, size_t len)
 	{
 		new = new_pipe_node(0);
 		if (new == NULL)
-			break ;
+			exit_malloc_error();
 		pipe_nodeadd_back(&pipelist, new);
 		index++;
 	}
-	head->prev = pipelist->next;
-	pipelist->next->next = head;
+	if (len)
+	{
+		head->prev = new;
+		new->next = head;
+	}
+	else
+	{
+		head->prev = head;
+		head->next = head;
+	}
 	return (head);
 }

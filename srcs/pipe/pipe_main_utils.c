@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/04 05:36:36 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/05 18:12:50 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,10 @@ void	do_pipe_dup_exec(t_data *data, t_parser *parser, t_pipe *pipelist)
 	exit(data->env->status);
 }
 
-void	pipe_end_process(t_pipe *pipelist)
+void	pipe_end_process(t_data *data, t_pipe *pipelist)
 {
 	wait_pipe(pipelist);
 	pipe_free(pipelist);
+	signal_minishell(data->signal, NORMAL);
 	return ;
 }

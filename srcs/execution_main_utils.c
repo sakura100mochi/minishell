@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   excution_main_utils.c                              :+:      :+:    :+:   */
+/*   execution_main_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/29 05:20:57 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/05 17:19:49 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ char	*format_command(t_parser *parser)
 
 	if (parser->cmd == NULL)
 		return (NULL);
-	cmd_len = check_quote_in_command(parser->cmd);
-	file_len = ft_strlen(parser->cmd) - (cmd_len + 1);
-	tmp = ft_substr(parser->cmd, 0, cmd_len);
+	cmd_len = check_quote_in_command(parser->all);
+	file_len = ft_strlen(parser->all) - (cmd_len + 1);
+	tmp = ft_substr(parser->all, 0, cmd_len);
 	if (!tmp)
 		exit_malloc_error();
-	file = ft_substr(parser->cmd, cmd_len + 1, file_len);
+	file = ft_substr(parser->all, cmd_len + 1, file_len);
 	if (!file)
 		exit_malloc_error();
 	free(parser->cmd);

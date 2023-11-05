@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/04 14:43:31 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/05 18:11:24 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ int	pipe_main(t_data *data, t_parser *parser, size_t len)
 		parser = parser->next;
 		index++;
 	}
-	pipe_end_process(head);
+	pipe_end_process(data, head);
 	return (0);
 }
