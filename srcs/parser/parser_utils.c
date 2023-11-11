@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:28:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/28 18:36:22 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/11/11 15:41:56 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_strjoin_minis(char *s1, char const *s2, t_parser *node)
 	i = 0;
 	while (s1 != NULL && *s1 != '\0')
 		str[i++] = *s1++;
-	if (s1 != NULL && *s2 != '\"' && *s2 != '\'' && str[i - 1] != '\"' && str[i - 1] != '\'')
+	if (s1 != NULL)
 		str[i++] = ' ';
 	while (*s2 != '\0')
 		str[i++] = *s2++;

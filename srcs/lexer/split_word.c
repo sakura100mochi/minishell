@@ -6,32 +6,71 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 17:02:15 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/23 17:55:01 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/11/11 15:55:45 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/parser.h"
 
-static size_t	quotation(char *str)
+static size_t	single_quo(char *str)
 {
 	size_t	i;
+	size_t	count;
 
 	i = 1;
+	count = 0;
+	while (str[i] == '\'')
+	{
+		count++;
+		i++;
+	}
+	while (str[i] != '\'' && str[i] != '\0')
+		i++;
+	while (count != 0)
+	{
+		if (str[i] != '\'')
+			return (0);
+		i++;
+		count--;
+	}
+	if (str[i] == '\'')
+		return (i + 1);
+	return (0);
+}
+
+static size_t	double_quo(char *str)
+{
+	size_t	i;
+	size_t	count;
+
+	i = 1;
+	count = 0;
+	while (str[i] == '\"')
+	{
+		count++;
+		i++;
+	}
+	while (str[i] != '\"' && str[i] != '\0')
+		i++;
+	while (count != 0)
+	{
+		if (str[i] != '\"')
+			return (0);
+		i++;
+		count--;
+	}
+	if (str[i] == '\"')
+		return (i + 1);
+	return (0);
+}
+
+static size_t	quotation(char *str)
+{
 	if (str[0] == '\'')
-	{
-		while (str[i] != '\'' && str[i] != '\0')
-			i++;
-		if (str[i] == '\'')
-			return (i + 1);
-	}
+		return (single_quo(str));
 	else if (str[0] == '\"')
-	{
-		while (str[i] != '\"' && str[i] != '\0')
-			i++;
-		if (str[i] == '\"')
-			return (i + 1);
-	}
+		return (double_quo(str));
 	return (0);
 }
 

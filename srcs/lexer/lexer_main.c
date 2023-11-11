@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:51 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/28 18:51:24 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/11/11 15:52:44 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/parser.h"
+#include "../../includes/error.h"
 
 static size_t	count_quotation(char *str, size_t *i)
 {
@@ -70,11 +71,12 @@ static size_t	count_word(char *str)
 	return (count);
 }
 
-static char	**ft_free(char **result)
+static char	**ft_free(t_data *data, char **result)
 {
 	size_t	i;
 
 	i = 0;
+	syntax(data);
 	while (result[i] != NULL)
 	{
 		free(result[i]);
@@ -84,7 +86,7 @@ static char	**ft_free(char **result)
 	return (NULL);
 }
 
-char	**lexer_main(char *str)
+char	**lexer_main(t_data *data, char *str)
 {
 	size_t	i;
 	char	**result;
@@ -97,7 +99,7 @@ char	**lexer_main(char *str)
 	{
 		result[i] = split_word(&str);
 		if (result[i] == NULL)
-			return (ft_free(result));
+			return (ft_free(data, result));
 		i++;
 	}
 	result[i] = NULL;
