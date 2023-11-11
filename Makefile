@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/11/03 17:51:21 by csakamot         ###   ########.fr        #
+#    Updated: 2023/11/11 15:59:20 by yhirai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -124,7 +124,7 @@ exe:
 	@ make DEBUG=1
 	@ make -s clean
 
-debug:
+debug:		fclean
 	@ make DEBUG=1
 
 .PHONY:		all clean fclean re exe
