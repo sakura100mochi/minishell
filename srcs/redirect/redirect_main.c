@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_main.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:09:45 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/23 20:28:00 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/11 17:47:02 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	redirect_main(t_data *data, t_parser *node)
 		file = node->redirect;
 		while (file != NULL)
 		{
-			if (file->type == UNKNOWN || file->file_name == NULL)
+			if (file->type == UNKNOWN || file->file_name == NULL
+				|| file->file_name[0] == '<' || file->file_name[0] == '>')
 				return (syntax(data));
 			else if (file->type == Q_H)
 				quote_heredoc(data, file);
