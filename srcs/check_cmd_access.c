@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/04 17:20:47 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/11 15:47:19 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,12 @@ static char	*check_absolute_path(char *cmd, char **path)
 	return (NULL);
 }
 
-char	*check_cmd_access(t_parser *parser, char **path)
+static char	*path_loop_check(t_parser *parser, char **path, char *full_path)
 {
 	size_t	index;
 	char	*tmp;
-	char	*full_path;
 
 	index = 0;
-	if (!path)
-		return (NULL);
 	while (path[index] != NULL)
 	{
 		tmp = create_file_path(parser->cmd);
@@ -80,6 +77,16 @@ char	*check_cmd_access(t_parser *parser, char **path)
 		index++;
 	}
 	full_path = check_absolute_path(parser->cmd, path);
+	return (full_path);
+}
+
+char	*check_cmd_access(t_parser *parser, char **path)
+{
+	char	*full_path;
+
+	full_path = NULL;
+	if (path)
+		full_path = path_loop_check(parser, path, full_path);
 	if (full_path)
 		return (full_path);
 	double_array_free(path);
