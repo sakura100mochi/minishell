@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:14:51 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/29 05:01:08 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/11 13:33:19 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	*trim_unquote_str(char *str, size_t start)
 	}
 	if (str[index] == '\0')
 		index++;
-	result = ft_substr(str, start, index - 1);
+	result = ft_substr(str, start, index - start - 1);
 	return (result);
 }
 

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   list_new.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:53:36 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/10/22 17:43:08 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/11/10 17:02:55 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/parser.h"
+#include "../../includes/error.h"
 
 t_parser	*ft_parsernew(char *all, char *cmd, char *option, t_file *redirect)
 {
@@ -29,6 +30,34 @@ t_parser	*ft_parsernew(char *all, char *cmd, char *option, t_file *redirect)
 	return (node);
 }
 
+static char	*set_file_name(char *one_phrase, t_parser *node)
+{
+	size_t	index;
+	size_t	start;
+	size_t	flag;
+	char	*result;
+
+	index = 0;
+	start = 0;
+	flag = 0;
+	while (one_phrase[index] != '\0')
+	{
+		if (!flag && (one_phrase[index] != ' ' && one_phrase[index] != '	'))
+		{
+			flag = 1;
+			start = index;
+		}
+		else if (flag && (one_phrase[index] == ' ' \
+					|| one_phrase[index] == '	'))
+			break ;
+		index++;
+	}
+	result = ft_substr(one_phrase, start, index - 1);
+	if (!result)
+		char_malloc_error(node);
+	return (result);
+}
+
 t_file	*ft_filenew(char **one_phrase, t_parser *node)
 {
 	t_file	*file;
@@ -38,9 +67,9 @@ t_file	*ft_filenew(char **one_phrase, t_parser *node)
 		return (NULL);
 	file->type = file_type(one_phrase);
 	if ((file->type == INPUT || file->type == OUTPUT) && one_phrase[1] != NULL)
-		file->file_name = ft_strjoin_minis(NULL, one_phrase[1], node);
+		file->file_name = set_file_name(one_phrase[1], node);
 	else if (one_phrase[1] != NULL && one_phrase[2] != NULL)
-		file->file_name = ft_strjoin_minis(NULL, one_phrase[2], node);
+		file->file_name = set_file_name(one_phrase[2], node);
 	else
 		file->file_name = NULL;
 	file->next = NULL;

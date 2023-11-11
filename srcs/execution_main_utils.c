@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/05 19:28:55 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/10 15:13:43 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,33 @@ static size_t	check_quote_in_command(char *str)
 	return (index);
 }
 
+static char	*only_option(t_parser *parser, char *tmp)
+{
+	if (tmp && !*tmp && parser->option)
+	{
+		free(tmp);
+		tmp = ft_strdup(parser->option);
+	}
+	if (!tmp)
+		exit_malloc_error();
+	return (tmp);
+}
+
+static char	*judge_blank_space(char *cmd)
+{
+	size_t	index;
+	char	*result;
+
+	index = 0;
+	while (cmd[index] != '\0' && (cmd[index] == ' ' || cmd[index] == '	'))
+		index++;
+	result = ft_substr(cmd, index, ft_strlen(cmd));
+	free(cmd);
+	if (!result)
+		exit_malloc_error();
+	return (result);
+}
+
 char	*format_command(t_parser *parser)
 {
 	size_t	cmd_len;
@@ -54,12 +81,14 @@ char	*format_command(t_parser *parser)
 
 	if (parser->cmd == NULL)
 		return (NULL);
+	parser->cmd = judge_blank_space(parser->cmd);
 	cmd_len = check_quote_in_command(parser->cmd);
 	file_len = ft_strlen(parser->cmd) - (cmd_len + 1);
 	tmp = ft_substr(parser->cmd, 0, cmd_len);
-	if (!tmp)
-		exit_malloc_error();
-	file = ft_substr(parser->cmd, cmd_len + 1, file_len);
+	tmp = only_option(parser, tmp);
+	while (parser->cmd[cmd_len] == ' ' || parser->cmd[cmd_len] == '	')
+		cmd_len++;
+	file = ft_substr(parser->cmd, cmd_len, file_len);
 	if (!file)
 		exit_malloc_error();
 	free(parser->cmd);

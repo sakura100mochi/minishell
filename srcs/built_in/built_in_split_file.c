@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/28 14:56:56 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/09 01:41:10 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	judge_file(char *str, size_t *index, char **result, size_t *count)
 		result[*count] = file_input_array(str, index);
 		*count = *count + 1;
 	}
-	else if (str[*index] != ' ' || str[*index] != '	')
+	else if (str[*index] != ' ' && str[*index] != '	')
 	{
 		result[*count] = file_input_array(str, index);
 		*count = *count + 1;

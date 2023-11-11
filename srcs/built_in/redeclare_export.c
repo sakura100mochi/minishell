@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/28 16:42:16 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/11 13:12:04 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_env	*redeclare_env(t_env *env, char *variable, char *tmp)
 	{
 		if (!ft_strncmp(tmp, env->variable, len))
 		{
-			printf("%s, %s\n", env->variable, variable);
 			free (env->variable);
 			env->variable = ft_strdup(variable);
 			if (env->variable == NULL)

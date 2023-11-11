@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/04 12:12:15 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/10 12:31:19 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static void	do_echo_option(t_parser *parser, char *str)
 
 	index = 0;
 	tmp = NULL;
-	printf("%s\n", parser->option);
 	while (parser->option[index] != '\0')
 	{
 		if (index > 0 && parser->option[index - 1] == '-' && \

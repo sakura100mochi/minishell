@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:26:05 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/29 06:49:12 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/11 13:11:43 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	built_in_export(t_parser *parser, t_env *env_variable, \
 	while (array[index] != NULL)
 	{
 		variable = variable_format(env_variable, array[index]);
-		printf("##%s##\n", variable);
 		judge_export(env_variable, exp_variable, variable, array[index]);
 		free(variable);
 		index++;

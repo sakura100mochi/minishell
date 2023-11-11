@@ -37,6 +37,25 @@ static int	syntax_check(t_data *data)
 	return (YES);
 }
 
+static int	judge_blank_space(char *prompt)
+{
+	size_t	index;
+	size_t	flag;
+
+	index = 0;
+	flag = 0;
+	while (prompt[index] != '\0')
+	{
+		if (prompt[index] != ' ' && prompt[index] != '	')
+			flag = 1;
+		index++;
+	}
+	if (flag)
+		return (NO);
+	free(prompt);
+	return (YES);
+}
+
 static int	judge_readline(t_data *data)
 {
 	if (data->prompt == NULL)
@@ -47,20 +66,18 @@ static int	judge_readline(t_data *data)
 	if (*data->prompt == '\0')
 	{
 		free(data->prompt);
-		return (1);
+		return (YES);
 	}
-	return (0);
+	if (judge_blank_space(data->prompt))
+		return (YES);
+	return (NO);
 }
 
 void	standby_state(t_data *data)
 {
-	int	fd;
-
 	while (1)
 	{
 		data->prompt = readline("minishell$");
-		fd = dup(2);
-		close(fd);
 		if (judge_readline(data))
 			continue ;
 		add_history(data->prompt);
