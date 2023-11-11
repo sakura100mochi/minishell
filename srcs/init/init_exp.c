@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 09:37:18 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 11:36:15 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/29 04:12:09 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,19 @@ void	exp_nodeadd_back(t_exp **env, t_exp *new)
 	new -> prev = *env;
 }
 
-t_exp	*new_exp_node(char *content, size_t head)
+static void	judge_exp_pointer(t_exp *start, t_exp *exp, size_t index)
 {
-	t_exp	*new;
-
-	new = (t_exp *)ft_calloc(1, sizeof(t_exp));
-	if (!new)
-		return (NULL);
-	if (head)
-		new -> head = 1;
-	new -> variable = content;
-	new -> next = NULL;
-	new -> prev = NULL;
-	return (new);
+	if (index == 0)
+	{
+		start->prev = exp;
+		start->next = exp;
+	}
+	else
+	{
+		start->prev = exp->next;
+		exp->next->next = start;
+	}
+	return ;
 }
 
 t_data	*init_exp(t_data *data)
@@ -92,14 +92,15 @@ t_data	*init_exp(t_data *data)
 	start = exp_variable;
 	while (environ[index])
 	{
+		if (!environ[index + 1])
+			break ;
 		new = new_exp_node(exp_variable_format(environ[index]), 0);
 		if (!new)
 			exit_malloc_error();
 		exp_nodeadd_back(&exp_variable, new);
 		index++;
 	}
-	start->prev = exp_variable->next;
-	exp_variable->next->next = start;
+	judge_exp_pointer(start, exp_variable, index);
 	data->exp = start;
 	return (data);
 }

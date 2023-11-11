@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/23 13:56:52 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/04 17:14:32 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	**create_command(t_parser *parser, char *file)
 static void	do_child_process(char *full_path, char **command, char **env)
 {
 	execve(full_path, command, env);
-	perror("minishell:");
+	perror("minishell");
 	exit(EXIT_SUCCESS);
 	return ;
 }
@@ -75,7 +75,8 @@ static void	fork_process(pid_t pid, char *full_path, char **command, char **env)
 	return ;
 }
 
-void	fork_and_execve(t_data *data, t_parser *parser, char *file)
+void	fork_and_execve(t_data *data, t_parser *parser, \
+									char *file, char **array)
 {
 	pid_t	pid;
 	int		status;
@@ -83,6 +84,7 @@ void	fork_and_execve(t_data *data, t_parser *parser, char *file)
 	char	**env;
 	char	*full_path;
 
+	(void)array;
 	status = 0;
 	full_path = check_cmd_path(data->env, parser);
 	if (!full_path)

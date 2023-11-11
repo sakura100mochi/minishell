@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/23 15:39:41 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/10 13:40:33 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,33 +17,6 @@
 #include "../includes/pipe.h"
 #include "../includes/redirect.h"
 #include "../includes/error.h"
-
-static size_t	check_quote_in_command(char *str)
-{
-	size_t	index;
-	size_t	single;
-	size_t	twofold;
-
-	index = 0;
-	single = 0;
-	twofold = 0;
-	while (str != NULL && str[index] != '\0')
-	{
-		if (!(single % 2) && !(twofold % 2) && str[index] == '\'')
-			single++;
-		else if (!(single % 2) && !(twofold % 2) && str[index] == '"')
-			twofold++;
-		else if (single % 2 && str[index] == '\'')
-			single++;
-		else if (twofold % 2 && str[index] == '"')
-			twofold++;
-		else if (!(single % 2) && !(twofold % 2) && \
-		(str[index] == ' ' || str[index] == '	'))
-			return (index);
-		index++;
-	}
-	return (index);
-}
 
 static int	check_redirect(t_parser *node)
 {
@@ -60,53 +33,42 @@ static int	check_redirect(t_parser *node)
 	return (NO);
 }
 
-static void	no_pipe_exec(t_data *data, t_parser *parser)
+static int	close_process(t_parser *parser, char *file)
 {
-	char	*file;
-
-	file = format_command(data->env, data->parser);
 	if (file == NULL)
 	{
 		if (parser->redirect)
 			close_fd(parser->redirect);
-		return ;
+		return (1);
 	}
+	return (0);
+}
+
+static void	no_pipe_exec(t_data *data, t_parser *parser)
+{
+	char	*file;
+	char	**file_array;
+
+	file = format_command(data->parser);
+	parser->cmd = unfold_main(data->env, parser->cmd);
+	file_array = file_to_array(data->env, file);
+	file = unfold_main(data->env, file);
+	if (close_process(parser, file))
+		return ;
 	if (parser->redirect)
-		dup_command(data, parser, parser->redirect, file);
+		dup_command(data, parser, file, file_array);
 	else
 	{
-		if (!judge_built_in(data, parser, file))
+		if (!judge_built_in(data, parser, file, file_array))
 		{
 			signal_minishell(data->signal, IGN);
-			fork_and_execve(data, parser, file);
+			fork_and_execve(data, parser, file, file_array);
 			signal_minishell(data->signal, NORMAL);
 		}
 	}
+	double_array_free(file_array);
 	free(file);
 	return ;
-}
-
-char	*format_command(t_env *env, t_parser *parser)
-{
-	size_t	cmd_len;
-	size_t	file_len;
-	char	*tmp;
-	char	*file;
-
-	if (parser->cmd == NULL)
-		return (NULL);
-	cmd_len = check_quote_in_command(parser->cmd);
-	file_len = ft_strlen(parser->cmd) - (cmd_len + 1);
-	tmp = ft_substr(parser->cmd, 0, cmd_len);
-	if (!tmp)
-		exit_malloc_error();
-	file = ft_substr(parser->cmd, cmd_len + 1, file_len);
-	if (!file)
-		exit_malloc_error();
-	free(parser->cmd);
-	parser->cmd = tmp;
-	file = unfold_main(env, parser, file);
-	return (file);
 }
 
 void	execution_main(t_data *data)

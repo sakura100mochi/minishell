@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:26:38 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/23 20:28:45 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/11 13:05:14 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,17 @@ static int	check_redirect(char *all, size_t *i, char c)
 
 	if (all == NULL)
 		return (NO);
-	j = *i;
-	while (all[j] != '\0' && all[j] != c)
+	j = 0;
+	if (*i)
 		j++;
-	if (all[j + 1] != '\0')
+	while (all[*i + j] != '\0' && all[*i + j] != c)
+		j++;
+	if (all[*i + j + 1] != '\0')
 		j++;
 	else
 		return (NO);
 	*i += j;
-	if (all[j - 1] == c && all[j] == c)
+	if (all[*i - 1] == c && all[*i] == c)
 		return (YES);
 	return (NO);
 }

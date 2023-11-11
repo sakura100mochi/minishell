@@ -6,11 +6,12 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:26:05 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/21 19:30:53 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/11 13:11:43 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/built_in.h"
+#include "../../includes/error.h"
 
 static int	check_equal(char *str)
 {
@@ -26,72 +27,65 @@ static int	check_equal(char *str)
 	return (1);
 }
 
-static int	check_variable(t_env *env, char *variable)
+static int	unset_error(t_parser *parser, t_env *env_variable)
 {
-	size_t	index;
-	size_t	flag;
-
-	index = 0;
-	flag = 0;
-	if (variable[index] == '=')
+	if (ft_strlen(parser->option) == 1)
 	{
-		env->status = 1;
-		return (0);
+		ft_printf("minishell: export: '-': not a valid identifier\n");
+		env_variable->status = 1;
 	}
-	while (variable[index] != '\0')
+	else
 	{
-		if (variable[index] == '=')
-			flag = index;
-		index++;
-	}
-	if (variable[flag - 1] == ' ' || variable[flag - 1] == '	')
-	{
-		env->status = 1;
-		return (0);
+		ft_printf("minishell: export: '-%c': not a valid identifier\n", \
+														parser->option[1]);
+		env_variable->status = 2;
 	}
 	return (1);
 }
 
-static void	do_export(t_env *env_variable, t_exp *exp_variable, char *variable)
+static void	judge_export(t_env *env_variable, t_exp *exp_variable, \
+												char *variable, char *str)
 {
-	if (*variable && !check_variable(env_variable, variable))
-	{
-		ft_printf("minishell: export: '=': not a valid identifier\n");
-		env_variable->status = 1;
-	}
-	else if (*variable && check_variable(env_variable, variable))
-	{
-		exp_variable = input_exp_variable(variable, env_variable, \
-														exp_variable, 1);
-		env_variable = input_env_variable(variable, env_variable);
-	}
-	return ;
-}
-
-void	built_in_export(t_parser *parser, t_env *env_variable, \
-									t_exp *exp_variable, char *str)
-{
-	char	*variable;
-
-	if (parser->option)
-	{
-		env_variable->status = 1;
-		ft_printf("minishell: export: '%s': not a valid identifier\n", \
-														parser->option);
-		env_variable->status = 2;
-		return ;
-	}
-	variable = variable_format(env_variable, str);
-	if (!*str)
-		export_no_command(env_variable, exp_variable);
-	else if (!*variable)
+	if (!variable)
+		exit_malloc_error();
+	if (!*variable)
 	{
 		ft_printf("minishell: export: enclose in quotation marks\n");
 		env_variable->status = 2;
 	}
 	else if (check_equal(str))
-		exp_variable = input_exp_variable(str, env_variable, exp_variable, 0);
+	{
+		if (check_expvariable_exist(exp_variable, str))
+		{
+			free(variable);
+			return ;
+		}
+		else
+			exp_variable = input_exp_variable(variable, \
+												exp_variable, 0);
+		env_variable->status = 0;
+	}
 	else
-		do_export(env_variable, exp_variable, variable);
-	free(variable);
+		do_export(env_variable, exp_variable, variable, str);
+}
+
+void	built_in_export(t_parser *parser, t_env *env_variable, \
+									t_exp *exp_variable, char **array)
+{
+	size_t	index;
+	char	*variable;
+
+	index = 0;
+	if (parser->option)
+		if (unset_error(parser, env_variable))
+			return ;
+	if (array[0] == NULL)
+		export_no_command(env_variable, exp_variable);
+	while (array[index] != NULL)
+	{
+		variable = variable_format(env_variable, array[index]);
+		judge_export(env_variable, exp_variable, variable, array[index]);
+		free(variable);
+		index++;
+	}
 }

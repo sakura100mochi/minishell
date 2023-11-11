@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:13 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/23 20:23:54 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/10/29 05:35:34 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ char	*check_cmd_path(t_env *env_variable, t_parser *parser)
 
 	path = NULL;
 	env_variable = env_variable->next;
+	if (!*parser->cmd)
+		return (NULL);
 	while (!env_variable->head)
 	{
 		len = ft_strlen(env_variable->variable);
@@ -48,7 +50,5 @@ char	*check_cmd_path(t_env *env_variable, t_parser *parser)
 		env_variable = env_variable->next;
 	}
 	full_path = check_cmd_access(parser, path);
-	if (!env_variable->head && full_path)
-		return (full_path);
-	return (NULL);
+	return (full_path);
 }

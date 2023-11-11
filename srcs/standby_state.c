@@ -37,21 +37,49 @@ static int	syntax_check(t_data *data)
 	return (YES);
 }
 
+static int	judge_blank_space(char *prompt)
+{
+	size_t	index;
+	size_t	flag;
+
+	index = 0;
+	flag = 0;
+	while (prompt[index] != '\0')
+	{
+		if (prompt[index] != ' ' && prompt[index] != '	')
+			flag = 1;
+		index++;
+	}
+	if (flag)
+		return (NO);
+	free(prompt);
+	return (YES);
+}
+
+static int	judge_readline(t_data *data)
+{
+	if (data->prompt == NULL)
+	{
+		ft_printf("exit\n");
+		exit(EXIT_SUCCESS);
+	}
+	if (*data->prompt == '\0')
+	{
+		free(data->prompt);
+		return (YES);
+	}
+	if (judge_blank_space(data->prompt))
+		return (YES);
+	return (NO);
+}
+
 void	standby_state(t_data *data)
 {
 	while (1)
 	{
 		data->prompt = readline("minishell$");
-		if (data->prompt == NULL)
-		{
-			ft_printf("exit\n");
-			exit(EXIT_SUCCESS);
-		}
-		if (*data->prompt == '\0')
-		{
-			free(data->prompt);
+		if (judge_readline(data))
 			continue ;
-		}
 		add_history(data->prompt);
 		data->parser = parser_main(lexer_main(data, data->prompt), data->prompt);
 		if (redirect_syntax(data) == NO || syntax_check(data) == NO)
