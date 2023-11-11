@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:26:05 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/11 13:11:43 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/11 15:57:13 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,7 @@ static void	judge_export(t_env *env_variable, t_exp *exp_variable, \
 	else if (check_equal(str))
 	{
 		if (check_expvariable_exist(exp_variable, str))
-		{
-			free(variable);
 			return ;
-		}
 		else
 			exp_variable = input_exp_variable(variable, \
 												exp_variable, 0);
