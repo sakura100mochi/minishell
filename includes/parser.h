@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 18:54:21 by yhirai            #+#    #+#             */
-/*   Updated: 2023/11/11 15:51:57 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/11/11 17:08:22 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 /*-----------*/
 
 /*---lexer---*/
-char		**lexer_main(t_data *data, char *str);
+char		**lexer_main(t_data *data);
 char		*split_word(char **str);
 /*-----------*/
 

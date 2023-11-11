@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:51 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/11 15:52:44 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/11/11 17:08:58 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,14 @@ static char	**ft_free(t_data *data, char **result)
 	return (NULL);
 }
 
-char	**lexer_main(t_data *data, char *str)
+char	**lexer_main(t_data *data)
 {
 	size_t	i;
 	char	**result;
+	char	*str;
 
 	i = 0;
+	str = data->prompt;
 	result = (char **)ft_calloc(sizeof(char *), count_word(str) + 1);
 	if (result == NULL)
 		return (NULL);

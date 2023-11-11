@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unfold_quote_variable.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:59:58 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/28 15:31:24 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/11 17:21:57 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ static char	*find_nbr_questoin(t_env *env, char *str, size_t len)
 	result = NULL;
 	if (!ft_strncmp("?", str, len))
 	{
+		if (g_signal != 0)
+			env->status = g_signal;
+		g_signal = 0;
 		result = ft_itoa(env->status);
 		if (!result)
 			exit_malloc_error();
