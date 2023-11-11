@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:13 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/03 17:59:10 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/11 15:11:22 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	change_home_directory(t_env *head, char *file)
 		chdir(home_path);
 	else if (file[1] != '\0' && file[1] == '/')
 	{
-		tmp_path = ft_strjoin(home_path, file + 2);
+		tmp_path = ft_strjoin(home_path, file + 1);
 		if (ft_strlen(tmp_path) < PATH_MAX)
 			do_chdir(head, tmp_path);
 		else

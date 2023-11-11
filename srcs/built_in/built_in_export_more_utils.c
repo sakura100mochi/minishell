@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:40:38 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/29 05:36:49 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/11 16:38:13 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ int	check_expvariable_exist(t_exp *exp, char *str)
 	exp = exp->next;
 	while (!exp->head)
 	{
-		if (!ft_strncmp(tmp, exp->variable, len))
+		if (!ft_strncmp(tmp, exp->variable, len) || \
+		(ft_strlen(exp->variable) == len - 1 && \
+		!ft_strncmp(tmp, exp->variable, len - 1)))
 		{
 			free(tmp);
 			return (YES);

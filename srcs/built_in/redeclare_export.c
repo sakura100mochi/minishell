@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/11 13:12:04 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/11 16:49:37 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_exp	*redeclare_exp(t_exp *exp, char *variable, char *tmp)
 {
 	size_t	len;
 	t_exp	*head;
+	char	*input_tmp;
 	char	*input;
 
 	len = ft_strlen(tmp);
@@ -48,11 +49,14 @@ t_exp	*redeclare_exp(t_exp *exp, char *variable, char *tmp)
 	input = NULL;
 	while (!exp->head)
 	{
-		if (!ft_strncmp(tmp, exp->variable + 11, len))
+		if (!ft_strncmp(tmp, exp->variable + 11, len) || \
+		(!ft_strncmp(tmp, exp->variable + 11, len - 1) && \
+		ft_strlen(exp->variable) == len + 10))
 		{
-			input = ft_strjoin("declare -x ", variable);
-			if (!input)
+			input_tmp = ft_strjoin("declare -x ", variable);
+			if (!tmp)
 				exit_malloc_error();
+			input = wrap_with_quotes(input_tmp);
 			free(exp->variable);
 			exp->variable = input;
 		}

@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:42:14 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/29 06:40:05 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/11 16:47:48 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ char	*wrap_with_quotes(char *str)
 	i = 0;
 	len = ft_strlen(str) + 2;
 	result = (char *)ft_calloc(sizeof(char), (len + 1));
+	if (!result)
+		exit_malloc_error();
 	while (i++ < len - 1)
 	{
 		if (!flag && i - 1 > 0 && result[i - 2] == '=')
