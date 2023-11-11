@@ -6,7 +6,7 @@
 #    By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/11/11 15:59:20 by yhirai           ###   ########.fr        #
+#    Updated: 2023/11/11 16:11:00 by yhirai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -124,7 +124,7 @@ exe:
 	@ make DEBUG=1
 	@ make -s clean
 
-debug:		fclean
+debug:
 	@ make DEBUG=1
 
 .PHONY:		all clean fclean re exe
