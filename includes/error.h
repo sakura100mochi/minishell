@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:24:18 by yhirai            #+#    #+#             */
-/*   Updated: 2023/11/12 17:48:22 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/11/12 19:50:52 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int			redirect_syntax(t_data *data);
 int			no_file(t_data *data, char *file_name);
 int			permission(t_data *data, char *file_name);
 int			ambiguous(t_data *data, char *file_name);
+int			is_directory(t_data *data, char *file_name);
 void		pipe_execve_error(t_parser *parser, size_t status);
 /*-----------*/
 
