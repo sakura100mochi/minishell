@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:18:37 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/28 16:45:42 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/12 17:09:45 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	judge_built_in(t_data *data, t_parser *parser, char *file, char **array)
 {
 	size_t	len;
 
-	(void)array;
 	len = ft_strlen(parser->cmd);
 	if (len == 2 && !ft_strncmp(parser->cmd, "cd", len))
 		data->env = built_in_cd(data->env, data->parser, array);

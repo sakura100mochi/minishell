@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/11 21:29:48 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/11/12 17:28:18 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ char	**add_file_to_array(char **result, char *file, size_t index, \
 																size_t len);
 char	*check_cmd_path(t_env *env_variable, t_parser *parser);
 char	*check_cmd_access(t_parser *parser, char **path);
+char	*check_absolute_path(char *cmd);
 /*---------------------*/
 
 /*---signal---*/

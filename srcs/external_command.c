@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/11 16:54:50 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/12 17:33:21 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ void	fork_and_execve(t_data *data, t_parser *parser, \
 
 	(void)array;
 	status = 0;
+	full_path = check_absolute_path(parser->cmd);
+	if (!full_path)
+		return ;
 	full_path = check_cmd_path(data->env, parser);
 	if (!full_path)
 		return (command_not_found(data->env, parser->cmd));
