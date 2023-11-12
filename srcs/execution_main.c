@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/12 17:11:37 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/12 19:53:30 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static void	no_pipe_exec(t_data *data, t_parser *parser)
 	char	*file;
 	char	**file_array;
 
-	printf("|%s|\n", parser->cmd);
 	file = format_command(data->parser);
 	parser->cmd = unfold_main(data->env, parser->cmd);
 	file_array = file_to_array(data->env, file);

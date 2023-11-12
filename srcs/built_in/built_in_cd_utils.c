@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:13 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/11 15:11:22 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/12 18:55:48 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	change_cwd_directory(t_env *head, char *wd_path, char *file)
 		tmp_path = create_file_path(file++);
 	else
 		tmp_path = create_file_path(file);
-	absolute_path = ft_strjoin(wd_path, tmp_path);
+	absolute_path = ft_strjoin_gnl(wd_path, tmp_path);
 	if (!absolute_path)
 		exit_malloc_error();
 	if (ft_strlen(absolute_path) < PATH_MAX)
