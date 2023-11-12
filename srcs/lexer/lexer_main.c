@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 15:03:51 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/11 17:08:58 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/11/12 16:46:50 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,13 @@
 #include "../../includes/parser.h"
 #include "../../includes/error.h"
 
-static size_t	count_quotation(char *str, size_t *i)
-{
-	size_t	j;
-	size_t	single;
-	size_t	twofold;
-
-	j = 1;
-	single = 0;
-	twofold = 0;
-	if (str[0] == '\'')
-		single++;
-	else if (str[0] == '"')
-		twofold++;
-	while (single != 0 && str[j] != '\'' && str[j] != '\0')
-		j++;
-	while (twofold != 0 && str[j] != '"' && str[j] != '\0')
-		j++;
-	if (str[j] != '\0')
-		j++;
-	*i += j;
-	return (1);
-}
-
 static int	check_char(char c, char d)
 {
 	if (c == '|' || c == '<' || c == '>')
 		return (YES);
 	if ((c != ' ' && c != '	' && c != '|' && c != '<' && c != '>')
 		&& (d == ' ' || d == '	' || d == '|' || d == '<' || d == '>'
-			|| d == '\'' || d == '\"' || d == '\0'))
+			|| d == '\0'))
 		return (YES);
 	return (NO);
 }
@@ -59,14 +36,9 @@ static size_t	count_word(char *str)
 	count = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '\'' || str[i] == '\"')
-			count += count_quotation(&str[i], &i);
-		else
-		{
-			if (check_char(str[i], str[i + 1]) == YES)
-				count++;
-			i++;
-		}
+		if (check_char(str[i], str[i + 1]) == YES)
+			count++;
+		i++;
 	}
 	return (count);
 }
@@ -111,10 +83,13 @@ char	**lexer_main(t_data *data)
 // int	main(void)
 // {
 // 	char	**result;
-// 	char	str[] = " ";
+// 	t_data *data;
+// 	char	str[] = "cat <<\"cat | ls\"";
 // 	int		i;
 
-// 	result = lexer_main(str);
+// 	data = malloc(sizeof(t_data));
+// 	data->prompt = str;
+// 	result = lexer_main(data);
 // 	if (result == NULL)
 // 		return (0);
 // 	i = 0;
@@ -123,6 +98,6 @@ char	**lexer_main(t_data *data)
 // 		printf("%s\n", result[i]);
 // 		i++;
 // 	}
-// 	ft_free(result);
+// 	ft_free(NULL, result);
 // 	return (0);
 // }

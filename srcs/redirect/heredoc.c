@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/10/23 20:28:50 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/12 15:54:44 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ static void	interactive_heredoc(t_env *env, t_file *file, \
 		prompt = readline(">");
 		if (prompt == NULL)
 			exit(EXIT_SUCCESS);
-		prompt = unfold_variable(env, file, prompt);
 		len = ft_strlen(prompt) + ft_strlen(name);
 		if (ft_strncmp(prompt, name, len) == 0)
 		{
 			free(prompt);
 			break ;
 		}
+		prompt = unfold_variable(env, file, prompt);
 		str = ft_strjoin_red(str, prompt, node);
 		free(prompt);
 	}
