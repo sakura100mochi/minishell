@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/05 18:12:50 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/12 16:42:09 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../../includes/pipe.h"
 #include "../../includes/error.h"
 
-static void	wait_pipe(t_pipe *pipelist)
+static void	wait_pipe(t_env *env, t_pipe *pipelist)
 {
 	int	status;
 
@@ -27,6 +27,9 @@ static void	wait_pipe(t_pipe *pipelist)
 		pipelist = pipelist->next;
 	}
 	waitpid(pipelist->pid, &status, 0);
+	if (status == 512)
+		status = 2;
+	env->status = status;
 	return ;
 }
 
@@ -60,7 +63,7 @@ void	do_pipe_dup_exec(t_data *data, t_parser *parser, t_pipe *pipelist)
 
 void	pipe_end_process(t_data *data, t_pipe *pipelist)
 {
-	wait_pipe(pipelist);
+	wait_pipe(data->env, pipelist);
 	pipe_free(pipelist);
 	signal_minishell(data->signal, NORMAL);
 	return ;

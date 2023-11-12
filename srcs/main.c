@@ -12,6 +12,8 @@
 
 #include "../includes/minishell.h"
 
+volatile sig_atomic_t g_signal;
+
 int	main(void)
 {
 	t_data	*data;

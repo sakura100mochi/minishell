@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/armeria/program/minishell/srcs/lexer",
-      "program": "/home/armeria/program/minishell/srcs/lexer/build/Debug/outDebug",
+      "cwd": "/home/armeria/program/minishell",
+      "program": "/home/armeria/program/minishell/minishell",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

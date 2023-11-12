@@ -44,7 +44,7 @@
 // OUTPUT >
 // UNKNOWN
 
-volatile sig_atomic_t	g_signal;
+extern volatile sig_atomic_t	g_signal;
 typedef enum e_r_type
 {
 	Q_H,

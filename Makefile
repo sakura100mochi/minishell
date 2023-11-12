@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+         #
+#    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/11/11 16:11:00 by yhirai           ###   ########.fr        #
+#    Updated: 2023/11/12 15:09:37 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ OBJS		= ${addprefix ${PRE}, ${SRCS:.c=.o}}
 ##-----------------------------##
 
 ##----------conpiler-----------##
-CFLAGS		= -Wall -Wextra -Werror -I $(shell brew --prefix readline)/include
+CFLAGS		= -g -Wall -Wextra -Werror -I $(shell brew --prefix readline)/include
 
 ifdef DEBUG
 	CFLAGS += -fsanitize=address -fno-omit-frame-pointer

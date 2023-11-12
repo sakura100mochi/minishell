@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:16:53 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/28 15:12:34 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/12 16:38:01 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_env_variable(char *str, size_t start, size_t end)
 	size_t	index;
 
 	index = start;
-	while (index < end)
+	while (index < end && str[index] != '\"')
 	{
 		if (str[index] == '$')
 			return (0);
