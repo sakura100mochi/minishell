@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:05:35 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/11/11 16:40:10 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/11/12 14:49:29 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_command(char **one_phrase, t_parser *node)
 			while (one_phrase[i] != NULL && one_phrase[i][0] == '-')
 				i++;
 		}
-		if (one_phrase[i] != NULL)
+		else
 			cmd = ft_command_add(cmd, one_phrase[i], node);
 		if (one_phrase[i] != NULL)
 			i++;
@@ -60,7 +60,8 @@ char	*ft_option(char **one_phrase, t_parser *node)
 
 	i = 1;
 	option = NULL;
-	if (one_phrase[1] != NULL && one_phrase[1][0] == '-')
+	if (one_phrase[0] != NULL && one_phrase[1] != NULL
+		&& one_phrase[1][0] == '-')
 	{
 		while (one_phrase[i] != NULL && one_phrase[i][0] == '-')
 		{

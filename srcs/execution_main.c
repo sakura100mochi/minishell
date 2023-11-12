@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/12 16:45:28 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/12 16:53:37 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	execution_main(t_data *data)
 		pipe_main(data, data->parser, len);
 		return ;
 	}
-	no_pipe_exec(data, data->parser);
+	if (data->parser->cmd != NULL)
+		no_pipe_exec(data, data->parser);
 	return ;
 }
