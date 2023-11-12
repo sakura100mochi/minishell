@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 12:55:26 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/12 16:33:51 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/12 18:10:11 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,7 @@ char	*check_quote_in_str(char *str, t_env *env)
 					str[index] == '\'' && single++)
 			str = remove_single_quote(str, &index);
 		else if (twofold % 2 && !(single % 2) && str[index] == '"' && twofold++)
-		{
-			printf("index:%ld, signal:%ld, twofold:%ld, str:%s\n", index, single, twofold, str);
 			str = remove_twofold_quote(str, env, &index);
-		}
 		index++;
 	}
 	return (str);

@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/11 21:41:40 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/12 18:23:21 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,20 @@ static char	*path_cmd_access(char *full_path, char **path, char *tmp)
 	return (NULL);
 }
 
-static char	*check_absolute_path(char *cmd, char **path)
+char	*check_absolute_path(char *cmd)
 {
 	char	*tmp;
 
 	tmp = ft_strdup(cmd);
 	if (!tmp)
 		exit_malloc_error();
-	if (!access(tmp, X_OK))
+	if (access(tmp, F_OK))
 	{
-		double_array_free(path);
-		return (tmp);
+		free(tmp);
+		return (ft_calloc(sizeof(0), 0));
 	}
+	if (!access(tmp, F_OK | X_OK))
+		return (tmp);
 	free(tmp);
 	return (NULL);
 }
@@ -86,8 +88,6 @@ char	*check_cmd_access(t_parser *parser, char **path)
 	full_path = NULL;
 	if (path)
 		full_path = path_loop_check(parser, path, full_path);
-	else
-		full_path = check_absolute_path(parser->cmd, path);
 	if (full_path)
 		return (full_path);
 	double_array_free(path);

@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/10 12:31:19 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/12 17:11:09 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ static void	do_echo_option(t_parser *parser, char *str)
 		}
 		index++;
 	}
+	if (ft_strlen(parser->option) == 1)
+		tmp = ft_substr(parser->option, index - 1, \
+			ft_strlen(parser->option) - index + 1);
 	print_echo_option(tmp, str, index - 1);
 	if (tmp)
 		free(tmp);
