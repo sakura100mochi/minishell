@@ -6,14 +6,14 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 17:02:15 by yhirai            #+#    #+#             */
-/*   Updated: 2023/11/11 15:55:45 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/11/12 16:46:42 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/parser.h"
 
-static size_t	single_quo(char *str)
+static size_t	single_quo(char *str, size_t *j)
 {
 	size_t	i;
 	size_t	count;
@@ -30,16 +30,17 @@ static size_t	single_quo(char *str)
 	while (count != 0)
 	{
 		if (str[i] != '\'')
-			return (0);
+			return (NO);
 		i++;
 		count--;
 	}
+	*j += i;
 	if (str[i] == '\'')
-		return (i + 1);
-	return (0);
+		return (YES);
+	return (NO);
 }
 
-static size_t	double_quo(char *str)
+static size_t	double_quo(char *str, size_t *j)
 {
 	size_t	i;
 	size_t	count;
@@ -56,21 +57,22 @@ static size_t	double_quo(char *str)
 	while (count != 0)
 	{
 		if (str[i] != '\"')
-			return (0);
+			return (NO);
 		i++;
 		count--;
 	}
+	*j += i;
 	if (str[i] == '\"')
-		return (i + 1);
-	return (0);
+		return (YES);
+	return (NO);
 }
 
-static size_t	quotation(char *str)
+static size_t	quotation(char *str, size_t *i)
 {
 	if (str[0] == '\'')
-		return (single_quo(str));
+		return (single_quo(str, i));
 	else if (str[0] == '\"')
-		return (double_quo(str));
+		return (double_quo(str, i));
 	return (0);
 }
 
@@ -81,12 +83,16 @@ static size_t	count_char(char *str)
 	i = 0;
 	if (str[i] == '|' || str[i] == '<' || str[i] == '>')
 		return (1);
-	if (str[i] == '\'' || str[i] == '\"')
-		return (quotation(str));
 	while (str[i] != ' ' && str[i] != '|' && str[i] != '<'
-		&& str[i] != '>' && str[i] != '\0' && str[i] != '\''
-		&& str[i] != '\"')
+		&& str[i] != '>' && str[i] != '\0')
+	{
+		if (str[i] == '\'' || str[i] == '\"')
+		{
+			if (quotation(&str[i], &i) == 0)
+				return (NO);
+		}
 		i++;
+	}
 	return (i);
 }
 
@@ -103,7 +109,7 @@ char	*split_word(char **str)
 		|| (tmp[i] == '	' && tmp[i] != '\0'))
 		i++;
 	len = count_char(&tmp[i]);
-	if (len == 0)
+	if (len == NO)
 		return (NULL);
 	result = ft_substr(&tmp[i], 0, len);
 	if (result == NULL)
