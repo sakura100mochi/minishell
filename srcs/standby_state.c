@@ -19,6 +19,7 @@ static int	syntax_check(t_data *data)
 {
 	t_parser	*node;
 	t_file		*file;
+	size_t		i;
 
 	node = data->parser;
 	while (node != NULL)
@@ -34,6 +35,11 @@ static int	syntax_check(t_data *data)
 		}
 		node = node->next;
 	}
+	i = 0;
+	while (data->prompt[i] != '\0')
+		i++;
+	if (data->prompt[i - 1] == '|')
+		return (NO);
 	return (YES);
 }
 
