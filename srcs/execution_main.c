@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/10 13:40:33 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/12 14:53:27 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	execution_main(t_data *data)
 		pipe_main(data, data->parser, len);
 		return ;
 	}
-	no_pipe_exec(data, data->parser);
+	if (data->parser->cmd != NULL)
+		no_pipe_exec(data, data->parser);
 	return ;
 }

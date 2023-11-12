@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:05:35 by hiraiyuina        #+#    #+#             */
-/*   Updated: 2023/11/12 14:25:59 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/11/12 14:49:29 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,17 @@ char	*ft_command(char **one_phrase, t_parser *node)
 	while (one_phrase[i] != NULL)
 	{
 		if ((one_phrase[i][0] == '<' || one_phrase[i][0] == '>') &&
-				one_phrase[i + 1] != NULL && one_phrase[1 + 2] != NULL &&
+				one_phrase[i + 1] != NULL &&
 				(one_phrase[i + 1][0] == '<' || one_phrase[i + 1][0] == '>'))
-			i += 3;
-		else if ((one_phrase[i][0] == '<' || one_phrase[i][0] == '>') &&
-					one_phrase[i + 1] != NULL)
 			i += 2;
+		else if (one_phrase[i][0] == '<' || one_phrase[i][0] == '>')
+			i++;
 		else if (i == 1 && one_phrase[1][0] == '-')
 		{
 			while (one_phrase[i] != NULL && one_phrase[i][0] == '-')
 				i++;
 		}
-		if (one_phrase[i] != NULL)
+		else
 			cmd = ft_command_add(cmd, one_phrase[i], node);
 		if (one_phrase[i] != NULL)
 			i++;
