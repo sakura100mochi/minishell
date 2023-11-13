@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/12 19:53:30 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/14 05:41:09 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	no_pipe_exec(t_data *data, t_parser *parser)
 		if (!judge_built_in(data, parser, file, file_array))
 		{
 			signal_minishell(data->signal, IGN);
-			fork_and_execve(data, parser, file, file_array);
+			fork_and_execve(data, parser, file_array);
 			signal_minishell(data->signal, NORMAL);
 		}
 	}

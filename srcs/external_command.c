@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/12 19:43:36 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/14 06:13:55 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	**struct_to_array(t_env *env)
 	return (result);
 }
 
-static char	**create_command(t_parser *parser, char *file)
+static char	**create_command(t_parser *parser, char **array)
 {
 	size_t	words;
 	size_t	index;
@@ -45,15 +45,13 @@ static char	**create_command(t_parser *parser, char *file)
 	words = 1;
 	index = 0;
 	if (parser->option)
-		words++;
-	if (file)
-		words += count_file_nbr(file);
+		words += optionlen(parser->option);
+	words += arraylen(array);
 	result = (char **)ft_calloc(sizeof(char *), words + 1);
 	result[index++] = ft_strdup(parser->cmd);
 	if (parser->option)
-		result[index++] = ft_strdup(parser->option);
-	if (*file)
-		add_file_to_array(result, file, index, words);
+		add_option_to_array(result, parser->option, &index);
+	add_file_to_array(result, array, index, words);
 	result[words] = NULL;
 	return (result);
 }
@@ -75,8 +73,7 @@ static void	fork_process(pid_t pid, char *full_path, char **command, char **env)
 	return ;
 }
 
-void	fork_and_execve(t_data *data, t_parser *parser, \
-									char *file, char **array)
+void	fork_and_execve(t_data *data, t_parser *parser, char **array)
 {
 	pid_t	pid;
 	int		status;
@@ -84,7 +81,6 @@ void	fork_and_execve(t_data *data, t_parser *parser, \
 	char	**env;
 	char	*full_path;
 
-	(void)array;
 	status = 0;
 	if (check_absolute_path(parser->cmd))
 		full_path = set_absolute_path(parser->cmd);
@@ -92,7 +88,7 @@ void	fork_and_execve(t_data *data, t_parser *parser, \
 		full_path = check_cmd_path(data->env, parser);
 	if (!full_path)
 		return ;
-	command = create_command(parser, file);
+	command = create_command(parser, array);
 	env = struct_to_array(data->env);
 	pid = fork();
 	signal_minishell(data->signal, INTERACTIVE);

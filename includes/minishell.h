@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:31:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/12 19:50:20 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/14 05:58:09 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,10 +152,11 @@ void	standby_state(t_data *data);
 void	exit_status_format(t_env *env, int status);
 
 /*---external_command---*/
-void	fork_and_execve(t_data *data, t_parser *parser, \
-								char *file, char **array);
-size_t	count_file_nbr(char *file);
-char	**add_file_to_array(char **result, char *file, size_t index, \
+void	fork_and_execve(t_data *data, t_parser *parser, char **array);
+size_t	optionlen(char *option);
+size_t	arraylen(char **array);
+void	add_option_to_array(char **result, char *option, size_t *index);
+void	add_file_to_array(char **result, char **array, size_t index, \
 																size_t len);
 char	*check_cmd_path(t_env *env_variable, t_parser *parser);
 char	*check_cmd_access(t_parser *parser, char **path);

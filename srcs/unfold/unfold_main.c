@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:16:53 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/12 16:38:01 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/13 12:29:54 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ char	*str_connection(char *result, char *str, size_t *start, size_t *end)
 	tmp_f = ft_substr(str, 0, *start);
 	tmp_b = ft_substr(str, *end, ft_strlen(str) - *end);
 	tmp = ft_strjoin(tmp_f, result);
-	*end = ft_strlen(tmp) - 1;
-	*start = ft_strlen(tmp) - 1;
+	*end = ft_strlen(tmp);
+	*start = ft_strlen(tmp);
 	free(result);
 	result = ft_strjoin(tmp, tmp_b);
 	free(tmp_f);

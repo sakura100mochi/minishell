@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:40:15 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/27 12:12:18 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/14 05:40:58 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	dup_command(t_data *data, t_parser *parser, char *str, char **array)
 	if (!judge_built_in(data, parser, str, array))
 	{
 		signal_minishell(data->signal, IGN);
-		fork_and_execve(data, parser, str, array);
+		fork_and_execve(data, parser, array);
 		signal_minishell(data->signal, NORMAL);
 	}
 	change_fd_to_std(&stdin, &stdout, input, output);
