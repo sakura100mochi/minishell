@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/12 19:50:00 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/15 20:49:38 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ char	*check_cmd_access(t_parser *parser, char **path)
 	char	*full_path;
 
 	full_path = NULL;
-	full_path = path_loop_check(parser, path, full_path);
+	if (path)
+		full_path = path_loop_check(parser, path, full_path);
 	if (full_path)
 		return (full_path);
 	double_array_free(path);
