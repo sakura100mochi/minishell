@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:13 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/12 19:50:57 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/15 20:19:26 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ int	check_absolute_path(char *cmd)
 char	*check_cmd_path(t_env *env_variable, t_parser *parser)
 {
 	size_t	len;
+	t_env	*head;
 	char	**path;
 	char	*full_path;
 
 	path = NULL;
+	head = env_variable;
 	env_variable = env_variable->next;
 	if (!*parser->cmd)
 		return (NULL);
@@ -72,6 +74,6 @@ char	*check_cmd_path(t_env *env_variable, t_parser *parser)
 	}
 	full_path = check_cmd_access(parser, path);
 	if (!full_path)
-		command_not_found(env_variable, parser->cmd);
+		command_not_found(head, parser->cmd);
 	return (full_path);
 }
