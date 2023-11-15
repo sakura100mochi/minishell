@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/12 16:42:09 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/15 20:21:59 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void	wait_pipe(t_env *env, t_pipe *pipelist)
 	waitpid(pipelist->pid, &status, 0);
 	if (status == 512)
 		status = 2;
+	else if (status == 32512)
+		status = 127;
 	env->status = status;
 	return ;
 }
