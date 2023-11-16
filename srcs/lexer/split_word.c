@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_word.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 17:02:15 by yhirai            #+#    #+#             */
-/*   Updated: 2023/11/12 16:46:42 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/11/16 09:01:46 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static size_t	single_quo(char *str, size_t *j)
 
 	i = 1;
 	count = 0;
-	while (str[i] == '\'')
+	while (str[i] == '\'' && str[i + 1] != '\0')
 	{
 		count++;
 		i++;
@@ -47,7 +47,7 @@ static size_t	double_quo(char *str, size_t *j)
 
 	i = 1;
 	count = 0;
-	while (str[i] == '\"')
+	while (str[i] == '\"' && str[i + 1] != '\0')
 	{
 		count++;
 		i++;
