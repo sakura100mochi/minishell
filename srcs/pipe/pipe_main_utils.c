@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/15 20:21:59 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/17 08:22:24 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../../includes/pipe.h"
 #include "../../includes/error.h"
 
-static void	wait_pipe(t_env *env, t_pipe *pipelist)
+static void	wait_pipe(t_env *env, t_parser *parser, t_pipe *pipelist)
 {
 	int	status;
 
@@ -24,9 +24,12 @@ static void	wait_pipe(t_env *env, t_pipe *pipelist)
 	while (!pipelist->head)
 	{
 		waitpid(pipelist->pid, &status, 0);
+		pipe_print_error(status, parser->cmd);
 		pipelist = pipelist->next;
+		parser = parser->next;
 	}
 	waitpid(pipelist->pid, &status, 0);
+	pipe_print_error(status, parser->cmd);
 	if (status == 512)
 		status = 2;
 	else if (status == 32512)
@@ -56,7 +59,7 @@ void	do_pipe_dup_exec(t_data *data, t_parser *parser, t_pipe *pipelist)
 	{
 		if (!judge_built_in(data, parser, pipelist->file, pipelist->array))
 		{
-			execve_without_fork(data, parser, pipelist, pipelist->file);
+			execve_without_fork(data, parser, pipelist);
 			signal_minishell(data->signal, NORMAL);
 		}
 	}
@@ -65,7 +68,7 @@ void	do_pipe_dup_exec(t_data *data, t_parser *parser, t_pipe *pipelist)
 
 void	pipe_end_process(t_data *data, t_pipe *pipelist)
 {
-	wait_pipe(data->env, pipelist);
+	wait_pipe(data->env, data->parser, pipelist);
 	pipe_free(pipelist);
 	signal_minishell(data->signal, NORMAL);
 	return ;

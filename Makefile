@@ -6,7 +6,7 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/11/12 15:09:37 by csakamot         ###   ########.fr        #
+#    Updated: 2023/11/16 12:43:15 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ PARSERSRC	= parser_main.c split_pipe.c list_new.c list_add_back.c parser_content
 REDIRECTSRC	= redirect_main.c append.c heredoc.c input.c output.c quote_heredoc.c redirect_utils.c
 UNFOLDSRC	= unfold_main.c remove_quote.c unfold_quote_variable.c unfold_unquote_variable.c \
 				unfold_utils.c unfold_quote_variable_utils.c
-PIPESRC		= pipe_main.c pipe_main_utils.c pipe_execve.c init_pipe.c pipe_free.c
+PIPESRC		= pipe_main.c pipe_main_utils.c pipe_execve.c init_pipe.c pipe_free.c pipe_error.c
 
 SRCS		= ${MAINSRC} ${addprefix ${ERROR}, ${ERRORSRC}} ${addprefix ${BUILTIN}, ${BULITINSRC}} ${addprefix ${LEXER}, ${LEXERSRC}} \
 			${addprefix ${PARSER}, ${PARSERSRC}} ${addprefix ${REDIRECT}, ${REDIRECTSRC}} \

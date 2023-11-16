@@ -6,14 +6,14 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/15 20:14:39 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/16 11:57:37 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/error.h"
 
-static char	**struct_to_array(t_env *env)
+char	**struct_to_array(t_env *env)
 {
 	size_t	index;
 	char	**result;
@@ -26,17 +26,21 @@ static char	**struct_to_array(t_env *env)
 		env = env->next;
 	}
 	result = (char **)ft_calloc(sizeof(char *), index + 1);
+	if (!result)
+		exit_malloc_error();
 	env = env->next;
 	index = 0;
 	while (!env->head)
 	{
 		result[index++] = ft_strdup(env->variable);
+		if (!result[index - 1])
+			exit_malloc_error();
 		env = env->next;
 	}
 	return (result);
 }
 
-static char	**create_command(t_parser *parser, char **array)
+char	**create_command(t_parser *parser, char **array)
 {
 	size_t	words;
 	size_t	index;

@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/12 14:00:37 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/16 11:38:21 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ char	**split_env_variable(char *tmp, size_t len)
 		if (check_dollar_charactor(tmp, index))
 			*tmp_array++ = input_env_variable(tmp, &start, index, &flag);
 		else if (flag && (tmp[index] == '\'' || tmp[index] == ' ' || \
-		tmp[index] == '	' || tmp[index] == '\0'))
+		tmp[index] == '	' || tmp[index] == '\0' || \
+		(index > 0 && tmp[index - 1] == '?' && tmp[index] == '?')))
 			*tmp_array++ = input_env_variable(tmp, &start, index, &flag);
 		index++;
 	}
