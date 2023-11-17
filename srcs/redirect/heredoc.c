@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/11/12 15:54:44 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/11/17 21:58:29 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	heredoc(t_data *data, t_file *file, char *name)
 	if (pid == -1)
 	{
 		exit(EXIT_FAILURE);
+		perror("");
 		return (NO);
 	}
 	else if (pid == 0)
