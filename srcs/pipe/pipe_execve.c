@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:56:11 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/17 08:07:09 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:45:56 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	execve_without_fork(t_data *data, t_parser *parser, t_pipe *pipelist)
 	command = create_command(parser, pipelist->array);
 	env = struct_to_array(data->env);
 	signal_minishell(data->signal, INTERACTIVE);
-	execve(full_path, command, env);
+	if (execve(full_path, command, env) == -1)
+		data->env->status = -1;
 	free(full_path);
 	double_array_free(command);
 	double_array_free(env);

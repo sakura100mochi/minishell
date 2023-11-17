@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/17 08:24:56 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:48:33 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 #include "../../includes/pipe.h"
 #include "../../includes/error.h"
 
-void	pipe_print_error(int status, char *cmd)
+void	pipe_print_error(int *status, char *cmd)
 {
-	if (status == 32512)
+	if (*status == 127)
 		ft_printf("minishell: %s: command not found\n", cmd);
+	else if (*status == -1)
+	{
+		ft_printf("minishell: %s: No such file or directory\n", cmd);
+		*status = 127;
+	}
 	return ;
 }
