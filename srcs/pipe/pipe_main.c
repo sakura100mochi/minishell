@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:06:30 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/17 08:22:52 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/17 23:34:45 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,18 @@
 #include "../../includes/unfold.h"
 #include "../../includes/error.h"
 
-static void	open_pipe(t_data *data, t_parser *parser, \
+static int	open_pipe(t_data *data, t_parser *parser, \
 							t_pipe *pipelist)
 {
 	if (!pipelist->head)
 		pipe(pipelist->pipe);
 	pipelist->file = format_command(parser);
+	if (pipelist->file == NULL)
+		return (NO);
 	parser->cmd = unfold_main(data->env, parser->cmd);
 	pipelist->array = file_to_array(data->env, pipelist->file);
 	pipelist->file = unfold_main(data->env, pipelist->file);
-	return ;
+	return (YES);
 }
 
 static t_pipe	*close_pipe(t_pipe *pipelist)
@@ -59,13 +61,15 @@ int	pipe_main(t_data *data, t_parser *parser, size_t len)
 	signal_minishell(data->signal, IGN);
 	while (index <= len)
 	{
-		open_pipe(data, parser, pipelist);
-		pipelist->pid = fork();
-		if (pipelist->pid == -1 && pipe_fork_error(pipelist))
-			break ;
-		else if (pipelist->pid == 0)
-			do_pipe_dup_exec(data, parser, pipelist);
-		pipelist = close_pipe(pipelist);
+		if (open_pipe(data, parser, pipelist))
+		{
+			pipelist->pid = fork();
+			if (pipelist->pid == -1 && pipe_fork_error(pipelist))
+				break ;
+			else if (pipelist->pid == 0)
+				do_pipe_dup_exec(data, parser, pipelist);
+			pipelist = close_pipe(pipelist);
+		}
 		parser = parser->next;
 		index++;
 	}
