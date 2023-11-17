@@ -67,7 +67,7 @@ static int	judge_readline(t_data *data)
 	if (data->prompt == NULL)
 	{
 		ft_printf("exit\n");
-		exit(EXIT_SUCCESS);
+		exit(data->env->status);
 	}
 	if (*data->prompt == '\0')
 	{
