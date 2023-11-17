@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 09:37:18 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/29 04:12:09 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:58:01 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,15 @@ t_data	*init_exp(t_data *data)
 
 	index = 0;
 	exp_variable = new_exp_node("head", 1);
-	if (!exp_variable)
-		exit_malloc_error();
 	start = exp_variable;
 	while (environ[index])
 	{
-		if (!environ[index + 1])
-			break ;
-		new = new_exp_node(exp_variable_format(environ[index]), 0);
-		if (!new)
-			exit_malloc_error();
-		exp_nodeadd_back(&exp_variable, new);
+		if (ft_strlen(environ[index]) > 1 \
+				&& ft_strncmp(environ[index], "_=", 2))
+		{
+			new = new_exp_node(exp_variable_format(environ[index]), 0);
+			exp_nodeadd_back(&exp_variable, new);
+		}
 		index++;
 	}
 	judge_exp_pointer(start, exp_variable, index);

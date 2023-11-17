@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:28:21 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/29 04:09:02 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:55:03 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_env	*new_env_node(char *content, size_t head)
 
 	new = (t_env *)ft_calloc(1, sizeof(t_env));
 	if (!new)
-		return (NULL);
+		exit_malloc_error();
 	if (head)
 		new->head = 1;
 	new->variable = content;
@@ -61,17 +61,15 @@ t_data	*init_env(t_data *data)
 
 	index = 0;
 	env_variable = new_env_node("head", 1);
-	if (!env_variable)
-		exit_malloc_error();
 	start = env_variable;
 	while (environ[index])
 	{
-		if (!environ[index + 1])
-			break ;
-		new = new_env_node(ft_strdup(environ[index]), 0);
-		if (!new)
-			exit_malloc_error();
-		env_nodeadd_back(&env_variable, new);
+		if (ft_strlen(environ[index]) > 1 \
+				&& ft_strncmp(environ[index], "_=", 2))
+		{
+			new = new_env_node(ft_strdup(environ[index]), 0);
+			env_nodeadd_back(&env_variable, new);
+		}
 		index++;
 	}
 	judge_env_pointer(start, env_variable, index);

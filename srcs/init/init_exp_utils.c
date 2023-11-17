@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/10/29 04:10:07 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:52:34 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_exp	*new_exp_node(char *content, size_t head)
 
 	new = (t_exp *)ft_calloc(1, sizeof(t_exp));
 	if (!new)
-		return (NULL);
+		exit_malloc_error();
 	if (head)
 		new -> head = 1;
 	new -> variable = content;
