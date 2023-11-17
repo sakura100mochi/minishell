@@ -6,7 +6,7 @@
 /*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:09:45 by yhirai            #+#    #+#             */
-/*   Updated: 2023/11/17 22:27:13 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/11/17 23:19:54 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	devide(t_data *data, t_file *file)
 	return (YES);
 }
 
-int	redirect_main(t_data *data, t_parser *node)
+static int	syntax_check_redirect(t_data *data, t_parser *node)
 {
 	t_file	*file;
 
@@ -44,7 +44,25 @@ int	redirect_main(t_data *data, t_parser *node)
 			if (file->type == UNKNOWN || file->file_name == NULL
 				|| file->file_name[0] == '<' || file->file_name[0] == '>')
 				return (syntax(data));
-			else if (devide(data, file) == NO)
+			file = file->next;
+		}
+		node = node->next;
+	}
+	return (YES);
+}
+
+int	redirect_main(t_data *data, t_parser *node)
+{
+	t_file	*file;
+
+	if (syntax_check_redirect(data, node) == NO)
+		return (NO);
+	while (node != NULL)
+	{
+		file = node->redirect;
+		while (file != NULL)
+		{
+			if (devide(data, file) == NO)
 				return (NO);
 			file = file->next;
 		}
