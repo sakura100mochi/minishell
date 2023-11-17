@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/17 12:49:45 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:28:02 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,8 @@ static void	wait_pipe(t_env *env, t_pipe *pipelist)
 	return ;
 }
 
-void	do_pipe_dup_exec(t_data *data, t_parser *parser, t_pipe *pipelist)
+static void	open_pipe(t_parser *parser, t_pipe *pipelist)
 {
-	int	stdout;
-
-	stdout = dup(1);
 	if (!pipelist->head)
 		close(pipelist->pipe[0]);
 	if (!pipelist->prev->head)
@@ -52,6 +49,15 @@ void	do_pipe_dup_exec(t_data *data, t_parser *parser, t_pipe *pipelist)
 			close_fd(parser->redirect);
 		return ;
 	}
+	return ;
+}
+
+void	do_pipe_dup_exec(t_data *data, t_parser *parser, t_pipe *pipelist)
+{
+	int	stdout;
+
+	stdout = dup(1);
+	open_pipe(parser, pipelist);
 	if (parser->redirect)
 		without_fork_dup_command(data, parser, \
 				parser->redirect, pipelist);
@@ -64,7 +70,8 @@ void	do_pipe_dup_exec(t_data *data, t_parser *parser, t_pipe *pipelist)
 		}
 	}
 	dup2(stdout, STDOUT_FILENO);
-	pipe_print_error(&(data->env->status), parser->cmd);
+	if (!pipelist->head)
+		pipe_print_error(&(data->env->status), parser->cmd);
 	close(stdout);
 	exit(data->env->status);
 }
