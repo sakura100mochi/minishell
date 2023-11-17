@@ -6,7 +6,7 @@
 /*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:09:45 by yhirai            #+#    #+#             */
-/*   Updated: 2023/11/17 21:46:08 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/11/17 22:27:13 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,22 @@
 #include "../../includes/parser.h"
 #include "../../includes/built_in.h"
 #include "../../includes/error.h"
+
+static int	devide(t_data *data, t_file *file)
+{
+	if (file->type == Q_H && quote_heredoc(data, file) == NO)
+		return (NO);
+	else if (file->type == HEREDOC
+		&& heredoc(data, file, file->file_name) == NO)
+		return (NO);
+	else if (file->type == INPUT && input(data, file) == NO)
+		return (NO);
+	else if (file->type == APPEND && append(data, file) == NO)
+		return (NO);
+	else if (file->type == OUTPUT && output(data, file) == NO)
+		return (NO);
+	return (YES);
+}
 
 int	redirect_main(t_data *data, t_parser *node)
 {
@@ -28,15 +44,7 @@ int	redirect_main(t_data *data, t_parser *node)
 			if (file->type == UNKNOWN || file->file_name == NULL
 				|| file->file_name[0] == '<' || file->file_name[0] == '>')
 				return (syntax(data));
-			else if (file->type == Q_H)
-				quote_heredoc(data, file);
-			else if (file->type == HEREDOC)
-				heredoc(data, file, file->file_name);
-			else if (file->type == INPUT && input(data, file) == NO)
-				return (NO);
-			else if (file->type == APPEND && append(data, file) == NO)
-				return (NO);
-			else if (file->type == OUTPUT && output(data, file) == NO)
+			else if (devide(data, file) == NO)
 				return (NO);
 			file = file->next;
 		}
