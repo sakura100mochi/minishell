@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:59:58 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/16 11:38:43 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/17 21:20:48 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,6 @@ static char	*find_nbr_questoin(t_env *env, char *str, size_t len)
 	result = NULL;
 	if (!ft_strncmp("?", str, len))
 	{
-		if (g_signal != 0)
-		{
-			env->status = g_signal;
-			g_signal = 0;
-		}
 		result = ft_itoa(env->status);
 		if (!result)
 			exit_malloc_error();
