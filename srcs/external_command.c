@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:24:46 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/17 21:17:55 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/18 00:36:03 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void	fork_and_execve(t_data *data, t_parser *parser, char **array)
 	fork_process(pid, full_path, command, env);
 	if (pid > 0)
 		waitpid(pid, &status, 0);
-	data->env->status = status;
 	exit_status_format(data->env, status);
 	free(full_path);
 	double_array_free(command);

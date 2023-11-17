@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:18:12 by yhirai            #+#    #+#             */
-/*   Updated: 2023/11/17 23:39:56 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/18 00:26:26 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int	heredoc(t_data *data, t_file *file, char *name)
 		interactive_heredoc(data->env, file, name, data->parser);
 	}
 	waitpid(pid, &status, 0);
-	data->env->status = status;
 	exit_status_format(data->env, status);
 	signal_minishell(data->signal, NORMAL);
 	return (YES);

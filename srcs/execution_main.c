@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:08:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/17 22:25:46 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/18 00:20:28 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	execution_main(t_data *data)
 	if (check_redirect(data->parser) == YES)
 	{
 		if (redirect_main(data, data->parser) == NO)
+			return ;
+		if (data->env->status)
 			return ;
 	}
 	if (len != 0)
