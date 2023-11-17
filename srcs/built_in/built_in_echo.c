@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 05:36:20 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/17 13:26:49 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/17 18:16:20 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ static void	do_echo_option(t_parser *parser, char *str)
 
 void	built_in_echo(t_env *env, t_parser *parser, char *str)
 {
-	// printf("%s, %s\n", parser->cmd, parser->option);
 	if (parser->option)
 		do_echo_option(parser, str);
 	else if (!parser->option && !*str)
