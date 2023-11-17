@@ -88,7 +88,7 @@ void	standby_state(t_data *data)
 			continue ;
 		add_history(data->prompt);
 		data->parser = parser_main(lexer_main(data), data->prompt);
-		if (syntax_check(data) == NO)
+		if (redirect_syntax(data) == NO || syntax_check(data) == NO)
 			syntax(data);
 		else if (data->parser == NULL)
 		{

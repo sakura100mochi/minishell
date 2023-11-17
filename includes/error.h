@@ -6,7 +6,7 @@
 /*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:24:18 by yhirai            #+#    #+#             */
-/*   Updated: 2023/11/17 23:06:14 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/11/17 23:48:06 by hiraiyuina       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		exit_malloc_error(void);
 /*---Error---*/
 void		command_not_found(t_env *env, char *str);
 int			syntax(t_data *data);
-// int			redirect_syntax(t_data *data);
+int			redirect_syntax(t_data *data);
 int			no_file(t_data *data, char *file_name);
 int			permission(t_data *data, char *file_name);
 int			ambiguous(t_data *data, char *file_name);
