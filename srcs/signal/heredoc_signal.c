@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_signal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hiraiyuina <hiraiyuina@student.42.fr>      +#+  +:+       +#+        */
+/*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 16:51:23 by yhirai            #+#    #+#             */
-/*   Updated: 2023/11/17 21:56:29 by hiraiyuina       ###   ########.fr       */
+/*   Updated: 2023/11/17 22:31:41 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	sigint(int signum)
 {
 	g_signal = 1;
 	write(STDOUT_FILENO, "\n", 1);
-	exit(EXIT_SUCCESS);
+	exit(EXIT_FAILURE);
 	(void)signum;
 }
 
