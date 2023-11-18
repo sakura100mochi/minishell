@@ -6,7 +6,7 @@
 /*   By: yhirai <yhirai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:26:38 by yhirai            #+#    #+#             */
-/*   Updated: 2023/11/18 15:05:03 by yhirai           ###   ########.fr       */
+/*   Updated: 2023/11/18 15:21:38 by yhirai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static int	check_redirect(char *all, size_t *i, char c)
 	while (all[j] != '\0' && all[j] != c)
 		j++;
 	if (all[j + 1] != '\0')
-		j++;
+		j += 2;
 	else
 		return (NO);
 	*i = j;
-	if (all[j - 1] == c && all[j] == c)
+	if (all[j - 2] == c && all[j - 1] == c)
 		return (YES);
 	return (NO);
 }
