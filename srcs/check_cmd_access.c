@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:32:08 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/18 00:36:58 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/18 11:11:22 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,19 @@ static char	*path_loop_check(t_parser *parser, char **path, char *full_path)
 	return (full_path);
 }
 
-char	*set_absolute_path(char *cmd)
+char	*set_absolute_path(char *cmd, t_env *env)
 {
 	char	*result;
 
 	result = ft_strdup(cmd);
 	if (!cmd)
 		exit_malloc_error();
-	return (result);
+	if (!access(result, F_OK))
+		return (result);
+	free(result);
+	ft_printf("minishell: %s: No such file or directory\n", cmd);
+	env->status = 127;
+	return (NULL);
 }
 
 char	*check_cmd_access(t_parser *parser, char **path)

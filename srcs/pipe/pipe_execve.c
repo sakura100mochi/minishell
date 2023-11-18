@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:56:11 by csakamot          #+#    #+#             */
-/*   Updated: 2023/11/17 14:25:51 by csakamot         ###   ########.fr       */
+/*   Updated: 2023/11/18 11:52:59 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@
 
 void	execve_without_fork(t_data *data, t_parser *parser, t_pipe *pipelist)
 {
-	extern int	errno;
 	char		**command;
 	char		**env;
 	char		*full_path;
 
 	if (check_absolute_path(parser->cmd))
-		full_path = set_absolute_path(parser->cmd);
+		full_path = set_absolute_path(parser->cmd, data->env);
 	else
 		full_path = check_cmd_path(data->env, parser);
 	if (!full_path)
